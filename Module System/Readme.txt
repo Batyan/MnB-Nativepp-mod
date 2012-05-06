@@ -1,6 +1,3 @@
-Mount&Blade Module System version 1.151
+Using Mount&Blade Module System version 1.151
 
-For getting documentation and the latest version of the module system check out:
-
-www.taleworlds.com/mb_module_system.html
-
+For the last stable playable version of the mod : http://www.mbrepository.com/file.php?id=2296
