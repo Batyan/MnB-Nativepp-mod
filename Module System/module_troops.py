@@ -1133,6 +1133,28 @@ troops = [
     itm_leather_jacket, itm_leather_cap],
    str_14|agi_17|int_5|cha_5|level(20),wp(100),knows_common|knows_riding_4|knows_ironflesh_3|knows_power_strike_3,mercenary_face_1, mercenary_face_2],
 
+  # Special faction troops -- slightly better than common troop (has it's drawbacks though
+  # Should be used by the kings instead of their usual counterpart (or used as an elite side troop)
+  # Biggest problem is not enough troops for all faction
+  # Frustration for the player, he can't have these troops
+	"""
+  ["vaegir_druzyna","Druzyna","Druzyna",tf_mounted|tf_guarantee_boots|tf_guarantee_gloves|tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_horse|tf_guarantee_shield,0,0,fac_kingdom_2,
+   [itm_scimitar_b,itm_tab_shield_kite_cav_b,
+    itm_banded_armor,itm_lamellar_armor,itm_mail_boots,itm_iron_greaves,itm_vaegir_war_helmet,itm_vaegir_war_helmet,itm_vaegir_mask,itm_hunter,itm_mail_mittens],
+   str_19|agi_19|int_5|cha_5|level(27),wpex(130,125,125,60,25,80),knows_common|knows_riding_5|knows_shield_4|knows_athletics_2|knows_ironflesh_4|knows_power_strike_4,vaegir_face_middle_1, vaegir_face_older_2],
+  # Always has a shield, but no lance and the two handed weapon can be good in siege defense
+  ["nord_hirdman","Hirdman","Hirdmen",tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_shield|tf_guarantee_helmet|tf_guarantee_gloves,0,0,fac_kingdom_4,
+   [itm_sword_viking_3,itm_sword_viking_3_small,itm_tab_shield_round_e,
+    itm_nordic_helmet,itm_nordic_huscarl_helmet,itm_nordic_warlord_helmet,itm_cuir_bouilli,itm_mail_boots,itm_gauntlets],
+   str_21|agi_18|int_5|cha_5|level(28),wpex(160,150,145,50,35,130),knows_common|knows_ironflesh_5|knows_power_strike_6|knows_power_throw_4|knows_athletics_5|knows_shield_5|knows_riding_2,nord_face_middle_1, nord_face_older_2],
+  # Better armor, no throwing axes, no one handed axes
+  ["sarranid_mamalik_sultaneya","Mamalik Sultaneya","Mamalik Sultaneya",tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_gloves|tf_guarantee_helmet|tf_guarantee_horse|tf_guarantee_shield,0,0,fac_kingdom_6,
+   [itm_sarranid_cavalry_sword,itm_sarranid_axe_b,itm_tab_shield_small_round_c,
+    itm_mamluke_mail,itm_sarranid_boots_d,itm_sarranid_veiled_helmet,itm_arabian_horse_b,itm_mail_mittens],
+   str_16|agi_22|int_5|cha_5|level(27),wpex(130,120,130,40,40,75),knows_common|knows_riding_6|knows_shield_3|knows_ironflesh_4|knows_power_strike_4|knows_athletics_3,sarranid_face_middle_1, sarranid_face_older_2],
+  # Better armor, no lance, no throwing weapons
+	"""
+   
   ["kidnapped_girl","Kidnapped Girl","Kidnapped Girls",tf_hero|tf_randomize_face|tf_female|tf_unmoveable_in_party_window,0,reserved,fac_commoners,
    [itm_dress,itm_leather_boots],
    def_attrib|level(2),wp(50),knows_common|knows_riding_2,woman_face_1, woman_face_2],
