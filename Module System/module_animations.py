@@ -52,7 +52,7 @@ blow       = 40000
 
 attack_parried_duration = 0.6
 attack_blocked_duration = 0.3
-attack_blocked_duration_thrust = attack_blocked_duration + 0.2
+attack_blocked_duration_thrust = attack_blocked_duration + 0.1
 attack_parried_duration_thrust = attack_parried_duration + 0.1
 defend_parry_duration_1 = 0.6
 defend_parry_duration_2 = 0.6
