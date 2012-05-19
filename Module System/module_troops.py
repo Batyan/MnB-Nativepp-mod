@@ -1138,6 +1138,11 @@ troops = [
   # Biggest problem is not enough troops for all faction
   # Frustration for the player, he can't have these troops
 	
+  # ["swadian_swordmaster","Swordmaster","Swordmasters",tf_guarantee_armor|tf_guarantee_boots|tf_guarantee_gloves|tf_guarantee_helmet, 0, 0, fac_kingdom_1,
+   # [itm_sword_two_handed_a,
+    # itm_gauntlets,itm_iron_greaves,itm_great_helmet,itm_guard_helmet,itm_mail_with_surcoat],
+   # str_23|agi_16|int_5|cha_5|level(28),wpex(130,140,130,60,60,80),knows_common|knows_riding_2|knows_shield_2|knows_ironflesh_3|knows_power_strike_4|knows_athletics_5, swadian_face_middle_1, swadian_face_older_2],
+  # Two handed sword, less resistant, faster
   # ["vaegir_druzyna","Druzyna","Druzyna",tf_mounted|tf_guarantee_boots|tf_guarantee_gloves|tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_horse|tf_guarantee_shield,0,0,fac_kingdom_2,
    # [itm_scimitar_b,itm_tab_shield_kite_cav_b,
     # itm_banded_armor,itm_lamellar_armor,itm_mail_boots,itm_iron_greaves,itm_vaegir_war_helmet,itm_vaegir_war_helmet,itm_vaegir_mask,itm_hunter,itm_mail_mittens],
@@ -1145,7 +1150,7 @@ troops = [
   # Always has a shield, but no lance and the two handed weapon can be good in siege defense
   # ["nord_hirdman","Hirdman","Hirdmen",tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_shield|tf_guarantee_helmet|tf_guarantee_gloves,0,0,fac_kingdom_4,
    # [itm_sword_viking_3,itm_sword_viking_3_small,itm_tab_shield_round_e,
-    # itm_nordic_helmet,itm_nordic_huscarl_helmet,itm_nordic_warlord_helmet,itm_cuir_bouilli,itm_mail_boots,itm_gauntlets],
+    # itm_nordic_huscarl_helmet,itm_nordic_warlord_helmet,itm_cuir_bouilli,itm_iron_greaves,itm_gauntlets],
    # str_21|agi_18|int_5|cha_5|level(28),wpex(160,150,145,50,35,130),knows_common|knows_ironflesh_5|knows_power_strike_6|knows_power_throw_4|knows_athletics_5|knows_shield_5|knows_riding_2,nord_face_middle_1, nord_face_older_2],
   # Better armor, no throwing axes, no one handed axes
   # ["sarranid_mamalik_sultaneya","Mamalik Sultaneya","Mamalik Sultaneya",tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_gloves|tf_guarantee_helmet|tf_guarantee_horse|tf_guarantee_shield,0,0,fac_kingdom_6,
