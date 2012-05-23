@@ -1164,7 +1164,7 @@ troops = [
    [itm_dress,itm_leather_boots],
    def_attrib|level(2),wp(50),knows_common|knows_riding_2,woman_face_1, woman_face_2],
    
-   ## recruit noble start ## 
+   ## recruit noble start ## # Also used for banner's faction storage
   ["noble_begin","noble_begin","noble_begin",0,no_scene,reserved,fac_commoners,
    [],
    def_attrib|level(4),wp(60),knows_common,mercenary_face_1, mercenary_face_2],
@@ -1345,6 +1345,7 @@ troops = [
    itm_gauntlets,itm_iron_greaves,itm_scale_armor,itm_guard_helmet,itm_warhorse],
    str_22|agi_29|int_5|cha_5|level(40),wp(180)|wp_firearm(90),knows_common|knows_athletics_4|knows_riding_4|knows_ironflesh_5|knows_power_strike_6|knows_shield_3|knows_horse_archery_3,man_face_older_1, man_face_older_2],
    
+  # Used for banner usage storage
   ["noble_end","noble_end","noble_end",0,no_scene,reserved,fac_commoners,
    [],
    def_attrib|level(4),wp(60),knows_common,mercenary_face_1, mercenary_face_2],

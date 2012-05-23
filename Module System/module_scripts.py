@@ -59961,7 +59961,7 @@ scripts = [
 	  (troop_slot_eq, ":cur_troop_id", slot_troop_occupation, slto_kingdom_hero), # only gives message if it is a lord -- kings don't care about their mercenaries' life
 	  # free its banner to be used by others
 	  (troop_get_slot, ":banner_id", ":cur_troop_id", slot_troop_banner_scene_prop),
-	  (troop_set_slot, ":banner_id", slot_banner_is_used, 0),
+	  (troop_set_slot, "trp_noble_end", ":banner_id", 0),
 	  
 	  (try_begin),
 	    (eq, ":defeated_troop_faction", "$players_kingdom"),
@@ -73722,15 +73722,16 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
   ("assign_banner",
    [
 	(store_script_param, ":lord_no", 1),
-	(troop_get_slot, ":faction_no", ":lord_no", slot_troop_original_faction), # use original faction banner
+	# (troop_get_slot, ":faction_no", ":lord_no", slot_troop_original_faction), # use original faction banner
 	# (store_troop_faction, ":faction_no", ":lord_no"),
 	(assign, ":banner_id", 0),
 	(assign, ":banner_icon_id", 0),
 	(try_begin),
 	  (eq, "$banner_type", 0),
 	  (try_begin),
-	  
+	    
 	    (troop_slot_eq, ":lord_no", slot_troop_occupation, slto_kingdom_hero),
+		(troop_get_slot, ":faction_no", ":lord_no", slot_troop_original_faction),
 		(try_begin),
 	      (eq, ":faction_no", "fac_kingdom_1"),
 		  (assign, ":banner_id", "spr_banner_kingdom_f"),
@@ -73778,6 +73779,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
         (try_end),
 	  
 	  (else_try),
+	    (store_troop_faction, ":faction_no", ":lord_no"),
 		(try_begin),
 	      (eq, ":faction_no", "fac_kingdom_1"),
 	      (assign, ":banner_id", "spr_banner_a"),
@@ -73818,13 +73820,14 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	  (try_end),
 	  
 	(else_try),
-	
+	  
 	  (try_begin), # tries to take a random banner
 	    (troop_slot_eq, ":lord_no", slot_troop_occupation, slto_kingdom_hero),
+		(troop_get_slot, ":faction_no", ":lord_no", slot_troop_original_faction),
 		(store_random_in_range, ":banner", banner_scene_props_begin, banner_scene_props_end),
 		(try_begin),
-		  (troop_slot_eq, ":banner", slot_banner_is_used, 0),
-		  (troop_slot_eq, ":banner", slot_banner_faction, ":faction_no"),
+		  (troop_slot_eq, "trp_noble_end", ":banner", 0), # banner is not already used
+		  (troop_slot_eq, "trp_noble_begin", ":banner", ":faction_no"), # banner is 'belonging' to that faction
 		  (assign, ":banner_id", ":banner"),
 		  (try_begin),
 		    (eq, "$test", 1),
@@ -73837,21 +73840,21 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		  (eq, ":banner_id", 0), # if it fails, tries to take the first banner
 		  (assign, ":end_cond", banner_scene_props_end),
 		  (try_for_range, ":banner", banner_scene_props_begin, ":end_cond"),
-		    (troop_slot_eq, ":banner", slot_banner_is_used, 0),
-		    (troop_slot_eq, ":banner", slot_banner_faction, ":faction_no"),
+		    (troop_slot_eq, "trp_noble_end", ":banner", 0), # banner is not already used
+		    (troop_slot_eq, "trp_noble_begin", ":banner", ":faction_no"), # banner is 'belonging' to that faction
 		    (assign, ":banner_id", ":banner"),
 		    (assign, ":end_cond", 0),
 		  (try_end),
 		  (eq, ":banner_id", 0), # if it fails, take a banner even if it is not for the kingdom
 		  (try_for_range, ":banner", banner_scene_props_begin, ":end_cond"),
-		    (troop_slot_eq, ":banner", slot_banner_is_used, 0),
+		    (troop_slot_eq, "trp_noble_end", ":banner", 0), # banner is not already used 
 		    (assign, ":banner_id", ":banner"),
 		    (assign, ":end_cond", 0),
 		    (try_begin),
 		      (eq, "$test", 1),
-		  	(str_store_faction_name, s15, ":faction_no"),
-		  	(str_store_troop_name, s16, ":lord_no"),
-		  	(display_message, "@{s16} of {s15} is not taking a faction banner"),
+		  	  (str_store_faction_name, s15, ":faction_no"),
+		  	  (str_store_troop_name, s16, ":lord_no"),
+		  	  (display_message, "@{s16} of {s15} is not taking a faction banner"),
 		    (try_end),
 		  (try_end),
 		  (eq, ":banner_id", 0),
@@ -73863,6 +73866,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		(try_end),
 		
 	  (else_try),
+	    (store_troop_faction, ":faction_no", ":lord_no"),
 	    (try_begin),
 	      (eq, ":faction_no", "fac_kingdom_1"),
 		  (assign, ":banner_id", "spr_banner_kingdom_f"),
@@ -73924,7 +73928,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	(try_end),
 	
 	(troop_set_slot, ":lord_no", slot_troop_banner_scene_prop, ":banner_id"),
-	(troop_set_slot, ":banner_id", slot_banner_is_used, 1),
+	(troop_set_slot, "trp_noble_end", ":banner_id", 1),
 	
 	(troop_get_slot, ":party_no", ":lord_no", slot_troop_leaded_party),
 	(try_begin),
@@ -78384,255 +78388,257 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	(try_begin),
 	  (eq, ":init_banners_faction", 1),
 	  # 31
-	  (troop_set_slot, "spr_banner_g", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_i", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_k", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_n", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_o", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_p", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_q", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_u", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_bj", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_bl", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_bm", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_cc", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_cd", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_ch", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_ci", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_cm", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_co", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_cq", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_eb", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_ec", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_ef", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_ej", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_eo", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_g01", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_g05", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_g12", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_g14", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_h01", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_h02", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_h03", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_h05", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_h07", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_h20", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_i13", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_i21", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_j07", slot_banner_faction, "fac_kingdom_1"), # swadian banner
-	  (troop_set_slot, "spr_banner_j11", slot_banner_faction, "fac_kingdom_1"), # swadian banner
+	  ## (troop_set_slot, "trp_noble_begin", "spr_banner_g", "fac_kingdom_1"),
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_k", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_n", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_o", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_p", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_q", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_u", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bj", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bl", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bm", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_cc", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_cd", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_ch", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_ci", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_cm", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_co", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_cq", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_eb", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_ec", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_ef", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_ej", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_eo", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g01", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g05", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g12", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g14", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h01", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h02", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h03", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h05", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h07", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h20", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i13", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i21", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_j07", "fac_kingdom_1"), # swadian banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_j11", "fac_kingdom_1"), # swadian banner
 	  
 	  # 16
-	  (troop_set_slot, "spr_banner_s", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_ba", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_bb", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_bc", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_bd", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_bp", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_bq", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_br", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_cg", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_cr", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_ek", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_er", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_g03", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_g11", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_g19", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_g21", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_h09", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_h10", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_h13", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_h21", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_i07", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_i11", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_i12", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_j04", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_j06", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_j16", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_k05", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
-	  (troop_set_slot, "spr_banner_k09", slot_banner_faction, "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_s", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_ba", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bb", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bc", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bd", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bp", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bq", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_br", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_cg", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_cr", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_ek", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_er", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g03", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g11", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g19", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g21", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h09", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h10", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h13", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h21", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i07", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i11", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i12", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_j04", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_j06", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_j16", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_k05", "fac_kingdom_2"), # vaegir banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_k09", "fac_kingdom_2"), # vaegir banner
 	  
 	  # 23
-	  (troop_set_slot, "spr_banner_bi", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_bu", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_cn", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_cu", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_da", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_db", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_dc", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_dd", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_de", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_df", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_dg", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_dh", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_di", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_dj", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_dk", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_dl", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_dm", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_dn", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_dq", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_ds", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_dt", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_du", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_g06", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_l01", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_l03", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_l04", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_l07", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_l08", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_l09", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_l12", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_l15", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_l16", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_l17", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_l19", slot_banner_faction, "fac_kingdom_3"), # khergit banner
-	  (troop_set_slot, "spr_banner_l20", slot_banner_faction, "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bi", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bu", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_cn", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_cu", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_da", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_db", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_dc", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_dd", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_de", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_df", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_dg", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_dh", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_di", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_dj", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_dk", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_dl", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_dm", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_dn", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_dq", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_ds", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_dt", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_du", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g06", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l01", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l03", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l04", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l07", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l08", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l09", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l12", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l15", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l16", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l17", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l19", "fac_kingdom_3"), # khergit banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l20", "fac_kingdom_3"), # khergit banner
 	  
 	  # 21
-	  (troop_set_slot, "spr_banner_h", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_l", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_m", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_r", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_bo", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_bt", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_cb", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_cs", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_dp", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_ea", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_ed", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_eh", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_ei", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_en", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_es", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_eu", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_g08", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_g13", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_g15", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_g17", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_h06", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_h08", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_h11", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_h14", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_h15", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_h16", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_h17", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_h18", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_i06", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_i15", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_i20", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_j05", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_j08", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_j16", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_j19", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_k01", slot_banner_faction, "fac_kingdom_4"), # nord banner
-	  (troop_set_slot, "spr_banner_k08", slot_banner_faction, "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_m", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_r", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bo", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bt", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_cb", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_cs", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_dp", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_ea", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_ed", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_eh", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_ei", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_en", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_es", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_eu", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g08", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g13", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g15", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g17", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h06", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h08", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h11", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h14", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h15", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h16", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h17", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h18", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i06", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i15", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i20", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_j05", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_j08", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_j16", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_j19", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_k01", "fac_kingdom_4"), # nord banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_k08", "fac_kingdom_4"), # nord banner
 	  
 	  # 20
-	  (troop_set_slot, "spr_banner_e", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_be", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_bf", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_bg", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_bk", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_bn", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_bs", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_ca", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_ce", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_cf", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_cj", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_ck", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_cl", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_ee", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_eg", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_el", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_et", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_g02", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_g07", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_h04", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_h12", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_h19", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_i03", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_i09", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_j01", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_j02", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_j03", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_j09", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_j10", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
-	  (troop_set_slot, "spr_banner_j15", slot_banner_faction, "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_e", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_be", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bf", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bg", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bk", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bn", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bs", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_ca", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_ce", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_cf", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_cj", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_ck", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_cl", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_ee", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_eg", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_el", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_et", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g02", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g07", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h04", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h12", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_h19", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i03", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i09", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_j01", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_j02", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_j03", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_j09", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_j10", "fac_kingdom_5"), # rhodok banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_j15", "fac_kingdom_5"), # rhodok banner
 	  
 	  # 21
-	  (troop_set_slot, "spr_banner_dr", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f02", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f03", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f04", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f05", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f06", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f07", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f08", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f09", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f10", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f11", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f12", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f13", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f14", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f15", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f16", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f17", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f18", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f19", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f20", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_f21", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_j20", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_l02", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_l05", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_l06", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_l10", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_l11", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_l14", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_l18", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
-	  (troop_set_slot, "spr_banner_l21", slot_banner_faction, "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_dr", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f02", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f03", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f04", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f05", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f06", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f07", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f08", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f09", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f10", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f11", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f12", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f13", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f14", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f15", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f16", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f17", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f18", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f19", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f20", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_f21", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_j20", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l02", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l05", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l06", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l10", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l11", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l14", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l18", "fac_kingdom_6"), # sarranid banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l21", "fac_kingdom_6"), # sarranid banner
 	  
-	  (troop_set_slot, "spr_banner_g16", slot_banner_faction, "fac_kingdom_9"), # khergit tribes banner
-	  (troop_set_slot, "spr_banner_i01", slot_banner_faction, "fac_kingdom_9"), # khergit tribes banner
-	  (troop_set_slot, "spr_banner_i04", slot_banner_faction, "fac_kingdom_9"), # khergit tribes banner
-	  (troop_set_slot, "spr_banner_i14", slot_banner_faction, "fac_kingdom_9"), # khergit tribes banner
-	  (troop_set_slot, "spr_banner_i16", slot_banner_faction, "fac_kingdom_9"), # khergit tribes banner
-	  (troop_set_slot, "spr_banner_l13", slot_banner_faction, "fac_kingdom_9"), # khergit tribes banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g16", "fac_kingdom_9"), # khergit tribes banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i01", "fac_kingdom_9"), # khergit tribes banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i04", "fac_kingdom_9"), # khergit tribes banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i14", "fac_kingdom_9"), # khergit tribes banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i16", "fac_kingdom_9"), # khergit tribes banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_l13", "fac_kingdom_9"), # khergit tribes banner
 	  
-	  (troop_set_slot, "spr_banner_j", slot_banner_faction, "fac_kingdom_10"), # freerider banner
-	  (troop_set_slot, "spr_banner_t", slot_banner_faction, "fac_kingdom_10"), # freerider banner
-	  (troop_set_slot, "spr_banner_bh", slot_banner_faction, "fac_kingdom_10"), # freerider banner
-	  (troop_set_slot, "spr_banner_ct", slot_banner_faction, "fac_kingdom_10"), # freerider banner
-	  (troop_set_slot, "spr_banner_g09", slot_banner_faction, "fac_kingdom_10"), # freerider banner
-	  (troop_set_slot, "spr_banner_g10", slot_banner_faction, "fac_kingdom_10"), # freerider banner
-	  (troop_set_slot, "spr_banner_g20", slot_banner_faction, "fac_kingdom_10"), # freerider banner
-	  (troop_set_slot, "spr_banner_i02", slot_banner_faction, "fac_kingdom_10"), # freerider banner
-	  (troop_set_slot, "spr_banner_i05", slot_banner_faction, "fac_kingdom_10"), # freerider banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_j", "fac_kingdom_10"), # freerider banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_t", "fac_kingdom_10"), # freerider banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_bh", "fac_kingdom_10"), # freerider banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_ct", "fac_kingdom_10"), # freerider banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g09", "fac_kingdom_10"), # freerider banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g10", "fac_kingdom_10"), # freerider banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g20", "fac_kingdom_10"), # freerider banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i02", "fac_kingdom_10"), # freerider banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i05", "fac_kingdom_10"), # freerider banner
 	  
-	  (troop_set_slot, "spr_banner_em", slot_banner_faction, "fac_kingdom_11"), # mudle banner
-	  (troop_set_slot, "spr_banner_ep", slot_banner_faction, "fac_kingdom_11"), # mudle banner
-	  (troop_set_slot, "spr_banner_eq", slot_banner_faction, "fac_kingdom_11"), # mudle banner
-	  (troop_set_slot, "spr_banner_g04", slot_banner_faction, "fac_kingdom_11"), # mudle banner
-	  (troop_set_slot, "spr_banner_i08", slot_banner_faction, "fac_kingdom_11"), # mudle banner
-	  (troop_set_slot, "spr_banner_i10", slot_banner_faction, "fac_kingdom_11"), # mudle banner
-	  (troop_set_slot, "spr_banner_k11", slot_banner_faction, "fac_kingdom_11"), # mudle banner
-	  (troop_set_slot, "spr_banner_k19", slot_banner_faction, "fac_kingdom_11"), # mudle banner
-	  
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_em", "fac_kingdom_11"), # mudle banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_ep", "fac_kingdom_11"), # mudle banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_eq", "fac_kingdom_11"), # mudle banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_g04", "fac_kingdom_11"), # mudle banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i08", "fac_kingdom_11"), # mudle banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_i10", "fac_kingdom_11"), # mudle banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_k11", "fac_kingdom_11"), # mudle banner
+	  (troop_set_slot, "trp_noble_begin", "spr_banner_k19", "fac_kingdom_11"), # mudle banner
 	  
 	(try_end),
-	(try_for_range, ":banner_id", "spr_banner_a", "spr_banner_kingdom_a"),
-	  (troop_set_slot, ":banner_id", slot_banner_is_used, 0),
-	(try_end),
-	(troop_set_slot, "spr_banner_a", slot_banner_is_used, 1), # swadian king
-	(troop_set_slot, "spr_banner_b", slot_banner_is_used, 1), # vaegir king
-	(troop_set_slot, "spr_banner_cu", slot_banner_is_used, 1), # khergit khan
-	(troop_set_slot, "spr_banner_c", slot_banner_is_used, 1), # nord king
-	(troop_set_slot, "spr_banner_d", slot_banner_is_used, 1), # rhodoks king
-	(troop_set_slot, "spr_banner_f01", slot_banner_is_used, 1), # sarranid king
 	
-	(troop_set_slot, "spr_banner_f", slot_banner_is_used, 1), # mudle king
-	(troop_set_slot, "spr_banner_cp", slot_banner_is_used, 1), # freerider king
-	(troop_set_slot, "spr_banner_do", slot_banner_is_used, 1), # khergit tribe khan
+	(troop_set_slot, "trp_noble_end", ":banner", 0),
+	(try_for_range, ":banner_id", "spr_banner_a", "spr_banner_kingdom_a"),
+	  (troop_set_slot, "trp_noble_end", ":banner_id", 0),
+	(try_end),
+	(troop_set_slot, "trp_noble_end", "spr_banner_a", 1), # swadian king
+	(troop_set_slot, "trp_noble_end", "spr_banner_b", 1), # vaegir king
+	(troop_set_slot, "trp_noble_end", "spr_banner_cu", 1), # khergit khan
+	(troop_set_slot, "trp_noble_end", "spr_banner_c", 1), # nord king
+	(troop_set_slot, "trp_noble_end", "spr_banner_d", 1), # rhodoks king
+	(troop_set_slot, "trp_noble_end", "spr_banner_f01", 1), # sarranid king
+	
+	(troop_set_slot, "trp_noble_end", "spr_banner_f", 1), # mudle king
+	(troop_set_slot, "trp_noble_end", "spr_banner_cp", 1), # freerider king
+	(troop_set_slot, "trp_noble_end", "spr_banner_do", 1), # khergit tribe khan
    ]),
 ]
 

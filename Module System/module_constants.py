@@ -1133,8 +1133,9 @@ wum_throw  = 0x00006
 wum_shield = 0x00007
 wum_horse  = 0x10000
 
-slot_banner_faction = 79
-slot_banner_is_used = 100
+# useless now
+# slot_banner_faction = 79 
+# slot_banner_is_used = 100
 
 
 ########################################################
@@ -2007,6 +2008,12 @@ adventurer_names_evil_end = "str_sufix_end"
 
 adventurer_names_end_begin = "str_sufix_1"
 adventurer_names_end_end = "str_sufix_56"
+
+
+banner_faction_slot_begin = "spr_banner_a" # these are used for making only one banner per lord
+banner_faction_slot_end = "spr_banner_end" # banner_a starts at 243 and banner_end is currently 501
+banner_used_slot_begin = banner_faction_slot_begin # should be the same, as banners have to be usable and can have a faction
+banner_used_slot_end = banner_faction_slot_end
 
 #NORMAL ACHIEVEMENTS
 ACHIEVEMENT_NONE_SHALL_PASS = 1,
