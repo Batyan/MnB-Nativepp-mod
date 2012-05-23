@@ -73728,10 +73728,10 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	(assign, ":banner_icon_id", 0),
 	(try_begin),
 	  (eq, "$banner_type", 0),
+	  (store_troop_faction, ":faction_no", ":lord_no"),
 	  (try_begin),
 	    
 	    (troop_slot_eq, ":lord_no", slot_troop_occupation, slto_kingdom_hero),
-		(troop_get_slot, ":faction_no", ":lord_no", slot_troop_original_faction),
 		(try_begin),
 	      (eq, ":faction_no", "fac_kingdom_1"),
 		  (assign, ":banner_id", "spr_banner_kingdom_f"),
@@ -73779,7 +73779,6 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
         (try_end),
 	  
 	  (else_try),
-	    (store_troop_faction, ":faction_no", ":lord_no"),
 		(try_begin),
 	      (eq, ":faction_no", "fac_kingdom_1"),
 	      (assign, ":banner_id", "spr_banner_a"),
@@ -73818,9 +73817,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		  (assign, ":banner_icon_id", "icon_banner_06"),
         (try_end),
 	  (try_end),
-	  
 	(else_try),
-	  
 	  (try_begin), # tries to take a random banner
 	    (troop_slot_eq, ":lord_no", slot_troop_occupation, slto_kingdom_hero),
 		(troop_get_slot, ":faction_no", ":lord_no", slot_troop_original_faction),
@@ -78625,7 +78622,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	  
 	(try_end),
 	
-	(troop_set_slot, "trp_noble_end", ":banner", 0),
+	# (troop_set_slot, "trp_noble_end", ":banner", 0),
 	(try_for_range, ":banner_id", "spr_banner_a", "spr_banner_kingdom_a"),
 	  (troop_set_slot, "trp_noble_end", ":banner_id", 0),
 	(try_end),
