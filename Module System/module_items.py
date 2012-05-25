@@ -741,7 +741,7 @@ items = [
 ["scimitar",         "Scimitar", [("scimitar_a",0),("scab_scimeter_a", ixmesh_carry)], itp_type_one_handed_wpn|itp_merchandise|itp_primary, itc_scimitar|itcf_carry_sword_left_hip|itcf_show_holster_when_drawn, 
  300 , weight(1.5)|difficulty(7)|spd_rtng(100) | weapon_length(96)|swing_damage(31 , cut) | thrust_damage(0 ,  pierce),imodbits_sword_high , [], [fac_kingdom_3, fac_kingdom_2]],
 ["scimitar_b",         "Elite Scimitar", [("scimitar_b",0),("scab_scimeter_b", ixmesh_carry)], itp_type_one_handed_wpn|itp_merchandise|itp_primary, itc_scimitar|itcf_carry_sword_left_hip|itcf_show_holster_when_drawn, 
- 550 , weight(1.55)|difficulty(8)|spd_rtng(98) | weapon_length(100)|swing_damage(33 , cut) | thrust_damage(0 ,  pierce),imodbits_sword_high , [], [fac_kingdom_2]],
+ 550 , weight(1.55)|difficulty(8)|spd_rtng(99) | weapon_length(100)|swing_damage(33 , cut) | thrust_damage(0 ,  pierce),imodbits_sword_high , [], [fac_kingdom_2]],
 
 ["scimitar_c",         "Light Scimitar", [("khergit_sword",0),("khergit_sword_scabbard", ixmesh_carry)], itp_type_one_handed_wpn|itp_merchandise|itp_primary, itc_longsword|itcf_carry_sword_left_hip|itcf_show_holster_when_drawn, 
  455 , weight(1.4)|abundance(30)|difficulty(7)|spd_rtng(101) | weapon_length(99)|swing_damage(30 , cut) | thrust_damage(18 ,  pierce),imodbits_sword_high , [], [fac_kingdom_3, fac_kingdom_6, fac_kingdom_2]],
@@ -903,7 +903,7 @@ items = [
 ["sword_khergit_3", "Sabre", [("khergit_sword_a",0),("khergit_sword_a_scabbard", ixmesh_carry)], itp_type_one_handed_wpn|itp_merchandise|itp_primary, itc_scimitar|itcf_carry_sword_left_hip|itcf_show_holster_when_drawn,
  425 , weight(1.4)|difficulty(7)|spd_rtng(99) | weapon_length(87)|swing_damage(33 , cut),imodbits_sword_high , [], [fac_kingdom_3, fac_kingdom_2]],
 ["sword_khergit_4", "Heavy Sabre", [("khergit_sword_d",0),("khergit_sword_d_scabbard", ixmesh_carry)], itp_type_one_handed_wpn|itp_merchandise|itp_primary, itc_scimitar|itcf_carry_sword_left_hip|itcf_show_holster_when_drawn,
- 585 , weight(2)  |difficulty(9)|spd_rtng(94) | weapon_length(88)|swing_damage(36 , cut),imodbits_sword_high , [], [fac_kingdom_3]],
+ 625 , weight(2)  |difficulty(9)|spd_rtng(95) | weapon_length(88)|swing_damage(36 , cut),imodbits_sword_high , [], [fac_kingdom_3]],
 
 
 

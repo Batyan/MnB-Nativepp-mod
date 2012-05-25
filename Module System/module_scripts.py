@@ -38519,7 +38519,7 @@ scripts = [
         (spawn_around_party, ":bandit_lair_template_spawnpoint", ":bandit_lair_template"),
 		(assign, ":new_camp", reg0),
 		
-		(party_set_icon, ":new_camp", "icon_bandit_lair"), # fixes lairs as flag
+		#(party_set_icon, ":new_camp", "icon_bandit_lair"), # fixes lairs as flag
 
 		(party_set_slot, ":new_camp", slot_party_type, spt_bandit_lair),
 
