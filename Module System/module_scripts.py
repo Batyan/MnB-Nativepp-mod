@@ -36605,9 +36605,14 @@ scripts = [
     [
        (store_script_param, ":center_no", 1),
        (party_get_slot, ":player_relation", ":center_no", slot_center_player_relation),
-       # (party_get_slot, ":center_culture", ":center_no", slot_center_culture),
-	   (store_faction_of_party, ":faction", ":center_no"),
-       (faction_get_slot, ":center_culture", ":faction", slot_faction_culture),
+	   (store_random_in_range, ":random", 0, 3),
+	   (try_begin), # 33% original faction, 67% current faction
+	     (eq, ":random", 0),
+         (party_get_slot, ":center_culture", ":center_no", slot_center_culture),
+	   (else_try),
+	     (store_faction_of_party, ":faction", ":center_no"),
+         (faction_get_slot, ":center_culture", ":faction", slot_faction_culture),
+	   (try_end),
 
 
 ##	   (try_begin),
@@ -38932,8 +38937,16 @@ scripts = [
 	 (store_troop_gold, ":gold", "trp_player"),
 	 (store_div, ":gold_capacity", ":gold", 200),#200 denars per noble
 	 (val_min, ":nobles_amount", ":gold_capacity"),
-	 (store_faction_of_party, ":fac", "$current_town"),
-	 (faction_get_slot, ":center_culture", ":fac", slot_faction_culture),
+
+	 (store_random_in_range, ":random", 0, 3),
+	 (try_begin), # 33% original faction, 67% current faction
+	   (eq, ":random", 0),
+        party_get_slot, ":center_culture", "$current_town", slot_center_culture),
+	 (else_try),
+	   (store_faction_of_party, ":fac", "$current_town"),
+       (faction_get_slot, ":center_culture", ":fac", slot_faction_culture),
+	 (try_end),
+
      (faction_get_slot, ":volunteer_troop", ":center_culture", slot_faction_noble_troop),
 	 (party_add_members, "p_main_party", ":volunteer_troop", ":nobles_amount"),
 	 (party_set_slot, "$current_town", slot_center_volunteer_troop_amount, 0),

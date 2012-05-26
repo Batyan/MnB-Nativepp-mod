@@ -458,7 +458,7 @@ troops = [
    def_attrib|level(25),wp(130),knows_common|knows_shield_3|knows_ironflesh_3|knows_power_strike_3,mercenary_face_1, mercenary_face_2],
 
 #peasant - retainer - footman - man-at-arms -  knight
-  ["swadian_recruit","Conscript","Conscripts",tf_guarantee_boots|tf_guarantee_armor,0,0,fac_kingdom_1,
+  ["swadian_recruit","Peasant","Peasants",tf_guarantee_boots|tf_guarantee_armor,0,0,fac_kingdom_1,
    [itm_scythe,itm_pickaxe,itm_club,itm_stones,itm_tab_shield_heater_a,itm_leather_cap,itm_felt_hat,itm_felt_hat,
     itm_red_shirt,itm_coarse_tunic,itm_red_tunic,itm_leather_apron,itm_wrapping_boots],
    def_attrib|level(4),wpex(50,45,50,20,20,30),knows_common|knows_athletics_1,swadian_face_younger_1, swadian_face_middle_2],
@@ -604,7 +604,7 @@ troops = [
    str_12|agi_20|int_5|cha_5|level(22),wpex(85,70,80,110,50,75),knows_common|knows_riding_5|knows_power_draw_4|knows_ironflesh_1|knows_horse_archery_4|knows_shield_2|knows_power_strike_1|knows_athletics_3,khergit_face_middle_1, khergit_face_older_2],
   ["khergit_dune_rider","Light Lancer","Light Lancers",tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_horse|tf_guarantee_shield|tf_guarantee_helmet|tf_guarantee_gloves,0,0,fac_kingdom_3,
    [itm_sword_khergit_3,itm_winged_mace,itm_light_lance,itm_light_lance,itm_tab_shield_small_round_c,itm_tab_shield_small_round_b,itm_javelin,
-    itm_nomad_robe,itm_lamellar_vest_khergit,itm_leather_steppe_cap_b,itm_leather_boots,itm_spiked_helmet,itm_khergit_war_helmet,itm_leather_gloves,itm_steppe_horse,itm_hunter],
+    itm_nomad_robe,itm_lamellar_vest_khergit,itm_leather_steppe_cap_b,itm_leather_boots,itm_khergit_war_helmet,itm_leather_gloves,itm_steppe_horse,itm_hunter],
    str_13|agi_17|int_5|cha_5|level(19),wpex(95,85,95,75,40,80),knows_common|knows_riding_5|knows_power_throw_1|knows_power_strike_2|knows_ironflesh_2|knows_athletics_2|knows_shield_2|knows_horse_archery_2,khergit_face_young_1, khergit_face_older_2],
   ["khergit_lancer","Lancer","Lancers",tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_horse|tf_guarantee_shield|tf_guarantee_helmet|tf_guarantee_gloves,0,0,fac_kingdom_3,
    [itm_sword_khergit_4,itm_winged_mace,itm_lance,itm_lance,itm_hafted_blade_b,itm_tab_shield_small_round_c,itm_javelin,
@@ -1133,10 +1133,10 @@ troops = [
     itm_leather_jacket, itm_leather_cap],
    str_14|agi_17|int_5|cha_5|level(20),wp(100),knows_common|knows_riding_4|knows_ironflesh_3|knows_power_strike_3,mercenary_face_1, mercenary_face_2],
 
-  # Special faction troops -- slightly better than common troop (has it's drawbacks though
+  # Special faction troops -- slightly better than common troop (has it's drawbacks though)
   # Should be used by the kings instead of their usual counterpart (or used as an elite side troop)
   # Biggest problem is not enough troops for all faction
-  # Frustration for the player, he can't have these troops
+  # Frustration for the player, as he can't have these troops
 	
   # ["swadian_swordmaster","Swordmaster","Swordmasters",tf_guarantee_armor|tf_guarantee_boots|tf_guarantee_gloves|tf_guarantee_helmet, 0, 0, fac_kingdom_1,
    # [itm_sword_two_handed_a,
