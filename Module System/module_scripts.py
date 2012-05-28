@@ -11066,7 +11066,7 @@ scripts = [
         (try_begin),
           #validity check
           (player_is_admin, ":player_no"),
-          (is_between, ":value", 2, 65),
+          (is_between, ":value", 2, 201),
           #condition checks are done
           (server_set_max_num_players, ":value"),
         (try_end),
@@ -13868,11 +13868,13 @@ scripts = [
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 7, "scn_multi_scene_14"),
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 8, "scn_multi_scene_17"),
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 9, "scn_multi_scene_18"),
-        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 10, "scn_random_multi_plain_medium"),
-        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 11, "scn_random_multi_plain_large"),
-        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 12, "scn_random_multi_steppe_medium"),
-        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 13, "scn_random_multi_steppe_large"),
-        (assign, ":num_maps", 14),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 10, "scn_multi_scene_19"),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 11, "scn_multi_scene_20"),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 12, "scn_random_multi_plain_medium"),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 13, "scn_random_multi_plain_large"),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 14, "scn_random_multi_steppe_medium"),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 15, "scn_random_multi_steppe_large"),
+        (assign, ":num_maps", 16),
       (else_try),
         (eq, ":game_type", multiplayer_game_type_battle),
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin, "scn_multi_scene_1"),
@@ -13885,11 +13887,13 @@ scripts = [
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 7, "scn_multi_scene_14"),
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 8, "scn_multi_scene_17"),
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 9, "scn_multi_scene_18"),
-        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 10, "scn_random_multi_plain_medium"),
-        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 11, "scn_random_multi_plain_large"),
-        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 12, "scn_random_multi_steppe_medium"),
-        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 13, "scn_random_multi_steppe_large"),
-        (assign, ":num_maps", 14),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 10, "scn_multi_scene_19"),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 11, "scn_multi_scene_20"),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 12, "scn_random_multi_plain_medium"),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 13, "scn_random_multi_plain_large"),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 14, "scn_random_multi_steppe_medium"),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 15, "scn_random_multi_steppe_large"),
+        (assign, ":num_maps", 16),
       (else_try),
         (eq, ":game_type", multiplayer_game_type_destroy),
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin, "scn_multi_scene_1"),
@@ -13899,7 +13903,9 @@ scripts = [
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 4, "scn_multi_scene_9"),
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 5, "scn_multi_scene_12"),
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 6, "scn_multi_scene_14"),
-        (assign, ":num_maps", 7),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 7, "scn_multi_scene_19"),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 8, "scn_multi_scene_20"),
+        (assign, ":num_maps", 9),
       (else_try),
         (eq, ":game_type", multiplayer_game_type_capture_the_flag),
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin, "scn_multi_scene_1"),
@@ -13912,11 +13918,13 @@ scripts = [
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 7, "scn_multi_scene_14"),
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 8, "scn_multi_scene_17"),
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 9, "scn_multi_scene_18"),
-        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 10, "scn_random_multi_plain_medium"),
-        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 11, "scn_random_multi_plain_large"),
-        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 12, "scn_random_multi_steppe_medium"),
-        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 13, "scn_random_multi_steppe_large"),
-        (assign, ":num_maps", 14),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 10, "scn_multi_scene_19"),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 11, "scn_multi_scene_20"),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 12, "scn_random_multi_plain_medium"),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 13, "scn_random_multi_plain_large"),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 14, "scn_random_multi_steppe_medium"),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 15, "scn_random_multi_steppe_large"),
+        (assign, ":num_maps", 16),
       (else_try),
         (eq, ":game_type", multiplayer_game_type_headquarters),
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin, "scn_multi_scene_1"),
@@ -13929,7 +13937,9 @@ scripts = [
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 7, "scn_multi_scene_14"),
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 8, "scn_multi_scene_17"),
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 9, "scn_multi_scene_18"),
-        (assign, ":num_maps", 10),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 10, "scn_multi_scene_19"),
+        (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin + 11, "scn_multi_scene_20"),
+        (assign, ":num_maps", 12),
       (else_try),
         (eq, ":game_type", multiplayer_game_type_siege),
         (troop_set_slot, "trp_multiplayer_data", multi_data_maps_for_game_type_begin, "scn_multi_scene_3"),
@@ -25361,6 +25371,25 @@ scripts = [
              (call_script, "script_change_center_prosperity", ":center_no", -1),
 			 (val_add, "$newglob_total_prosperity_from_townloot", -1),
            (try_end),
+		   
+		   #Reduce prosperity of besieged castle/town by -0.33/-4 every day.
+           (try_begin),
+             (try_begin),
+               (is_between, ":center_no", castles_begin, castles_end),
+               (store_random_in_range, ":random_value", 0, 6),
+               (try_begin),
+                 (eq, ":random_value", 0),
+                 (assign, ":daily_siege_effect_on_prosperity", -1),
+               (else_try),
+                 (assign, ":daily_siege_effect_on_prosperity", 0),
+               (try_end),
+             (else_try),
+               (assign, ":daily_siege_effect_on_prosperity", -2),
+             (try_end),
+       
+             (call_script, "script_change_center_prosperity", ":center_no", ":daily_siege_effect_on_prosperity"),
+             (val_add, "$newglob_total_prosperity_from_townloot", ":daily_siege_effect_on_prosperity"),
+           (try_end),
 
            (store_faction_of_party, ":center_faction", ":center_no"),
         # Lift siege unless there is an enemy party nearby
@@ -27583,7 +27612,7 @@ scripts = [
              (store_faction_of_troop, ":screen_leader_faction", ":screen_leader"),
              (eq, ":screen_leader_faction", ":faction_no"),
 
-             (troop_get_slot, ":screening_party", ":screen_leader_faction", slot_troop_leaded_party),
+             (troop_get_slot, ":screening_party", ":screen_leader", slot_troop_leaded_party),
 			 ##diplomacy start+ Guard against things such as the party being 0 (p_main_party)
 			 (gt, ":screening_party", 0),
 			 ##diplomacy end+
@@ -38941,7 +38970,7 @@ scripts = [
 	 (store_random_in_range, ":random", 0, 3),
 	 (try_begin), # 33% original faction, 67% current faction
 	   (eq, ":random", 0),
-        party_get_slot, ":center_culture", "$current_town", slot_center_culture),
+       (party_get_slot, ":center_culture", "$current_town", slot_center_culture),
 	 (else_try),
 	   (store_faction_of_party, ":fac", "$current_town"),
        (faction_get_slot, ":center_culture", ":fac", slot_faction_culture),
@@ -39066,14 +39095,11 @@ scripts = [
   # OUTPUT: reg0 = ideal_prosperity
   ("get_center_ideal_prosperity",
     [(store_script_param, ":center_no", 1),
-     (assign, ":ideal", 100),
+     (assign, ":ideal", 65),
 
-	 (call_script, "script_center_get_goods_availability", ":center_no"),
-	 (store_mul, ":hardship_index", reg0, 2), #currently x2
-#	 (val_div, ":hardship_index", 2), #Currently x2.5
-
-	 (val_sub, ":ideal", ":hardship_index"),
-	 (val_max, ":ideal", 0),
+     (call_script, "script_center_get_goods_availability", ":center_no"),
+     (store_mul, ":hardship_index", reg0, 2),
+     (val_sub, ":ideal", ":hardship_index"),	 
 	 
 	 ## bank_begin
 	 (try_begin),
@@ -39087,27 +39113,8 @@ scripts = [
        (party_slot_eq, ":center_no", slot_center_has_fish_pond, 1),
        (val_add, ":ideal", 5),
      (try_end),
-
-#     (try_begin),
-#       (is_between, ":center_no", villages_begin, villages_end),
-#       (try_begin),
-#         (party_slot_eq, ":center_no", slot_center_has_fish_pond, 1),
-#         (val_add, ":ideal", 5),
-#       (try_end),
-#       (party_get_slot, ":land_quality", ":center_no", slot_village_land_quality),
-#       (val_mul, ":land_quality", 3),
-#       (val_add, ":ideal", ":land_quality"),
-#       (party_get_slot, ":num_cattle", ":center_no", slot_village_number_of_cattle),
-#       (val_div, ":num_cattle", 20),
-#       (val_add, ":ideal", ":num_cattle"),
-#     (else_try),
-#       (try_for_range, ":village_no", villages_begin, villages_end),
-#         (party_slot_eq, ":village_no", slot_village_bound_center, ":center_no"),
-#         (party_get_slot, ":prosperity", ":village_no", slot_town_prosperity),
-#         (val_div, ":prosperity", 20),
-#         (val_add, ":ideal", ":prosperity"),
-#       (try_end),
-#     (try_end),
+	 
+	 (val_max, ":ideal", 0),
 
      (assign, reg0, ":ideal"),
      ]),
@@ -45779,7 +45786,7 @@ scripts = [
 				(party_is_active, ":defeated_lord_party"),
 
 				#is party under suggestion?
-				(call_script, "script_cf_party_under_player_suggestion", ":winner_lord_party"),
+				(call_script, "script_cf_party_under_player_suggestion", ":defeated_lord_party"),
 				(call_script, "script_add_log_entry", logent_player_suggestion_failed, "trp_player", -1, ":cur_troop_id", -1),
 			(try_end),
 
@@ -46689,8 +46696,7 @@ scripts = [
     (faction_get_slot, ":old_marshall", ":faction_no", slot_faction_marshall),
 
     (faction_set_slot, ":faction_no", slot_faction_marshall, ":faction_marshall"),
-
-    (faction_get_slot, ":old_marshall", ":faction_no", slot_faction_marshall),
+	
     (try_begin),
 		(ge, ":old_marshall", 0),
 		(troop_get_slot, ":old_marshall_party", ":old_marshall", slot_troop_leaded_party),
@@ -48422,9 +48428,9 @@ scripts = [
             (assign, ":minimum_distance", 100000),
             (try_for_range, ":center_no", centers_begin, centers_end),
               (store_faction_of_party, ":center_faction", ":center_no"),
-              (eq, ":center_faction", ":faction_no"),
+              (eq, ":center_faction", ":faction_no"), #200
               (try_begin),
-                (neq, ":center_no", ":most_threatened_center"), #200
+                (neq, ":center_no", ":most_threatened_center"),
                 (store_distance_to_party_from_party, ":dist", ":party_no", ":center_no"),
                 (lt, ":dist", ":minimum_distance"),
                 (assign, ":minimum_distance", ":dist"),
@@ -48900,6 +48906,7 @@ scripts = [
 	  (eq, ":old_ai_state", spai_screening_army),
 
 	  (faction_get_slot, ":faction_marshal", ":faction_no", slot_faction_marshall),
+	  (ge, ":faction_marshal", 0),
 	  (troop_get_slot, ":marshal_party", ":faction_marshal", slot_troop_leaded_party),
 	  (party_is_active, ":marshal_party"),
 
@@ -48945,6 +48952,7 @@ scripts = [
 	  (eq, reg0, 1),
 
 	  (faction_get_slot, ":faction_marshal", ":faction_no", slot_faction_marshall),
+	  (ge, ":faction_marshal", 0),
 	  (troop_get_slot, ":marshal_party", ":faction_marshal", slot_troop_leaded_party),
 
 	  (assign, ":action", spai_accompanying_army),
@@ -50632,7 +50640,7 @@ scripts = [
           (else_try),
             (try_begin),
               (lt, ":power_ratio", 200), #changes between 5..25
-              (val_div, ":threat_importance", 10),
+              (store_div, ":threat_importance", ":power_ratio", 10),
               (val_add, ":threat_importance", 6 ),
             (else_try),
               (assign, ":threat_importance", 26),
@@ -52737,7 +52745,7 @@ scripts = [
 		(gt, ":consumer_consumption", 2),
 
 
-		(store_div, ":max_impact", ":consumer_consumption", 3), #was 4
+		(store_div, ":max_impact", ":consumer_consumption", 4), #was 4, dropped 3 again 4 now
 
 		#High-demand items like grain tend to have much more dramatic price differentiation, so they yield substantially higher results than low-demand items
 
@@ -52745,10 +52753,10 @@ scripts = [
         (val_add, ":cur_good_price_slot", slot_town_trade_good_prices_begin),
         (party_get_slot, ":price", ":center_no", ":cur_good_price_slot"),
 
-		(store_sub, ":price_differential", ":price", 950),
-		(gt, ":price_differential", 100), #was 100
+		(store_sub, ":price_differential", ":price", 1000),
+		(gt, ":price_differential", 200), #was 100
 
-		(val_div, ":price_differential", 100),
+		(val_div, ":price_differential", 200),
 		(val_min, ":price_differential", ":max_impact"),
 
 		(val_add, ":hardship_index", ":price_differential"),
@@ -54712,6 +54720,8 @@ scripts = [
 			(eq, ":at_peace_with_everyone", 0),
 
             (is_between, ":most_threatened_center", centers_begin, centers_end),
+            (this_or_next|eq, ":current_ai_state", sfai_default),    #MOTO not going to attack anyway 
+            (this_or_next|eq, ":current_ai_state", sfai_feast),    #MOTO not going to attack anyway (THIS is the emergency to stop feast) 
             (gt, ":threat_danger_level", ":target_value_level"),
 
             (assign, ":continue_gathering", 0),
@@ -54864,6 +54874,8 @@ scripts = [
 		(else_try),
 			(party_is_active, ":marshal_party"),
 			(is_between, ":most_threatened_center", walled_centers_begin, walled_centers_end),
+			(this_or_next|eq, ":current_ai_state", sfai_default),    #MOTO not going to attack anyway 
+            (this_or_next|eq, ":current_ai_state", sfai_feast),    #MOTO not going to attack anyway (THIS is the emergency to stop feast)
 			(ge, ":threat_danger_level", ":target_value_level"),
 			(party_slot_ge, ":most_threatened_center", slot_center_is_besieged_by, 0),
 
@@ -54876,6 +54888,8 @@ scripts = [
 		#3b - DEFEAT ENEMIES NEAR CENTER - similar to above, but a different string
 		(else_try),
 			(party_is_active, ":marshal_party"),
+			(this_or_next|eq, ":current_ai_state", sfai_default),    #MOTO not going to attack anyway 
+            (this_or_next|eq, ":current_ai_state", sfai_feast),    #MOTO not going to attack anyway (THIS is the emergency to stop feast)                
 			(ge, ":threat_danger_level", ":target_value_level"),
 			(is_between, ":most_threatened_center", villages_begin, villages_end),
 

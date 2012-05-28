@@ -3121,6 +3121,10 @@ scene_props = [
    (particle_system_add_new, "psys_fall_leafs_a"),
   ]),
  ]),
+("rock_bridge_a",0,"rock_bridge_a","bo_rock_bridge_a", []),
+("suspension_bridge_a",0,"suspension_bridge_a","bo_suspension_bridge_a", []),
+("mine_a",0,"mine_a","bo_mine_a", []),
+
 ]
 
 

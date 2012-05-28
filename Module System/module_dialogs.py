@@ -21954,8 +21954,8 @@ Please give {reg0?her:him} these {reg10} denars and thank {reg0?her:him} on my b
 ##diplomacy end+
     (eq, ":has_center", 1),
 
-    (call_script, "script_npc_decision_checklist_peace_or_war", "$g_encountered_party_faction", "fac_player_supporters_faction", "trp_player"),
-##diplomacy start+ allow the player to negotiate, as they can through a minister
+    (call_script, "script_npc_decision_checklist_peace_or_war", "$g_talk_troop_faction", "fac_player_supporters_faction", "trp_player"), #moto fix here 
+	##diplomacy start+ allow the player to negotiate, as they can through a minister
 (assign, "$temp", reg0),#<-- the check peace war result
 (lt, reg0, -2),#<-- negotiation is impossible at -3 or worse
 
@@ -22149,7 +22149,7 @@ Please give {reg0?her:him} these {reg10} denars and thank {reg0?her:him} on my b
 #(call_script, "script_diplomacy_start_peace_between_kingdoms", "$g_encountered_party_faction", "$players_kingdom", 1),
 ], "I accept. Let us stop making war upon each other, for the time being anyway", "close_window",
 [
-   (call_script, "script_diplomacy_start_peace_between_kingdoms", "$g_encountered_party_faction", "$players_kingdom", 1),
+   (call_script, "script_diplomacy_start_peace_between_kingdoms", "$g_talk_troop_faction", "$players_kingdom", 1), #moto fix here 
 (eq,"$talk_context",tc_party_encounter),
 (assign, "$g_leave_encounter", 1),
 ]],
@@ -29354,6 +29354,26 @@ I suppose there are plenty of bounty hunters around to get the job done . . .", 
    ##diplomacy end+
  ]],
 
+  [anyone,"start", [(troop_slot_eq, "$g_talk_troop", slot_troop_occupation, slto_kingdom_lady),
+                    (check_quest_active, "qst_escort_lady"),
+                    (eq, "$talk_context", tc_entering_center_quest_talk),
+                    (quest_slot_eq, "qst_escort_lady", slot_quest_object_troop, "$g_talk_troop")],
+   "Thank you for escorting me here, {playername}. Please accept this gift as a token of my gratitude.\
+ I hope we shall meet again sometime in the future.", "lady_escort_lady_succeeded",
+   [
+     (quest_get_slot, ":cur_center", "qst_escort_lady", slot_quest_target_center),
+     (add_xp_as_reward, 300),
+     (call_script, "script_troop_add_gold", "trp_player", 250),
+     (call_script, "script_end_quest", "qst_escort_lady"),
+     (call_script, "script_change_player_relation_with_troop", "$g_talk_troop", 2),
+     (troop_set_slot, "$g_talk_troop", slot_troop_cur_center, ":cur_center"),
+     (remove_member_from_party,"$g_talk_troop"),
+     ]],
+
+	[anyone|plyr,"lady_escort_lady_succeeded", [], "It was an honor to serve you, {s65}.", "close_window",[]],
+
+
+	
   [anyone,"start",
    [
     (troop_slot_eq, "$g_talk_troop", slot_troop_occupation, slto_kingdom_lady),
@@ -29758,26 +29778,8 @@ I suppose there are plenty of bounty hunters around to get the job done . . .", 
     (add_xp_as_reward, 400),
     (call_script, "script_end_quest", "qst_duel_for_lady"),
     ]],
-
-
-  [anyone,"start", [(troop_slot_eq, "$g_talk_troop", slot_troop_occupation, slto_kingdom_lady),
-                    (check_quest_active, "qst_escort_lady"),
-                    (eq, "$talk_context", tc_entering_center_quest_talk),
-                    (quest_slot_eq, "qst_escort_lady", slot_quest_object_troop, "$g_talk_troop")],
-   "Thank you for escorting me here, {playername}. Please accept this gift as a token of my gratitude.\
- I hope we shall meet again sometime in the future.", "lady_escort_lady_succeeded",
-   [
-     (quest_get_slot, ":cur_center", "qst_escort_lady", slot_quest_target_center),
-     (add_xp_as_reward, 300),
-     (call_script, "script_troop_add_gold", "trp_player", 250),
-     (call_script, "script_end_quest", "qst_escort_lady"),
-     (call_script, "script_change_player_relation_with_troop", "$g_talk_troop", 2),
-     (troop_set_slot, "$g_talk_troop", slot_troop_cur_center, ":cur_center"),
-     (remove_member_from_party,"$g_talk_troop"),
-     ]],
-
-	[anyone|plyr,"lady_escort_lady_succeeded", [], "It was an honor to serve you, {s65}.", "close_window",[]],
-
+	
+	
 	[anyone,"start", [
 	(troop_slot_eq, "$g_talk_troop", slot_troop_occupation, slto_kingdom_lady),
   	(troop_set_slot, "$g_talk_troop", slot_lady_no_messages, 0), #do this for all
@@ -37157,7 +37159,18 @@ I suppose there are plenty of bounty hunters around to get the job done . . .", 
 
   [anyone|plyr,"mayor_info_talk",[(eq, "$mayor_info_lord_told",0)], "Who rules this town?", "mayor_info_lord",[]],
   ##diplomacy start+ make gender correct
-  [anyone, "mayor_info_lord", [(party_get_slot, ":town_lord","$current_town",slot_town_lord),(str_store_troop_name, s10, ":town_lord"),
+  [anyone, "mayor_info_lord", [
+  (party_get_slot, ":town_lord","$current_town",slot_town_lord),
+  (try_begin), 
+      (eq, ":town_lord", "trp_player"), 
+      (str_store_string, s10, "str_your_excellency"), 
+  (else_try), 
+      (is_between, ":town_lord", active_npcs_begin, active_npcs_end), 
+      (str_store_troop_name, s10, ":town_lord"), 
+  (else_try), 
+      (faction_get_slot, ":faction_leader", "$g_encountered_party_faction", slot_faction_leader), 
+      (str_store_troop_name, s10, ":faction_leader"), 
+  (try_end), 
   (call_script, "script_dplmc_store_troop_is_female", ":town_lord"),],#Next line, He -> {reg0?She:He}
    "Our town's lord and protector is {s10}. {reg0?She:He} owns the castle and sometimes resides there, and collects taxes from the town.\
  However we regulate ourselves in most of the matters that concern ourselves.\
