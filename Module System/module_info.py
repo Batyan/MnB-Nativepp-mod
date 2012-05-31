@@ -5,4 +5,4 @@
 #export_dir = "C:/Program Files (x86)/Mount&Blade Warband/Modules/1st module/"
 #export_dir = "C:/Games/Steam/SteamApps/common/mountblade warband/Modules/1st module/"
 #export_dir = "C:/Games/Mount&Blade Warband/Modules/1st module/"
-export_dir = "C:/Games/Mount&Blade Warband 1151/Modules/1st module/"
+export_dir = "C:/Games/Mount&Blade Warband/Modules/1st module/"

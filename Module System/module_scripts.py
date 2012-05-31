@@ -8388,7 +8388,7 @@ scripts = [
       (troop_set_slot, "trp_player", slot_troop_custom_banner_charge_color_4, 0xFFFFFFFF),
 
       #Setting background colors for banners
-      (troop_set_slot, "trp_banner_background_color_array", 0, 0xFF8f4531),
+      (troop_set_slot, "trp_banner_background_color_array", 0, 0xFF8f4531), # a_01
       (troop_set_slot, "trp_banner_background_color_array", 1, 0xFFd9d7d1),
       (troop_set_slot, "trp_banner_background_color_array", 2, 0xFF373736),
       (troop_set_slot, "trp_banner_background_color_array", 3, 0xFFa48b28),
@@ -8408,8 +8408,8 @@ scripts = [
       (troop_set_slot, "trp_banner_background_color_array", 17, 0xFFdfded6),
       (troop_set_slot, "trp_banner_background_color_array", 18, 0xFF292724),
       (troop_set_slot, "trp_banner_background_color_array", 19, 0xFF58611b),
-      (troop_set_slot, "trp_banner_background_color_array", 20, 0xFF313a67),
-      (troop_set_slot, "trp_banner_background_color_array", 21, 0xFF9c924a),
+      (troop_set_slot, "trp_banner_background_color_array", 20, 0xFF313a67), # a_21
+      (troop_set_slot, "trp_banner_background_color_array", 21, 0xFF9c924a), # b_01
 	  (troop_set_slot, "trp_banner_background_color_array", 22, 0xFF998b39),
 	  (troop_set_slot, "trp_banner_background_color_array", 23, 0xFF365168),
       (troop_set_slot, "trp_banner_background_color_array", 24, 0xFFd6d3ce),
@@ -8429,8 +8429,8 @@ scripts = [
       (troop_set_slot, "trp_banner_background_color_array", 38, 0xFF4d7136),
 	  (troop_set_slot, "trp_banner_background_color_array", 39, 0xFF395d84),
       (troop_set_slot, "trp_banner_background_color_array", 40, 0xFF527539),
-      (troop_set_slot, "trp_banner_background_color_array", 41, 0xFF9c3c39),
-      (troop_set_slot, "trp_banner_background_color_array", 42, 0xFF42518c),
+      (troop_set_slot, "trp_banner_background_color_array", 41, 0xFF9c3c39), # b_21
+      (troop_set_slot, "trp_banner_background_color_array", 42, 0xFF42518c), # c_01
       (troop_set_slot, "trp_banner_background_color_array", 43, 0xFFa46a2c),
 	  (troop_set_slot, "trp_banner_background_color_array", 44, 0xFF9f5141),
       (troop_set_slot, "trp_banner_background_color_array", 45, 0xFF2c6189),
@@ -8450,8 +8450,8 @@ scripts = [
       (troop_set_slot, "trp_banner_background_color_array", 59, 0xFF2e2f2c),
       (troop_set_slot, "trp_banner_background_color_array", 60, 0xFF604283),
       (troop_set_slot, "trp_banner_background_color_array", 61, 0xFF395584),
-      (troop_set_slot, "trp_banner_background_color_array", 62, 0xFF313031),
-      (troop_set_slot, "trp_banner_background_color_array", 63, 0xFF7e3f2e),
+      (troop_set_slot, "trp_banner_background_color_array", 62, 0xFF313031), # c_21
+      (troop_set_slot, "trp_banner_background_color_array", 63, 0xFF7e3f2e), # d_01
       (troop_set_slot, "trp_banner_background_color_array", 64, 0xFF343434),
       (troop_set_slot, "trp_banner_background_color_array", 65, 0xFF3c496b),
       (troop_set_slot, "trp_banner_background_color_array", 66, 0xFFd9d8d1),
@@ -8471,8 +8471,8 @@ scripts = [
       (troop_set_slot, "trp_banner_background_color_array", 80, 0xFF76512e),
       (troop_set_slot, "trp_banner_background_color_array", 81, 0xFFe7e3de),
       (troop_set_slot, "trp_banner_background_color_array", 82, 0xFF947921),
-      (troop_set_slot, "trp_banner_background_color_array", 83, 0xFF4d7b7c),
-      (troop_set_slot, "trp_banner_background_color_array", 84, 0xFF343331),
+      (troop_set_slot, "trp_banner_background_color_array", 83, 0xFF4d7b7c), # d_21
+      (troop_set_slot, "trp_banner_background_color_array", 84, 0xFF343331), # e_01
       (troop_set_slot, "trp_banner_background_color_array", 85, 0xFFa74d36),
       (troop_set_slot, "trp_banner_background_color_array", 86, 0xFFe7e3de),
       (troop_set_slot, "trp_banner_background_color_array", 87, 0xFFd6d8ce),
@@ -8492,8 +8492,8 @@ scripts = [
       (troop_set_slot, "trp_banner_background_color_array", 101, 0xFFdcdbd3),
       (troop_set_slot, "trp_banner_background_color_array", 102, 0xFFdbdcd3),
       (troop_set_slot, "trp_banner_background_color_array", 103, 0xFF843831),
-      (troop_set_slot, "trp_banner_background_color_array", 104, 0xFFcecfc6),
-	  (troop_set_slot, "trp_banner_background_color_array", 105, 0xFFc39d31),
+      (troop_set_slot, "trp_banner_background_color_array", 104, 0xFFcecfc6), # e_21
+	  (troop_set_slot, "trp_banner_background_color_array", 105, 0xFFc39d31), # f_01
 	  (troop_set_slot, "trp_banner_background_color_array", 106, 0xFFcbb670),
 	  (troop_set_slot, "trp_banner_background_color_array", 107, 0xFF394a18),
 	  (troop_set_slot, "trp_banner_background_color_array", 108, 0xFF372708),
@@ -8513,16 +8513,148 @@ scripts = [
       (troop_set_slot, "trp_banner_background_color_array", 122, 0xFF703324),
 	  (troop_set_slot, "trp_banner_background_color_array", 123, 0xFF24293c),
 	  (troop_set_slot, "trp_banner_background_color_array", 124, 0xFF5d6966),
-	  (troop_set_slot, "trp_banner_background_color_array", 125, 0xFFbd9631),
-	  (troop_set_slot, "trp_banner_background_color_array", 126, 0xFFc6b26b),
-	  (troop_set_slot, "trp_banner_background_color_array", 127, 0xFF394918),
-
+	  (troop_set_slot, "trp_banner_background_color_array", 125, 0xFFbd9631), # f_21
+	  (troop_set_slot, "trp_banner_background_color_array", 126, 0xFF844131), # g_01
+	  (troop_set_slot, "trp_banner_background_color_array", 127, 0xFF5F2929),
+	  (troop_set_slot, "trp_banner_background_color_array", 128, 0xFFC5C5BD),
+	  (troop_set_slot, "trp_banner_background_color_array", 129, 0xFFD6DBD6),
+	  (troop_set_slot, "trp_banner_background_color_array", 130, 0xFF637531),
+	  (troop_set_slot, "trp_banner_background_color_array", 131, 0xFF9F5B44),
+	  (troop_set_slot, "trp_banner_background_color_array", 132, 0xFF315689),
+	  (troop_set_slot, "trp_banner_background_color_array", 133, 0xFF333433),
+	  (troop_set_slot, "trp_banner_background_color_array", 134, 0xFFDEE3DE),
+	  (troop_set_slot, "trp_banner_background_color_array", 135, 0xFFD6D3CE),
+	  (troop_set_slot, "trp_banner_background_color_array", 136, 0xFFD8D7D0),
+	  (troop_set_slot, "trp_banner_background_color_array", 137, 0xFF917629),
+	  (troop_set_slot, "trp_banner_background_color_array", 138, 0xFF75713F),
+      (troop_set_slot, "trp_banner_background_color_array", 139, 0xFFE1E3DE),
+      (troop_set_slot, "trp_banner_background_color_array", 140, 0xFFD8D8D0),
+      (troop_set_slot, "trp_banner_background_color_array", 141, 0xFF5D4329),
+      (troop_set_slot, "trp_banner_background_color_array", 142, 0xFF2E597E),
+      (troop_set_slot, "trp_banner_background_color_array", 143, 0xFF393835),
+	  (troop_set_slot, "trp_banner_background_color_array", 144, 0xFFE1DFD8),
+	  (troop_set_slot, "trp_banner_background_color_array", 145, 0xFFD0D0C8),
+	  (troop_set_slot, "trp_banner_background_color_array", 146, 0xFFB7B6B7), # g_21
+	  (troop_set_slot, "trp_banner_background_color_array", 147, 0xFFB23C31), # h_01
+	  (troop_set_slot, "trp_banner_background_color_array", 148, 0xFFAD3C31),
+	  (troop_set_slot, "trp_banner_background_color_array", 149, 0xFFD8D5C8),
+	  (troop_set_slot, "trp_banner_background_color_array", 150, 0xFF362926),
+	  (troop_set_slot, "trp_banner_background_color_array", 151, 0xFFD8D4C8),
+	  (troop_set_slot, "trp_banner_background_color_array", 152, 0xFF332D26),
+	  (troop_set_slot, "trp_banner_background_color_array", 153, 0xFF3E75A1),
+	  (troop_set_slot, "trp_banner_background_color_array", 154, 0xFFCBC5B7),
+	  (troop_set_slot, "trp_banner_background_color_array", 155, 0xFFDBBD41),
+	  (troop_set_slot, "trp_banner_background_color_array", 156, 0xFFB79B26),
+	  (troop_set_slot, "trp_banner_background_color_array", 157, 0xFF942C29),
+	  (troop_set_slot, "trp_banner_background_color_array", 158, 0xFFB7AF9C),
+	  (troop_set_slot, "trp_banner_background_color_array", 159, 0xFF639A42),
+      (troop_set_slot, "trp_banner_background_color_array", 160, 0xFF416579),
+      (troop_set_slot, "trp_banner_background_color_array", 161, 0xFFCEC7BD),
+      (troop_set_slot, "trp_banner_background_color_array", 162, 0xFF499289),
+      (troop_set_slot, "trp_banner_background_color_array", 163, 0xFF4A9631),
+      (troop_set_slot, "trp_banner_background_color_array", 164, 0xFFC8A42E),
+	  (troop_set_slot, "trp_banner_background_color_array", 165, 0xFF44AE23),
+	  (troop_set_slot, "trp_banner_background_color_array", 166, 0xFF4A8E29),
+	  (troop_set_slot, "trp_banner_background_color_array", 167, 0xFF3E7A2B), # h_21
+	  (troop_set_slot, "trp_banner_background_color_array", 168, 0xFF638A29), # i_01
+	  (troop_set_slot, "trp_banner_background_color_array", 169, 0xFFC65142),
+	  (troop_set_slot, "trp_banner_background_color_array", 170, 0xFFCEC7B5),
+	  (troop_set_slot, "trp_banner_background_color_array", 171, 0xFF579831),
+	  (troop_set_slot, "trp_banner_background_color_array", 172, 0xFFC84A3C),
+	  (troop_set_slot, "trp_banner_background_color_array", 173, 0xFFCBAE33),
+	  (troop_set_slot, "trp_banner_background_color_array", 174, 0xFFD0B039),
+	  (troop_set_slot, "trp_banner_background_color_array", 175, 0xFFE4E3D8),
+	  (troop_set_slot, "trp_banner_background_color_array", 176, 0xFFE4E1DB),
+	  (troop_set_slot, "trp_banner_background_color_array", 177, 0xFFC8AE34),
+	  (troop_set_slot, "trp_banner_background_color_array", 178, 0xFF4A79A5),
+	  (troop_set_slot, "trp_banner_background_color_array", 179, 0xFF5A9229),
+	  (troop_set_slot, "trp_banner_background_color_array", 180, 0xFFCEBE42),
+      (troop_set_slot, "trp_banner_background_color_array", 181, 0xFF479736),
+      (troop_set_slot, "trp_banner_background_color_array", 182, 0xFFAF3D2E),
+      (troop_set_slot, "trp_banner_background_color_array", 183, 0xFF54BA49),
+      (troop_set_slot, "trp_banner_background_color_array", 184, 0xFF992621),
+      (troop_set_slot, "trp_banner_background_color_array", 185, 0xFFAD392E),
+	  (troop_set_slot, "trp_banner_background_color_array", 186, 0xFFCBB049),
+	  (troop_set_slot, "trp_banner_background_color_array", 187, 0xFFD6CFBD),
+	  (troop_set_slot, "trp_banner_background_color_array", 188, 0xFFD8BD4F), # i_21
+	  (troop_set_slot, "trp_banner_background_color_array", 189, 0xFF392C29), # j_01
+	  (troop_set_slot, "trp_banner_background_color_array", 190, 0xFFBBA239),
+	  (troop_set_slot, "trp_banner_background_color_array", 191, 0xFF446199),
+	  (troop_set_slot, "trp_banner_background_color_array", 192, 0xFFA23C33),
+	  (troop_set_slot, "trp_banner_background_color_array", 193, 0xFFBA402E),
+	  (troop_set_slot, "trp_banner_background_color_array", 194, 0xFFC6B221),
+	  (troop_set_slot, "trp_banner_background_color_array", 195, 0xFFBA553C),
+	  (troop_set_slot, "trp_banner_background_color_array", 196, 0xFFDBBB44),
+	  (troop_set_slot, "trp_banner_background_color_array", 197, 0xFFD8D3C8),
+	  (troop_set_slot, "trp_banner_background_color_array", 198, 0xFFCEC7B5),
+	  (troop_set_slot, "trp_banner_background_color_array", 199, 0xFFC0372E),
+	  (troop_set_slot, "trp_banner_background_color_array", 200, 0xFF413326),
+	  (troop_set_slot, "trp_banner_background_color_array", 201, 0xFF494633),
+      (troop_set_slot, "trp_banner_background_color_array", 202, 0xFFCECBBD),
+      (troop_set_slot, "trp_banner_background_color_array", 203, 0xFFBAA026),
+      (troop_set_slot, "trp_banner_background_color_array", 204, 0xFFCEC8B7),
+      (troop_set_slot, "trp_banner_background_color_array", 205, 0xFF293C94),
+      (troop_set_slot, "trp_banner_background_color_array", 206, 0xFFEFE74A),
+	  (troop_set_slot, "trp_banner_background_color_array", 207, 0xFF41382E),
+	  (troop_set_slot, "trp_banner_background_color_array", 208, 0xFF7E3565),
+	  (troop_set_slot, "trp_banner_background_color_array", 209, 0xFFCEAE29), # j_21
+	  (troop_set_slot, "trp_banner_background_color_array", 210, 0xFF4A7918), # k_01
+	  (troop_set_slot, "trp_banner_background_color_array", 211, 0xFFDBC254),
+	  (troop_set_slot, "trp_banner_background_color_array", 212, 0xFFC6C7BD),
+	  (troop_set_slot, "trp_banner_background_color_array", 213, 0xFFE1CC70),
+	  (troop_set_slot, "trp_banner_background_color_array", 214, 0xFFC6B639),
+	  (troop_set_slot, "trp_banner_background_color_array", 215, 0xFF42AE39),
+	  (troop_set_slot, "trp_banner_background_color_array", 216, 0xFFD0CBBA),
+	  (troop_set_slot, "trp_banner_background_color_array", 217, 0xFFCE5B4C),
+	  (troop_set_slot, "trp_banner_background_color_array", 218, 0xFFB54131),
+	  (troop_set_slot, "trp_banner_background_color_array", 219, 0xFFAC4B39),
+	  (troop_set_slot, "trp_banner_background_color_array", 220, 0xFFCBC9BA),
+	  (troop_set_slot, "trp_banner_background_color_array", 221, 0xFF547999),
+	  (troop_set_slot, "trp_banner_background_color_array", 222, 0xFFCEC7B5),
+      (troop_set_slot, "trp_banner_background_color_array", 223, 0xFFDEDDD3),
+      (troop_set_slot, "trp_banner_background_color_array", 224, 0xFF52769F),
+      (troop_set_slot, "trp_banner_background_color_array", 225, 0xFFD3B64A),
+      (troop_set_slot, "trp_banner_background_color_array", 226, 0xFFC65542),
+      (troop_set_slot, "trp_banner_background_color_array", 227, 0xFFC65547),
+	  (troop_set_slot, "trp_banner_background_color_array", 228, 0xFFB75B3C),
+	  (troop_set_slot, "trp_banner_background_color_array", 229, 0xFF313026),
+	  (troop_set_slot, "trp_banner_background_color_array", 230, 0xFF659636), # k_21
+	  (troop_set_slot, "trp_banner_background_color_array", 231, 0xFFE1BD33), # l_01
+	  (troop_set_slot, "trp_banner_background_color_array", 232, 0xFF3E3B2E),
+	  (troop_set_slot, "trp_banner_background_color_array", 233, 0xFF5D5744),
+	  (troop_set_slot, "trp_banner_background_color_array", 234, 0xFFAD3429),
+	  (troop_set_slot, "trp_banner_background_color_array", 235, 0xFFC6AE39),
+	  (troop_set_slot, "trp_banner_background_color_array", 236, 0xFF3E382E),
+	  (troop_set_slot, "trp_banner_background_color_array", 237, 0xFF529E42),
+	  (troop_set_slot, "trp_banner_background_color_array", 238, 0xFF529E42),
+	  (troop_set_slot, "trp_banner_background_color_array", 239, 0xFF4A9A94),
+	  (troop_set_slot, "trp_banner_background_color_array", 240, 0xFFC6C7B5),
+	  (troop_set_slot, "trp_banner_background_color_array", 241, 0xFF41448C),
+	  (troop_set_slot, "trp_banner_background_color_array", 242, 0xFF428284),
+	  (troop_set_slot, "trp_banner_background_color_array", 243, 0xFF428284),
+      (troop_set_slot, "trp_banner_background_color_array", 244, 0xFF524F3E),
+      (troop_set_slot, "trp_banner_background_color_array", 245, 0xFFD3B336),
+      (troop_set_slot, "trp_banner_background_color_array", 246, 0xFFA54539),
+      (troop_set_slot, "trp_banner_background_color_array", 247, 0xFFD8B63C),
+      (troop_set_slot, "trp_banner_background_color_array", 248, 0xFFA14436),
+	  (troop_set_slot, "trp_banner_background_color_array", 249, 0xFFAA382E),
+	  (troop_set_slot, "trp_banner_background_color_array", 250, 0xFF425D29),
+	  (troop_set_slot, "trp_banner_background_color_array", 251, 0xFFC2BAAA), # l_21
+	  
+	  # kingdom banners
+	  (troop_set_slot, "trp_banner_background_color_array", 252, 0xFF295575), # nord
+	  (troop_set_slot, "trp_banner_background_color_array", 253, 0xFFB2AC9C), # vaegir
+	  (troop_set_slot, "trp_banner_background_color_array", 254, 0xFF4A2429), # khergit
+	  (troop_set_slot, "trp_banner_background_color_array", 255, 0xFF365E29), # rhodok
+	  (troop_set_slot, "trp_banner_background_color_array", 256, 0xFFB29844), # sarranid
+	  (troop_set_slot, "trp_banner_background_color_array", 257, 0xFF471A18), # swadian
+	  
       #Default banners
-      (troop_set_slot, "trp_banner_background_color_array", 128, 0xFF212221),
-      (troop_set_slot, "trp_banner_background_color_array", 129, 0xFF212221),
-      (troop_set_slot, "trp_banner_background_color_array", 130, 0xFF2E3B10),
-      (troop_set_slot, "trp_banner_background_color_array", 131, 0xFF425D7B),
-      (troop_set_slot, "trp_banner_background_color_array", 132, 0xFF394608),
+      (troop_set_slot, "trp_banner_background_color_array", 258, 0xFF212221),
+      (troop_set_slot, "trp_banner_background_color_array", 259, 0xFF212221),
+      (troop_set_slot, "trp_banner_background_color_array", 260, 0xFF2E3B10),
+      (troop_set_slot, "trp_banner_background_color_array", 261, 0xFF425D7B),
+      (troop_set_slot, "trp_banner_background_color_array", 262, 0xFF394608),
 	  ]),
 
 
