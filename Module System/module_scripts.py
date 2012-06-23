@@ -23596,9 +23596,18 @@ scripts = [
 	(try_begin),
 	  	(gt, ":hours", 0),
 		(gt, ":lord_troop_id", 0),
-
-    	(call_script, "script_troop_change_relation_with_troop", ":lord_troop_id", ":faction_leader", 10),
-		(val_add, "$total_promotion_changes", 10),
+		
+		(try_begin), # Giving a city is better than a small village
+			(is_between, ":center_no", towns_begin, towns_end),
+			(assign, ":bonus", 20),
+		(else_try),
+			(is_between, ":center_no", castles_begin, castles_end),
+			(assign, ":bonus", 12),
+		(else_try),
+			(assign, ":bonus", 8),
+		(try_end),
+		(call_script, "script_troop_change_relation_with_troop", ":lord_troop_id", ":faction_leader", ":bonus"),
+		(val_add, "$total_promotion_changes", ":bonus"),
 
 		#smaller factions are more dramatically influenced by internal jealousies
 		#Disabled as of NOV 2010
@@ -24300,7 +24309,7 @@ scripts = [
       # (try_end),
 #Rebellion changes end
 
-	  (else_try), # don't know why last option didn't make errors or wrong reinforcments
+	  (else_try), # don't know why last option didn't make errors or wrong reinforcements
 
       # (try_begin),
         (eq, ":party_faction", "fac_player_supporters_faction"),

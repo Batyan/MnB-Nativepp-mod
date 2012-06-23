@@ -15271,6 +15271,10 @@ What kind of recruits do you want?", "dplmc_constable_recruit_select",
 	"{s9}", "close_window", [
 	(troop_set_slot, "$g_talk_troop", slot_troop_occupation, slto_kingdom_hero),
 	(call_script, "script_troop_change_relation_with_troop", "$g_talk_troop", "trp_player", 15),
+	(try_begin),
+	  (neg|troop_slot_ge, "$g_talk_troop", slot_troop_banner_scene_prop, 1),
+	  (call_script, "script_assign_banner", ":lord_no"),
+	(try_end),
 	]],
 
   [anyone|plyr ,"lord_requests_recruitment_player",

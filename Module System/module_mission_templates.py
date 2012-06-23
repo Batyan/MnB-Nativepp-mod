@@ -141,7 +141,7 @@ formations_triggers = [
 	]),
 	
 #implement HOLD OVER THERE when player lets go of key/etc
-	(.5, 0, 0, [(neg|main_hero_fallen),(neg|game_key_is_down, gk_zoom),], [
+	(.5, 0, 0, [(neg|main_hero_fallen),], [
 		(set_fixed_point_multiplier, 100),
 		(store_mission_timer_c_msec, "$last_player_trigger"),
 		
