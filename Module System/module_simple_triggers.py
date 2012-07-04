@@ -1286,49 +1286,49 @@ simple_triggers = [
 		#Tally the fiefs owned by the hero, and cache the value in slot.
 		#If a lord owns no fiefs, his relations with his liege may deteriorate.
 		(try_begin),
-		(assign, reg0, 1),#Center points + 1
-		(try_for_range, ":center", centers_begin, centers_end),
-			(party_slot_eq, ":center", slot_town_lord, ":troop_no"),
+			(assign, reg0, 1),#Center points + 1
+			(try_for_range, ":center", centers_begin, centers_end),
+				(party_slot_eq, ":center", slot_town_lord, ":troop_no"),
+				(try_begin),
+					(is_between, ":center", towns_begin, towns_end),
+					(val_add, reg0, 3),#3 points per town
+				(else_try),
+					(is_between, ":center", walled_centers_begin, walled_centers_end),
+					(val_add, reg0, 2),#2 points per castle
+				(else_try),
+					(val_add, reg0, 1),#1 point per village
+				(try_end),
+			(try_end),
+			#Update cached total
+			(troop_set_slot, ":troop_no", dplmc_slot_troop_center_points_plus_one, reg0),
+			#If a lord has no fiefs, relation loss potentially results.
+			#Do not apply this to the player.
+			(eq, reg0, 1),
+			(troop_slot_eq, ":troop_no", slot_troop_occupation, slto_kingdom_hero),
+			(neq, ":troop_no", "trp_player"),
+
+			#Don't apply this to the leader
+			(faction_get_slot, ":faction_leader", ":faction", slot_faction_leader),
+			(gt, ":faction_leader", -1),
+			(neq, ":faction_leader", ":troop_no"),
+			(neg|troop_slot_eq, ":faction_leader", slot_troop_spouse, ":troop_no"),
+			(neg|troop_slot_eq, ":troop_no", slot_troop_spouse, ":faction_leader"),
+
+			(troop_get_slot, ":troop_reputation", ":troop_no", slot_lord_reputation_type),
 			(try_begin),
-				(is_between, ":center", towns_begin, towns_end),
-				(val_add, reg0, 3),#3 points per town
+				(this_or_next|eq, ":troop_reputation", lrep_quarrelsome),
+				(this_or_next|eq, ":troop_reputation", lrep_selfrighteous),
+				(this_or_next|eq, ":troop_reputation", lrep_cunning),
+				(eq, ":troop_reputation", lrep_debauched),
+				(call_script, "script_troop_change_relation_with_troop", ":troop_no", ":faction_leader", -4),
+				(val_add, "$total_no_fief_changes", -4),
 			(else_try),
-				(is_between, ":center", walled_centers_begin, walled_centers_end),
-				(val_add, reg0, 2),#2 points per castle
-			(else_try),
-				(val_add, reg0, 1),#1 point per village
+				(this_or_next|eq, ":troop_reputation", lrep_ambitious),#add support for lady personalities
+				(eq, ":troop_reputation", lrep_martial),
+				(call_script, "script_troop_change_relation_with_troop", ":troop_no", ":faction_leader", -2),
+				(val_add, "$total_no_fief_changes", -2),
 			(try_end),
 		(try_end),
-		#Update cached total
-		(troop_set_slot, ":troop_no", dplmc_slot_troop_center_points_plus_one, reg0),
-		#If a lord has no fiefs, relation loss potentially results.
-		#Do not apply this to the player.
-		(eq, reg0, 1),
-		(troop_slot_eq, ":troop_no", slot_troop_occupation, slto_kingdom_hero),
-		(neq, ":troop_no", "trp_player"),
-
-		#Don't apply this to the leader
-		(faction_get_slot, ":faction_leader", ":faction", slot_faction_leader),
-		(gt, ":faction_leader", -1),
-		(neq, ":faction_leader", ":troop_no"),
-		(neg|troop_slot_eq, ":faction_leader", slot_troop_spouse, ":troop_no"),
-		(neg|troop_slot_eq, ":troop_no", slot_troop_spouse, ":faction_leader"),
-
-		(troop_get_slot, ":troop_reputation", ":troop_no", slot_lord_reputation_type),
-		(try_begin),
-			(this_or_next|eq, ":troop_reputation", lrep_quarrelsome),
-			(this_or_next|eq, ":troop_reputation", lrep_selfrighteous),
-			(this_or_next|eq, ":troop_reputation", lrep_cunning),
-			(eq, ":troop_reputation", lrep_debauched),
-			(call_script, "script_troop_change_relation_with_troop", ":troop_no", ":faction_leader", -4),
-			(val_add, "$total_no_fief_changes", -4),
-		(else_try),
-			(this_or_next|eq, ":troop_reputation", lrep_ambitious),#add support for lady personalities
-			(eq, ":troop_reputation", lrep_martial),
-			(call_script, "script_troop_change_relation_with_troop", ":troop_no", ":faction_leader", -2),
-			(val_add, "$total_no_fief_changes", -2),
-		(try_end),
-    #(try_end), # Unwanted try_end ?
 
         #Auto-indictment or defection
 		(try_begin),
@@ -3216,7 +3216,8 @@ simple_triggers = [
       (try_for_range_backwards, ":i_stack", 0, ":num_stacks"),
         (party_prisoner_stack_get_troop_id, ":stack_troop", ":center_no", ":i_stack"),
         (troop_is_hero, ":stack_troop"),
-        (troop_slot_eq, ":stack_troop", slot_troop_occupation, slto_kingdom_hero),
+        (this_or_next|troop_slot_eq, ":stack_troop", slot_troop_occupation, slto_kingdom_hero),
+		(troop_slot_eq, ":stack_troop", slot_troop_occupation, slto_kingdom_mercenary),
         (store_random_in_range, ":random_no", 0, 100),
         (try_begin),
           (le, ":random_no", 10),
@@ -6212,7 +6213,7 @@ simple_triggers = [
 	     (neg|troop_slot_eq, ":lord_no", slot_troop_equipement_level, 6),
 	     (gt, ":chance", 0),
 		 (val_mul, ":chance", ":chance"),
-		 (val_mul, ":chance", 2),
+		 (val_mul, ":chance", 3), # slightly higher chances - was 2
 		 (try_begin),
 		   (troop_slot_eq, ":lord_no", slot_troop_equipement_level, 0), ## lvl 0 lords can progress faster
 		   (val_add, ":chance", 20),
@@ -6233,6 +6234,20 @@ simple_triggers = [
 	   (troop_set_slot, ":lord_no", slot_troop_equipement_level, ":equipement_level_new"),
 	   (call_script, "script_set_attrib_points", ":lord_no"),  ## change stats before
 	   (call_script, "script_change_equipement", ":lord_no"),
+	   # Lords increasing in rank will thank their leader for the fief
+	   (store_troop_faction, ":lord_faction", ":lord_no"),
+	   (try_begin),
+	     (is_between, ":lord_faction", kingdoms_begin, kingdoms_end),
+		 (faction_get_slot, ":leader", ":lord_faction", slot_faction_leader),
+		 (ge, ":leader", 0), # mostly for player, but affect other kings too
+		 (try_begin),
+		   (gt, ":equipement_level_new", ":equipement_level"),
+		   (store_mul, ":relation_change", ":equipement_level_new", 2),
+		 (else_try),
+		   (store_mul, ":relation_change", ":equipement_level", -1),
+		 (try_end),
+		 (call_script, "script_troop_change_relation_with_troop", ":lord_no", ":leader", ":relation_change"),
+	   (try_end),
 	   (try_begin),
 	     (eq, "$test", 1),
 	     (str_store_troop_name, s11, ":lord_no"),
@@ -6274,7 +6289,9 @@ simple_triggers = [
 	 (troop_set_note_available, ":troop_no", 1),
 	 (try_begin),
 	   (eq, "$test", 1),
-	   (display_message, "@New lord to be recruited"),
+	   (display_message, "@New lord to be recruited.", 0x00FF00),
+	 (else_try),
+	   (display_message, "@Rumors have been heard about someone looking for you in your court."),
 	 (try_end),
 	]),
 	
@@ -7528,17 +7545,17 @@ simple_triggers = [
 
       (game_get_reduce_campaign_ai, ":reduce_campaign_ai"),
       (try_begin),
-         (eq, ":reduce_campaign_ai", 0), #hard, lose 5/6
-	 (assign, ":loss_numerator", 5),
-	 (assign, ":loss_denominator", 6),
+        (eq, ":reduce_campaign_ai", 0), #hard, lose 5/6
+		(assign, ":loss_numerator", 5),
+		(assign, ":loss_denominator", 6),
       (else_try),
-         (eq, ":reduce_campaign_ai", 1), #medium, lose 2/3
-	 (assign, ":loss_numerator", 2),
-	 (assign, ":loss_denominator", 3),
+        (eq, ":reduce_campaign_ai", 1), #medium, lose 2/3
+		(assign, ":loss_numerator", 2),
+		(assign, ":loss_denominator", 3),
       (else_try),
-         (eq, ":reduce_campaign_ai", 2), #easy, lose 1/2
-	 (assign, ":loss_numerator", 1),
-	 (assign, ":loss_denominator", 2),
+        (eq, ":reduce_campaign_ai", 2), #easy, lose 1/2
+		(assign, ":loss_numerator", 1),
+		(assign, ":loss_denominator", 2),
       (try_end),
 
       (store_troop_gold, ":cur_gold", "trp_household_possessions"),
@@ -7548,13 +7565,13 @@ simple_triggers = [
         #(val_div, ":cur_gold", 3),
         #(call_script, "script_troop_add_gold", "trp_player", ":cur_gold"),
         #(display_message, "@Your last fief was captured and you lost 2/3 of your treasury"),
-	(store_mul, ":lost_gold", ":cur_gold", ":loss_numerator"),
-	(val_div, ":lost_gold", ":loss_denominator"),
-	(val_mul, ":lost_gold", -1),
-	(call_script, "script_dplmc_withdraw_from_treasury", ":lost_gold"),
-	(assign, reg0, ":loss_numerator"),
-	(assign, reg1, ":loss_denominator"),
-	(display_message, "@Your last fief was captured and you lost {reg0}/{reg1} of your treasury"),
+		(store_mul, ":lost_gold", ":cur_gold", ":loss_numerator"),
+		(val_div, ":lost_gold", ":loss_denominator"),
+		(val_mul, ":lost_gold", -1),
+		(call_script, "script_dplmc_withdraw_from_treasury", ":lost_gold"),
+		(assign, reg0, ":loss_numerator"),
+		(assign, reg1, ":loss_denominator"),
+		(display_message, "@Your last fief was captured and you lost {reg0}/{reg1} of your treasury"),
       (try_end),
 
       (assign, reg0, ":save_reg0"),

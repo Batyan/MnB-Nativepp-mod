@@ -2007,7 +2007,8 @@ adventurer_names_end = "str_sufix_1"
 adventurer_names_evil_end = "str_sufix_end"
 
 adventurer_names_end_begin = "str_sufix_1"
-adventurer_names_end_end = "str_sufix_56"
+#adventurer_names_end_end = "str_sufix_56"
+adventurer_names_end_end = "str_sufix_end"
 
 
 banner_faction_slot_begin = "spr_banner_a" # these are used for making only one banner per lord

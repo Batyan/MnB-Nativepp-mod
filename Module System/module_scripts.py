@@ -375,27 +375,27 @@ scripts = [
 # Factions:
       (faction_set_slot, "fac_kingdom_1",  slot_faction_culture, "fac_culture_1"),
       (faction_set_slot, "fac_kingdom_1",  slot_faction_leader, "trp_kingdom_1_lord"),
-	  (troop_set_slot, "trp_kingdom_1_lord", slot_troop_renown, 1800),
+	  (troop_set_slot, "trp_kingdom_1_lord", slot_troop_renown, 1500),
 
       (faction_set_slot, "fac_kingdom_2",  slot_faction_culture, "fac_culture_2"),
       (faction_set_slot, "fac_kingdom_2",  slot_faction_leader, "trp_kingdom_2_lord"),
-	  (troop_set_slot, "trp_kingdom_2_lord", slot_troop_renown, 1800),
+	  (troop_set_slot, "trp_kingdom_2_lord", slot_troop_renown, 1500),
 
       (faction_set_slot, "fac_kingdom_3",  slot_faction_culture, "fac_culture_3"),
       (faction_set_slot, "fac_kingdom_3",  slot_faction_leader, "trp_kingdom_3_lord"),
-	  (troop_set_slot, "trp_kingdom_3_lord", slot_troop_renown, 1800),
+	  (troop_set_slot, "trp_kingdom_3_lord", slot_troop_renown, 1500),
 
       (faction_set_slot, "fac_kingdom_4",  slot_faction_culture, "fac_culture_4"),
       (faction_set_slot, "fac_kingdom_4",  slot_faction_leader, "trp_kingdom_4_lord"),
-	  (troop_set_slot, "trp_kingdom_4_lord", slot_troop_renown, 1800),
+	  (troop_set_slot, "trp_kingdom_4_lord", slot_troop_renown, 1500),
 
       (faction_set_slot, "fac_kingdom_5",  slot_faction_culture, "fac_culture_5"),
       (faction_set_slot, "fac_kingdom_5",  slot_faction_leader, "trp_kingdom_5_lord"),
-	  (troop_set_slot, "trp_kingdom_5_lord", slot_troop_renown, 1800),
+	  (troop_set_slot, "trp_kingdom_5_lord", slot_troop_renown, 1500),
 
       (faction_set_slot, "fac_kingdom_6",  slot_faction_culture, "fac_culture_6"),
       (faction_set_slot, "fac_kingdom_6",  slot_faction_leader, "trp_kingdom_6_lord"),
-	  (troop_set_slot, "trp_kingdom_6_lord", slot_troop_renown, 1800),
+	  (troop_set_slot, "trp_kingdom_6_lord", slot_troop_renown, 1500),
 
 	  (faction_set_slot, "fac_kingdom_7",  slot_faction_culture, "fac_culture_7"),
 
@@ -403,15 +403,15 @@ scripts = [
 
 	  (faction_set_slot, "fac_kingdom_9",  slot_faction_culture, "fac_culture_9"),
 	  (faction_set_slot, "fac_kingdom_9",  slot_faction_leader, "trp_kingdom_9_lord"),
-	  (troop_set_slot, "trp_kingdom_9_lord", slot_troop_renown, 1500),
+	  (troop_set_slot, "trp_kingdom_9_lord", slot_troop_renown, 900),
 
 	  (faction_set_slot, "fac_kingdom_10",  slot_faction_culture, "fac_culture_8"),
 	  (faction_set_slot, "fac_kingdom_10",  slot_faction_leader, "trp_kingdom_10_lord"),
-	  (troop_set_slot, "trp_kingdom_10_lord", slot_troop_renown, 1500),
+	  (troop_set_slot, "trp_kingdom_10_lord", slot_troop_renown, 900),
 
 	  (faction_set_slot, "fac_kingdom_11",  slot_faction_culture, "fac_culture_5a"),
 	  (faction_set_slot, "fac_kingdom_11",  slot_faction_leader, "trp_kingdom_11_lord"),
-	  (troop_set_slot, "trp_kingdom_11_lord", slot_troop_renown, 1500),
+	  (troop_set_slot, "trp_kingdom_11_lord", slot_troop_renown, 900),
 
       (assign, ":player_faction_culture", "fac_culture_8"),
       (faction_set_slot, "fac_player_supporters_faction",  slot_faction_culture, ":player_faction_culture"),
@@ -635,7 +635,7 @@ scripts = [
       (try_for_range, ":kingdom_hero", active_npcs_begin, active_npcs_end),
         (troop_slot_eq, ":kingdom_hero", slot_troop_occupation, slto_kingdom_hero),
         #(troop_slot_eq, ":kingdom_hero", slot_troop_occupation, slto_inactive_pretender),
-        (store_troop_faction, ":kingdom_hero_faction", ":kingdom_hero"),
+        # (store_troop_faction, ":kingdom_hero_faction", ":kingdom_hero"),
         # (try_begin),
           # (eq, ":kingdom_hero_faction", "fac_kingdom_1"),
           # (troop_set_slot, ":kingdom_hero", slot_troop_banner_scene_prop, "spr_banner_kingdom_f"),
@@ -669,25 +669,26 @@ scripts = [
 
 
 
+		## No need of this as we change the equipement of lords and then their renown
+		## Kings have thier renown initialized before
+        # (store_character_level, ":level", ":kingdom_hero"),
+        # (store_mul, ":renown", ":level", ":level"),
+        # (val_div, ":renown", 4), #for top lord, is about 400
 
-        (store_character_level, ":level", ":kingdom_hero"),
-        (store_mul, ":renown", ":level", ":level"),
-        (val_div, ":renown", 4), #for top lord, is about 400
+		# (troop_get_slot, ":age", ":kingdom_hero", slot_troop_age),
+        # (store_mul, ":age_addition", ":age", ":age"),
+        # (val_div, ":age_addition", 8), #for top lord, is about 400
+		# (val_add, ":renown", ":age_addition"),
 
-		(troop_get_slot, ":age", ":kingdom_hero", slot_troop_age),
-        (store_mul, ":age_addition", ":age", ":age"),
-        (val_div, ":age_addition", 8), #for top lord, is about 400
-		(val_add, ":renown", ":age_addition"),
+        # (try_begin),
+          # (faction_slot_eq, ":kingdom_hero_faction", slot_faction_leader, ":kingdom_hero"),
+          # (store_random_in_range, ":random_renown", 250, 500),
+        # (else_try),
+          # (store_random_in_range, ":random_renown", 0, 200),
+        # (try_end),
+        # (val_add, ":renown", ":random_renown"),
 
-        (try_begin),
-          (faction_slot_eq, ":kingdom_hero_faction", slot_faction_leader, ":kingdom_hero"),
-          (store_random_in_range, ":random_renown", 250, 500),
-        (else_try),
-          (store_random_in_range, ":random_renown", 0, 200),
-        (try_end),
-        (val_add, ":renown", ":random_renown"),
-
-        (troop_set_slot, ":kingdom_hero", slot_troop_renown, ":renown"),
+        # (troop_set_slot, ":kingdom_hero", slot_troop_renown, ":renown"),
       (try_end),
 
       (try_for_range, ":troop_no", "trp_player", "trp_merchants_end"),
@@ -1337,9 +1338,13 @@ scripts = [
 	  (faction_set_slot, "fac_kingdom_4", slot_faction_adjective, "str_kingdom_4_adjective"),
 	  (faction_set_slot, "fac_kingdom_5", slot_faction_adjective, "str_kingdom_5_adjective"),
 	  (faction_set_slot, "fac_kingdom_6", slot_faction_adjective, "str_kingdom_6_adjective"),
-	  (faction_set_slot, "fac_kingdom_9", slot_faction_adjective, "str_kingdom_9_adjective"),
-	  (faction_set_slot, "fac_kingdom_10",slot_faction_adjective,"str_kingdom_10_adjective"),
-	  (faction_set_slot, "fac_kingdom_11",slot_faction_adjective,"str_kingdom_11_adjective"),
+	  (faction_set_slot, "fac_kingdom_9", slot_faction_adjective, "str_kingdom_3_adjective"), # use the same as khergit
+	  (faction_set_slot, "fac_kingdom_10",slot_faction_adjective, "str_kingdom_10_adjective"),
+	  (faction_set_slot, "fac_kingdom_11",slot_faction_adjective, "str_kingdom_11_adjective"),
+	  
+	  # Fix 
+	  (faction_set_slot, "fac_neutral",   slot_faction_adjective, "str_kingdom_foreign_adjective"),
+	  (faction_set_slot, "fac_neutral_4", slot_faction_adjective, "str_kingdom_foreign_adjective"),
 
 ##      (assign, "$players_kingdom", "fac_kingdom_1"),
 ##      (call_script, "script_give_center_to_lord", "p_town_7", "trp_player", 0),
@@ -4302,7 +4307,7 @@ scripts = [
 				   (eq, ":improvement", 136),
 				   (assign, ":improvement", 140),
 				   (party_get_slot, ":money", ":root_defeated_party", slot_center_bank_money),
-				   (ge, ":money", 1),
+				   (neq, ":money", 0),
 				   (assign, reg41, ":money"),
 				   (assign, reg40, ":root_defeated_party"),
 				   (party_set_slot, ":root_defeated_party", slot_center_bank_money, 0),
@@ -4313,13 +4318,13 @@ scripts = [
 			     (le, ":rand", 8),
 			     (try_for_range, ":improvement", 134, 141),
 				   (party_set_slot, ":root_defeated_party", ":improvement", 0),
-				   (party_get_slot, ":money", ":root_defeated_party", slot_center_bank_money),
-				   (ge, ":money", 1),
-				   (assign, reg41, ":money"),
-				   (assign, reg40, ":root_defeated_party"),
-				   (party_set_slot, ":root_defeated_party", slot_center_bank_money, 0),
-				   (jump_to_menu, "mnu_bank_destroyed"),
 				 (try_end),
+				 (party_get_slot, ":money", ":root_defeated_party", slot_center_bank_money),
+				 (neq, ":money", 0),
+				 (assign, reg41, ":money"),
+				 (assign, reg40, ":root_defeated_party"),
+				 (party_set_slot, ":root_defeated_party", slot_center_bank_money, 0),
+				 (jump_to_menu, "mnu_bank_destroyed"),
 			   (try_end),
 
 			   (store_current_hours, ":hours"),
@@ -7232,6 +7237,7 @@ scripts = [
      #new money system addition end
      ]),
 
+	# script_initialize_aristocracy
 	("initialize_aristocracy",
 	[
 	  #LORD OCCUPATIONS, BLOOD RELATIONSHIPS, RENOWN AND REPUTATIONS
@@ -24912,7 +24918,7 @@ scripts = [
         (else_try),
           (eq, ":party_type", spt_prisoner_train),
           (party_add_template, ":result", ":reinforcements_c"),
-          (party_add_template, ":result", ":reinforcements_b"),
+          (party_add_template, ":result", ":reinforcements_c"),
 ##          (try_begin),
 ##            (call_script,"script_cf_faction_get_random_enemy_faction",":faction_no"),
 ##            (store_random_in_range,":r",0,3),
@@ -25279,14 +25285,7 @@ scripts = [
                (ge, ":raid_leader", 0),
                (str_store_party_name, s2, ":looter_party"),
                (display_log_message, "@The village of {s1} has been looted by {s2}."),
-
-               (try_begin),
-                 (party_get_slot, ":village_lord", ":village_no", slot_town_lord),
-                 (is_between, ":village_lord", active_npcs_begin, active_npcs_end),
-                 (call_script, "script_troop_change_relation_with_troop", ":raid_leader", ":village_lord", -1),
-                 (val_add, "$total_battle_enemy_changes", -1),
-               (try_end),
-
+			   
 			   (try_begin), # buildings destroyed with looting
 			     (this_or_next|party_slot_eq, ":village_no", slot_center_has_manor, 1),
 				 (this_or_next|party_slot_eq, ":village_no", slot_center_has_fish_pond, 1),
@@ -25300,29 +25299,36 @@ scripts = [
 				   (eq, ":slot", 0),
 				   (party_slot_eq, ":village_no", slot_center_has_manor, 1),
 				   (party_set_slot, ":village_no", slot_center_has_manor, 0),
-				   (display_message, "@The manor built in the village of {s1} has been destroyed"),
+				   (display_log_message, "@The manor built in the village of {s1} has been destroyed"),
 				 (else_try),
 				   (eq, ":slot", 1),
 				   (party_slot_eq, ":village_no", slot_center_has_fish_pond, 1),
 				   (party_set_slot, ":village_no", slot_center_has_fish_pond, 0),
-				   (display_message, "@The mill built in the village of {s1} has been destroyed"),
+				   (display_log_message, "@The mill built in the village of {s1} has been destroyed"),
 				 (else_try),
 				   (eq, ":slot", 2),
 				   (party_slot_eq, ":village_no", slot_center_has_watch_tower, 1),
 				   (party_set_slot, ":village_no", slot_center_has_watch_tower, 0),
-				   (display_message, "@The watch tower built in the village of {s1} has been destroyed"),
+				   (display_log_message, "@The watch tower built in the village of {s1} has been destroyed"),
 				 (else_try),
 				   (eq, ":slot", 3),
 				   (party_slot_eq, ":village_no", slot_center_has_school, 1),
 				   (party_set_slot, ":village_no", slot_center_has_school, 0),
-				   (display_message, "@The school built in the village of {s1} has been destroyed"),
+				   (display_log_message, "@The school built in the village of {s1} has been destroyed"),
 				 (else_try),
 				   (eq, ":slot", 4),
 				   (party_slot_eq, ":village_no", slot_center_has_messenger_post, 1),
 				   (party_set_slot, ":village_no", slot_center_has_messenger_post, 0),
-				   (display_message, "@The messenger post built in the village of {s1} has been destroyed"),
+				   (display_log_message, "@The messenger post built in the village of {s1} has been destroyed"),
 				 (try_end),
 			   (try_end),
+
+               (try_begin),
+                 (party_get_slot, ":village_lord", ":village_no", slot_town_lord),
+                 (is_between, ":village_lord", active_npcs_begin, active_npcs_end),
+                 (call_script, "script_troop_change_relation_with_troop", ":raid_leader", ":village_lord", -1),
+                 (val_add, "$total_battle_enemy_changes", -1),
+               (try_end),
 
 			   #give loot gold to raid leader
                (troop_get_slot, ":raid_leader_gold", ":raid_leader", slot_troop_wealth),
@@ -28032,9 +28038,9 @@ scripts = [
         (neq, ":troop_no", "trp_player"),
         (neg|is_between, ":troop_no", soldiers_begin, soldiers_end),
         ##diplomacy start+
-		  (neq, ":troop_no", "trp_kingdom_heroes_including_player_begin"),
-		  #(neq, ":troop_no", -1),#OLD
-		  (ge, ":troop_no", 1),#NEW
+		(neq, ":troop_no", "trp_kingdom_heroes_including_player_begin"),
+		#(neq, ":troop_no", -1),#OLD
+		(ge, ":troop_no", 1),#NEW
         ##diplomacy end+
         (neq, ":difference", 0),
         (call_script, "script_troop_get_player_relation", ":troop_no"),
@@ -39635,7 +39641,7 @@ scripts = [
         (troop_set_slot, "trp_npc17", slot_troop_2ary_morality_value, 0),
         (troop_set_slot, "trp_npc17", slot_troop_personalityclash_object, "trp_npc19"), #sverre - aethrod
         (troop_set_slot, "trp_npc17", slot_troop_personalityclash2_object, "trp_npc20"), #sverre - saorie
-        (troop_set_slot, "trp_npc17", slot_troop_personalitymatch_object, "trp_npc18"),  #sverre - ahmad moulik
+        (troop_set_slot, "trp_npc17", slot_troop_personalitymatch_object, "trp_npc18"),  #sverre - seis
         (troop_set_slot, "trp_npc17", slot_troop_home, "p_village_69"), #Kwynn
         (troop_set_slot, "trp_npc17", slot_troop_payment_request, 400),
 		(troop_set_slot, "trp_npc17", slot_troop_kingsupport_argument, argument_victory),
@@ -39644,13 +39650,13 @@ scripts = [
 		(troop_set_slot, "trp_npc17", slot_lord_reputation_type, lrep_benefactor), #
 
 
-		(troop_set_slot, "trp_npc18", slot_troop_morality_type, tmt_egalitarian), #ahmad moulik
+		(troop_set_slot, "trp_npc18", slot_troop_morality_type, tmt_egalitarian), #seis
         (troop_set_slot, "trp_npc18", slot_troop_morality_value, 4),
         (troop_set_slot, "trp_npc18", slot_troop_2ary_morality_type, -1),
         (troop_set_slot, "trp_npc18", slot_troop_2ary_morality_value, 0),
-        (troop_set_slot, "trp_npc18", slot_troop_personalityclash_object, "trp_npc19"), #ahmad moulik - aethrod
-        (troop_set_slot, "trp_npc18", slot_troop_personalityclash2_object, "trp_npc20"), #ahmad moulik - saorie
-        (troop_set_slot, "trp_npc18", slot_troop_personalitymatch_object, "trp_npc17"),  #ahmad moulik - sverre
+        (troop_set_slot, "trp_npc18", slot_troop_personalityclash_object, "trp_npc19"), #seis - aethrod
+        (troop_set_slot, "trp_npc18", slot_troop_personalityclash2_object, "trp_npc20"), #seis - saorie
+        (troop_set_slot, "trp_npc18", slot_troop_personalitymatch_object, "trp_npc17"),  #seis - sverre
         (troop_set_slot, "trp_npc18", slot_troop_home, "p_village_102"), #Shibal Zumr
         (troop_set_slot, "trp_npc18", slot_troop_payment_request, 0),
 		(troop_set_slot, "trp_npc18", slot_troop_kingsupport_argument, argument_lords),
@@ -39662,7 +39668,7 @@ scripts = [
         (troop_set_slot, "trp_npc19", slot_troop_morality_value, 4),
         (troop_set_slot, "trp_npc19", slot_troop_2ary_morality_type, -1),
         (troop_set_slot, "trp_npc19", slot_troop_2ary_morality_value, 0),
-        (troop_set_slot, "trp_npc19", slot_troop_personalityclash_object, "trp_npc18"), #aethrod - ahmad moulik
+        (troop_set_slot, "trp_npc19", slot_troop_personalityclash_object, "trp_npc18"), #aethrod - seis
         (troop_set_slot, "trp_npc19", slot_troop_personalityclash2_object, "trp_npc17"), #aethrod - sverre
         (troop_set_slot, "trp_npc19", slot_troop_personalitymatch_object, "trp_npc20"),  #aethrod - saorie
         (troop_set_slot, "trp_npc19", slot_troop_home, "p_village_16"), #Shapeshte
@@ -39676,7 +39682,7 @@ scripts = [
         (troop_set_slot, "trp_npc20", slot_troop_morality_value, 4),
         (troop_set_slot, "trp_npc20", slot_troop_2ary_morality_type, -1),
         (troop_set_slot, "trp_npc20", slot_troop_2ary_morality_value, 0),
-        (troop_set_slot, "trp_npc20", slot_troop_personalityclash_object, "trp_npc18"), #saorie - ahmad moulik
+        (troop_set_slot, "trp_npc20", slot_troop_personalityclash_object, "trp_npc18"), #saorie - seis
         (troop_set_slot, "trp_npc20", slot_troop_personalityclash2_object, "trp_npc17"), #saorie - sverre
         (troop_set_slot, "trp_npc20", slot_troop_personalitymatch_object, "trp_npc19"),  #saorie - aethrod
         (troop_set_slot, "trp_npc20", slot_troop_home, "p_village_16"), #Shapeshte
@@ -39685,6 +39691,90 @@ scripts = [
 		(troop_set_slot, "trp_npc20", slot_troop_kingsupport_opponent, -1), #
  		(troop_set_slot, "trp_npc20", slot_troop_town_with_contacts, "p_town_12"), #Wercheg
 		(troop_set_slot, "trp_npc20", slot_lord_reputation_type, lrep_selfrighteous), #
+		
+		(troop_set_slot, "trp_npc21", slot_troop_morality_type, tmt_egalitarian), #
+        (troop_set_slot, "trp_npc21", slot_troop_morality_value, 3),
+        (troop_set_slot, "trp_npc21", slot_troop_2ary_morality_type, -1),
+        (troop_set_slot, "trp_npc21", slot_troop_2ary_morality_value, 0),
+        (troop_set_slot, "trp_npc21", slot_troop_personalityclash_object, "trp_npc22"), #
+        (troop_set_slot, "trp_npc21", slot_troop_personalityclash2_object, "trp_npc24"), #
+        (troop_set_slot, "trp_npc21", slot_troop_personalitymatch_object, "trp_npc23"),  #
+        (troop_set_slot, "trp_npc21", slot_troop_home, "p_town_6"), #
+        (troop_set_slot, "trp_npc21", slot_troop_payment_request, 5000),
+		(troop_set_slot, "trp_npc21", slot_troop_kingsupport_argument, argument_victory),
+		(troop_set_slot, "trp_npc21", slot_troop_kingsupport_opponent, -1), #
+ 		(troop_set_slot, "trp_npc21", slot_troop_town_with_contacts, "p_town_6"), #
+		(troop_set_slot, "trp_npc21", slot_lord_reputation_type, lrep_selfrighteous), #
+		
+		(troop_set_slot, "trp_npc22", slot_troop_morality_type, tmt_egalitarian), #
+        (troop_set_slot, "trp_npc22", slot_troop_morality_value, 3),
+        (troop_set_slot, "trp_npc22", slot_troop_2ary_morality_type, -1),
+        (troop_set_slot, "trp_npc22", slot_troop_2ary_morality_value, 0),
+        (troop_set_slot, "trp_npc22", slot_troop_personalityclash_object, "trp_npc21"), #
+        (troop_set_slot, "trp_npc22", slot_troop_personalityclash2_object, "trp_npc23"), #
+        (troop_set_slot, "trp_npc22", slot_troop_personalitymatch_object, "trp_npc25"),  #
+        (troop_set_slot, "trp_npc22", slot_troop_home, "p_town_11"), #
+        (troop_set_slot, "trp_npc22", slot_troop_payment_request, 5000),
+		(troop_set_slot, "trp_npc22", slot_troop_kingsupport_argument, argument_victory),
+		(troop_set_slot, "trp_npc22", slot_troop_kingsupport_opponent, -1), #
+ 		(troop_set_slot, "trp_npc22", slot_troop_town_with_contacts, "p_town_11"), #
+		(troop_set_slot, "trp_npc22", slot_lord_reputation_type, lrep_selfrighteous), #
+		
+		(troop_set_slot, "trp_npc23", slot_troop_morality_type, tmt_egalitarian), #
+        (troop_set_slot, "trp_npc23", slot_troop_morality_value, 3),
+        (troop_set_slot, "trp_npc23", slot_troop_2ary_morality_type, -1),
+        (troop_set_slot, "trp_npc23", slot_troop_2ary_morality_value, 0),
+        (troop_set_slot, "trp_npc23", slot_troop_personalityclash_object, "trp_npc22"), #
+        (troop_set_slot, "trp_npc23", slot_troop_personalityclash2_object, "trp_npc26"), #
+        (troop_set_slot, "trp_npc23", slot_troop_personalitymatch_object, "trp_npc21"),  #
+        (troop_set_slot, "trp_npc23", slot_troop_home, "p_town_18"), #
+        (troop_set_slot, "trp_npc23", slot_troop_payment_request, 5000),
+		(troop_set_slot, "trp_npc23", slot_troop_kingsupport_argument, argument_victory),
+		(troop_set_slot, "trp_npc23", slot_troop_kingsupport_opponent, -1), #
+ 		(troop_set_slot, "trp_npc23", slot_troop_town_with_contacts, "p_town_18"), #
+		(troop_set_slot, "trp_npc23", slot_lord_reputation_type, lrep_selfrighteous), #
+		
+		(troop_set_slot, "trp_npc24", slot_troop_morality_type, tmt_egalitarian), #
+        (troop_set_slot, "trp_npc24", slot_troop_morality_value, 3),
+        (troop_set_slot, "trp_npc24", slot_troop_2ary_morality_type, -1),
+        (troop_set_slot, "trp_npc24", slot_troop_2ary_morality_value, 0),
+        (troop_set_slot, "trp_npc24", slot_troop_personalityclash_object, "trp_npc21"), #
+        (troop_set_slot, "trp_npc24", slot_troop_personalityclash2_object, "trp_npc25"), #
+        (troop_set_slot, "trp_npc24", slot_troop_personalitymatch_object, "trp_npc26"),  #
+        (troop_set_slot, "trp_npc24", slot_troop_home, "p_town_2"), #
+        (troop_set_slot, "trp_npc24", slot_troop_payment_request, 5000),
+		(troop_set_slot, "trp_npc24", slot_troop_kingsupport_argument, argument_victory),
+		(troop_set_slot, "trp_npc24", slot_troop_kingsupport_opponent, -1), #
+ 		(troop_set_slot, "trp_npc24", slot_troop_town_with_contacts, "p_town_2"), #
+		(troop_set_slot, "trp_npc24", slot_lord_reputation_type, lrep_selfrighteous), #
+		
+		(troop_set_slot, "trp_npc25", slot_troop_morality_type, tmt_egalitarian), #
+        (troop_set_slot, "trp_npc25", slot_troop_morality_value, 3),
+        (troop_set_slot, "trp_npc25", slot_troop_2ary_morality_type, -1),
+        (troop_set_slot, "trp_npc25", slot_troop_2ary_morality_value, 0),
+        (troop_set_slot, "trp_npc25", slot_troop_personalityclash_object, "trp_npc24"), #
+        (troop_set_slot, "trp_npc25", slot_troop_personalityclash2_object, "trp_npc26"), #
+        (troop_set_slot, "trp_npc25", slot_troop_personalitymatch_object, "trp_npc22"),  #
+        (troop_set_slot, "trp_npc25", slot_troop_home, "p_town_15"), #
+        (troop_set_slot, "trp_npc25", slot_troop_payment_request, 5000),
+		(troop_set_slot, "trp_npc25", slot_troop_kingsupport_argument, argument_victory),
+		(troop_set_slot, "trp_npc25", slot_troop_kingsupport_opponent, -1), #
+ 		(troop_set_slot, "trp_npc25", slot_troop_town_with_contacts, "p_town_15"), #
+		(troop_set_slot, "trp_npc25", slot_lord_reputation_type, lrep_selfrighteous), #
+		
+		(troop_set_slot, "trp_npc26", slot_troop_morality_type, tmt_egalitarian), #
+        (troop_set_slot, "trp_npc26", slot_troop_morality_value, 3),
+        (troop_set_slot, "trp_npc26", slot_troop_2ary_morality_type, -1),
+        (troop_set_slot, "trp_npc26", slot_troop_2ary_morality_value, 0),
+        (troop_set_slot, "trp_npc26", slot_troop_personalityclash_object, "trp_npc25"), #
+        (troop_set_slot, "trp_npc26", slot_troop_personalityclash2_object, "trp_npc23"), #
+        (troop_set_slot, "trp_npc26", slot_troop_personalitymatch_object, "trp_npc24"),  #
+        (troop_set_slot, "trp_npc26", slot_troop_home, "p_town_22"), #
+        (troop_set_slot, "trp_npc26", slot_troop_payment_request, 5000),
+		(troop_set_slot, "trp_npc26", slot_troop_kingsupport_argument, argument_victory),
+		(troop_set_slot, "trp_npc26", slot_troop_kingsupport_opponent, -1), #
+ 		(troop_set_slot, "trp_npc26", slot_troop_town_with_contacts, "p_town_22"), #
+		(troop_set_slot, "trp_npc26", slot_lord_reputation_type, lrep_selfrighteous), #
 
         (store_sub, "$number_of_npc_slots", slot_troop_strings_end, slot_troop_intro),
 
@@ -39694,7 +39784,7 @@ scripts = [
             (try_for_range, ":slot_addition", 0, "$number_of_npc_slots"),
                 (store_add, ":slot", ":slot_addition", slot_troop_intro),
 
-                (store_mul, ":string_addition", ":slot_addition", 20),
+                (store_mul, ":string_addition", ":slot_addition", 26),
                 (store_add, ":string", "str_npc1_intro", ":string_addition"),
                 (val_add, ":string", ":npc"),
                 (val_sub, ":string", companions_begin),
@@ -46655,7 +46745,7 @@ scripts = [
 	(try_end),
 
 
-	(try_begin), #generate controversy if troops are in the same faciton
+	(try_begin), #generate controversy if troops are in the same faction
 		(lt, ":amount", -5),
 		(try_begin),
 			(eq, ":troop1", "trp_player"),
@@ -60106,15 +60196,22 @@ scripts = [
 	   (party_set_banner_icon, ":center_no", 0),
 	(try_end),
 	(try_begin),
-	  (troop_slot_eq, ":cur_troop_id", slot_troop_occupation, slto_kingdom_mercenary),
+	  (is_between, ":cur_troop_id", kingdom_mercenaries_begin, kingdom_mercenaries_end),
+	  # (troop_slot_eq, ":cur_troop_id", slot_troop_occupation, slto_kingdom_mercenary),
 	  (troop_set_faction, ":cur_troop_id", "fac_neutral_4"),
+	  (troop_set_slot, ":cur_troop_id", slot_troop_occupation, slto_kingdom_mercenary),
+	(else_try),
+	  (eq, ":defeated_troop_faction", "fac_player_supporters_faction"),
+	  (troop_get_slot, ":origin_faction", ":cur_troop_id", slot_troop_original_faction),
+	  (troop_set_faction, ":cur_troop_id", ":origin_faction"),
 	(try_end),
 	(troop_set_slot, ":cur_troop_id", slot_troop_occupation, slto_inactive),
 	(troop_set_slot, ":cur_troop_id", slot_troop_equipement_level, 0),
 	(troop_set_slot, ":cur_troop_id", slot_troop_lord_level, 0),
-	(str_store_troop_name, s31, ":cur_troop_id"),
+	(call_script, "script_reset_lord_relations", ":cur_troop_id"),
 	(try_begin),
 	  (eq, "$test", 1),
+	  (str_store_troop_name, s31, ":cur_troop_id"),
 	  (display_message, "@{s31} is dead", 0xFF0000),
 	(try_end),
 	#Annull all quests of which the lord is giver
@@ -60143,13 +60240,13 @@ scripts = [
 	    (try_end),
 	    (try_begin),
 	      (store_relation, ":relation", ":defeated_troop_faction", "fac_player_supporters_faction"),
-	  	(ge, ":relation", 20),
-	  	(val_add, ":chance", 1),
+	  	  (ge, ":relation", 20),
+	  	  (val_add, ":chance", 1),
 	    (try_end),
 	    (try_begin),
 	      (this_or_next|ge, ":chance", 2),
 	      (eq, ":continue", 1), ## if quest with a lord always say he is dead
-	  	(assign, reg31, ":defeated_troop_faction"),
+	  	  (assign, reg31, ":defeated_troop_faction"),
 	      (jump_to_menu, "mnu_kingdom_report_dead_lord"),
 	    (try_end),
 	  (try_end),
@@ -73895,7 +73992,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	(assign, ":banner_id", 0),
 	(assign, ":banner_icon_id", 0),
 	(try_begin),
-	  (eq, "$banner_type", 0),
+	  (eq, "$banner_type", 0), # faction banners
 	  (store_troop_faction, ":faction_no", ":lord_no"),
 	  (try_begin),
 	    
@@ -78804,6 +78901,28 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	(troop_set_slot, "trp_noble_end", "spr_banner_f", 1), # mudle king
 	(troop_set_slot, "trp_noble_end", "spr_banner_cp", 1), # freerider king
 	(troop_set_slot, "trp_noble_end", "spr_banner_do", 1), # khergit tribe khan
+   ]),
+   
+   
+   # script_reset_lord_relations
+   # This script reset a lord's relations with all other lord
+   ("reset_lord_relations",
+   [
+     (store_script_param, ":lord_no", 1),
+	 
+	 # Change relation with player
+	 (troop_set_slot, ":lord_no", slot_troop_player_relation, 0),
+	 
+	 # Change relation with other lords
+	 (try_for_range, ":other_lord", active_npcs_begin, active_npcs_end),
+	 
+	   (store_add, ":lord_no_slot", ":other_lord", slot_troop_relations_begin),
+	   (troop_set_slot, ":lord_no", ":lord_no_slot", 0),
+
+	   (store_add, ":other_lord_slot", ":lord_no", slot_troop_relations_begin),
+	   (troop_set_slot, ":other_lord", ":other_lord_slot", 0),
+	 
+	 (try_end),
    ]),
 ]
 

@@ -794,7 +794,13 @@ strings = [
   ("npc17_intro", "You have the eyes of a leader, would you sit for a while and take a drink with me?"),
   ("npc18_intro", "No I don't sell anything, you can tell this to all your friends."),
   ("npc19_intro", "Hello. Let me introduce myself, people call me Aethrod and you can do the same. May I have the honor of knowing your name?"),
-  ("npc20_intro", "Hello there. From the look of you, I'd say you're expecting to get into some fights in the near future. Are you by any chance looking for some help?"),
+  ("npc20_intro", "Hail there friend, do you mind talking with me a little?"),
+("npc21_intro", "Hello there. From the look of you, I'd say you're expecting to get into some fights in the near future. Are you by any chance looking for some help?"),
+("npc22_intro", "Hello there. From the look of you, I'd say you're expecting to get into some fights in the near future. Are you by any chance looking for some help?"),
+("npc23_intro", "Hello there. From the look of you, I'd say you're expecting to get into some fights in the near future. Are you by any chance looking for some help?"),
+("npc24_intro", "Hello there. From the look of you, I'd say you're expecting to get into some fights in the near future. Are you by any chance looking for some help?"),
+("npc25_intro", "Hello there. From the look of you, I'd say you're expecting to get into some fights in the near future. Are you by any chance looking for some help?"),
+("npc26_intro", "Hello there. From the look of you, I'd say you're expecting to get into some fights in the near future. Are you by any chance looking for some help?"),
 
   ("npc1_intro_response_1", "Perhaps. What's the urgency?"),
   ("npc2_intro_response_1", "Your last five denars? What happened to you?"),
@@ -815,7 +821,13 @@ strings = [
   ("npc17_intro_response_1", "Sure I always like to meet new people."),
   ("npc18_intro_response_1", "And I'm not here to buy anything."),
   ("npc19_intro_response_1", "I am {playername}. What do you want?"),
-  ("npc20_intro_response_1", "I could be. What's your story?"),
+  ("npc20_intro_response_1", "No I don't, what is it?"),
+("npc21_intro_response_1", "I could be. What's your story?"),
+("npc22_intro_response_1", "I could be. What's your story?"),
+("npc23_intro_response_1", "I could be. What's your story?"),
+("npc24_intro_response_1", "I could be. What's your story?"),
+("npc25_intro_response_1", "I could be. What's your story?"),
+("npc26_intro_response_1", "I could be. What's your story?"),
 
   ("npc1_intro_response_2", "Step back, sir, and keep your hand away from my purse."),
   ("npc2_intro_response_2", "I have better things to do."),
@@ -836,7 +848,13 @@ strings = [
   ("npc17_intro_response_2", "Not with a bandit."),
   ("npc18_intro_response_2", "I'll leave you alone."),
   ("npc19_intro_response_2", "Someone you shouldn't know."),
-  ("npc20_intro_response_2", "Mind your own business, lass."),
+  ("npc20_intro_response_2", "I do, now back off."),
+("npc21_intro_response_2", "Mind your own business, lass."),
+("npc22_intro_response_2", "Mind your own business, lass."),
+("npc23_intro_response_2", "Mind your own business, lass."),
+("npc24_intro_response_2", "Mind your own business, lass."),
+("npc25_intro_response_2", "Mind your own business, lass."),
+("npc26_intro_response_2", "Mind your own business, lass."),
 
 #backstory intro
   ("npc1_backstory_a", "Well, {sir/madame}, it's a long story..."),
@@ -858,7 +876,13 @@ strings = [
   ("npc17_backstory_a", "Allow me to introduce miself, I am Sverre, let me tell you my story."),
   ("npc18_backstory_a", "My most humble apologies, I am Seis Utis, the son of Hem Utis, best trader I've ever seen."),
   ("npc19_backstory_a", "Well as you may know these are hard times for everyone and I am no exception to the rule."),
-  ("npc20_backstory_a", "Well, {sir/madame}, as long as I can remember I've had a weakness for pretty things, and it's gotten me into trouble, you see."),
+  ("npc20_backstory_a", "Good. I ran into a few troubles recently, you see, I began wandering around Calradia as a sort of ... eh ... adventurer you'd say, but it is not working as I'd expected."),
+("npc21_backstory_a", "Well, {sir/madame}, as long as I can remember I've had a weakness for pretty things, and it's gotten me into trouble, you see."),
+("npc22_backstory_a", "Well, {sir/madame}, as long as I can remember I've had a weakness for pretty things, and it's gotten me into trouble, you see."),
+("npc23_backstory_a", "Well, {sir/madame}, as long as I can remember I've had a weakness for pretty things, and it's gotten me into trouble, you see."),
+("npc24_backstory_a", "Well, {sir/madame}, as long as I can remember I've had a weakness for pretty things, and it's gotten me into trouble, you see."),
+("npc25_backstory_a", "Well, {sir/madame}, as long as I can remember I've had a weakness for pretty things, and it's gotten me into trouble, you see."),
+("npc26_backstory_a", "Well, {sir/madame}, as long as I can remember I've had a weakness for pretty things, and it's gotten me into trouble, you see."),
 
 #backstory main body
   ("npc1_backstory_b", "I had a bit of a misunderstanding {s19}in {s20} about a horse that I found tied up outside the inn. It was the spitting image of a beast that threw me a few days back and ran off. Naturally I untied it for a closer look. As it turns out, the horse belonged to a merchant, a pinch-faced old goat who wouldn't accept that it all was a simple misunderstanding, and went off to get the guard."),
@@ -880,7 +904,13 @@ strings = [
   ("npc17_backstory_b", "In a far away land, I was a poor man, looking for a job, but no one wanted a fatherless children like me, because they said I was not strong enough to do all the work, well they were right. Once someone took me for a work in a farm, a very good family, I started to consider them as mine. But in a stormy day, a group of looters came, they killed everyone but me, I was scared first, but as time passed, I became furious, I wanted to make them pay for what they did, so I started to take arms, to train myself, and when I was ready, I searched them, and killed them, burning their village and killing everyone. I then began to do this, to everyone, to everything. But these land where poor, so I thought about leaving and coming on another land, I travelled and I found Calradia."),
   ("npc18_backstory_b", "But because of him, people always ask me to sell them things I don't even know, someone even told me he will kill me when I'll leave this tavern, well I'm here for a while I think."),
   ("npc19_backstory_b", "Hopefully for me, my problems are not as dangerous or as important as the others', but still, this is something I must deal with."),
-  ("npc20_backstory_b", "I grew up in Malayurg castle as a bonded servant, working alongside my mother in the kitchens. I would amuse myself by hunting mice through the pantries and sculleries. I was so good at it that I put the castle cats out of a job, and eventually the lord realized that I might also be employed to track down bigger game, on certain errands of a type perhaps better left unsaid. Needless to say, I found a number of opportunities to avail myself of trinkets that had formerly belonged to my lord's enemies. So I was able to buy myself out of bondage, and find hire as a free agent. My last job was {s19}in {s20}."),
+  ("npc20_backstory_b", "With all these bandits roaming around, I got beaten up a few times already. And before you ask, yes, I tried to fight back, but being alone against a dozen of them is not an easy task, hopefuly for me I was so badly wounded they thought I was dead. And a group of peasant was passing by a few hours later, they patched me up and I thought I had to do something against that, I collected a few men from the surrounding villages. Oh! These men can't even hold a stick properly!"),
+("npc21_backstory_b", "I grew up in Malayurg castle as a bonded servant, working alongside my mother in the kitchens. I would amuse myself by hunting mice through the pantries and sculleries. I was so good at it that I put the castle cats out of a job, and eventually the lord realized that I might also be employed to track down bigger game, on certain errands of a type perhaps better left unsaid. Needless to say, I found a number of opportunities to avail myself of trinkets that had formerly belonged to my lord's enemies. So I was able to buy myself out of bondage, and find hire as a free agent. My last job was {s19}in {s20}."),
+("npc22_backstory_b", "I grew up in Malayurg castle as a bonded servant, working alongside my mother in the kitchens. I would amuse myself by hunting mice through the pantries and sculleries. I was so good at it that I put the castle cats out of a job, and eventually the lord realized that I might also be employed to track down bigger game, on certain errands of a type perhaps better left unsaid. Needless to say, I found a number of opportunities to avail myself of trinkets that had formerly belonged to my lord's enemies. So I was able to buy myself out of bondage, and find hire as a free agent. My last job was {s19}in {s20}."),
+("npc23_backstory_b", "I grew up in Malayurg castle as a bonded servant, working alongside my mother in the kitchens. I would amuse myself by hunting mice through the pantries and sculleries. I was so good at it that I put the castle cats out of a job, and eventually the lord realized that I might also be employed to track down bigger game, on certain errands of a type perhaps better left unsaid. Needless to say, I found a number of opportunities to avail myself of trinkets that had formerly belonged to my lord's enemies. So I was able to buy myself out of bondage, and find hire as a free agent. My last job was {s19}in {s20}."),
+("npc24_backstory_b", "I grew up in Malayurg castle as a bonded servant, working alongside my mother in the kitchens. I would amuse myself by hunting mice through the pantries and sculleries. I was so good at it that I put the castle cats out of a job, and eventually the lord realized that I might also be employed to track down bigger game, on certain errands of a type perhaps better left unsaid. Needless to say, I found a number of opportunities to avail myself of trinkets that had formerly belonged to my lord's enemies. So I was able to buy myself out of bondage, and find hire as a free agent. My last job was {s19}in {s20}."),
+("npc25_backstory_b", "I grew up in Malayurg castle as a bonded servant, working alongside my mother in the kitchens. I would amuse myself by hunting mice through the pantries and sculleries. I was so good at it that I put the castle cats out of a job, and eventually the lord realized that I might also be employed to track down bigger game, on certain errands of a type perhaps better left unsaid. Needless to say, I found a number of opportunities to avail myself of trinkets that had formerly belonged to my lord's enemies. So I was able to buy myself out of bondage, and find hire as a free agent. My last job was {s19}in {s20}."),
+("npc26_backstory_b", "I grew up in Malayurg castle as a bonded servant, working alongside my mother in the kitchens. I would amuse myself by hunting mice through the pantries and sculleries. I was so good at it that I put the castle cats out of a job, and eventually the lord realized that I might also be employed to track down bigger game, on certain errands of a type perhaps better left unsaid. Needless to say, I found a number of opportunities to avail myself of trinkets that had formerly belonged to my lord's enemies. So I was able to buy myself out of bondage, and find hire as a free agent. My last job was {s19}in {s20}."),
 
 #backstory recruit pitch
   ("npc1_backstory_c", "But if I was with a larger group who could vouch for me, they might let it pass. I'd be very grateful to you."),
@@ -902,7 +932,13 @@ strings = [
   ("npc17_backstory_c", "Time passed as I grew up, with my hatred going down, I reminded all things I did, and I became sick of it, of all things I liked to do, so I ran away when my men weren't looking and I found this town, a safe place far away from sea riders, and a place where I could find someone to hire me."),
   ("npc18_backstory_c", "Maybe you could help me, get me out of this city and I'll stay with you, what do you say?"),
   ("npc19_backstory_c", "If you do not know this it may be because I only am here since a very short time, I usually travel around Calradia in search for something I don't know. Back to the point, some hysterical girls track me and want me to marry one of them. And you look like the kind of person that could help me get out of this trap."),
-  ("npc20_backstory_c", "Unfortunately, my last employer's wife had a lovely amulet, of a kind I simply could not resist. She doesn't know it's missing, yet, but she might soon. So tell me, are you looking for helpers?"),
+  ("npc20_backstory_c", "Now I come to wonder. You look like someone that do this kind of things ... and I guess you do it better than I. Are you by any chance looking for someone to back you up in fight?"),
+("npc21_backstory_c", "Unfortunately, my last employer's wife had a lovely amulet, of a kind I simply could not resist. She doesn't know it's missing, yet, but she might soon. So tell me, are you looking for helpers?"),
+("npc22_backstory_c", "Unfortunately, my last employer's wife had a lovely amulet, of a kind I simply could not resist. She doesn't know it's missing, yet, but she might soon. So tell me, are you looking for helpers?"),
+("npc23_backstory_c", "Unfortunately, my last employer's wife had a lovely amulet, of a kind I simply could not resist. She doesn't know it's missing, yet, but she might soon. So tell me, are you looking for helpers?"),
+("npc24_backstory_c", "Unfortunately, my last employer's wife had a lovely amulet, of a kind I simply could not resist. She doesn't know it's missing, yet, but she might soon. So tell me, are you looking for helpers?"),
+("npc25_backstory_c", "Unfortunately, my last employer's wife had a lovely amulet, of a kind I simply could not resist. She doesn't know it's missing, yet, but she might soon. So tell me, are you looking for helpers?"),
+("npc26_backstory_c", "Unfortunately, my last employer's wife had a lovely amulet, of a kind I simply could not resist. She doesn't know it's missing, yet, but she might soon. So tell me, are you looking for helpers?"),
 
 
 ### use these if there is a short period of time between the last meeting
@@ -925,7 +961,13 @@ strings = [
   ("npc17_backstory_later", "I went throught all cities of Calradia, no one wants a man like me, reminds me of the old time, I hope I'll find another family, and that this time I'll be able to defend it."),
   ("npc18_backstory_later", "Am I a jinx? They don't want to leave me alone."),
   ("npc19_backstory_later", "I do the odd job from time to time. But there's naught like steady employment, and a regular run of corpses to loot."),
-  ("npc20_backstory_later", "I do the odd job from time to time. But there's naught like steady employment, and a regular run of corpses to loot."),
+("npc20_backstory_later", "I tried again, failed again, I am sure there is one little thing I am missing but ... I can't know what it is."),
+("npc21_backstory_later", "I do the odd job from time to time. But there's naught like steady employment, and a regular run of corpses to loot."),
+("npc22_backstory_later", "I do the odd job from time to time. But there's naught like steady employment, and a regular run of corpses to loot."),
+("npc23_backstory_later", "I do the odd job from time to time. But there's naught like steady employment, and a regular run of corpses to loot."),
+("npc24_backstory_later", "I do the odd job from time to time. But there's naught like steady employment, and a regular run of corpses to loot."),
+("npc25_backstory_later", "I do the odd job from time to time. But there's naught like steady employment, and a regular run of corpses to loot."),
+("npc26_backstory_later", "I do the odd job from time to time. But there's naught like steady employment, and a regular run of corpses to loot."),
 
 
   ("npc1_backstory_response_1", "Perhaps. But how do I know that there won't be a 'misunderstanding' about one of my horses?"),
@@ -947,7 +989,13 @@ strings = [
   ("npc17_backstory_response_1", "I may be able to help you, what can you do?"),
   ("npc18_backstory_response_1", "What would be in it for me?"),
   ("npc19_backstory_response_1", "What if I am?"),
-  ("npc20_backstory_response_1", "I might be. What can you do?"),
+  ("npc20_backstory_response_1", "It's always better to have someone look for your back. What are you good at?"),
+("npc21_backstory_response_1", "I might be. What can you do?"),
+("npc22_backstory_response_1", "I might be. What can you do?"),
+("npc23_backstory_response_1", "I might be. What can you do?"),
+("npc24_backstory_response_1", "I might be. What can you do?"),
+("npc25_backstory_response_1", "I might be. What can you do?"),
+("npc26_backstory_response_1", "I might be. What can you do?"),
 
   ("npc1_backstory_response_2", "I'll do no such thing. I have better things to do then to help thieves avoid justice."),
   ("npc2_backstory_response_2", "Hard luck, friend. Good day to you."),
@@ -965,10 +1013,16 @@ strings = [
   ("npc14_backstory_response_2", "I'll let you know if I hear of anything. Good day."),
   ("npc15_backstory_response_2", "Sorry. I've got all the men that I can manage right now."),
   ("npc16_backstory_response_2", "Sorry, lass. You sound like you might be trouble."),
-  ("npc17_backstory_response_2", "I understand why no one wanted you when you were young, it's not because you weren't strong enough, it's because you're uncontrolable."),
+  ("npc17_backstory_response_2", "I understand why no one wanted you when you were young, it's because you're uncontrolable."),
   ("npc18_backstory_response_2", "Sorry I don't want to get into troubles."),
   ("npc19_backstory_response_2", "I think you are searching for bravery and I am not that."),
-  ("npc20_backstory_response_2", "Sorry, lass. You sound like you might be trouble."),
+  ("npc20_backstory_response_2", "I'd rather have experienced fighters in my ranks."),
+("npc21_backstory_response_2", "Sorry, lass. You sound like you might be trouble."),
+("npc22_backstory_response_2", "Sorry, lass. You sound like you might be trouble."),
+("npc23_backstory_response_2", "Sorry, lass. You sound like you might be trouble."),
+("npc24_backstory_response_2", "Sorry, lass. You sound like you might be trouble."),
+("npc25_backstory_response_2", "Sorry, lass. You sound like you might be trouble."),
+("npc26_backstory_response_2", "Sorry, lass. You sound like you might be trouble."),
 
   ("npc1_signup", "{Sir/Madame} -- I'm offended that you would even think such a thing. I'd be most indebted to you, and you'll see that I show my gratitude."),
   ("npc2_signup", "Well, I will confess that I am not a warrior by trade."),
@@ -989,7 +1043,13 @@ strings = [
   ("npc17_signup", "As I said I'm used to kill my foes quickly, with an axe usually."),
   ("npc18_signup", "I know how to trade with people, I got it from my father, I can heal the wounds of men too."),
   ("npc19_signup", "Well I think that we will be able to fool them, making them believe that {we are in the same family, you will then be able to dismiss them./you and me are... You know that we will make babies and all what goes with it.}"),
-  ("npc20_signup", "Well, {sir/madame}, let me tell you. I may not know how to read and write, but I know the quickest way to a man's heart is between his fourth and fifth rib, if you understand me. "),
+  ("npc20_signup", "I can do whatever you want me to do, as long as it is about killing people."),
+("npc21_signup", "Well, {sir/madame}, let me tell you. I may not know how to read and write, but I know the quickest way to a man's heart is between his fourth and fifth rib, if you understand me. "),
+("npc22_signup", "Well, {sir/madame}, let me tell you. I may not know how to read and write, but I know the quickest way to a man's heart is between his fourth and fifth rib, if you understand me. "),
+("npc23_signup", "Well, {sir/madame}, let me tell you. I may not know how to read and write, but I know the quickest way to a man's heart is between his fourth and fifth rib, if you understand me. "),
+("npc24_signup", "Well, {sir/madame}, let me tell you. I may not know how to read and write, but I know the quickest way to a man's heart is between his fourth and fifth rib, if you understand me. "),
+("npc25_signup", "Well, {sir/madame}, let me tell you. I may not know how to read and write, but I know the quickest way to a man's heart is between his fourth and fifth rib, if you understand me. "),
+("npc26_signup", "Well, {sir/madame}, let me tell you. I may not know how to read and write, but I know the quickest way to a man's heart is between his fourth and fifth rib, if you understand me. "),
 
   ("npc1_signup_2", "I've ridden over a fair amount of rough country in my time, more often than not in a hurry. I'm a good tracker and I've got a good eye for terrain. So what do you say?"),
   ("npc2_signup_2", "I'm a fast learner. I can ride, and know a fair bit about trade, prices and such."),
@@ -1010,7 +1070,13 @@ strings = [
   ("npc17_signup_2", "I will do all I can to serve you."),
   ("npc18_signup_2", "And the best of all, I know how to cook you an excelent lemon duck."),
   ("npc19_signup_2", "I will be forever in debt with you for helping me out."),
-  ("npc20_signup_2", "I can throw knives, in addition to stabbing with them, and I'm slippery as quicksilver. You'll find me useful in a fight, I'll warrant."),
+  ("npc20_signup_2", "I guess it would be enough for me to  protect your life aswell. As that also makes me kill your ennemies."),
+("npc21_signup_2", "I can throw knives, in addition to stabbing with them, and I'm slippery as quicksilver. You'll find me useful in a fight, I'll warrant."),
+("npc22_signup_2", "I can throw knives, in addition to stabbing with them, and I'm slippery as quicksilver. You'll find me useful in a fight, I'll warrant."),
+("npc23_signup_2", "I can throw knives, in addition to stabbing with them, and I'm slippery as quicksilver. You'll find me useful in a fight, I'll warrant."),
+("npc24_signup_2", "I can throw knives, in addition to stabbing with them, and I'm slippery as quicksilver. You'll find me useful in a fight, I'll warrant."),
+("npc25_signup_2", "I can throw knives, in addition to stabbing with them, and I'm slippery as quicksilver. You'll find me useful in a fight, I'll warrant."),
+("npc26_signup_2", "I can throw knives, in addition to stabbing with them, and I'm slippery as quicksilver. You'll find me useful in a fight, I'll warrant."),
 
 
   ("npc1_signup_response_1", "Good. You can be useful to us."),
@@ -1032,7 +1098,13 @@ strings = [
   ("npc17_signup_response_1", "Great we need some experienced men like you."),
   ("npc18_signup_response_1", "All right, you come with me."),
   ("npc19_signup_response_1", "Right but after that you don't talk about me being in your family."),
-  ("npc20_signup_response_1", "It sounds like you can do the job. I will hire you."),
+  ("npc20_signup_response_1", "Exactly what I was looking for, you're in."),
+("npc21_signup_response_1", "It sounds like you can do the job. I will hire you."),
+("npc22_signup_response_1", "It sounds like you can do the job. I will hire you."),
+("npc23_signup_response_1", "It sounds like you can do the job. I will hire you."),
+("npc24_signup_response_1", "It sounds like you can do the job. I will hire you."),
+("npc25_signup_response_1", "It sounds like you can do the job. I will hire you."),
+("npc26_signup_response_1", "It sounds like you can do the job. I will hire you."),
 
 #11
   ("npc1_signup_response_2", "I'd prefer not to take the risk. Good day, sir."),
@@ -1054,7 +1126,13 @@ strings = [
   ("npc17_signup_response_2", "It's a no, I'm not used to work with bandits."),
   ("npc18_signup_response_2", "If this is the best you can do I don't think you'll be able to leave this town."),
   ("npc19_signup_response_2", "Tricky plan, find someone else."),
-  ("npc20_signup_response_2", "To be honest, I'd prefer someone who was a little less tempted to larceny."),
+  ("npc20_signup_response_2", "Eh... To be honest you're scary. And I don't want you to go rampage because you can't control yourself."),
+("npc21_signup_response_2", "To be honest, I'd prefer someone who was a little less tempted to larceny."),
+("npc22_signup_response_2", "To be honest, I'd prefer someone who was a little less tempted to larceny."),
+("npc23_signup_response_2", "To be honest, I'd prefer someone who was a little less tempted to larceny."),
+("npc24_signup_response_2", "To be honest, I'd prefer someone who was a little less tempted to larceny."),
+("npc25_signup_response_2", "To be honest, I'd prefer someone who was a little less tempted to larceny."),
+("npc26_signup_response_2", "To be honest, I'd prefer someone who was a little less tempted to larceny."),
 
   ("npc1_payment", "I will be very useful to you, {sir/madame}, you can bet on that. Just one more thing before we leave, would you mind lending me {reg3} denars? I am ashamed to say it, but I have made myself a bit of debt here, staying in this tavern over the last few weeks and the tavern owners no longer believe that I am loaded with gold as I used to tell them. You know, things could get ugly here if they see me leaving with you before paying them."),
   ("npc2_payment", "{!}."),
@@ -1075,7 +1153,13 @@ strings = [
   ("npc17_payment", "It saddens me to tell you this, but I need some money before I can go, as a proof you're the good person, {reg3} denars will be enought."),
   ("npc18_payment", "{!}."),
   ("npc19_payment", "{!}."),
-  ("npc20_payment", "Now, that's good news, captain. So, how about paying me a little something to seal off our agreement? A mere {reg3} would be enough. Please don't take this the wrong way, but I've had some bad luck with employers in the past. "),
+  ("npc20_payment", "There is something I would ask before I can join you, a small payment of {reg3} denars to make sure I am not going with a poor {man/woman}."),
+("npc21_payment", "Now, that's good news, captain. So, how about paying me a little something to seal off our agreement? A mere {reg3} would be enough. Please don't take this the wrong way, but I've had some bad luck with employers in the past. "),
+("npc22_payment", "Now, that's good news, captain. So, how about paying me a little something to seal off our agreement? A mere {reg3} would be enough. Please don't take this the wrong way, but I've had some bad luck with employers in the past. "),
+("npc23_payment", "Now, that's good news, captain. So, how about paying me a little something to seal off our agreement? A mere {reg3} would be enough. Please don't take this the wrong way, but I've had some bad luck with employers in the past. "),
+("npc24_payment", "Now, that's good news, captain. So, how about paying me a little something to seal off our agreement? A mere {reg3} would be enough. Please don't take this the wrong way, but I've had some bad luck with employers in the past. "),
+("npc25_payment", "Now, that's good news, captain. So, how about paying me a little something to seal off our agreement? A mere {reg3} would be enough. Please don't take this the wrong way, but I've had some bad luck with employers in the past. "),
+("npc26_payment", "Now, that's good news, captain. So, how about paying me a little something to seal off our agreement? A mere {reg3} would be enough. Please don't take this the wrong way, but I've had some bad luck with employers in the past. "),
 
   ("npc1_payment_response", "Very well, here's {reg3} denars. Now, fall in with the rest."),
   ("npc2_payment_response", "{!}."),
@@ -1096,7 +1180,13 @@ strings = [
   ("npc17_payment_response", "All right, here's {reg3} denars for you. Make yourself ready to leave."),
   ("npc18_payment_response", "{!}."),
   ("npc19_payment_response", "{!}."),
-  ("npc20_payment_response", "All right, here's {reg3} denars for you. Make yourself ready."),
+  ("npc20_payment_response", "Here's your proof, {reg3} denars."),
+("npc21_payment_response", "All right, here's {reg3} denars for you. Make yourself ready."),
+("npc22_payment_response", "All right, here's {reg3} denars for you. Make yourself ready."),
+("npc23_payment_response", "All right, here's {reg3} denars for you. Make yourself ready."),
+("npc24_payment_response", "All right, here's {reg3} denars for you. Make yourself ready."),
+("npc25_payment_response", "All right, here's {reg3} denars for you. Make yourself ready."),
+("npc26_payment_response", "All right, here's {reg3} denars for you. Make yourself ready."),
 
 
 
@@ -1118,9 +1208,15 @@ strings = [
   ("npc15_morality_speech", "{Sir/Madame} -- just so you know my opinion, any commander with sense will not let his company {s21}.I hope you don't mind me speaking so bluntly."),
   ("npc16_morality_speech", "Captain. I don't like to {s21}. So many throats left uncut, and so many purses left unexplored..."),
   ("npc17_morality_speech", "{Sir/Madame} I'd prefer not to {s21}. I want to forgot all these things I did in the past."),
-  ("npc18_morality_speech", "It is not my habit to complain but I must tell you that I don't like the way you {s21}."),
-  ("npc19_morality_speech", "Captain. I don't like to {s21}. So many throats left uncut, and so many purses left unexplored..."),
-  ("npc20_morality_speech", "Captain. I don't like to {s21}. So many throats left uncut, and so many purses left unexplored..."),
+  ("npc18_morality_speech", "It is not my habit to complain but I must tell you that I don't like to {s21}, it is a shame for a leader to have to humiliate himself this way."),
+  ("npc19_morality_speech", "{playername}, I am not sure if you understand what war is all about, but it is not meant to {s21}"),
+  ("npc20_morality_speech", "I don't undestand why you would want to {s21}, I really can't."),
+("npc21_morality_speech", "Captain. I don't like to {s21}. So many throats left uncut, and so many purses left unexplored..."),
+("npc22_morality_speech", "Captain. I don't like to {s21}. So many throats left uncut, and so many purses left unexplored..."),
+("npc23_morality_speech", "Captain. I don't like to {s21}. So many throats left uncut, and so many purses left unexplored..."),
+("npc24_morality_speech", "Captain. I don't like to {s21}. So many throats left uncut, and so many purses left unexplored..."),
+("npc25_morality_speech", "Captain. I don't like to {s21}. So many throats left uncut, and so many purses left unexplored..."),
+("npc26_morality_speech", "Captain. I don't like to {s21}. So many throats left uncut, and so many purses left unexplored..."),
 
 
   ("npc1_2ary_morality_speech", "Boss -- just so you know, I've got no problem if we {s21}. Living to fight another day makes good sense to me."),
@@ -1143,6 +1239,12 @@ strings = [
   ("npc18_2ary_morality_speech", "{!}[No secondary moral code]"),
   ("npc19_2ary_morality_speech", "{!}[No secondary moral code]"),
   ("npc20_2ary_morality_speech", "{!}[No secondary moral code]"),
+  ("npc21_2ary_morality_speech", "{!}[No secondary moral code]"),
+  ("npc22_2ary_morality_speech", "{!}[No secondary moral code]"),
+  ("npc23_2ary_morality_speech", "{!}[No secondary moral code]"),
+  ("npc24_2ary_morality_speech", "{!}[No secondary moral code]"),
+  ("npc25_2ary_morality_speech", "{!}[No secondary moral code]"),
+  ("npc26_2ary_morality_speech", "{!}[No secondary moral code]"),
 
   ("npc1_personalityclash_speech", "Captain -- no offense, but I'm a bit tired of {s11}, who puts on airs like she's something better than your humble servant Borcha."),
   ("npc2_personalityclash_speech", "{Sir/Madame} -- as you recall I was a merchant before I signed on with you. I respect men who make their living peacefully, risking all to bring goods for far away lands."),
@@ -1160,10 +1262,16 @@ strings = [
   ("npc14_personalityclash_speech", "Excuse me, captain. A few minutes ago, I had expressed the opinion that liberal use of the lash and occasional use of the gallows is essential to keep soldiers in line. Men without a healthy fear of their commanders are more likely to run from battle."),
   ("npc15_personalityclash_speech", "Excuse me. I hope you don't mind me telling you that in my opinion, that girl {s11} is a danger to the party. She's a feral brat, disrespectful of authority and the basic principles of the military art."),
   ("npc16_personalityclash_speech", "Oy, captain. Just so you know -- there's something funny about {s11}. He makes strange scrawlings in the dirt, and mutters to himself."),
-  ("npc17_personalityclash_speech", "{!}[No one]"),
-  ("npc18_personalityclash_speech", "{!}[No one]"),
-  ("npc19_personalityclash_speech", "{!}[No one]"),
-  ("npc20_personalityclash_speech", "{!}[No one]"),
+("npc17_personalityclash_speech", "{!}[No one]"),
+("npc18_personalityclash_speech", "{!}[No one]"),
+("npc19_personalityclash_speech", "{!}[No one]"),
+("npc20_personalityclash_speech", "{!}[No one]"),
+("npc21_personalityclash_speech", "{!}[No one]"),
+("npc22_personalityclash_speech", "{!}[No one]"),
+("npc23_personalityclash_speech", "{!}[No one]"),
+("npc24_personalityclash_speech", "{!}[No one]"),
+("npc25_personalityclash_speech", "{!}[No one]"),
+("npc26_personalityclash_speech", "{!}[No one]"),
 
   ("npc1_personalityclash_speech_b", "She's a common bandit, just like myself, and she has no right to tell me to keep my distance from her, as she did just now."),
   ("npc2_personalityclash_speech_b", "I don't much care to hear {s11} gloat about the caravans he has looted, or he plans to loot, like he has no respect for good honest trade."),
@@ -1181,10 +1289,16 @@ strings = [
   ("npc14_personalityclash_speech_b", "That chit {s11} saw fit to admonish me for this. I will not have my methods questioned in front of the men, and I will not serve any commander who tolerates such insubordination in his company. Thank you for allowing me to speak my peace."),
   ("npc15_personalityclash_speech_b", "What's more, I suspect she's a thief. I found her going through my baggage and pawing some of my schematics, and she pulled a knife on me when I thought fit to object. A wise captain would not allow her in his company."),
   ("npc16_personalityclash_speech_b", "Fearing witchcraft, I asked him about it, and he told me that a chit of a girl like myself should mind her own business. So I had a look in his baggage, and found strange plans and diagrams. I think he's a sorceror, {sir/madame}, and if I catch him trying to hex me he'll have a knife in his throat."),
-  ("npc17_personalityclash_speech_b", "{!}[No one]"),
-  ("npc18_personalityclash_speech_b", "{!}[No one]"),
-  ("npc19_personalityclash_speech_b", "{!}[No one]"),
-  ("npc20_personalityclash_speech_b", "{!}[No one]"),
+("npc17_personalityclash_speech_b", "{!}[No one]"),
+("npc18_personalityclash_speech_b", "{!}[No one]"),
+("npc19_personalityclash_speech_b", "{!}[No one]"),
+("npc20_personalityclash_speech_b", "{!}[No one]"),
+("npc21_personalityclash_speech_b", "{!}[No one]"),
+("npc22_personalityclash_speech_b", "{!}[No one]"),
+("npc23_personalityclash_speech_b", "{!}[No one]"),
+("npc24_personalityclash_speech_b", "{!}[No one]"),
+("npc25_personalityclash_speech_b", "{!}[No one]"),
+("npc26_personalityclash_speech_b", "{!}[No one]"),
 
 
 ### set off by behavior after victorious battle
@@ -1204,10 +1318,16 @@ strings = [
   ("npc14_personalityclash2_speech", "Sir. {s11} is incorrigibly indisciplined. During that skirmish, I called out to him that he should hold ranks with the rest of our battle array. He called back to me that I should 'get stuffed.'"),
   ("npc15_personalityclash2_speech", "Captain -- I must tell you that I question {s11}'s medical credentials. As he was tending to our wounded after that last battle, I saw fit to remind him that the peerless Galerian often advocated administering a distillation of beetroot, to restore the humor imbalance brought by loss of sanguinity."),
   ("npc16_personalityclash2_speech", "Beg your pardon, {sir/ma'am}. {s11} might have been a very good thief, but he's not got the stomach to be a warrior, if you ask me."),
-  ("npc17_personalityclash2_speech", "{!}[No one]"),
-  ("npc18_personalityclash2_speech", "{!}[No one]"),
-  ("npc19_personalityclash2_speech", "{!}[No one]"),
-  ("npc20_personalityclash2_speech", "{!}[No one]"),
+("npc17_personalityclash2_speech", "{!}[No one]"),
+("npc18_personalityclash2_speech", "{!}[No one]"),
+("npc19_personalityclash2_speech", "{!}[No one]"),
+("npc20_personalityclash2_speech", "{!}[No one]"),
+("npc21_personalityclash2_speech", "{!}[No one]"),
+("npc22_personalityclash2_speech", "{!}[No one]"),
+("npc23_personalityclash2_speech", "{!}[No one]"),
+("npc24_personalityclash2_speech", "{!}[No one]"),
+("npc25_personalityclash2_speech", "{!}[No one]"),
+("npc26_personalityclash2_speech", "{!}[No one]"),
 
   ("npc1_personalityclash2_speech_b", "The way she whistles cheerfully as she does it -- it puts a chill down my spine, it does."),#borcha - klethi
   ("npc2_personalityclash2_speech_b", "The enemy was bearing down on us, and he says, 'Step aside, merchant, this is knight's work.' Next time I will step aside, and let him take a spear in the gut."), #marnid - alayen
@@ -1225,10 +1345,16 @@ strings = [
   ("npc14_personalityclash2_speech_b", "{Sir/Madame}, such defiance of proper authority is a corrosive influence on our company, and I shall have him flogged if he does so again."), #lazalit - bunduk
   ("npc15_personalityclash2_speech_b", "{s11} responded that Galenian was an 'antiquated know-nothing.' Captain, no true doctor would have such disrespect for the great masters of the past. I do not believe you should employ such an obvious impostor."), #artimenner - jeremus
   ("npc16_personalityclash2_speech_b", "After our last scrap, I was slicing open the guts of some our foes to check for hidden gold, as a girl who counts her pennies ought. He gagged and muttered that I was an 'animal.' I'll inspect his innards for contraband if he doesn't keep a civil tongue in his head."), #klethi - borcha
-  ("npc17_personalityclash2_speech_b", "{!}[No one]"),
-  ("npc18_personalityclash2_speech_b", "{!}[No one]"),
-  ("npc19_personalityclash2_speech_b", "{!}[No one]"),
-  ("npc20_personalityclash2_speech_b", "{!}[No one]"),
+("npc17_personalityclash2_speech_b", "{!}[No one]"),
+("npc18_personalityclash2_speech_b", "{!}[No one]"),
+("npc19_personalityclash2_speech_b", "{!}[No one]"),
+("npc20_personalityclash2_speech_b", "{!}[No one]"),
+("npc21_personalityclash2_speech_b", "{!}[No one]"),
+("npc22_personalityclash2_speech_b", "{!}[No one]"),
+("npc23_personalityclash2_speech_b", "{!}[No one]"),
+("npc24_personalityclash2_speech_b", "{!}[No one]"),
+("npc25_personalityclash2_speech_b", "{!}[No one]"),
+("npc26_personalityclash2_speech_b", "{!}[No one]"),
 
 
   ("npc1_personalitymatch_speech", "Boss. {s11} back there didn't do badly in that last fight at all. He's a good egg, too."),
@@ -1250,7 +1376,13 @@ strings = [
   ("npc17_personalitymatch_speech", "{Sir/Madame}. I like very much the way {s11} sees the world around him."),
   ("npc18_personalitymatch_speech", "{!}[No one]"),
   ("npc19_personalitymatch_speech", "I was just speaking with {s11}, she is meant to be with me."),
-  ("npc20_personalitymatch_speech", "Oy -- captain. I was just having a chat with {s11}, as we picked through the bodies after our last little scrap."),
+  ("npc20_personalitymatch_speech", "{playername}, I am not sure how to say this, but do you think love is a sign of weakness?."),
+("npc21_personalitymatch_speech", "Oy -- captain. I was just having a chat with {s11}, as we picked through the bodies after our last little scrap."),
+("npc22_personalitymatch_speech", "Oy -- captain. I was just having a chat with {s11}, as we picked through the bodies after our last little scrap."),
+("npc23_personalitymatch_speech", "Oy -- captain. I was just having a chat with {s11}, as we picked through the bodies after our last little scrap."),
+("npc24_personalitymatch_speech", "Oy -- captain. I was just having a chat with {s11}, as we picked through the bodies after our last little scrap."),
+("npc25_personalitymatch_speech", "Oy -- captain. I was just having a chat with {s11}, as we picked through the bodies after our last little scrap."),
+("npc26_personalitymatch_speech", "Oy -- captain. I was just having a chat with {s11}, as we picked through the bodies after our last little scrap."),
 
   ("npc1_personalitymatch_speech_b", "Without good honest souls like him to bring silver into Calradia, scoundrels like me would have a hard time in life, I'll warrant. I'm glad to have him with us."),
   ("npc2_personalitymatch_speech_b", "Based on how he did in that last fight, I'd say that I'd trust my back to him any day, although I'd still keep a hand on my purse."),
@@ -1270,8 +1402,14 @@ strings = [
   ("npc16_personalitymatch_speech_b", "Have you heard her story? Can you believe the wrongs done to her? I tell you, it makes my blood boil. I want to cut off all the little bits of those bastards who mistreated her -- and I'll do it, too, if we ever run into them in our travels."),
   ("npc17_personalitymatch_speech_b", "He thinks that everything can be good if you look at the good side of things, I think he's right, and it spurs me to keep going."),
   ("npc18_personalitymatch_speech_b", "{!}[No one]"),
-  ("npc19_personalitymatch_speech_b", "You know she is so beautiful, she is funny and she knows how to fight with a sword how could a man like me resist. I don't know if I have to say it to her, she may be scared. Please do as if I didn't told you anything."),
-  ("npc20_personalitymatch_speech_b", "Have you heard her story? Can you believe the wrongs done to her? I tell you, it makes my blood boil. I want to cut off all the little bits of those bastards who mistreated her -- and I'll do it, too, if we ever run into them in our travels."),
+  ("npc19_personalitymatch_speech_b", "You know she is so beautiful, she is funny and she knows how to fight with a sword how could a man like me resist. I don't know if I have to say it to her, she might get scared. Please do as if I didn't tell you anything."),
+  ("npc20_personalitymatch_speech_b", "I say this because ... well there is this {s11}, he ... I don't know what to say when I am infront of him, I fell empty of everything you are a {man/woman} so you must {know how men feel on this subject/be better than I at this}. Oh well ... nevermind I don't even think he's onto me anyway. It's still a pleasure to have him close to me during the fight."),
+("npc21_personalitymatch_speech_b", "Have you heard her story? Can you believe the wrongs done to her? I tell you, it makes my blood boil. I want to cut off all the little bits of those bastards who mistreated her -- and I'll do it, too, if we ever run into them in our travels."),
+("npc22_personalitymatch_speech_b", "Have you heard her story? Can you believe the wrongs done to her? I tell you, it makes my blood boil. I want to cut off all the little bits of those bastards who mistreated her -- and I'll do it, too, if we ever run into them in our travels."),
+("npc23_personalitymatch_speech_b", "Have you heard her story? Can you believe the wrongs done to her? I tell you, it makes my blood boil. I want to cut off all the little bits of those bastards who mistreated her -- and I'll do it, too, if we ever run into them in our travels."),
+("npc24_personalitymatch_speech_b", "Have you heard her story? Can you believe the wrongs done to her? I tell you, it makes my blood boil. I want to cut off all the little bits of those bastards who mistreated her -- and I'll do it, too, if we ever run into them in our travels."),
+("npc25_personalitymatch_speech_b", "Have you heard her story? Can you believe the wrongs done to her? I tell you, it makes my blood boil. I want to cut off all the little bits of those bastards who mistreated her -- and I'll do it, too, if we ever run into them in our travels."),
+("npc26_personalitymatch_speech_b", "Have you heard her story? Can you believe the wrongs done to her? I tell you, it makes my blood boil. I want to cut off all the little bits of those bastards who mistreated her -- and I'll do it, too, if we ever run into them in our travels."),
 
 
   ("npc1_retirement_speech", "I'm a bit tired of marching up and down the land, shedding my blood for someone else's cause. The loot is good, but I think I've got enough of that, now. I'm going to head back to my village, take a wife, settle down, maybe raise horses if I can afford it."),
@@ -1293,7 +1431,13 @@ strings = [
   ("npc17_retirement_speech", "{Sir/Madame}. It was a great experience being in this company, I learned to overlook my past and this is a good thing, but I must leave, as I think I have to search for the real family I had expeceted, this is surelly not you"),
   ("npc18_retirement_speech", "This is not that I don't like you, but I must leave, I can find better elsewhere."),
   ("npc19_retirement_speech", "I had great moments with you, but I need to go on my own right now for some time."),
-  ("npc20_retirement_speech", "I've had good times in this company, and I've found myself a pretty trinket or two on the battlefield, but right now it isn't working out. I'm leaving you to go offer my talents to someone else."),
+  ("npc20_retirement_speech", "I think you and I have different point of view, not that I don't respect yours, it's sometimes difficult to understand you, I think it is time for me to try and find something somewhere else, you've been a great help to me and I will never forget that."),
+("npc21_retirement_speech", "I've had good times in this company, and I've found myself a pretty trinket or two on the battlefield, but right now it isn't working out. I'm leaving you to go offer my talents to someone else."),
+("npc22_retirement_speech", "I've had good times in this company, and I've found myself a pretty trinket or two on the battlefield, but right now it isn't working out. I'm leaving you to go offer my talents to someone else."),
+("npc23_retirement_speech", "I've had good times in this company, and I've found myself a pretty trinket or two on the battlefield, but right now it isn't working out. I'm leaving you to go offer my talents to someone else."),
+("npc24_retirement_speech", "I've had good times in this company, and I've found myself a pretty trinket or two on the battlefield, but right now it isn't working out. I'm leaving you to go offer my talents to someone else."),
+("npc25_retirement_speech", "I've had good times in this company, and I've found myself a pretty trinket or two on the battlefield, but right now it isn't working out. I'm leaving you to go offer my talents to someone else."),
+("npc26_retirement_speech", "I've had good times in this company, and I've found myself a pretty trinket or two on the battlefield, but right now it isn't working out. I'm leaving you to go offer my talents to someone else."),
 
   ("npc1_rehire_speech", "Boss -- it's good to see you again. I know we had our differences in the past, but to tell you the truth, those were some of the best days I've known. And, to tell you the truth, I've had a bit of difficulty finding work. Listen, if you'd be willing to have me back, I'd be willing to sign up with your company again."),
   ("npc2_rehire_speech", "{Sir/Madame}! It's good to see you again. But I'll confess -- I've been looking for you. I bought a load of goods like I told you I would, loaded them up, and took them back across the steppe -- but wouldn't you know it, I was hit again by Khergits, and lost it all. I guess I'm just destined to fight for my fortune. Also, people tell me that you've done very well for yourself. So tell me, {sir/madame}, would you have me back?"),
@@ -1314,7 +1458,13 @@ strings = [
   ("npc17_rehire_speech", "{Sir/Madame} it's good to see you again, I searched for some sort of family, and I think I was wrong, you're the best that can be on earth."),
   ("npc18_rehire_speech", "I know what you are thinking, 'How stupid he is to be in same situation he was before' I know, but my old friends came back, I don't think I'm as good as when I was on your band."),
   ("npc19_rehire_speech", "I must admit that I was stupid to leave you, you are one of the best leader of all times and to tell the truth people always asked me why I left you, I had no reason. So would you take me back?"),
-  ("npc20_rehire_speech", "Captain! They say that you've done well for yourself since we last met. I'll come out and admit that I cursed your name when we parted ways, but thinking back on it you weren't all that bad. All these lords, they're glad enough to send me on little side errands, but they don't much care to have me in their main battle-line. Apparently I spook the men. I've heard it muttered that I'm a witch, or that I eat men's hearts after killing them, or other rot. Not that I mind stabbing a man while he's asleep, but it's a lot more gratifying when he's awake and kicking. So I thought I'd try to find you again, see if you'll take me on."),
+  ("npc20_rehire_speech", "Oh it's you, {playername}, I've been trying again you see, followed your example, but I can't seem to do anything with what is given to me, I guess I am not, unlike you, a good leader. Plus, you seem to bring me luck, is it too much for me to ask that you take me back?"),
+("npc21_rehire_speech", "Captain! They say that you've done well for yourself since we last met. I'll come out and admit that I cursed your name when we parted ways, but thinking back on it you weren't all that bad. All these lords, they're glad enough to send me on little side errands, but they don't much care to have me in their main battle-line. Apparently I spook the men. I've heard it muttered that I'm a witch, or that I eat men's hearts after killing them, or other rot. Not that I mind stabbing a man while he's asleep, but it's a lot more gratifying when he's awake and kicking. So I thought I'd try to find you again, see if you'll take me on."),
+("npc22_rehire_speech", "Captain! They say that you've done well for yourself since we last met. I'll come out and admit that I cursed your name when we parted ways, but thinking back on it you weren't all that bad. All these lords, they're glad enough to send me on little side errands, but they don't much care to have me in their main battle-line. Apparently I spook the men. I've heard it muttered that I'm a witch, or that I eat men's hearts after killing them, or other rot. Not that I mind stabbing a man while he's asleep, but it's a lot more gratifying when he's awake and kicking. So I thought I'd try to find you again, see if you'll take me on."),
+("npc23_rehire_speech", "Captain! They say that you've done well for yourself since we last met. I'll come out and admit that I cursed your name when we parted ways, but thinking back on it you weren't all that bad. All these lords, they're glad enough to send me on little side errands, but they don't much care to have me in their main battle-line. Apparently I spook the men. I've heard it muttered that I'm a witch, or that I eat men's hearts after killing them, or other rot. Not that I mind stabbing a man while he's asleep, but it's a lot more gratifying when he's awake and kicking. So I thought I'd try to find you again, see if you'll take me on."),
+("npc24_rehire_speech", "Captain! They say that you've done well for yourself since we last met. I'll come out and admit that I cursed your name when we parted ways, but thinking back on it you weren't all that bad. All these lords, they're glad enough to send me on little side errands, but they don't much care to have me in their main battle-line. Apparently I spook the men. I've heard it muttered that I'm a witch, or that I eat men's hearts after killing them, or other rot. Not that I mind stabbing a man while he's asleep, but it's a lot more gratifying when he's awake and kicking. So I thought I'd try to find you again, see if you'll take me on."),
+("npc25_rehire_speech", "Captain! They say that you've done well for yourself since we last met. I'll come out and admit that I cursed your name when we parted ways, but thinking back on it you weren't all that bad. All these lords, they're glad enough to send me on little side errands, but they don't much care to have me in their main battle-line. Apparently I spook the men. I've heard it muttered that I'm a witch, or that I eat men's hearts after killing them, or other rot. Not that I mind stabbing a man while he's asleep, but it's a lot more gratifying when he's awake and kicking. So I thought I'd try to find you again, see if you'll take me on."),
+("npc26_rehire_speech", "Captain! They say that you've done well for yourself since we last met. I'll come out and admit that I cursed your name when we parted ways, but thinking back on it you weren't all that bad. All these lords, they're glad enough to send me on little side errands, but they don't much care to have me in their main battle-line. Apparently I spook the men. I've heard it muttered that I'm a witch, or that I eat men's hearts after killing them, or other rot. Not that I mind stabbing a man while he's asleep, but it's a lot more gratifying when he's awake and kicking. So I thought I'd try to find you again, see if you'll take me on."),
 
 #local color strings
   ("npc1_home_intro", "Boss -- did you know that I was born around here, in the high steppe? This is where I got my eye for horseflesh, because this is good land for horses, although a hard land for men. I suppose that's why the Khergits like it."),
@@ -1335,8 +1485,14 @@ strings = [
   ("npc16_home_intro", "Aye, captain, do you see those? Those are hare tracks in the snow. We must be getting near to my birthplace."),
   ("npc17_home_intro", "This place reminds me of the old time, we must be near the place where I landed."),
   ("npc18_home_intro", "Such a lovely place this is, did you know I was born here?."),
-  ("npc19_home_intro", "I went in this place before, people from here have to face tought weather, that may be the reason why they are really welcoming."),
-  ("npc20_home_intro", "Aye, captain, do you see those? Those are hare tracks in the snow. We must be getting near to my birthplace."),
+  ("npc19_home_intro", "I went in this small village before, people from here have to face tought weather, that may be the reason why they are really welcoming."),
+  ("npc20_home_intro", "Ah! {playername}, we must be getting close to my birthplace."),
+("npc21_home_intro", "Aye, captain, do you see those? Those are hare tracks in the snow. We must be getting near to my birthplace."),
+("npc22_home_intro", "Aye, captain, do you see those? Those are hare tracks in the snow. We must be getting near to my birthplace."),
+("npc23_home_intro", "Aye, captain, do you see those? Those are hare tracks in the snow. We must be getting near to my birthplace."),
+("npc24_home_intro", "Aye, captain, do you see those? Those are hare tracks in the snow. We must be getting near to my birthplace."),
+("npc25_home_intro", "Aye, captain, do you see those? Those are hare tracks in the snow. We must be getting near to my birthplace."),
+("npc26_home_intro", "Aye, captain, do you see those? Those are hare tracks in the snow. We must be getting near to my birthplace."),
 
 
   ("npc1_home_description", "Well, Khergits always lived here, even back in the old days, as the Emperor gave them gold and lands to keep out the other tribes. I'm told my grandfather was a Khergit chieftain, although my mother didn't know him, any more than I knew my father. When my mother was a lass, the Khergit started coming over the mountains in larger numbers, and now there's a Khergit Khan in Tulga."),
@@ -1358,8 +1514,14 @@ strings = [
   ("npc16_home_description", "The snows in these valleys don't melt until late in the year, and the land is hard to plough. You can grow a bit of barley, but not much else. But there's wealth here in the woods: deer, rabbit and lynx, meat and furs, and the mountains have iron, and traders would ship enough saltfish up the river from the coast to keep the people fed for the winter."),
   ("npc17_home_description", "This is a wonderful place, and this may be the only my band and I didn't loot."),
   ("npc18_home_description", "Well you know, we were entirely devoted to the goodwill of this village, it had huge palms around everywhere, a well for water, the prosperty of this place had nothing to envy to the big cities around here, you know people were rich."),
-  ("npc19_home_description", "When I was still a little boy, my parents came here, because of the war, the soldiers told us to go away from our home, we resisted, but my father was wounded and this village was our shelter."),
-  ("npc20_home_description", "The snows in these valleys don't melt until late in the year, and the land is hard to plough. You can grow a bit of barley, but not much else. But there's wealth here in the woods: deer, rabbit and lynx, meat and furs, and the mountains have iron, and traders would ship enough saltfish up the river from the coast to keep the people fed for the winter."),
+  ("npc19_home_description", "When I was still a little boy, my parents came here, because of the war, the soldiers told us to go away from our home, we resisted, but my father was wounded and this village became our shelter."),
+  ("npc20_home_description", "You know, this place was my bit of heaven in my youth, cold climate for sure, but the people were so welcoming that you completely forgot how hard it was to live."),
+("npc21_home_description", "The snows in these valleys don't melt until late in the year, and the land is hard to plough. You can grow a bit of barley, but not much else. But there's wealth here in the woods: deer, rabbit and lynx, meat and furs, and the mountains have iron, and traders would ship enough saltfish up the river from the coast to keep the people fed for the winter."),
+("npc22_home_description", "The snows in these valleys don't melt until late in the year, and the land is hard to plough. You can grow a bit of barley, but not much else. But there's wealth here in the woods: deer, rabbit and lynx, meat and furs, and the mountains have iron, and traders would ship enough saltfish up the river from the coast to keep the people fed for the winter."),
+("npc23_home_description", "The snows in these valleys don't melt until late in the year, and the land is hard to plough. You can grow a bit of barley, but not much else. But there's wealth here in the woods: deer, rabbit and lynx, meat and furs, and the mountains have iron, and traders would ship enough saltfish up the river from the coast to keep the people fed for the winter."),
+("npc24_home_description", "The snows in these valleys don't melt until late in the year, and the land is hard to plough. You can grow a bit of barley, but not much else. But there's wealth here in the woods: deer, rabbit and lynx, meat and furs, and the mountains have iron, and traders would ship enough saltfish up the river from the coast to keep the people fed for the winter."),
+("npc25_home_description", "The snows in these valleys don't melt until late in the year, and the land is hard to plough. You can grow a bit of barley, but not much else. But there's wealth here in the woods: deer, rabbit and lynx, meat and furs, and the mountains have iron, and traders would ship enough saltfish up the river from the coast to keep the people fed for the winter."),
+("npc26_home_description", "The snows in these valleys don't melt until late in the year, and the land is hard to plough. You can grow a bit of barley, but not much else. But there's wealth here in the woods: deer, rabbit and lynx, meat and furs, and the mountains have iron, and traders would ship enough saltfish up the river from the coast to keep the people fed for the winter."),
 
   ("npc1_home_description_2", "They go easy on us farming folk, and don't ask for much in tax -- not that we would be able to pay in any case. The land isn't good enough for most crops. Frankly, it's only good for horse-rearing, and that only for half of the year, in the winter after the rains. In the summer they take their herds back into the mountains. Caravans come over the hills and bring spice to Tulga, but we don't see much of that money down in the villages."),
   ("npc2_home_description_2", "I had loaded up on saffron, cinnamon, cloves, pepper and other spices and a chest full of denars. I estimated that I could buy linens, furs, velvet, iron and wool, and the extra horses to carry them back, and I'd still make a profit. I just hadn't figured in the Khergits, who apparently don't care for others cutting in on their monopoly."),
@@ -1379,8 +1541,14 @@ strings = [
   ("npc16_home_description_2", "Still, it was a thin living, and there were always too many mouths around to feed. The Vaegir king and the Khergit khan don't make life any easier for us, squeezing for tax money the villages they control, and raiding for plunder the villages they don't. Of course, I can't say I wouldn't do the same if I had a castle and an army all of my own. The mighty do whatever they can, and the humble do whatever they must."),
   ("npc17_home_description_2", "There was once one of my men asking why we didn't loot that place, at first I didn't answered, knowing nothing to say, but later I told him that this place will be our one day, so we where not about to destroy what we will own no?"),
   ("npc18_home_description_2", "But the sultan didn't agree with this, he sent his armies, and the people around here couldn't do anything, this is at that time that my father and I left and he started to become famous for his trading. What a strange way to become famous."),
-  ("npc19_home_description_2", "Unfortunatly my father didn't made througth it and my mom hanged herself, people from here took me as their son and I am grateful for ever for helping my family and me when I was alone."),
-  ("npc20_home_description_2", "Still, it was a thin living, and there were always too many mouths around to feed. The Vaegir king and the Khergit khan don't make life any easier for us, squeezing for tax money the villages they control, and raiding for plunder the villages they don't. Of course, I can't say I'd do any differently do the same if I had a castle and an army all of my own. The mighty do whatever they can, and the humble do whatever they must."),
+  ("npc19_home_description_2", "Unfortunatly my father didn't made througth it and my mom hanged herself, people from here took me as their son and made me believe my mother died of a disease too. But I am grateful to them for helping my family before, and me when I was alone. There was a girl I used to flirt with when I was a boy, she was so perfect, sometimes I regret having left this place."),
+  ("npc20_home_description_2", "My parents told me of many wars, people used to come around, because it's quite far away from the fortified places so far from sieges, and it's not rich enough to be worth looting. Well to tell the truth we had some quite wealthy person coming around sometimes, one day, a group of people came here, amongst them was a very wealthy family, the father died because of a disease and the mother was raped and left for dead in the middle of nowhere, they had a little boy about my age, my parents never told him what really happened, and I understand why."),
+("npc21_home_description_2", "Still, it was a thin living, and there were always too many mouths around to feed. The Vaegir king and the Khergit khan don't make life any easier for us, squeezing for tax money the villages they control, and raiding for plunder the villages they don't. Of course, I can't say I'd do any differently do the same if I had a castle and an army all of my own. The mighty do whatever they can, and the humble do whatever they must."),
+("npc22_home_description_2", "Still, it was a thin living, and there were always too many mouths around to feed. The Vaegir king and the Khergit khan don't make life any easier for us, squeezing for tax money the villages they control, and raiding for plunder the villages they don't. Of course, I can't say I'd do any differently do the same if I had a castle and an army all of my own. The mighty do whatever they can, and the humble do whatever they must."),
+("npc23_home_description_2", "Still, it was a thin living, and there were always too many mouths around to feed. The Vaegir king and the Khergit khan don't make life any easier for us, squeezing for tax money the villages they control, and raiding for plunder the villages they don't. Of course, I can't say I'd do any differently do the same if I had a castle and an army all of my own. The mighty do whatever they can, and the humble do whatever they must."),
+("npc24_home_description_2", "Still, it was a thin living, and there were always too many mouths around to feed. The Vaegir king and the Khergit khan don't make life any easier for us, squeezing for tax money the villages they control, and raiding for plunder the villages they don't. Of course, I can't say I'd do any differently do the same if I had a castle and an army all of my own. The mighty do whatever they can, and the humble do whatever they must."),
+("npc25_home_description_2", "Still, it was a thin living, and there were always too many mouths around to feed. The Vaegir king and the Khergit khan don't make life any easier for us, squeezing for tax money the villages they control, and raiding for plunder the villages they don't. Of course, I can't say I'd do any differently do the same if I had a castle and an army all of my own. The mighty do whatever they can, and the humble do whatever they must."),
+("npc26_home_description_2", "Still, it was a thin living, and there were always too many mouths around to feed. The Vaegir king and the Khergit khan don't make life any easier for us, squeezing for tax money the villages they control, and raiding for plunder the villages they don't. Of course, I can't say I'd do any differently do the same if I had a castle and an army all of my own. The mighty do whatever they can, and the humble do whatever they must."),
 
   ("npc1_home_recap", "I'm from the high steppe, near {s21}."),
   ("npc2_home_recap", "I was born over the mountains.  I'm a merchant, the son of a merchant, and the grandson of a merchant."),
@@ -1400,8 +1568,14 @@ strings = [
   ("npc16_home_recap", "Why, captain, I was born in Uslum village, but my mother lost her land to a scheming relative and had to put herself in bond to a nearby lord."),
   ("npc17_home_recap", "I was born overseas in a little village named Gurd, I never told you that, I thought this was not interesting for you."),
   ("npc18_home_recap", "I was born in {s21}, a prosperous village, and am the son of an incredible trader."),
-  ("npc19_home_recap", "I was born in some big town as people told me, but I never knew which one."),
-  ("npc20_home_recap", "Why, captain, I was born in Uslum village, but my mother lost her land to a scheming relative and had to put herself in bond to a nearby lord."),
+  ("npc19_home_recap", "I was born in some big town as people told me, but I never knew which one, big walls, rich town, it's all that I know of."),
+  ("npc20_home_recap", "I was born in the small village of {s21}, warsh climate but warmful people living in it."),
+("npc21_home_recap", "Why, captain, I was born in Uslum village, but my mother lost her land to a scheming relative and had to put herself in bond to a nearby lord."),
+("npc22_home_recap", "Why, captain, I was born in Uslum village, but my mother lost her land to a scheming relative and had to put herself in bond to a nearby lord."),
+("npc23_home_recap", "Why, captain, I was born in Uslum village, but my mother lost her land to a scheming relative and had to put herself in bond to a nearby lord."),
+("npc24_home_recap", "Why, captain, I was born in Uslum village, but my mother lost her land to a scheming relative and had to put herself in bond to a nearby lord."),
+("npc25_home_recap", "Why, captain, I was born in Uslum village, but my mother lost her land to a scheming relative and had to put herself in bond to a nearby lord."),
+("npc26_home_recap", "Why, captain, I was born in Uslum village, but my mother lost her land to a scheming relative and had to put herself in bond to a nearby lord."),
 
   ("npc1_honorific", "boss"), #Borcha
   ("npc2_honorific", "{sir/madame}"), #marnid
@@ -1422,7 +1596,13 @@ strings = [
   ("npc17_honorific", "{sir/madame}"),#sverre
   ("npc18_honorific", "{playername}"),
   ("npc19_honorific", "{playername}"),
-  ("npc20_honorific", "captain"),
+  ("npc20_honorific", "{playername}"),
+("npc21_honorific", "captain"),
+("npc22_honorific", "captain"),
+("npc23_honorific", "captain"),
+("npc24_honorific", "captain"),
+("npc25_honorific", "captain"),
+("npc26_honorific", "captain"),
 
   ("npc1_kingsupport_1", "That's a great idea, Boss. All these kings and khans and landed nobles who rule now, with their prisons and gibbets and scaffolds, the whippings and brandings and hangings for any man who might be driven by the crying of his children to steal a loaf of bread, or maybe a horse -- Calradia deserves something better."), #Borcha
   ("npc2_kingsupport_1", "Well, captain -- I'd support you. I think you'd give Calradia the kind of enlightened rule which it has long needed."), #marnid
@@ -1443,7 +1623,13 @@ strings = [
   ("npc17_kingsupport_1", "I'm not the one that can say what is good or not, but if you were to be {king/queen}, I'll do whatever I can to make your royal life more comfortable."), #sverre
   ("npc18_kingsupport_1", "Well, if you were to be {king/queen}, I hope you will not forget that a good {king/queen} is made to lead the men to peace and prosperity, not to make war, still it is sometimes necessary to declare war, but you will have to do it carefully and not to your people."),
   ("npc19_kingsupport_1", "I may not be the good person to judge about this but a {king/queen} must help his people and lead them to glory and so, like you did with me."),
-  ("npc20_kingsupport_1", "Why not, captain? I'm sure you'd make a fine {king/queen} -- and of course I'd hope you remember the little people like myself who did you a pretty turn on your scramble to the throne."),
+("npc20_kingsupport_1", "Why not, captain? I'm sure you'd make a fine {king/queen} -- and of course I'd hope you remember the little people like myself who did you a pretty turn on your scramble to the throne."),
+("npc21_kingsupport_1", "Why not, captain? I'm sure you'd make a fine {king/queen} -- and of course I'd hope you remember the little people like myself who did you a pretty turn on your scramble to the throne."),
+("npc22_kingsupport_1", "Why not, captain? I'm sure you'd make a fine {king/queen} -- and of course I'd hope you remember the little people like myself who did you a pretty turn on your scramble to the throne."),
+("npc23_kingsupport_1", "Why not, captain? I'm sure you'd make a fine {king/queen} -- and of course I'd hope you remember the little people like myself who did you a pretty turn on your scramble to the throne."),
+("npc24_kingsupport_1", "Why not, captain? I'm sure you'd make a fine {king/queen} -- and of course I'd hope you remember the little people like myself who did you a pretty turn on your scramble to the throne."),
+("npc25_kingsupport_1", "Why not, captain? I'm sure you'd make a fine {king/queen} -- and of course I'd hope you remember the little people like myself who did you a pretty turn on your scramble to the throne."),
+("npc26_kingsupport_1", "Why not, captain? I'm sure you'd make a fine {king/queen} -- and of course I'd hope you remember the little people like myself who did you a pretty turn on your scramble to the throne."),
 
   
   ("npc1_kingsupport_2", "Sure would, Boss. But let me tell you what might bring others to your cause -- particularly us poor folk. They tell us that in the old days, each new Emperor who took the throne would issue a great amnesty for all but the worst prisoners in his dungeons, give people a second chance to make something of themselves -- like you gave me a second chance, Boss."), #Borcha
@@ -1465,7 +1651,13 @@ strings = [
   ("npc17_kingsupport_2", "Of course I would. And with you as a {king/queen}, I think you will put an end to murders, looting and so."), #sverre
   ("npc18_kingsupport_2", "Of course, but I don't know how will I call you, my {lord/lady}? My {king/queen}? Or will I still be able to call you by your name ... I think I need time to think about it ..."),
   ("npc19_kingsupport_2", "Sure, and I must add that you did very well with me so I do not see reason for you to have a bad one."),
-  ("npc20_kingsupport_2", "Of course, my {lord/lady}. And what's more, I figure a girl like me could do you a bit of a service raising support with the lords of this land. I may have only had a small part in their schemes and intrigues over the years, but I think I know what they want. And given what I know of their secrets, they'd not want to be denying me admission to their halls, now would they?"),
+("npc20_kingsupport_2", "Of course, my {lord/lady}. And what's more, I figure a girl like me could do you a bit of a service raising support with the lords of this land. I may have only had a small part in their schemes and intrigues over the years, but I think I know what they want. And given what I know of their secrets, they'd not want to be denying me admission to their halls, now would they?"),
+("npc21_kingsupport_2", "Of course, my {lord/lady}. And what's more, I figure a girl like me could do you a bit of a service raising support with the lords of this land. I may have only had a small part in their schemes and intrigues over the years, but I think I know what they want. And given what I know of their secrets, they'd not want to be denying me admission to their halls, now would they?"),
+("npc22_kingsupport_2", "Of course, my {lord/lady}. And what's more, I figure a girl like me could do you a bit of a service raising support with the lords of this land. I may have only had a small part in their schemes and intrigues over the years, but I think I know what they want. And given what I know of their secrets, they'd not want to be denying me admission to their halls, now would they?"),
+("npc23_kingsupport_2", "Of course, my {lord/lady}. And what's more, I figure a girl like me could do you a bit of a service raising support with the lords of this land. I may have only had a small part in their schemes and intrigues over the years, but I think I know what they want. And given what I know of their secrets, they'd not want to be denying me admission to their halls, now would they?"),
+("npc24_kingsupport_2", "Of course, my {lord/lady}. And what's more, I figure a girl like me could do you a bit of a service raising support with the lords of this land. I may have only had a small part in their schemes and intrigues over the years, but I think I know what they want. And given what I know of their secrets, they'd not want to be denying me admission to their halls, now would they?"),
+("npc25_kingsupport_2", "Of course, my {lord/lady}. And what's more, I figure a girl like me could do you a bit of a service raising support with the lords of this land. I may have only had a small part in their schemes and intrigues over the years, but I think I know what they want. And given what I know of their secrets, they'd not want to be denying me admission to their halls, now would they?"),
+("npc26_kingsupport_2", "Of course, my {lord/lady}. And what's more, I figure a girl like me could do you a bit of a service raising support with the lords of this land. I may have only had a small part in their schemes and intrigues over the years, but I think I know what they want. And given what I know of their secrets, they'd not want to be denying me admission to their halls, now would they?"),
  
   ("npc1_kingsupport_2a", "Please go on..."), #Borcha
   ("npc2_kingsupport_2a", "Please continue..."), #marnid
@@ -1486,7 +1678,13 @@ strings = [
   ("npc17_kingsupport_2a", "Please continue..."), #sverre
   ("npc18_kingsupport_2a", "Maybe we will discuss about it later, what do you have in mind?"),
   ("npc19_kingsupport_2a", "Yes..."),
-  ("npc20_kingsupport_2a", "Interesting... Please continue"),
+("npc20_kingsupport_2a", "Interesting... Please continue"),
+("npc21_kingsupport_2a", "Interesting... Please continue"),
+("npc22_kingsupport_2a", "Interesting... Please continue"),
+("npc23_kingsupport_2a", "Interesting... Please continue"),
+("npc24_kingsupport_2a", "Interesting... Please continue"),
+("npc25_kingsupport_2a", "Interesting... Please continue"),
+("npc26_kingsupport_2a", "Interesting... Please continue"),
 
   ("npc1_kingsupport_2b", "Well. We saw how that turned out..."), #Borcha
   ("npc2_kingsupport_2b", "I do not ask for their support, as they would no doubt wish to make a profit on the transaction."), #marnid
@@ -1507,7 +1705,13 @@ strings = [
   ("npc17_kingsupport_2b", "I hope you understand that what you're asking is impossible."), #sverre
   ("npc18_kingsupport_2b", "A {king/queen} must declare war before the others do it, there is no need to wait for death if you can fight it."),
   ("npc19_kingsupport_2b", "You do not know me."),
-  ("npc20_kingsupport_2b", "No offense, but I'm not sure that's the approach I'd take"),
+("npc20_kingsupport_2b", "No offense, but I'm not sure that's the approach I'd take"),
+("npc21_kingsupport_2b", "No offense, but I'm not sure that's the approach I'd take"),
+("npc22_kingsupport_2b", "No offense, but I'm not sure that's the approach I'd take"),
+("npc23_kingsupport_2b", "No offense, but I'm not sure that's the approach I'd take"),
+("npc24_kingsupport_2b", "No offense, but I'm not sure that's the approach I'd take"),
+("npc25_kingsupport_2b", "No offense, but I'm not sure that's the approach I'd take"),
+("npc26_kingsupport_2b", "No offense, but I'm not sure that's the approach I'd take"),
 
   ("npc1_kingsupport_3", "If I could go about this land for a few weeks, telling the common folk that you were going to amnesty their kinfolk like the emperors of old -- well, they would start talking of you as the Emperor, and that would pave your way to the throne. Shall I do that, Boss?"), #Borcha
   ("npc2_kingsupport_2", "If you like, captain, I can take a few weeks to visit the guildhalls and caravanseries where I have contacts, and explain to them that, in you, they will have a {king/ruler} who will check the rapacious nobles, who, with their tariffs and taxes, would strangle commerce for the sake of a few extra denars to spend on their wars and their feasts. What do you say to that, captain?"), #marnid
@@ -1528,7 +1732,13 @@ strings = [
   ("npc17_kingsupport_3", "If you would please leave me for some times, I will go in a town, where I met a good man, he's a little like me, he want this banditry to end, and I don't think we're alone. He will dispatch the word that you will try to do all your possible to stop it if you're named {king/queen} of this land."),
   ("npc18_kingsupport_3", "You're right and this is why I propose you this: I go in towns and villages to tell them what you'll do as a {king/queen}, I'm sure a lot of them will support you."),
   ("npc19_kingsupport_3", "If you allow me I will go in towns and tell the story of a child whose father was killed because of the war and later when this now grown up boy was taken saved by a hero. I will not lie to them, and tell the thruth about you, as a good person and someone ready to save others with no reward."),
-  ("npc20_kingsupport_3", "Give me leave for a few weeks, and I'll do a little tour of my former employers' castles. I'll sing them a pretty song about what you'll do as {king/queen}, about all the ancient freedoms you'll restore -- let them rob their tenants and tax the merchants and fight their wars and spend themselves silly without a thought to tomorrow, as a noble ought! What do you say to that, captain?"),
+("npc20_kingsupport_3", "Give me leave for a few weeks, and I'll do a little tour of my former employers' castles. I'll sing them a pretty song about what you'll do as {king/queen}, about all the ancient freedoms you'll restore -- let them rob their tenants and tax the merchants and fight their wars and spend themselves silly without a thought to tomorrow, as a noble ought! What do you say to that, captain?"),
+("npc21_kingsupport_3", "Give me leave for a few weeks, and I'll do a little tour of my former employers' castles. I'll sing them a pretty song about what you'll do as {king/queen}, about all the ancient freedoms you'll restore -- let them rob their tenants and tax the merchants and fight their wars and spend themselves silly without a thought to tomorrow, as a noble ought! What do you say to that, captain?"),
+("npc22_kingsupport_3", "Give me leave for a few weeks, and I'll do a little tour of my former employers' castles. I'll sing them a pretty song about what you'll do as {king/queen}, about all the ancient freedoms you'll restore -- let them rob their tenants and tax the merchants and fight their wars and spend themselves silly without a thought to tomorrow, as a noble ought! What do you say to that, captain?"),
+("npc23_kingsupport_3", "Give me leave for a few weeks, and I'll do a little tour of my former employers' castles. I'll sing them a pretty song about what you'll do as {king/queen}, about all the ancient freedoms you'll restore -- let them rob their tenants and tax the merchants and fight their wars and spend themselves silly without a thought to tomorrow, as a noble ought! What do you say to that, captain?"),
+("npc24_kingsupport_3", "Give me leave for a few weeks, and I'll do a little tour of my former employers' castles. I'll sing them a pretty song about what you'll do as {king/queen}, about all the ancient freedoms you'll restore -- let them rob their tenants and tax the merchants and fight their wars and spend themselves silly without a thought to tomorrow, as a noble ought! What do you say to that, captain?"),
+("npc25_kingsupport_3", "Give me leave for a few weeks, and I'll do a little tour of my former employers' castles. I'll sing them a pretty song about what you'll do as {king/queen}, about all the ancient freedoms you'll restore -- let them rob their tenants and tax the merchants and fight their wars and spend themselves silly without a thought to tomorrow, as a noble ought! What do you say to that, captain?"),
+("npc26_kingsupport_3", "Give me leave for a few weeks, and I'll do a little tour of my former employers' castles. I'll sing them a pretty song about what you'll do as {king/queen}, about all the ancient freedoms you'll restore -- let them rob their tenants and tax the merchants and fight their wars and spend themselves silly without a thought to tomorrow, as a noble ought! What do you say to that, captain?"),
 
   ("npc1_kingsupport_objection", "Boss -- you've given leave to Alayen to go tell the nobles that they will have rights over pasture, market, and forest? I can't say I like that. Give him his way, and he'll set up gibbets in every village in the land, where there will dangle some poor sod like me who thought he might pick up a bow, head to the woods and put a bit of meat on his table."), #Borcha
   ("npc2_kingsupport_objection", "Um, captain. Matheld has ridden off to tell the lords of this land that you'll let them settle their quarrels by force and violence. You know they rarely actually fight each other, right? Most of the time, it's the traders and travellers on the roads between their castles that get clobbered in their petty disputes. Any excuse to shake down a caravan, they'll take. I really hope that she misunderstood you, sir."), #marnid
@@ -1551,6 +1761,12 @@ strings = [
   ("npc18_kingsupport_objection", "{!}"),
   ("npc19_kingsupport_objection", "{!}"),
   ("npc20_kingsupport_objection", "{!}"),
+("npc21_kingsupport_objection", "{!}"),
+("npc22_kingsupport_objection", "{!}"),
+("npc23_kingsupport_objection", "{!}"),
+("npc24_kingsupport_objection", "{!}"),
+("npc25_kingsupport_objection", "{!}"),
+("npc26_kingsupport_objection", "{!}"),
 
 #
   ("npc1_intel_mission", "Well, Boss, as it happens, I have a few cousins over in {s17}, and unlike some in my family, they can still stand the sight of me. They deal in horses --- I've even been able to supply them with stock from time to time -- and so they get to pick up a bit of the gossip round the castles and great halls of the {s18}. I could go over there for a few days and tell you what I find out."), #Borcha
@@ -1572,7 +1788,13 @@ strings = [
   ("npc17_intel_mission", "As you may guess, I still have friends of my old past, and I learned that one of them is at {s17}. Well I could go there and report you anything he learned about {s18}. What do you think?."),
   ("npc18_intel_mission", "{playername} I am still connected to other traders of the {s18}, and they know about everything you may want to know about them, I could have a conversation with some of them to learn more about {s18}. What do you say?."),
   ("npc19_intel_mission", "{playername} I wish to know more about the family that allowed me to be what I am right now, I heard that they are in {s17} right now and that they got enought money to be a respected family. They are high enough placed to know about {s18}. This will be good for both of us, I will see my old family and you will learn more about {s18}."),
-  ("npc20_intel_mission", "Oy, Captain! I had a mind to pay a visit to my old haunts at {s17}. Let's just say that the lord and lady of the place had commissioned a certain service from me, and had been a bit lax about payment. However, a certain sparkly bauble in the lady's possession will fit the bill nicely. I see no need to trouble them by letting them know about my visit, but I could have a wee chat with my old friend the castle steward, who'll be letting me into the place, about goings-on in the {s18}."),
+("npc20_intel_mission", "Oy, Captain! I had a mind to pay a visit to my old haunts at {s17}. Let's just say that the lord and lady of the place had commissioned a certain service from me, and had been a bit lax about payment. However, a certain sparkly bauble in the lady's possession will fit the bill nicely. I see no need to trouble them by letting them know about my visit, but I could have a wee chat with my old friend the castle steward, who'll be letting me into the place, about goings-on in the {s18}."),
+("npc21_intel_mission", "Oy, Captain! I had a mind to pay a visit to my old haunts at {s17}. Let's just say that the lord and lady of the place had commissioned a certain service from me, and had been a bit lax about payment. However, a certain sparkly bauble in the lady's possession will fit the bill nicely. I see no need to trouble them by letting them know about my visit, but I could have a wee chat with my old friend the castle steward, who'll be letting me into the place, about goings-on in the {s18}."),
+("npc22_intel_mission", "Oy, Captain! I had a mind to pay a visit to my old haunts at {s17}. Let's just say that the lord and lady of the place had commissioned a certain service from me, and had been a bit lax about payment. However, a certain sparkly bauble in the lady's possession will fit the bill nicely. I see no need to trouble them by letting them know about my visit, but I could have a wee chat with my old friend the castle steward, who'll be letting me into the place, about goings-on in the {s18}."),
+("npc23_intel_mission", "Oy, Captain! I had a mind to pay a visit to my old haunts at {s17}. Let's just say that the lord and lady of the place had commissioned a certain service from me, and had been a bit lax about payment. However, a certain sparkly bauble in the lady's possession will fit the bill nicely. I see no need to trouble them by letting them know about my visit, but I could have a wee chat with my old friend the castle steward, who'll be letting me into the place, about goings-on in the {s18}."),
+("npc24_intel_mission", "Oy, Captain! I had a mind to pay a visit to my old haunts at {s17}. Let's just say that the lord and lady of the place had commissioned a certain service from me, and had been a bit lax about payment. However, a certain sparkly bauble in the lady's possession will fit the bill nicely. I see no need to trouble them by letting them know about my visit, but I could have a wee chat with my old friend the castle steward, who'll be letting me into the place, about goings-on in the {s18}."),
+("npc25_intel_mission", "Oy, Captain! I had a mind to pay a visit to my old haunts at {s17}. Let's just say that the lord and lady of the place had commissioned a certain service from me, and had been a bit lax about payment. However, a certain sparkly bauble in the lady's possession will fit the bill nicely. I see no need to trouble them by letting them know about my visit, but I could have a wee chat with my old friend the castle steward, who'll be letting me into the place, about goings-on in the {s18}."),
+("npc26_intel_mission", "Oy, Captain! I had a mind to pay a visit to my old haunts at {s17}. Let's just say that the lord and lady of the place had commissioned a certain service from me, and had been a bit lax about payment. However, a certain sparkly bauble in the lady's possession will fit the bill nicely. I see no need to trouble them by letting them know about my visit, but I could have a wee chat with my old friend the castle steward, who'll be letting me into the place, about goings-on in the {s18}."),
 
 
   ("npc1_fief_acceptance", "You'd make me lord of {s17}, Boss? Well, that would be the kindest thing that anyone has ever done for me in a long time. Heh. I'll make the most of it -- you can count on that. I have to say, though -- I'm not sure how the other lords of this realm will react, when they find old Borcha in their august company."), #Borcha
@@ -1594,7 +1816,13 @@ strings = [
   ("npc17_fief_acceptance", "You'll make me your vassal? What an important task you ask me, but I shall make good use of what you give me."),
   ("npc18_fief_acceptance", "I knew this moment would happen but not right now, you surprise me and this is a huge one."),
   ("npc19_fief_acceptance", "I didn't expected this, me? A fief for me? You give me the proof of you goodwill towards me."),
-  ("npc20_fief_acceptance", "Oh, that's most generous of you, {sire/my lady}. I've been in and out of many a great hall or manor -- not always with the master's permission, I should add -- but I never thought I'd own one myself. Let me think... When I collect my first year's rents, what baubles shall I buy myself?"),
+("npc20_fief_acceptance", "Oh, that's most generous of you, {sire/my lady}. I've been in and out of many a great hall or manor -- not always with the master's permission, I should add -- but I never thought I'd own one myself. Let me think... When I collect my first year's rents, what baubles shall I buy myself?"),
+("npc21_fief_acceptance", "Oh, that's most generous of you, {sire/my lady}. I've been in and out of many a great hall or manor -- not always with the master's permission, I should add -- but I never thought I'd own one myself. Let me think... When I collect my first year's rents, what baubles shall I buy myself?"),
+("npc22_fief_acceptance", "Oh, that's most generous of you, {sire/my lady}. I've been in and out of many a great hall or manor -- not always with the master's permission, I should add -- but I never thought I'd own one myself. Let me think... When I collect my first year's rents, what baubles shall I buy myself?"),
+("npc23_fief_acceptance", "Oh, that's most generous of you, {sire/my lady}. I've been in and out of many a great hall or manor -- not always with the master's permission, I should add -- but I never thought I'd own one myself. Let me think... When I collect my first year's rents, what baubles shall I buy myself?"),
+("npc24_fief_acceptance", "Oh, that's most generous of you, {sire/my lady}. I've been in and out of many a great hall or manor -- not always with the master's permission, I should add -- but I never thought I'd own one myself. Let me think... When I collect my first year's rents, what baubles shall I buy myself?"),
+("npc25_fief_acceptance", "Oh, that's most generous of you, {sire/my lady}. I've been in and out of many a great hall or manor -- not always with the master's permission, I should add -- but I never thought I'd own one myself. Let me think... When I collect my first year's rents, what baubles shall I buy myself?"),
+("npc26_fief_acceptance", "Oh, that's most generous of you, {sire/my lady}. I've been in and out of many a great hall or manor -- not always with the master's permission, I should add -- but I never thought I'd own one myself. Let me think... When I collect my first year's rents, what baubles shall I buy myself?"),
 
   ("npc1_woman_to_woman", "{!}."), #Borcha
   ("npc2_woman_to_woman", "{!}."), #marnid
@@ -1615,7 +1843,13 @@ strings = [
   ("npc17_woman_to_woman", "{!}."), 
   ("npc18_woman_to_woman", "{!}."), 
   ("npc19_woman_to_woman", "{!}."), 
-  ("npc20_woman_to_woman", "Oy, Captain -- if you don't mind me saying, you've made quite a name for yourself in these parts. I suspect that if you were a man, a king would have offered you a fief by now. But we ladies should come to expect things like that. Men will find any excuse not to reward us for our work, so if we take a fancy to a bit of land somewhere, maybe we should just reach out and take it. That's the way I look at the world, anyway."),
+("npc20_woman_to_woman", "Oy, Captain -- if you don't mind me saying, you've made quite a name for yourself in these parts. I suspect that if you were a man, a king would have offered you a fief by now. But we ladies should come to expect things like that. Men will find any excuse not to reward us for our work, so if we take a fancy to a bit of land somewhere, maybe we should just reach out and take it. That's the way I look at the world, anyway."),
+("npc21_woman_to_woman", "Oy, Captain -- if you don't mind me saying, you've made quite a name for yourself in these parts. I suspect that if you were a man, a king would have offered you a fief by now. But we ladies should come to expect things like that. Men will find any excuse not to reward us for our work, so if we take a fancy to a bit of land somewhere, maybe we should just reach out and take it. That's the way I look at the world, anyway."),
+  ("npc22_woman_to_woman", "{!}."),
+  ("npc23_woman_to_woman", "{!}."),
+  ("npc24_woman_to_woman", "{!}."),
+  ("npc25_woman_to_woman", "{!}."),
+  ("npc26_woman_to_woman", "{!}."),
 
   ("npc1_turn_against", "I'm sorry that we meet like this, boss. There's no question that I owe my rise in life to you. You doubtless think me ungrateful. However, one has to follow one's destiny -- isn't that correct?"), #Borcha
   ("npc2_turn_against", "This is a sad day. I never thought that I might meet my old captain on the field of battle. Even if I triumph, it will bring me no joy."), #marnid
@@ -1636,7 +1870,13 @@ strings = [
   ("npc17_turn_against", "{Sir/Lady}. It's you, I know that we are ennemies, but I still consider you as a friend, aren't best friends that struggle the most?"),
   ("npc18_turn_against", "{playername} I had hopped to meet you in the field, just to test your skills against me, we fought together, but now we are ennemies, still I think that we should be fair against the other shall we?"),
   ("npc19_turn_against", "It saddens me to see you on the other side of the battle {playername}, I had hopped that we would not meet on the field, that our friendship would not be messed. I hope that whoever win this battle we shall stay friends and later remind of this epic battle between two partners."),
-  ("npc20_turn_against", "Hello, Captain! So, I guess we're enemies! One small word of warning if we end up fighting each other -- once the rage of battle hits me, I can't always account for my actions. Just know that whatever I do, it's not personal. Maybe if we both walk away from this, we can meet once more as friends?"),
+("npc20_turn_against", "Hello, Captain! So, I guess we're enemies! One small word of warning if we end up fighting each other -- once the rage of battle hits me, I can't always account for my actions. Just know that whatever I do, it's not personal. Maybe if we both walk away from this, we can meet once more as friends?"),
+("npc21_turn_against", "Hello, Captain! So, I guess we're enemies! One small word of warning if we end up fighting each other -- once the rage of battle hits me, I can't always account for my actions. Just know that whatever I do, it's not personal. Maybe if we both walk away from this, we can meet once more as friends?"),
+("npc22_turn_against", "Hello, Captain! So, I guess we're enemies! One small word of warning if we end up fighting each other -- once the rage of battle hits me, I can't always account for my actions. Just know that whatever I do, it's not personal. Maybe if we both walk away from this, we can meet once more as friends?"),
+("npc23_turn_against", "Hello, Captain! So, I guess we're enemies! One small word of warning if we end up fighting each other -- once the rage of battle hits me, I can't always account for my actions. Just know that whatever I do, it's not personal. Maybe if we both walk away from this, we can meet once more as friends?"),
+("npc24_turn_against", "Hello, Captain! So, I guess we're enemies! One small word of warning if we end up fighting each other -- once the rage of battle hits me, I can't always account for my actions. Just know that whatever I do, it's not personal. Maybe if we both walk away from this, we can meet once more as friends?"),
+("npc25_turn_against", "Hello, Captain! So, I guess we're enemies! One small word of warning if we end up fighting each other -- once the rage of battle hits me, I can't always account for my actions. Just know that whatever I do, it's not personal. Maybe if we both walk away from this, we can meet once more as friends?"),
+("npc26_turn_against", "Hello, Captain! So, I guess we're enemies! One small word of warning if we end up fighting each other -- once the rage of battle hits me, I can't always account for my actions. Just know that whatever I do, it's not personal. Maybe if we both walk away from this, we can meet once more as friends?"),
 
 #NPC companion changes end
 
@@ -2419,9 +2659,11 @@ strings = [
   ("kingdom_4_adjective",                     "Nord"),
   ("kingdom_5_adjective",                     "Rhodok"),
   ("kingdom_6_adjective",                     "Sarranid"),
-  ("kingdom_9_adjective",                     "Khergit Tribe"),
+#  ("kingdom_9_adjective",                     "Khergit Tribe"),
   ("kingdom_10_adjective",                    "Freerider's"),
   ("kingdom_11_adjective",                    "Mudles"),
+  
+  ("kingdom_foreign_adjective",               "Foreign"),
   
 
   ("credits_1", "Mount&Blade: Warband Copyright 2008-2010 Taleworlds Entertainment"),

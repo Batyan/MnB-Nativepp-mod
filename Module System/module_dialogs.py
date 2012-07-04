@@ -3387,6 +3387,24 @@ whereas {reg21?{s9} still has {reg21} {s0} supporting {reg0?her:him}:{s9} has no
 		    (eq, "$g_talk_troop", "trp_npc20"),
 			(troop_set_slot, "$g_talk_troop", slot_troop_original_faction, "fac_kingdom_2"),##Saorie
 		  (else_try),
+		    (eq, "$g_talk_troop", "trp_npc21"),
+			(troop_set_slot, "$g_talk_troop", slot_troop_original_faction, "fac_kingdom_1"),##
+		  (else_try),
+		    (eq, "$g_talk_troop", "trp_npc22"),
+			(troop_set_slot, "$g_talk_troop", slot_troop_original_faction, "fac_kingdom_2"),##
+		  (else_try),
+		    (eq, "$g_talk_troop", "trp_npc23"),
+			(troop_set_slot, "$g_talk_troop", slot_troop_original_faction, "fac_kingdom_3"),##
+		  (else_try),
+		    (eq, "$g_talk_troop", "trp_npc24"),
+			(troop_set_slot, "$g_talk_troop", slot_troop_original_faction, "fac_kingdom_4"),##
+		  (else_try),
+		    (eq, "$g_talk_troop", "trp_npc25"),
+			(troop_set_slot, "$g_talk_troop", slot_troop_original_faction, "fac_kingdom_5"),##
+		  (else_try),
+		    (eq, "$g_talk_troop", "trp_npc26"),
+			(troop_set_slot, "$g_talk_troop", slot_troop_original_faction, "fac_kingdom_6"),##
+		  (else_try),
 		    (troop_set_slot, "$g_talk_troop", slot_troop_original_faction, "fac_kingdom_7"),##New NPCs ??? -20-30-
 		  (try_end),
 		(try_end),
@@ -3639,6 +3657,24 @@ whereas {reg21?{s9} still has {reg21} {s0} supporting {reg0?her:him}:{s9} has no
 		  (else_try),
 		    (eq, "$g_talk_troop", "trp_npc20"),
 			(troop_set_slot, "$g_talk_troop", slot_troop_original_faction, "fac_kingdom_2"),##Saorie
+		  (else_try),
+		    (eq, "$g_talk_troop", "trp_npc21"),
+			(troop_set_slot, "$g_talk_troop", slot_troop_original_faction, "fac_kingdom_1"),##
+		  (else_try),
+		    (eq, "$g_talk_troop", "trp_npc22"),
+			(troop_set_slot, "$g_talk_troop", slot_troop_original_faction, "fac_kingdom_2"),##
+		  (else_try),
+		    (eq, "$g_talk_troop", "trp_npc23"),
+			(troop_set_slot, "$g_talk_troop", slot_troop_original_faction, "fac_kingdom_3"),##
+		  (else_try),
+		    (eq, "$g_talk_troop", "trp_npc24"),
+			(troop_set_slot, "$g_talk_troop", slot_troop_original_faction, "fac_kingdom_4"),##
+		  (else_try),
+		    (eq, "$g_talk_troop", "trp_npc25"),
+			(troop_set_slot, "$g_talk_troop", slot_troop_original_faction, "fac_kingdom_5"),##
+		  (else_try),
+		    (eq, "$g_talk_troop", "trp_npc26"),
+			(troop_set_slot, "$g_talk_troop", slot_troop_original_faction, "fac_kingdom_6"),##
 		  (else_try),
 		    (troop_set_slot, "$g_talk_troop", slot_troop_original_faction, "fac_kingdom_7"),##New NPCs ??? -20-30-
 		  (try_end),
@@ -15273,7 +15309,7 @@ What kind of recruits do you want?", "dplmc_constable_recruit_select",
 	(call_script, "script_troop_change_relation_with_troop", "$g_talk_troop", "trp_player", 15),
 	(try_begin),
 	  (neg|troop_slot_ge, "$g_talk_troop", slot_troop_banner_scene_prop, 1),
-	  (call_script, "script_assign_banner", ":lord_no"),
+	  (call_script, "script_assign_banner", "$g_talk_troop"),
 	(try_end),
 	]],
 
