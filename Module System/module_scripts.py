@@ -3911,31 +3911,44 @@ scripts = [
 			  #
               (call_script, "script_dplmc_party_calculate_strength_in_terrain", "p_collective_ally", ":terrain_code", 0, 1),
               (assign, ":defender_strength", reg0),
+              (assign, ":defender_defense", reg2),
               (call_script, "script_dplmc_party_calculate_strength_in_terrain", "p_collective_enemy", ":terrain_code", 0, 1),
               (assign, ":attacker_strength", reg0),
+              (assign, ":attacker_defense", reg2),
           (else_try),
-          (call_script, "script_party_calculate_strength", "p_collective_ally", 0),
-          (assign, ":defender_strength", reg0),
-          (call_script, "script_party_calculate_strength", "p_collective_enemy", 0),
-          (assign, ":attacker_strength", reg0),
+              (call_script, "script_party_calculate_strength", "p_collective_ally", 0),
+              (assign, ":defender_strength", reg0),
+              (assign, ":defender_defense", reg2),
+              (call_script, "script_party_calculate_strength", "p_collective_enemy", 0),
+              (assign, ":attacker_strength", reg0),
+              (assign, ":attacker_defense", reg2),
           (try_end),
           ##diplomacy end+
 
-          (store_div, ":defender_strength", ":defender_strength", 20),
-          (val_min, ":defender_strength", 50),
+          (store_div, ":defender_strength", ":defender_strength", 20), # attacker strength is not limited by single ladder
+          # (val_min, ":defender_strength", 50),
           (val_max, ":defender_strength", 1),
           (store_div, ":attacker_strength", ":attacker_strength", 20),
-          (val_min, ":attacker_strength", 50),
+          # (val_min, ":attacker_strength", 50),
           (val_add, ":attacker_strength", 1),
+		  
+		  (store_div, ":defender_defense", ":defender_defense", 20),
+          # (val_min, ":defender_defense", 50),
+          (val_max, ":defender_defense", 1),
+          (store_div, ":attacker_defense", ":attacker_defense", 20),
+          # (val_min, ":attacker_defense", 50),
+          (val_add, ":attacker_defense", 1),
           (try_begin),
             #For sieges increase attacker casualties and reduce defender casualties.
             (this_or_next|party_slot_eq, ":root_defender_party", slot_party_type, spt_castle),
             (party_slot_eq, ":root_defender_party", slot_party_type, spt_town),
-            (val_mul, ":defender_strength", 123), #it was 1.5 in old version, now it is only 1.23
+            (val_mul, ":defender_strength", 150), #it was 1.5 in old version, now it is only 1.23 -- back to 1.5
             (val_div, ":defender_strength", 100),
+			
+			(val_mul, ":defender_defense", 2), #twice as hard to kill defenders, we do this to make taking castles last longer
 
-            (val_mul, ":attacker_strength", 100), #it was 0.5 in old version, now it is only 1 / 1.23
-            (val_div, ":attacker_strength", 123),
+            # (val_mul, ":attacker_strength", 100), #it was 0.5 in old version, now it is only 1 / 1.23
+            # (val_div, ":attacker_strength", 123),
           (try_end),
 
           ##diplomacy begin
@@ -3977,8 +3990,23 @@ scripts = [
 
           (try_begin),
             (neg|is_currently_night), #Don't fight at night
-            (inflict_casualties_to_party_group, ":root_attacker_party", ":defender_strength", "p_temp_casualties"),
+			(store_div, ":attacker_reduce_dmg", ":defender_strength", ":attacker_defense"),
+			(val_min, ":attacker_reduce_dmg", 50),
+			(val_add, ":attacker_reduce_dmg", 50), # 50% reduction max
+			(store_mul, ":attacker_attack", ":defender_strength", ":attacker_reduce_dmg"),
+			(val_div, ":attacker_attack", 100),
+			(set_fixed_point_multiplier, 1),
+			(store_sqrt, ":attacker_attack", ":attacker_attack"),
+			
+            (inflict_casualties_to_party_group, ":root_attacker_party", ":attacker_attack", "p_temp_casualties"),
+            # (inflict_casualties_to_party_group, ":root_attacker_party", ":defender_strength", "p_temp_casualties"),
             (party_collect_attachments_to_party, ":root_attacker_party", "p_collective_enemy"),
+			# (try_begin),
+			  # (eq, "$test", 1),
+			  # (assign, reg5, ":attacker_attack"),
+			  # (str_store_party_name, s5, ":root_attacker_party"),
+			  # (display_message, "@Defender attack on {s5} : {reg5}"),
+			# (try_end),
           (try_end),
           (call_script, "script_party_count_fit_for_battle", "p_collective_enemy", 0),
           (assign, ":new_attacker_strength", reg0),
@@ -3986,8 +4014,22 @@ scripts = [
           (try_begin),
             (gt, ":new_attacker_strength", 0),
             (neg|is_currently_night), #Don't fight at night
-            (inflict_casualties_to_party_group, ":root_defender_party", ":attacker_strength", "p_temp_casualties"),
+			(store_div, ":defender_reduce_dmg", ":attacker_strength", ":defender_defense"),
+			(val_min, ":defender_reduce_dmg", 50),
+			(val_add, ":defender_reduce_dmg", 50), # 50% reduction max
+			(store_mul, ":defender_attack", ":attacker_strength", ":defender_reduce_dmg"),
+			(val_div, ":defender_attack", 100),
+			(set_fixed_point_multiplier, 1),
+			(store_sqrt, ":defender_attack", ":defender_attack"),
+			
+            (inflict_casualties_to_party_group, ":root_defender_party", ":defender_attack", "p_temp_casualties"),
             (party_collect_attachments_to_party, ":root_defender_party", "p_collective_ally"),
+			# (try_begin),
+			  # (eq, "$test", 1),
+			  # (assign, reg6, ":defender_attack"),
+			  # (str_store_party_name, s6, ":root_defender_party"),
+			  # (display_message, "@Attacker attack on {s6} : {reg6}"),
+			# (try_end),
           (try_end),
           (call_script, "script_party_count_fit_for_battle", "p_collective_ally", 0),
           (assign, ":new_defender_strength", reg0),
@@ -4481,6 +4523,7 @@ scripts = [
 
            #ADD XP
            (try_begin),
+		     (neg|is_currently_night), #Don't fight at night so no xp
 		     (neg|party_slot_eq, ":root_attacker_party", slot_party_type, spt_village_farmer),
              #(party_slot_eq, ":root_attacker_party", slot_party_type, spt_kingdom_hero_party),
              #(store_random_in_range, ":random_num",0, 100),
@@ -4509,6 +4552,7 @@ scripts = [
              (call_script, "script_upgrade_hero_party", ":root_attacker_party", ":xp_gained_attacker"),
            (try_end),
            (try_begin),
+		     (neg|is_currently_night), #Don't fight at night so no xp
 		     (neg|party_slot_eq, ":root_defender_party", slot_party_type, spt_village_farmer),
              #(party_slot_eq, ":root_defender_party", slot_party_type, spt_kingdom_hero_party),
              #(store_random_in_range, ":random_num",0, 100),
@@ -16596,7 +16640,7 @@ scripts = [
 
   #script_party_calculate_strength:
   # INPUT: arg1 = party_id, arg2 = exclude leader
-  # OUTPUT: reg0 = strength
+  # OUTPUT: reg0 = strength, reg1 = defense
 
   ("party_calculate_strength",
     [
@@ -16604,6 +16648,7 @@ scripts = [
       (store_script_param_2, ":exclude_leader"), #Party_id
 
       (assign, reg0,0),
+	  (assign, reg2,0),
       (party_get_num_companion_stacks, ":num_stacks", ":party"),
       (assign, ":first_stack", 0),
       (try_begin),
@@ -16615,20 +16660,41 @@ scripts = [
         (store_character_level, ":stack_strength", ":stack_troop"),
         (val_add, ":stack_strength", 4), #new was 12 (patch 1.125)
         (val_mul, ":stack_strength", ":stack_strength"),
-		(val_mul, ":stack_strength", 2), #new (patch 1.125)
-        (val_div, ":stack_strength", 100),
-        (val_max, ":stack_strength", 1), #new (patch 1.125)
+		(val_mul, ":stack_strength", ":stack_strength"), #changed was 2
+        (val_div, ":stack_strength", 400), #was 100
+        (val_max, ":stack_strength", 2), #new (patch 1.125)
+		(store_div, ":stack_defense", ":stack_strength", 2),
+		(try_begin),
+		  (troop_is_guarantee_ranged, ":stack_troop"), #ranged weapons have increased attack (big defense penality)
+          (val_mul, ":stack_strength", 2),
+		  (val_div, ":stack_defense", 2),
+		(try_end),
+		(try_begin),
+		  (troop_is_guarantee_horse, ":stack_troop"), #cavalry is a good offensive unit (no defense penality)
+		  (val_mul, ":stack_strength", 3),
+		  (val_div, ":stack_strength", 2),
+		(else_try),
+		  (neg|troop_is_guarantee_ranged, ":stack_troop"), #infantry here
+          (val_mul, ":stack_defense", 3),
+		  (val_div, ":stack_defense", 2),
+		(try_end),
         (try_begin),
           (neg|troop_is_hero, ":stack_troop"),
           (party_stack_get_size, ":stack_size",":party",":i_stack"),
           (party_stack_get_num_wounded, ":num_wounded",":party",":i_stack"),
           (val_sub, ":stack_size", ":num_wounded"),
           (val_mul, ":stack_strength", ":stack_size"),
+		  (val_mul, ":stack_defense", ":stack_size"),
         (else_try),
           (troop_is_wounded, ":stack_troop"), #hero & wounded
           (assign,":stack_strength",0),
+          (assign,":stack_defense",0),
+		(else_try),
+		  (val_mul, ":stack_strength", 2), #heroes have increased power
+		  (val_mul, ":stack_defense", 2), #heroes have increased power
         (try_end),
         (val_add, reg0, ":stack_strength"),
+		(val_add, reg2, ":stack_defense"),
       (try_end),
       (party_set_slot, ":party", slot_party_cached_strength, reg0),
   ]),
@@ -28892,17 +28958,17 @@ scripts = [
          (try_end),
       (else_try),
 	   #The old behavior, unchanged:
-      (try_for_range, ":cur_troop", heroes_begin, heroes_end),
-        (this_or_next|troop_slot_eq, ":cur_troop", slot_troop_occupation, slto_kingdom_hero),
-		(troop_slot_eq, ":cur_troop", slot_troop_occupation, slto_kingdom_mercenary),
-        (troop_get_slot, ":cur_party", ":cur_troop", slot_troop_leaded_party),
-        (party_is_active, ":cur_party"),
-        (call_script, "script_party_calculate_strength", ":cur_party", 0), #will update slot_party_cached_strength
-      (try_end),
-      (call_script, "script_party_calculate_strength", "p_main_party", 0), #will update slot_party_cached_strength
-      (try_for_range, ":cur_center", walled_centers_begin, walled_centers_end),
-        (call_script, "script_party_calculate_strength", ":cur_center", 0), #will update slot_party_cached_strength
-      (try_end),
+        (try_for_range, ":cur_troop", heroes_begin, heroes_end),
+          (this_or_next|troop_slot_eq, ":cur_troop", slot_troop_occupation, slto_kingdom_hero),
+		  (troop_slot_eq, ":cur_troop", slot_troop_occupation, slto_kingdom_mercenary),
+          (troop_get_slot, ":cur_party", ":cur_troop", slot_troop_leaded_party),
+          (party_is_active, ":cur_party"),
+          (call_script, "script_party_calculate_strength", ":cur_party", 0), #will update slot_party_cached_strength
+        (try_end),
+        (call_script, "script_party_calculate_strength", "p_main_party", 0), #will update slot_party_cached_strength
+        (try_for_range, ":cur_center", walled_centers_begin, walled_centers_end),
+          (call_script, "script_party_calculate_strength", ":cur_center", 0), #will update slot_party_cached_strength
+        (try_end),
       (try_end),
       ##diplomacy end+
 
@@ -67561,7 +67627,7 @@ scripts = [
         (store_character_level, ":stack_strength", ":stack_troop"),
         (val_add, ":stack_strength", 4), #new was 12 (patch 1.125)
         (val_mul, ":stack_strength", ":stack_strength"),
-        (val_mul, ":stack_strength", 2), #new (patch 1.125)
+        (val_mul, ":stack_strength", ":stack_strength"), #new was 2
         #move the next two lines to after terrain advantage
         #(val_div, ":stack_strength", 100), 
         #(val_max, ":stack_strength", 1), #new (patch 1.125)
@@ -67619,9 +67685,9 @@ scripts = [
            ##AotE terrain advantages
         (try_end),
         #moved the next two lines here from above
-        (val_div, ":stack_strength", 100),#<- moved here from above
+        (val_div, ":stack_strength", 400),#<- moved here from above
         (val_max, ":stack_strength", 1), #new (patch 1.125) #<- moved here from above
-        (val_div, ":terrain_free_strength", 100),
+        (val_div, ":terrain_free_strength", 400),
         (val_max, ":terrain_free_strength", 1),
         (try_begin),
           (neg|troop_is_hero, ":stack_troop"),
@@ -67641,6 +67707,7 @@ scripts = [
 	  #Load results into registers and cache if appropriate
 	  (assign, reg0, ":total_strength_terrain"),
 	  (assign, reg1, ":total_strength_no_terrain"),
+	  (store_div, reg2, ":total_strength_terrain", 2),
       (try_begin),
          (eq, ":cache_policy", 1),
          (party_set_slot, ":party", slot_party_cached_strength, reg0),

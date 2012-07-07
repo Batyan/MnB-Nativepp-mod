@@ -122,7 +122,7 @@ knows_tracker_npc = knows_weapon_master_1|knows_athletics_2|knows_spotting_2|kno
 
 lord_attrib = str_22|agi_20|int_20|cha_34|level(30)
 
-knight_attrib_0 = str_12|agi_12|int_9 |cha_8|level(30)
+knight_attrib_0 = str_12|agi_12|int_9 |cha_8 |level(30)
 knight_attrib_1 = str_16|agi_14|int_10|cha_12|level(30)
 knight_attrib_2 = str_20|agi_16|int_11|cha_16|level(30)
 knight_attrib_3 = str_24|agi_18|int_12|cha_20|level(30)
@@ -413,11 +413,11 @@ troops = [
   ["mercenary_horseman","Horseman","Horsemen",tf_mounted|tf_guarantee_boots|tf_guarantee_gloves|tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_horse|tf_guarantee_shield,no_scene,reserved,fac_commoners,
    [itm_bastard_sword_a,itm_sword_medieval_b,itm_tab_shield_heater_cav_a,itm_tab_shield_kite_cav_a,
     itm_mail_shirt,itm_haubergeon,itm_mail_chausses,itm_norman_helmet,itm_mail_coif,itm_helmet_with_neckguard,itm_leather_gloves,itm_pack_horse,itm_courser,itm_hunter],
-   str_15|agi_16|int_10|cha_10|level(20),wpex(95,85,90,35,50,45),knows_common|knows_athletics_1|knows_riding_3|knows_ironflesh_2|knows_shield_2|knows_power_strike_3,mercenary_face_1, mercenary_face_2],
+   str_15|agi_16|int_10|cha_10|level(20),wpex(95,85,85,35,50,45),knows_common|knows_athletics_1|knows_riding_3|knows_ironflesh_2|knows_shield_2|knows_power_strike_3,mercenary_face_1, mercenary_face_2],
   ["mercenary_cavalry","Cavalry","Cavalry",tf_mounted|tf_guarantee_boots|tf_guarantee_gloves|tf_guarantee_armor|tf_guarantee_helmet|tf_guarantee_horse|tf_guarantee_shield,no_scene,reserved,fac_commoners,
    [itm_bastard_sword_b,itm_sword_medieval_b,itm_tab_shield_heater_cav_b,itm_tab_shield_kite_cav_b,
     itm_mail_hauberk,itm_banded_armor,itm_mail_boots,itm_kettle_hat,itm_mail_coif,itm_flat_topped_helmet,itm_helmet_with_neckguard,itm_mail_mittens,itm_courser,itm_hunter],
-   str_17|agi_19|int_13|cha_13|level(25),wpex(125,115,120,40,60,50),knows_common|knows_athletics_2|knows_riding_4|knows_ironflesh_3|knows_shield_3|knows_power_strike_4,mercenary_face_1, mercenary_face_2],
+   str_17|agi_19|int_13|cha_13|level(25),wpex(125,115,115,40,60,50),knows_common|knows_athletics_2|knows_riding_4|knows_ironflesh_3|knows_shield_3|knows_power_strike_4,mercenary_face_1, mercenary_face_2],
 
 
   ["mercenary_landsknecht","Landsknecht","Landsknechts",tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_gloves|tf_guarantee_helmet,no_scene,reserved,fac_commoners,
@@ -1562,7 +1562,7 @@ troops = [
    str_8|agi_7|int_13|cha_7|level(4),wpex(25,15,30,15,20,20),
    knows_merchant_npc|knows_ironflesh_1|knows_power_strike_1|knows_surgery_4|knows_wound_treatment_3|knows_first_aid_3,
    0x000000078000500e4f8ba62a9cd5d36d00000000001e36250000000000000000],
-  ["npc13","Nizar","Nizar",tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac_commoners,
+  ["npc13","Nizar","Nizar",tf_mounted|tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac_commoners,
    [itm_nomad_robe, itm_nomad_boots, itm_scimitar, itm_courser],
    str_7|agi_7|int_12|cha_8|level(3),wpex(80,70,80,70,60,75),
    knows_warrior_npc|knows_riding_2|knows_leadership_2|knows_athletics_2|knows_ironflesh_2|knows_power_strike_1|knows_weapon_master_1|knows_leadership_2,
@@ -1608,36 +1608,36 @@ troops = [
   ## 20skill   lvl4
   ## 36skill  lvl20
   ## ToDo : New companion faces
-  ["npc21","npc21","npc21",tf_female|tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac_commoners,
+  ["npc21","Ilya","Ilya",tf_mounted|tf_female|tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac_commoners,
    [itm_haubergeon,itm_leather_boots,itm_leather_gloves,itm_mail_coif,itm_light_crossbow,itm_steel_bolts,itm_sword_medieval_c,itm_tab_shield_heater_cav_a,itm_hunter],
    str_17|agi_13|int_12|cha_9|level(20),wpex(110,90,95,110,125,95),
-   knows_riding_5|knows_ironflesh_5 |knows_power_strike_4|knows_athletics_4|knows_shield_3|knows_tactics_4|knows_leadership_3 |knows_trainer_replacement_2|knows_horse_archery_2|knows_power_throw_1|knows_power_draw_3,
-   0x000000019204100339266858dca53b3300000000001eba940000000000000000],
-  ["npc22","npc22","npc22",tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac_commoners,
+   knows_weapon_master_3|knows_riding_5|knows_ironflesh_5 |knows_power_strike_4|knows_athletics_4|knows_shield_3|knows_tactics_4|knows_leadership_3 |knows_trainer_replacement_2|knows_horse_archery_2|knows_power_throw_1|knows_power_draw_3,
+   0x00000001bf0400041b0a92492cae48b100000000001e475a0000000000000000],
+  ["npc22","Ysellian","Ysellian",tf_mounted|tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac_commoners,
    [itm_mail_hauberk,itm_leather_boots,itm_leather_gloves,itm_vaegir_lamellar_helmet,itm_strong_bow,itm_bodkin_arrows,itm_bodkin_arrows,itm_scimitar,itm_courser],
    str_15|agi_18|int_9|cha_9|level(20),wpex(90,75,70,130,75,85),
-   knows_riding_6|knows_ironflesh_2 |knows_power_strike_3|knows_athletics_4|knows_shield_2|knows_tactics_3|knows_leadership_3 |knows_trainer_replacement_3|knows_horse_archery_4|knows_power_throw_1|knows_power_draw_5,
-   0x000000019204100339266858dca53b3300000000001eba940000000000000000],
-  ["npc23","npc23","npc23",tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac_commoners,
+   knows_weapon_master_3|knows_riding_6|knows_ironflesh_2 |knows_power_strike_3|knows_athletics_4|knows_shield_2|knows_tactics_3|knows_leadership_3 |knows_trainer_replacement_3|knows_horse_archery_4|knows_power_throw_1|knows_power_draw_5,
+   0x00000001b00c11c9461c76470b755aea00000000001f0ae10000000000000000],
+  ["npc23","Khutza","Khutza",tf_mounted|tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac_commoners,
    [itm_lamellar_vest_khergit,itm_leather_boots,itm_leather_gloves,itm_khergit_war_helmet,itm_lance,itm_sword_khergit_3,itm_javelin,itm_tab_shield_small_round_c,itm_hunter],
    str_12|agi_18|int_12|cha_9|level(20),wpex(100,85,140,80,70,95),
-   knows_riding_6|knows_ironflesh_3 |knows_power_strike_4|knows_athletics_4|knows_shield_3|knows_tactics_4|knows_leadership_3 |knows_trainer_replacement_4|knows_horse_archery_2|knows_power_throw_3,
-   0x000000019204100339266858dca53b3300000000001eba940000000000000000],
-  ["npc24","npc24","npc24",tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac_commoners,
+   knows_weapon_master_3|knows_riding_6|knows_ironflesh_3 |knows_power_strike_4|knows_athletics_4|knows_shield_3|knows_tactics_4|knows_leadership_3 |knows_trainer_replacement_4|knows_horse_archery_2|knows_power_throw_3,
+   0x00000008651043004adcd158dc37672a00000000001d399d0000000000000000],
+  ["npc24","Uhtred","Uhtred",tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac_commoners,
    [itm_mail_shirt,itm_mail_chausses,itm_mail_mittens,itm_nordic_fighter_helmet,itm_two_handed_battle_axe_2,itm_tab_shield_round_d,itm_throwing_axes,itm_throwing_axes],
    str_18|agi_18|int_9|cha_6|level(20),wpex(110,130,115,70,65,90),
-   knows_riding_3|knows_ironflesh_6 |knows_power_strike_6|knows_athletics_6|knows_shield_4|knows_tactics_3|knows_leadership_2 |knows_trainer_replacement_3|knows_power_throw_3,
-   0x000000019204100339266858dca53b3300000000001eba940000000000000000],
-  ["npc25","npc25","npc25",tf_female|tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac_commoners,
+   knows_weapon_master_3|knows_riding_3|knows_ironflesh_6 |knows_power_strike_6|knows_athletics_6|knows_shield_4|knows_tactics_3|knows_leadership_2 |knows_trainer_replacement_3|knows_power_throw_3,
+   0x0000000e4904138625578a372366398400000000001f4d5b0000000000000000],
+  ["npc25","Ireth","Ireth",tf_mounted|tf_female|tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac_commoners,
    [itm_byrnie,itm_leather_boots,itm_leather_gloves,itm_kettle_hat,itm_light_lance,itm_morningstar,itm_courser],
-   str_15|agi_15|int_12|cha_9|level(20),wpex(80,70,75,65,65,60),
-   knows_riding_5|knows_ironflesh_4 |knows_power_strike_5|knows_athletics_5|knows_shield_4|knows_tactics_4|knows_leadership_3 |knows_trainer_replacement_4|knows_power_throw_2,
-   0x000000019204100339266858dca53b3300000000001eba940000000000000000],
-  ["npc26","npc26","npc26",tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac_commoners,
+   str_15|agi_15|int_12|cha_9|level(20),wpex(100,105,115,65,75,70),
+   knows_weapon_master_3|knows_riding_5|knows_ironflesh_4 |knows_power_strike_5|knows_athletics_5|knows_shield_4|knows_tactics_4|knows_leadership_3 |knows_trainer_replacement_4|knows_power_throw_2,
+   0x00000001aa10200657214a22ee91670a00000000001d36e30000000000000000],
+  ["npc26","Merek","Merek",tf_mounted|tf_hero|tf_unmoveable_in_party_window, 0, reserved, fac_commoners,
    [itm_sarranid_cavalry_robe,itm_sarranid_boots_c,itm_leather_gloves,itm_sarranid_helmet1,itm_sarranid_cavalry_sword,itm_tab_shield_small_round_c,itm_arabian_horse_b,itm_javelin,itm_javelin],
-   str_11|agi_22|int_9|cha_9|level(20),wpex(80,70,75,65,65,60),
-   knows_riding_7|knows_ironflesh_2 |knows_power_strike_3|knows_athletics_6|knows_shield_4|knows_tactics_3|knows_leadership_3 |knows_trainer_replacement_3|knows_horse_archery_2|knows_power_throw_3,
-   0x000000019204100339266858dca53b3300000000001eba940000000000000000],
+   str_11|agi_22|int_9|cha_9|level(20),wpex(125,110,115,65,65,105),
+   knows_weapon_master_3|knows_riding_7|knows_ironflesh_2 |knows_power_strike_3|knows_athletics_6|knows_shield_4|knows_tactics_3|knows_leadership_3 |knows_trainer_replacement_3|knows_horse_archery_2|knows_power_throw_3,
+   0x00000001831061062b1da5589390ace200000000001cb5b20000000000000000],
   ## New Companions
 #NPC system changes end
 
@@ -2002,7 +2002,7 @@ troops = [
   ["kingdom_2_pretender", "Prince Valdym the Bastard",	"Valdym", tf_hero|tf_unmoveable_in_party_window|tf_mounted, 			0,reserved,  fac_kingdom_2,[itm_warhorse,			itm_courtly_outfit,	itm_leather_boots,	itm_lamellar_armor,		itm_iron_greaves,		itm_scale_gauntlets,	itm_vaegir_war_helmet,		itm_scimitar_b,itm_war_bow,itm_bodkin_arrows,					itm_tab_shield_kite_cav_b],			king_attrib,wp(220),king_skills, 0x00000000200412142452ed631b30365c00000000001c94e80000000000000000, vaegir_face_middle_2],
 #had his patrimony falsified
 
-  ["kingdom_3_pretender", "Dustum Khan",				"Dustum", tf_hero|tf_unmoveable_in_party_window|tf_mounted, 			0,reserved,  fac_kingdom_3,[itm_warhorse_steppe,	itm_nomad_robe,		itm_leather_boots,	itm_khergit_guard_armor,itm_splinted_greaves,	itm_lamelar_gauntlets,	itm_khergit_guard_helmet,	itm_hafted_blade_a,itm_jarid,itm_jarid,							itm_tab_shield_small_round_c],		king_attrib,wp(220),king_skills, 0x000000065504310b30d556b51238f66100000000001c256d0000000000000000, khergit_face_middle_2],
+  ["kingdom_3_pretender", "Dustum Khan",				"Dustum", tf_hero|tf_unmoveable_in_party_window|tf_mounted, 			0,reserved,  fac_kingdom_3,[itm_warhorse_steppe,	itm_nomad_robe,		itm_leather_boots,	itm_khergit_guard_armor,itm_splinted_greaves,	itm_lamellar_gauntlets,	itm_khergit_guard_helmet,	itm_hafted_blade_a,itm_jarid,itm_jarid,							itm_tab_shield_small_round_c],		king_attrib,wp(220),king_skills, 0x000000065504310b30d556b51238f66100000000001c256d0000000000000000, khergit_face_middle_2],
 #of the family
 
   ["kingdom_4_pretender", "Lethwin Far-Seeker",			"Lethwin",tf_hero|tf_unmoveable_in_party_window, 						0,reserved,  fac_kingdom_4,[						itm_tabard,			itm_leather_boots,	itm_banded_armor,		itm_iron_greaves,		itm_gauntlets,			itm_nordic_warlord_helmet,	itm_long_axe_c,itm_long_bow,itm_bodkin_arrows,					itm_tab_shield_round_e],			king_attrib,wp(220),king_skills, 0x00000004340c01841d89949529a6776a00000000001c910a0000000000000000, nord_face_young_2],

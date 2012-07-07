@@ -11651,9 +11651,10 @@ What kind of recruits do you want?", "dplmc_constable_recruit_select",
 		#Cache terrain value, but use non-terrain value for cost
 		(assign, reg0, reg1),
 	(else_try),
-	   (call_script, "script_party_calculate_strength", ":party_no", 0),
+	    (call_script, "script_party_calculate_strength", ":party_no", 0),
 	(try_end),
-	(val_div, reg0, 2),
+	(val_add, reg0, reg2), #new use defense aswell
+	(val_div, reg0, 4),
 	(val_add, reg0, 30),
 	(call_script, "script_round_value", reg0),
 	(val_max, reg0, 50),#at least 50 denars per party
@@ -27006,7 +27007,9 @@ Hand over my {reg19} denars, if you please, and end our business together.", "lo
 
   [anyone,"lord_propose_mercenary", [(call_script, "script_party_calculate_strength", "p_main_party", 0),
                                      (assign, ":offer_value", reg0),
-                                     (val_add, ":offer_value", 100),
+									 (val_add, ":offer_value", reg2), #new use defense aswell
+									 (val_div, ":offer_value", 4), #new use defense aswell
+                                     (val_add, ":offer_value", 30),
                                      (call_script, "script_round_value", ":offer_value"),
                                      (assign, ":offer_value", reg0),
                                      (assign, "$temp", ":offer_value"),
@@ -32250,6 +32253,8 @@ I suppose there are plenty of bounty hunters around to get the job done . . .", 
     (val_sub, "$caravan_escort_offer", 10),
     (call_script, "script_party_calculate_strength", "p_main_party",0),
     (assign, ":player_strength", reg0),
+	(val_add, ":player_strength", reg2), #new use defense aswell
+	(val_div, ":player_strength", 2), #new use defense aswell
     (val_min, ":player_strength", 200),
     (val_add, ":player_strength", 20),
     (val_mul,"$caravan_escort_offer",":player_strength"),

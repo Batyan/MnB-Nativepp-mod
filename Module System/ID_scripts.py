@@ -776,5 +776,6 @@ script_order_party_troops = 774
 script_cf_mercenary_join_centers_faction = 775
 script_cf_faction_need_mercenaries = 776
 script_init_banners_slot = 777
+script_reset_lord_relations = 778
 
 

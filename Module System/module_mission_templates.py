@@ -5105,13 +5105,13 @@ mission_templates = [
       common_battle_inventory,
 
       #AI Triggers
-      # (0, 0, ti_once, [(neg|party_slot_eq, "p_main_party", slot_party_pref_formations, 1), ## PBOD - Formations AI NOT active
-          # (store_mission_timer_a,":mission_time"),(ge,":mission_time",2),
-          # ],
-       # [(call_script, "script_select_battle_tactic"),
-        # (call_script, "script_battle_tactic_init"),
-        #(call_script, "script_battle_calculate_initial_powers"), #deciding run away method changed and that line is erased
-        # ]),
+      (0, 0, ti_once, [(neg|party_slot_eq, "p_main_party", slot_party_pref_formations, 1), ## PBOD - Formations AI NOT active
+          (store_mission_timer_a,":mission_time"),(ge,":mission_time",2),
+          ],
+       [(call_script, "script_select_battle_tactic"),
+        (call_script, "script_battle_tactic_init"),
+        # (call_script, "script_battle_calculate_initial_powers"), #deciding run away method changed and that line is erased
+        ]),
       
       (3, 0, 0, [
           (call_script, "script_apply_effect_of_other_people_on_courage_scores"),

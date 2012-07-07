@@ -11840,7 +11840,8 @@ presentations = [
         (overlay_set_position, reg1, pos1),
         (call_script, "script_party_calculate_strength", "p_main_party", 0),
         (assign, ":offer_value", reg0),
-        (val_div, ":offer_value", 2),
+		(val_add, ":offer_value", reg1),
+        (val_div, ":offer_value", 4),
         (val_add, ":offer_value", 30),
         (call_script, "script_round_value", ":offer_value"),
         (val_add, ":net_change", reg0),
@@ -13235,7 +13236,7 @@ presentations = [
 					(assign, reg0, reg1),
 				(else_try),
 					#Use the non-terrain-modified strength script.
-					(call_script, "script_party_calculate_strength", ":center_no", dplmc_terrain_code_siege, 0),
+					(call_script, "script_party_calculate_strength", ":center_no", 0),
 				(try_end),
 
 				(val_max, reg0, 250),#A certain minimum scale is assumed

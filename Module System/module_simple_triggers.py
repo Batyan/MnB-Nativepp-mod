@@ -289,8 +289,8 @@ simple_triggers = [
 	]),
 
 
- (24, #Kingdom ladies send messages
- [ 
+	(24, #Kingdom ladies send messages
+	[ 
 	(try_begin),
 		(neg|check_quest_active, "qst_visit_lady"),
 		(neg|troop_slot_ge, "trp_player", slot_troop_prisoner_of_party, 1),
@@ -5358,7 +5358,7 @@ simple_triggers = [
 	(try_end),
 	]),
    
-  (6,
+  (6, # patrol - scout behavior
    [(try_for_parties, ":party_no"),
       (this_or_next|party_slot_eq, ":party_no", slot_party_type, spt_patrol),
 	  (party_slot_eq, ":party_no", slot_party_type, spt_scout),
@@ -7301,61 +7301,61 @@ simple_triggers = [
 	(assign, ":save_reg0", reg0),
 	(assign, ":save_reg1", reg1),
 	(assign, ":save_reg4", reg4),
-  (try_begin),
-  #only proceed if setting is enabled
+	(try_begin),
+	#only proceed if setting is enabled
 		(ge, "$g_dplmc_lord_recycling", DPLMC_LORD_RECYCLING_ENABLE),
-  #Kings/pretenders do not return in this manner (it should be different if it does happen).
-  #Companions have a separate mechanism for return.
-  (assign, ":chosen_lord", -1),
+	#Kings/pretenders do not return in this manner (it should be different if it does happen).
+	#Companions have a separate mechanism for return.
+		(assign, ":chosen_lord", -1),
 		(assign, ":best_score", -101),
 		(assign, ":num_exiles", 0),
-  #iterate over lords from a random start point, wrapping back to zero
-  (store_random_in_range, ":rand_no", lords_begin, lords_end),
-  (try_for_range, ":index", lords_begin, lords_end),
-	 (store_add, ":troop_no", ":rand_no", ":index"),
-	 (try_begin),
-	    #wrap back around when you go off the end
-		(ge, ":troop_no", lords_end),
-                (val_sub, ":troop_no", lords_end),
-                (val_add, ":troop_no", lords_begin),
-	 (try_end),
-		  #Elsewhere we do the bookkeeping of ensuring that when a lord gets exiled
-		  #his occupation changes to dplmc_slto_exile, and when loading a Native
-		  #saved gamed with diplomacy we make this change for any lords required.
-		  (troop_slot_eq, ":troop_no", slot_troop_occupation, dplmc_slto_exile),
-		  
-	 (store_troop_faction, ":faction_no", ":troop_no"),
-	 (this_or_next|eq, ":faction_no", -1),
-		  (this_or_next|eq, ":faction_no", "fac_commoners"),
-	    (eq, ":faction_no", "fac_outlaws"),
-		  (val_add, ":num_exiles", 1),
-		  (try_begin),
-		     #Pick the lord with the best relation with his original liege.
-			  #In most cases this will be the lord that has been in exile
-			  #the longest.
-			  (troop_get_slot, ":new_faction", ":troop_no", slot_troop_original_faction),
-			  (is_between, ":new_faction", kingdoms_begin, kingdoms_end),
-			  (faction_get_slot, ":faction_leader", ":new_faction", slot_faction_leader),
-			  (gt, ":faction_leader", 0),
-			  (call_script, "script_troop_get_relation_with_troop", ":troop_no", ":faction_leader"),
-			  (this_or_next|eq, ":chosen_lord", -1),
-			     (gt, reg0, ":best_score"),
-			  (assign, ":chosen_lord", ":troop_no"),
-			  (assign, ":best_score", reg0),
-		  (else_try),
-		     (eq, ":chosen_lord", -1),
-			 (assign, ":chosen_lord", ":troop_no"),
-	 (try_end),
-  (try_end),
-  #search is done
-  (try_begin),
-	 #no lord found
-     (eq, ":chosen_lord", -1),
-	 (try_begin),
-  	    (ge, "$cheat_mode", 1),
-		(display_message, "@{!}DEBUG - no eligible lords in exile"),
-	 (try_end),
-  (else_try),
+		#iterate over lords from a random start point, wrapping back to zero
+		(store_random_in_range, ":rand_no", lords_begin, lords_end),
+		(try_for_range, ":index", lords_begin, lords_end),
+			(store_add, ":troop_no", ":rand_no", ":index"),
+			(try_begin),
+				#wrap back around when you go off the end
+				(ge, ":troop_no", lords_end),
+				(val_sub, ":troop_no", lords_end),
+				(val_add, ":troop_no", lords_begin),
+			(try_end),
+			  #Elsewhere we do the bookkeeping of ensuring that when a lord gets exiled
+			  #his occupation changes to dplmc_slto_exile, and when loading a Native
+			  #saved gamed with diplomacy we make this change for any lords required.
+			(troop_slot_eq, ":troop_no", slot_troop_occupation, dplmc_slto_exile),
+			  
+			(store_troop_faction, ":faction_no", ":troop_no"),
+			(this_or_next|eq, ":faction_no", -1),
+			(this_or_next|eq, ":faction_no", "fac_commoners"),
+			(eq, ":faction_no", "fac_outlaws"),
+			(val_add, ":num_exiles", 1),
+			(try_begin),
+				 #Pick the lord with the best relation with his original liege.
+				  #In most cases this will be the lord that has been in exile
+				  #the longest.
+				(troop_get_slot, ":new_faction", ":troop_no", slot_troop_original_faction),
+				(is_between, ":new_faction", kingdoms_begin, kingdoms_end),
+				(faction_get_slot, ":faction_leader", ":new_faction", slot_faction_leader),
+				(gt, ":faction_leader", 0),
+				(call_script, "script_troop_get_relation_with_troop", ":troop_no", ":faction_leader"),
+				(this_or_next|eq, ":chosen_lord", -1),
+				(gt, reg0, ":best_score"),
+				(assign, ":chosen_lord", ":troop_no"),
+				(assign, ":best_score", reg0),
+			(else_try),
+				(eq, ":chosen_lord", -1),
+				(assign, ":chosen_lord", ":troop_no"),
+			(try_end),
+		(try_end),
+		#search is done
+		(try_begin),
+		 #no lord found
+			(eq, ":chosen_lord", -1),
+			(try_begin),
+				(ge, "$cheat_mode", 1),
+				(display_message, "@{!}DEBUG - no eligible lords in exile"),
+			(try_end),
+		(else_try),
 			#If there were fewer than 3 lords in exile, random chance that none will return.
 			(lt, ":num_exiles", 3),
 			(store_random_in_range, ":random", 0, 256),
@@ -7366,56 +7366,56 @@ simple_triggers = [
 				(display_message, "@{!}DEBUG - {reg0} lords found in exile; randomly decided not to try to return anyone."),
 			(try_end),
 		(else_try),
-     #found a lord
-     (neq, ":chosen_lord", -1),
- 	 (try_begin),
-  	    (ge, "$cheat_mode", 1),
-		(str_store_troop_name, s4, ":chosen_lord"),
-			(assign, reg0, ":best_score"),
-			(assign, reg1, ":num_exiles"),
-			(display_message, "@{!}DEBUG - {reg1} lords found in exile; {s4} chosen to return, score was {reg0}"),
-	 (try_end),
-	 #To decrease the displeasing fragmentation of lord cultures, bias towards assigning
-	 #the lord back to his original faction if possible.
-	 (troop_get_slot, ":new_faction", ":chosen_lord", slot_troop_original_faction),
-	 (try_begin),
-			 #If the original faction is not active, or the lord's relation is too low, use a different faction
-			 (this_or_next|lt, ":best_score", -50),
-			 (this_or_next|neg|is_between, ":new_faction", kingdoms_begin, kingdoms_end),
-			    (neg|faction_slot_eq, ":new_faction", slot_faction_state, sfs_active),
-   	    (call_script, "script_lord_find_alternative_faction", ":chosen_lord"),
-		(assign, ":new_faction", reg0),
-	 (try_end),
-	 (try_begin),
-	    (neg|is_between, ":new_faction", kingdoms_begin, kingdoms_end),
-		(ge, "$cheat_mode", 1),
-		(str_store_troop_name, s4, ":chosen_lord"),
-		(display_message, "@{!}DEBUG - {s4} found no faction to return to!"),
-	 (try_end),
-	 (is_between, ":new_faction", kingdoms_begin, kingdoms_end),
-		 (assign, ":num_inactive", 0),
-		 (try_begin),
-			(eq, ":new_faction", "$players_kingdom"),
-			(call_script, "script_dplmc_get_troop_standing_in_faction", "trp_player", "$players_kingdom"),
-			(ge, reg0, DPLMC_FACTION_STANDING_LEADER_SPOUSE),
-			(assign, ":num_inactive", 0),
-			(try_for_range, ":other_lord", lords_begin, lords_end),
-			   (store_troop_faction, ":other_lord_faction", ":other_lord"),
-			   (this_or_next|eq, ":other_lord_faction", "fac_player_supporters_faction"),
-				(eq, ":other_lord_faction", "$players_kingdom"),
-			   (troop_slot_eq, ":other_lord", slot_troop_occupation, slto_inactive),
-			   (val_add, ":num_inactive", 1),
-			(try_end),
-			(gt, ":num_inactive", 1),
+		 #found a lord
+			(neq, ":chosen_lord", -1),
 			(try_begin),
 				(ge, "$cheat_mode", 1),
-				(assign, reg0, ":num_inactive"),
-				(display_message, "@{!}DEBUG - Not returning a lord to the player's kingdom, since there are already {reg0} lords waiting for their petitions to be heard."),
+				(str_store_troop_name, s4, ":chosen_lord"),
+				(assign, reg0, ":best_score"),
+				(assign, reg1, ":num_exiles"),
+				(display_message, "@{!}DEBUG - {reg1} lords found in exile; {s4} chosen to return, score was {reg0}"),
 			(try_end),
-		 (else_try),
-	 (call_script, "script_dplmc_lord_return_from_exile", ":chosen_lord", ":new_faction"),
-  (try_end),
-  (try_end),
+			#To decrease the displeasing fragmentation of lord cultures, bias towards assigning
+			#the lord back to his original faction if possible.
+			(troop_get_slot, ":new_faction", ":chosen_lord", slot_troop_original_faction),
+			(try_begin),
+				#If the original faction is not active, or the lord's relation is too low, use a different faction
+				(this_or_next|lt, ":best_score", -50),
+				(this_or_next|neg|is_between, ":new_faction", kingdoms_begin, kingdoms_end),
+				(neg|faction_slot_eq, ":new_faction", slot_faction_state, sfs_active),
+				(call_script, "script_lord_find_alternative_faction", ":chosen_lord"),
+				(assign, ":new_faction", reg0),
+			(try_end),
+			(try_begin),
+				(neg|is_between, ":new_faction", kingdoms_begin, kingdoms_end),
+				(ge, "$cheat_mode", 1),
+				(str_store_troop_name, s4, ":chosen_lord"),
+				(display_message, "@{!}DEBUG - {s4} found no faction to return to!"),
+			(try_end),
+			(is_between, ":new_faction", kingdoms_begin, kingdoms_end),
+			(assign, ":num_inactive", 0),
+			(try_begin),
+				(eq, ":new_faction", "$players_kingdom"),
+				(call_script, "script_dplmc_get_troop_standing_in_faction", "trp_player", "$players_kingdom"),
+				(ge, reg0, DPLMC_FACTION_STANDING_LEADER_SPOUSE),
+				(assign, ":num_inactive", 0),
+				(try_for_range, ":other_lord", lords_begin, lords_end),
+				   (store_troop_faction, ":other_lord_faction", ":other_lord"),
+				   (this_or_next|eq, ":other_lord_faction", "fac_player_supporters_faction"),
+					(eq, ":other_lord_faction", "$players_kingdom"),
+				   (troop_slot_eq, ":other_lord", slot_troop_occupation, slto_inactive),
+				   (val_add, ":num_inactive", 1),
+				(try_end),
+				(gt, ":num_inactive", 1),
+				(try_begin),
+					(ge, "$cheat_mode", 1),
+					(assign, reg0, ":num_inactive"),
+					(display_message, "@{!}DEBUG - Not returning a lord to the player's kingdom, since there are already {reg0} lords waiting for their petitions to be heard."),
+				(try_end),
+			(else_try),
+				(call_script, "script_dplmc_lord_return_from_exile", ":chosen_lord", ":new_faction"),
+			(try_end),
+		(try_end),
 	(try_end),
 	##More piggybacking
 	##
