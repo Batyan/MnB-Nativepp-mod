@@ -5003,108 +5003,172 @@ game_menus = [
       (assign, ":total_player_and_followers_strength", reg0),
 	  (assign, ":total_player_and_followers_defense", reg2),
                                     
-      (try_begin),
-        (le, ":total_player_and_followers_strength", ":enemy_party_strength"),
-        (assign, ":minimum_power", ":total_player_and_followers_strength"),
-      (else_try),
-        (assign, ":minimum_power", ":enemy_party_strength"),
-      (try_end),
+      # (try_begin),
+        # (le, ":total_player_and_followers_strength", ":enemy_party_strength"),
+        # (assign, ":minimum_power", ":total_player_and_followers_strength"),
+      # (else_try),
+        # (assign, ":minimum_power", ":enemy_party_strength"),
+      # (try_end),
       
-      (try_begin),
-        (le, ":minimum_power", 25),
-        (assign, ":division_constant", 1),
-      (else_try),
-        (le, ":minimum_power", 50),
-        (assign, ":division_constant", 2),
-      (else_try),
-        (le, ":minimum_power", 75),
-        (assign, ":division_constant", 3),
-      (else_try),
-        (le, ":minimum_power", 125),
-        (assign, ":division_constant", 4),
-      (else_try),
-        (le, ":minimum_power", 200),
-        (assign, ":division_constant", 5),
-      (else_try),
-        (le, ":minimum_power", 400),
-        (assign, ":division_constant", 6),
-      (else_try),
-        (le, ":minimum_power", 800),
-        (assign, ":division_constant", 7),
-      (else_try),
-        (le, ":minimum_power", 1600),
-        (assign, ":division_constant", 8),
-      (else_try),
-        (le, ":minimum_power", 3200),
-        (assign, ":division_constant", 9),
-      (else_try),
-        (le, ":minimum_power", 6400),
-        (assign, ":division_constant", 10),
-      (else_try),
-        (le, ":minimum_power", 12800),
-        (assign, ":division_constant", 11),
-      (else_try),
-        (le, ":minimum_power", 25600),
-        (assign, ":division_constant", 12),
-      (else_try),
-        (le, ":minimum_power", 51200),
-        (assign, ":division_constant", 13),
-      (else_try),
-        (le, ":minimum_power", 102400),
-        (assign, ":division_constant", 14),
-      (else_try),  
-        (assign, ":division_constant", 15),
-      (try_end), 
-                                                                              
-      (val_div, ":player_party_strength", ":division_constant"), #1.126, ":division_constant" was 5 before
-      (val_max, ":player_party_strength", 1), #1.126
-      (val_div, ":enemy_party_strength", ":division_constant"), #1.126, ":division_constant" was 5 before
-      (val_max, ":enemy_party_strength", 1), #1.126
-      (val_div, ":total_player_and_followers_strength", ":division_constant"), #1.126, ":division_constant" was 5 before
-      (val_max, ":total_player_and_followers_strength", 1), #1.126
+      # (try_begin),
+        # (le, ":minimum_power", 25),
+        # (assign, ":division_constant", 1),
+      # (else_try),
+        # (le, ":minimum_power", 50),
+        # (assign, ":division_constant", 2),
+      # (else_try),
+        # (le, ":minimum_power", 75),
+        # (assign, ":division_constant", 3),
+      # (else_try),
+        # (le, ":minimum_power", 125),
+        # (assign, ":division_constant", 4),
+      # (else_try),
+        # (le, ":minimum_power", 200),
+        # (assign, ":division_constant", 5),
+      # (else_try),
+        # (le, ":minimum_power", 400),
+        # (assign, ":division_constant", 6),
+      # (else_try),
+        # (le, ":minimum_power", 800),
+        # (assign, ":division_constant", 7),
+      # (else_try),
+        # (le, ":minimum_power", 1600),
+        # (assign, ":division_constant", 8),
+      # (else_try),
+        # (le, ":minimum_power", 3200),
+        # (assign, ":division_constant", 9),
+      # (else_try),
+        # (le, ":minimum_power", 6400),
+        # (assign, ":division_constant", 10),
+      # (else_try),
+        # (le, ":minimum_power", 12800),
+        # (assign, ":division_constant", 11),
+      # (else_try),
+        # (le, ":minimum_power", 25600),
+        # (assign, ":division_constant", 12),
+      # (else_try),
+        # (le, ":minimum_power", 51200),
+        # (assign, ":division_constant", 13),
+      # (else_try),
+        # (le, ":minimum_power", 102400),
+        # (assign, ":division_constant", 14),
+      # (else_try),  
+        # (assign, ":division_constant", 15),
+      # (try_end), 
 	  
-	  (val_div, ":player_party_defense", ":division_constant"), #1.126, ":division_constant" was 5 before
-      (val_max, ":player_party_defense", 1), #1.126
-      (val_div, ":enemy_party_defense", ":division_constant"), #1.126, ":division_constant" was 5 before
-      (val_max, ":enemy_party_defense", 1), #1.126
-      (val_div, ":total_player_and_followers_defense", ":division_constant"), #1.126, ":division_constant" was 5 before
-      (val_max, ":total_player_and_followers_defense", 1), #1.126
+	  (val_div, ":player_party_strength", 5),
+      (val_max, ":player_party_strength", 1),
+      (val_div, ":enemy_party_strength", 5),
+      (val_add, ":enemy_party_strength", 1),
+	  (val_div, ":total_player_and_followers_strength", 5),
+      (val_add, ":total_player_and_followers_strength", 1),
+
+	  (val_div, ":player_party_defense", 5),
+      (val_max, ":player_party_defense", 1),
+      (val_div, ":enemy_party_defense", 5),
+      (val_add, ":enemy_party_defense", 1),
+	  (val_div, ":total_player_and_followers_defense", 5),
+      (val_add, ":total_player_and_followers_defense", 1),
+                                                                              
+      # (val_div, ":player_party_strength", ":division_constant"), #1.126, ":division_constant" was 5 before
+      # (val_max, ":player_party_strength", 1), #1.126
+      # (val_div, ":enemy_party_strength", ":division_constant"), #1.126, ":division_constant" was 5 before
+      # (val_max, ":enemy_party_strength", 1), #1.126
+      # (val_div, ":total_player_and_followers_strength", ":division_constant"), #1.126, ":division_constant" was 5 before
+      # (val_max, ":total_player_and_followers_strength", 1), #1.126
+	  
+	  # (val_div, ":player_party_defense", ":division_constant"), #1.126, ":division_constant" was 5 before
+      # (val_max, ":player_party_defense", 1), #1.126
+      # (val_div, ":enemy_party_defense", ":division_constant"), #1.126, ":division_constant" was 5 before
+      # (val_max, ":enemy_party_defense", 1), #1.126
+      # (val_div, ":total_player_and_followers_defense", ":division_constant"), #1.126, ":division_constant" was 5 before
+      # (val_max, ":total_player_and_followers_defense", 1), #1.126
+	  
+	  
 	  
       (store_mul, "$g_strength_contribution_of_player", ":player_party_strength", 100),
       (val_div, "$g_strength_contribution_of_player", ":total_player_and_followers_strength"),
+	  
+	  (store_mul, ":defense_contribution_of_player", ":player_party_defense", 100),
+      (val_div, ":defense_contribution_of_player", ":total_player_and_followers_defense"),
+	  
+	  (try_begin), # We reduce ennemy's strength to a level closer to the player
+	    (gt, ":enemy_party_strength", ":total_player_and_followers_strength"),
+	    (val_add, ":enemy_party_strength", ":total_player_and_followers_strength"),
+	    (val_div, ":enemy_party_strength", 2),
+	  (else_try), # Unless player has more strength
+	    (store_add, ":ally_strength", ":total_player_and_followers_strength", ":enemy_party_strength"),
+	    (val_div, ":ally_strength", 2),
+	  (try_end),
+	  
+	  (try_begin), # We do the same for defense, except that we increase defender's defense
+	    (gt, ":enemy_party_defense", ":total_player_and_followers_defense"),
+	    (store_add, ":ally_defense", ":total_player_and_followers_defense", ":enemy_party_defense"),
+	    (val_div, ":ally_defense", 2),
+		
+		(store_mul, ":player_party_defense", ":ally_defense", ":defense_contribution_of_player"),
+		(val_div, ":player_party_defense", 100),
+	  (else_try),
+	    (val_add, ":enemy_party_defense", ":total_player_and_followers_defense"),
+	    (val_div, ":enemy_party_defense", 2),
+	  (try_end),
       
 	  (store_mul, ":player_attacked", ":enemy_party_strength", 100),
 	  (val_div, ":player_attacked", "$g_strength_contribution_of_player"),
 	  
-	  (val_mul, ":player_attacked", ":player_attacked"),
-	  (val_div, ":player_attacked", ":player_party_defense"),
+	  # (val_mul, ":player_attacked", ":player_attacked"),
+	  # (val_div, ":player_attacked", ":player_party_defense"),
+	  
+	  (store_div, ":player_reduce_dmg", ":player_attacked", ":player_party_defense"),
+	  (val_min, ":player_reduce_dmg", 50),
+	  (val_add, ":player_reduce_dmg", 50), # 50% reduction max
+	  (store_mul, ":player_attack", ":player_attacked", ":player_reduce_dmg"),
+	  (val_div, ":player_attack", 100),
+	  (set_fixed_point_multiplier, 1),
+	  (store_sqrt, ":player_attack", ":player_attack"),
 	  
 	  # (inflict_casualties_to_party_group, "p_main_party", ":enemy_party_strength", "p_temp_casualties"),
-	  (inflict_casualties_to_party_group, "p_main_party", ":player_attacked", "p_temp_casualties"),
+	  (inflict_casualties_to_party_group, "p_main_party", ":player_attack", "p_temp_casualties"),
       (call_script, "script_print_casualties_to_s0", "p_temp_casualties", 0),
       (str_store_string_reg, s8, s0),
       (try_begin),
         (ge, "$g_ally_party", 0),
 		
-		(store_sub, ":ally_defense", ":total_player_and_followers_defense", ":player_party_defense"),
+		(val_sub, ":ally_defense", ":player_party_defense"),
 		
 		(store_mul, ":ally_attacked", ":enemy_party_strength", 100),
 		(store_sub, ":ally_contribution", 100, "$g_strength_contribution_of_player"),
 	    (val_div, ":ally_attacked", ":ally_contribution"),
 	  
-	    (val_mul, ":ally_attacked", ":ally_attacked"),
-	    (val_div, ":ally_attacked", ":ally_defense"),
+	    # (val_mul, ":ally_attacked", ":ally_attacked"),
+	    # (val_div, ":ally_attacked", ":ally_defense"),
+		
+		(store_div, ":ally_reduce_dmg", ":ally_attacked", ":ally_defense"),
+	    (val_min, ":ally_reduce_dmg", 50),
+	    (val_add, ":ally_reduce_dmg", 50), # 50% reduction max
+	    (store_mul, ":ally_attack", ":ally_attacked", ":ally_reduce_dmg"),
+	    (val_div, ":ally_attack", 100),
+	    (set_fixed_point_multiplier, 1),
+	    (store_sqrt, ":ally_attack", ":ally_attack"),
 		
         # (inflict_casualties_to_party_group, "$g_ally_party", ":enemy_party_strength", "p_temp_casualties"),
-        (inflict_casualties_to_party_group, "$g_ally_party", ":ally_attacked", "p_temp_casualties"),
+        (inflict_casualties_to_party_group, "$g_ally_party", ":ally_attack", "p_temp_casualties"),
         (str_store_string_reg, s8, s0),
-      (try_end),  
+      (try_end),
 	  
-	  (store_mul, ":ennemy_attacked", ":total_player_and_followers_strength", ":total_player_and_followers_strength"),
-	  (val_div, ":ennemy_attacked", ":enemy_party_defense"),
+	  (store_div, ":ennemy_reduce_dmg", ":ally_strength", ":enemy_party_defense"),
+	  (val_min, ":ennemy_reduce_dmg", 50),
+	  (val_add, ":ennemy_reduce_dmg", 50), # 50% reduction max
+	  (store_mul, ":ennemy_attack", ":ally_strength", ":ennemy_reduce_dmg"),
+	  (val_div, ":ennemy_attack", 100),
+	  (set_fixed_point_multiplier, 1),
+	  (store_sqrt, ":ennemy_attack", ":ennemy_attack"),
+	  
+	  # (store_mul, ":ennemy_attacked", ":total_player_and_followers_strength", ":total_player_and_followers_strength"),
+	  # (val_div, ":ennemy_attacked", ":enemy_party_defense"),
                                   
       # (inflict_casualties_to_party_group, "$g_encountered_party", ":total_player_and_followers_strength", "p_temp_casualties"),
-      (inflict_casualties_to_party_group, "$g_encountered_party", ":ennemy_attacked", "p_temp_casualties"),
+      (inflict_casualties_to_party_group, "$g_encountered_party", ":ennemy_attack", "p_temp_casualties"),
 
       #ozan begin
       (party_get_num_companion_stacks, ":num_stacks", "p_temp_casualties"), 
@@ -6341,18 +6405,54 @@ game_menus = [
 	  (assign, ":enemy_party_defense", reg2),
       (val_div, ":enemy_party_strength", 5),
 	  (val_div, ":enemy_party_defense", 5),
+	  
+	  (store_mul, ":strength_contribution_of_player", ":player_party_strength", 100),
+      (val_div, ":strength_contribution_of_player", ":friend_party_strength"),
+	  
+	  (store_mul, ":defense_contribution_of_player", ":player_party_defense", 100),
+      (val_div, ":defense_contribution_of_player", ":friend_party_defense"),
+	  
+	  (try_begin), # We reduce ennemy's strength to a level closer to the player
+	    (gt, ":enemy_party_strength", ":friend_party_strength"),
+	    (val_add, ":enemy_party_strength", ":friend_party_strength"),
+	    (val_div, ":enemy_party_strength", 2),
+	  (else_try), # Unless player has more strength
+	    (store_add, ":friend_party_strength", ":friend_party_strength", ":enemy_party_strength"),
+	    (val_div, ":friend_party_strength", 2),
+	  (try_end),
+	  
+	  (try_begin), # We do the same for defense, except that we increase defender's defense
+	    (gt, ":enemy_party_defense", ":friend_party_defense"),
+	    (store_add, ":ally_defense", ":friend_party_defense", ":enemy_party_defense"),
+	    (val_div, ":ally_defense", 2),
+		
+		(store_mul, ":player_party_defense", ":ally_defense", ":defense_contribution_of_player"),
+		(val_div, ":player_party_defense", 100),
+	  (else_try),
+	    (val_add, ":enemy_party_defense", ":friend_party_defense"),
+	    (val_div, ":enemy_party_defense", 2),
+		(assign, ":ally_defense", ":friend_party_defense"),
+	  (try_end),
 
       (try_begin),
         (eq, ":friend_party_strength", 0),
-        (store_div, ":enemy_party_strength_for_p", ":enemy_party_strength", 2),
+        (assign, ":enemy_party_strength_for_p", ":enemy_party_strength"),
       (else_try),
         (assign, ":enemy_party_strength_for_p", ":enemy_party_strength"),
         (val_mul, ":enemy_party_strength_for_p", ":player_party_strength"),
         (val_div, ":enemy_party_strength_for_p", ":friend_party_strength"),
       (try_end),
 	  
-	  (store_mul, ":player_attack", ":enemy_party_strength_for_p", ":enemy_party_strength_for_p"),
-	  (val_div, ":player_attack", ":player_party_defense"),
+	  (store_mul, ":player_attacked", ":enemy_party_strength", 100),
+	  (val_div, ":player_attacked", ":strength_contribution_of_player"),
+	  
+	  (store_div, ":player_reduce_dmg", ":player_attacked", ":player_party_defense"),
+	  (val_min, ":player_reduce_dmg", 50),
+	  (val_add, ":player_reduce_dmg", 50), # 50% reduction max
+	  (store_mul, ":player_attack", ":player_attacked", ":player_reduce_dmg"),
+	  (val_div, ":player_attack", 100),
+	  (set_fixed_point_multiplier, 1),
+	  (store_sqrt, ":player_attack", ":player_attack"),
 
       (val_sub, ":enemy_party_strength", ":enemy_party_strength_for_p"),
       (inflict_casualties_to_party_group, "p_main_party", ":player_attack", "p_temp_casualties"),
@@ -6360,9 +6460,18 @@ game_menus = [
       (call_script, "script_print_casualties_to_s0", "p_temp_casualties", 0),
       (str_store_string_reg, s8, s0),
 	  
-	  (store_add, ":ennemy_attack", ":player_party_strength", ":friend_party_strength"),
-	  (val_mul, ":ennemy_attack", ":ennemy_attack"),
-	  (val_div, ":ennemy_attack", ":enemy_party_defense"),
+	  (store_add, ":ally_strength", ":player_party_strength", ":friend_party_strength"),
+	  
+	  (store_div, ":ennemy_reduce_dmg", ":ally_strength", ":enemy_party_defense"),
+	  (val_min, ":ennemy_reduce_dmg", 50),
+	  (val_add, ":ennemy_reduce_dmg", 50), # 50% reduction max
+	  (store_mul, ":ennemy_attack", ":ally_strength", ":ennemy_reduce_dmg"),
+	  (val_div, ":ennemy_attack", 100),
+	  (set_fixed_point_multiplier, 1),
+	  (store_sqrt, ":ennemy_attack", ":ennemy_attack"),
+	  
+	  # (val_mul, ":ennemy_attack", ":ennemy_attack"),
+	  # (val_div, ":ennemy_attack", ":enemy_party_defense"),
                                     
       (inflict_casualties_to_party_group, "$g_enemy_party", ":ennemy_attack", "p_temp_casualties"),
       # (inflict_casualties_to_party_group, "$g_enemy_party", ":friend_party_strength", "p_temp_casualties"),
@@ -6388,8 +6497,25 @@ game_menus = [
       (call_script, "script_collect_friendly_parties"),
       #(party_collect_attachments_to_party, "$g_ally_party", "p_collective_ally"),
 	  
-	  (store_mul, ":ally_attack", ":enemy_party_strength", ":enemy_party_strength"),
-	  (val_div, ":ally_attack", ":friend_party_defense"),
+	  (val_sub, ":ally_defense", ":player_party_defense"),
+		
+	  (store_mul, ":ally_attacked", ":enemy_party_strength", 100),
+	  (store_sub, ":ally_contribution", 100, ":strength_contribution_of_player"),
+	  (val_div, ":ally_attacked", ":ally_contribution"),
+	  
+	  # (val_mul, ":ally_attacked", ":ally_attacked"),
+	  # (val_div, ":ally_attacked", ":ally_defense"),
+	  
+	  (store_div, ":ally_reduce_dmg", ":ally_attacked", ":ally_defense"),
+	  (val_min, ":ally_reduce_dmg", 50),
+	  (val_add, ":ally_reduce_dmg", 50), # 50% reduction max
+	  (store_mul, ":ally_attack", ":ally_attacked", ":ally_reduce_dmg"),
+	  (val_div, ":ally_attack", 100),
+	  (set_fixed_point_multiplier, 1),
+	  (store_sqrt, ":ally_attack", ":ally_attack"),
+	  
+	  # (store_mul, ":ally_attack", ":enemy_party_strength", ":enemy_party_strength"),
+	  # (val_div, ":ally_attack", ":friend_party_defense"),
 
       # (inflict_casualties_to_party_group, "$g_ally_party", ":enemy_party_strength", "p_temp_casualties"),
       (inflict_casualties_to_party_group, "$g_ally_party", ":ally_attack", "p_temp_casualties"),
@@ -8003,42 +8129,81 @@ game_menus = [
     "{s4}^^Your casualties:{s8}^^Enemy casualties were: {s9}",
     "none",
     [
-        (try_begin),
-          (set_background_mesh, "mesh_pic_siege_attack"),
-        (try_end),
-        ###diplomacy start+
+		(try_begin),
+		  (set_background_mesh, "mesh_pic_siege_attack"),
+		(try_end),
+		###diplomacy start+
 		##If terrain advantage is on, use siege settings
-        #(assign, ":save_dplmc_terrain_advantage", "$g_dplmc_terrain_advantage"),
+		#(assign, ":save_dplmc_terrain_advantage", "$g_dplmc_terrain_advantage"),
 		##(assign, "$g_dplmc_terrain_advantage", ":save_dplmc_terrain_advantage"),
 		#(try_begin),
 		#   (eq, "$g_dplmc_terrain_advantage", TERRAIN_ADVANTAGE_ENABLE),
 		#   (assign, "$g_dplmc_terrain_advantage", TERRAIN_ADVANTAGE_FORCE_SIEGE),
 		#(try_end),
 		###diplomacy end+
-        (call_script, "script_party_calculate_strength", "p_main_party", 1), #skip player
-        (assign, ":player_party_strength", reg0),
+		(call_script, "script_party_calculate_strength", "p_main_party", 1), #skip player
+		(assign, ":player_party_strength", reg0),
 		(assign, ":player_party_defense", reg2),
-		(val_div, ":player_party_strength", 6),
-        (val_div, ":player_party_defense", 10),
+		(val_div, ":player_party_strength", 5),
+		(val_div, ":player_party_defense", 5),
 
-        (call_script, "script_party_calculate_strength", "$g_encountered_party", 0),
-        (assign, ":enemy_party_strength", reg0),
-        (assign, ":enemy_party_defense", reg2),
-        (val_div, ":enemy_party_strength", 4),
-		(val_div, ":enemy_party_defense", 4),
+		(call_script, "script_party_calculate_strength", "$g_encountered_party", 0),
+		(assign, ":enemy_party_strength", reg0),
+		(assign, ":enemy_party_defense", reg2),
+		(val_div, ":enemy_party_strength", 5),
+		(val_div, ":enemy_party_defense", 5),
+
+		(val_mul, ":enemy_party_strength", 150), #it was 1.5 in old version, now it is only 1.23 -- back to 1.5
+		(val_div, ":enemy_party_strength", 100),
+			
+		(val_mul, ":enemy_party_defense", 2), #twice as hard to kill defenders, we do this to make taking castles last longer
+
+		# (store_mul, ":ennemy_attack", ":enemy_party_strength", ":enemy_party_strength"),
+		# (val_div, ":ennemy_attack", ":player_party_defense"),
 		
-		(store_mul, ":ennemy_attack", ":enemy_party_strength", ":enemy_party_strength"),
-		(val_div, ":ennemy_attack", ":player_party_defense"),
+		(try_begin), # We reduce ennemy's strength to a level closer to the player
+		  (gt, ":enemy_party_strength", ":player_party_strength"),
+		  (val_add, ":enemy_party_strength", ":player_party_strength"),
+		  (val_div, ":enemy_party_strength", 2),
+		(else_try), # Unless player has more strength
+		  (store_add, ":player_party_strength", ":player_party_strength", ":enemy_party_strength"),
+		  (val_div, ":player_party_strength", 2),
+		(try_end),
+		
+		(try_begin),
+		  (gt, ":enemy_party_defense", ":player_party_defense"),
+		  (store_add, ":player_party_defense", ":player_party_defense", ":enemy_party_defense"),
+		  (val_div, ":player_party_defense", 2),
+		(else_try),
+		  (val_add, ":enemy_party_defense", ":player_party_defense"),
+		  (val_div, ":enemy_party_defense", 2),
+		(try_end),
+		
+		(store_div, ":player_reduce_dmg", ":enemy_party_strength", ":player_party_defense"),
+		(val_min, ":player_reduce_dmg", 50),
+		(val_add, ":player_reduce_dmg", 50), # 50% reduction max
+		(store_mul, ":player_attack", ":enemy_party_strength", ":player_reduce_dmg"),
+		(val_div, ":player_attack", 100),
+		(set_fixed_point_multiplier, 1),
+		(store_sqrt, ":player_attack", ":player_attack"),
 
-        (inflict_casualties_to_party_group, "p_main_party", ":ennemy_attack", "p_temp_casualties"),
+        (inflict_casualties_to_party_group, "p_main_party", ":player_attack", "p_temp_casualties"),
         # (inflict_casualties_to_party_group, "p_main_party", ":enemy_party_strength", "p_temp_casualties"),
         (call_script, "script_print_casualties_to_s0", "p_temp_casualties", 0),
         (str_store_string_reg, s8, s0),
 		
-		(store_mul, ":player_attack", ":player_party_strength", ":player_party_strength"),
-		(val_div, ":player_attack", ":enemy_party_defense"),
+		# (store_mul, ":player_attack", ":player_party_strength", ":player_party_strength"),
+		# (val_div, ":player_attack", ":enemy_party_defense"),
+		
+		(store_div, ":ennemy_reduce_dmg", ":player_party_strength", ":enemy_party_defense"),
+		(val_min, ":ennemy_reduce_dmg", 50),
+		(val_add, ":ennemy_reduce_dmg", 50), # 50% reduction max
+		(store_mul, ":ennemy_attack", ":player_party_strength", ":ennemy_reduce_dmg"),
+		(val_div, ":ennemy_attack", 100),
+		(set_fixed_point_multiplier, 1),
+		(store_sqrt, ":ennemy_attack", ":ennemy_attack"),
 
-        (inflict_casualties_to_party_group, "$g_encountered_party", ":player_attack", "p_temp_casualties"),
+        (inflict_casualties_to_party_group, "$g_encountered_party", ":ennemy_attack", "p_temp_casualties"),
         # (inflict_casualties_to_party_group, "$g_encountered_party", ":player_party_strength", "p_temp_casualties"),
         (call_script, "script_print_casualties_to_s0", "p_temp_casualties", 0),
         (str_store_string_reg, s9, s0),
@@ -8099,13 +8264,13 @@ game_menus = [
         (call_script, "script_party_calculate_strength", "p_main_party", 1), #skip player
         (assign, ":player_party_strength", reg0),
 		(assign, ":player_party_defense", reg2),
-        (val_div, ":player_party_strength", 6),
-        (val_div, ":player_party_defense", 10),
+        (val_div, ":player_party_strength", 5),
+        (val_div, ":player_party_defense", 5),
         (call_script, "script_party_calculate_strength", "p_collective_friends", 0),
         (assign, ":friend_party_strength", reg0),
         (assign, ":friend_party_defense", reg2),
-        (val_div, ":friend_party_strength", 6),
-        (val_div, ":friend_party_defense", 10),
+        (val_div, ":friend_party_strength", 5),
+        (val_div, ":friend_party_defense", 5),
 
         (val_max, ":friend_party_strength", 1),
         (val_max, ":friend_party_defense", 1),
@@ -8113,8 +8278,24 @@ game_menus = [
         (call_script, "script_party_calculate_strength", "p_collective_enemy", 0),
         (assign, ":enemy_party_strength", reg0),
         (assign, ":enemy_party_defense", reg2),
-        (val_div, ":enemy_party_strength", 4),
-        (val_div, ":enemy_party_defense", 4),
+        (val_div, ":enemy_party_strength", 5),
+        (val_div, ":enemy_party_defense", 5),
+		
+		(val_mul, ":friend_party_strength", 150), #it was 1.5 in old version, now it is only 1.23 -- back to 1.5
+		(val_div, ":friend_party_strength", 100),
+			
+		(val_mul, ":friend_party_defense", 2), #twice as hard to kill defenders, we do this to make taking castles last longer
+		
+		(val_mul, ":player_party_strength", 150), #it was 1.5 in old version, now it is only 1.23 -- back to 1.5
+		(val_div, ":player_party_strength", 100),
+			
+		(val_mul, ":player_party_defense", 2), #twice as hard to kill defenders, we do this to make taking castles last longer
+		
+		(store_mul, ":strength_contribution_of_player", ":player_party_strength", 100),
+		(val_div, ":strength_contribution_of_player", ":friend_party_strength"),
+	  
+		(store_mul, ":defense_contribution_of_player", ":player_party_defense", 100),
+		(val_div, ":defense_contribution_of_player", ":friend_party_defense"),
 
 ##        (assign, reg0, ":player_party_strength"),
 ##        (assign, reg1, ":friend_party_strength"),
@@ -8124,28 +8305,72 @@ game_menus = [
 ##        (display_message, "@{!}player_str={reg0} friend_str={reg1} enemy_str={reg2}"),
 ##        (display_message, "@{!}enemy_party={reg3} ally_party={reg4}"),
 
-        (try_begin),
-          (eq, ":friend_party_strength", 0),
-          (store_div, ":enemy_party_strength_for_p", ":enemy_party_strength", 2),
-        (else_try),
-          (assign, ":enemy_party_strength_for_p", ":enemy_party_strength"),
-          (val_mul, ":enemy_party_strength_for_p", ":player_party_strength"),
-          (val_div, ":enemy_party_strength_for_p", ":friend_party_strength"),
-        (try_end),
+		(try_begin), # We reduce ennemy's strength to a level closer to the player
+		  (gt, ":enemy_party_strength", ":friend_party_strength"),
+		  (val_add, ":enemy_party_strength", ":friend_party_strength"),
+		  (val_div, ":enemy_party_strength", 2),
+		(else_try), # Unless player has more strength
+		  (store_add, ":ally_strength", ":friend_party_strength", ":enemy_party_strength"),
+		  (val_div, ":ally_strength", 2),
+		(try_end),
 
-        (val_sub, ":enemy_party_strength", ":enemy_party_strength_for_p"),
+		(try_begin), # We do the same for defense, except that we increase defender's defense
+		  (gt, ":enemy_party_defense", ":friend_party_defense"),
+		  (store_add, ":ally_defense", ":friend_party_defense", ":enemy_party_defense"),
+		  (val_div, ":ally_defense", 2),
+
+		  (store_mul, ":player_party_defense", ":ally_defense", ":defense_contribution_of_player"),
+		  (val_div, ":player_party_defense", 100),
+		(else_try),
+		  (val_add, ":enemy_party_defense", ":friend_party_defense"),
+		  (val_div, ":enemy_party_defense", 2),
+		(try_end),
+
+		(try_begin),
+		  (eq, ":friend_party_strength", 0),
+		  (assign, ":enemy_party_strength_for_p", ":enemy_party_strength"),
+		(else_try),
+		  (assign, ":enemy_party_strength_for_p", ":enemy_party_strength"),
+		  (val_mul, ":enemy_party_strength_for_p", ":player_party_strength"),
+		  (val_div, ":enemy_party_strength_for_p", ":friend_party_strength"),
+		(try_end),
+
+        # (val_sub, ":enemy_party_strength", ":enemy_party_strength_for_p"),
 		
-		(store_mul, ":player_attack", ":enemy_party_strength_for_p", ":enemy_party_strength_for_p"),
-		(val_div, ":player_attack", ":player_party_defense"),
+		# (store_mul, ":player_attack", ":enemy_party_strength_for_p", ":enemy_party_strength_for_p"),
+		# (val_div, ":player_attack", ":player_party_defense"),
+		
+		(store_mul, ":player_attacked", ":enemy_party_strength", 100),
+		(val_div, ":player_attacked", ":strength_contribution_of_player"),
+	  
+		(store_div, ":player_reduce_dmg", ":player_attacked", ":player_party_defense"),
+		(val_min, ":player_reduce_dmg", 50),
+		(val_add, ":player_reduce_dmg", 50), # 50% reduction max
+		(store_mul, ":player_attack", ":player_attacked", ":player_reduce_dmg"),
+		(val_div, ":player_attack", 100),
+		(set_fixed_point_multiplier, 1),
+		(store_sqrt, ":player_attack", ":player_attack"),
+
+		(val_sub, ":enemy_party_strength", ":enemy_party_strength_for_p"),
 		
         (inflict_casualties_to_party_group, "p_main_party", ":player_attack", "p_temp_casualties"),
         # (inflict_casualties_to_party_group, "p_main_party", ":enemy_party_strength_for_p", "p_temp_casualties"),
         (call_script, "script_print_casualties_to_s0", "p_temp_casualties", 0),
         (str_store_string_reg, s8, s0),
 		
-		(store_add, ":ennemy_attack", ":friend_party_strength", ":player_party_strength"),
-		(val_mul, ":ennemy_attack", ":ennemy_attack"),
-		(val_div, ":ennemy_attack", ":enemy_party_defense"),
+		# (store_add, ":ennemy_attack", ":friend_party_strength", ":player_party_strength"),
+		# (val_mul, ":ennemy_attack", ":ennemy_attack"),
+		# (val_div, ":ennemy_attack", ":enemy_party_defense"),
+		
+		(store_add, ":ally_strength", ":player_party_strength", ":friend_party_strength"),
+	  
+		(store_div, ":ennemy_reduce_dmg", ":ally_strength", ":enemy_party_defense"),
+		(val_min, ":ennemy_reduce_dmg", 50),
+		(val_add, ":ennemy_reduce_dmg", 50), # 50% reduction max
+		(store_mul, ":ennemy_attack", ":ally_strength", ":ennemy_reduce_dmg"),
+		(val_div, ":ennemy_attack", 100),
+		(set_fixed_point_multiplier, 1),
+		(store_sqrt, ":ennemy_attack", ":ennemy_attack"),
                                     
         (inflict_casualties_to_party_group, "$g_enemy_party", ":ennemy_attack", "p_temp_casualties"),
         # (inflict_casualties_to_party_group, "$g_enemy_party", ":friend_party_strength", "p_temp_casualties"),
@@ -8154,8 +8379,22 @@ game_menus = [
 
         (call_script, "script_collect_friendly_parties"),
 		
-		(store_mul, ":ally_attack", ":enemy_party_strength", ":enemy_party_strength"),
-		(val_div, ":ally_attack", ":friend_party_defense"),
+		(val_sub, ":ally_defense", ":player_party_defense"),
+		
+		(store_mul, ":ally_attacked", ":enemy_party_strength", 100),
+		(store_sub, ":ally_contribution", 100, ":strength_contribution_of_player"),
+		(val_div, ":ally_attacked", ":ally_contribution"),
+		
+		# (val_mul, ":ally_attacked", ":ally_attacked"),
+		# (val_div, ":ally_attacked", ":ally_defense"),
+		
+		(store_div, ":ally_reduce_dmg", ":ally_attacked", ":ally_defense"),
+		(val_min, ":ally_reduce_dmg", 50),
+		(val_add, ":ally_reduce_dmg", 50), # 50% reduction max
+		(store_mul, ":ally_attack", ":ally_attacked", ":ally_reduce_dmg"),
+		(val_div, ":ally_attack", 100),
+		(set_fixed_point_multiplier, 1),
+		(store_sqrt, ":ally_attack", ":ally_attack"),
 
         (inflict_casualties_to_party_group, "$g_ally_party", ":ally_attack", "p_temp_casualties"),
         # (inflict_casualties_to_party_group, "$g_ally_party", ":enemy_party_strength", "p_temp_casualties"),
@@ -9330,38 +9569,104 @@ game_menus = [
         (try_end),
         
         (call_script, "script_party_calculate_strength", "p_collective_ally", 0),
-        (assign, ":ally_party_strength", reg0),
-        (assign, ":ally_party_defense", reg2),
-        (val_div, ":ally_party_strength", 5),
-        (val_div, ":ally_party_defense", 5),
+        (assign, ":friend_party_strength", reg0),
+        (assign, ":friend_party_defense", reg2),
+        (val_div, ":friend_party_strength", 5),
+        (val_div, ":friend_party_defense", 5),
         (call_script, "script_party_calculate_strength", "p_collective_enemy", 0),
         (assign, ":enemy_party_strength", reg0),
         (assign, ":enemy_party_defense", reg2),
-        (val_div, ":enemy_party_strength", 6),
-        (val_div, ":enemy_party_defense", 10),
+        (val_div, ":enemy_party_strength", 5),
+        (val_div, ":enemy_party_defense", 5),
 
-        (store_add, ":friend_party_strength", ":player_party_strength", ":ally_party_strength"),
-        (try_begin),
-          (eq, ":friend_party_strength", 0),
-          (store_div, ":enemy_party_strength_for_p", ":enemy_party_strength", 2),
-        (else_try),
-          (assign, ":enemy_party_strength_for_p", ":enemy_party_strength"),
-          (val_mul, ":enemy_party_strength_for_p", ":player_party_strength"),
-          (val_div, ":enemy_party_strength_for_p", ":friend_party_strength"),
-        (try_end),
-
-        (val_sub, ":enemy_party_strength", ":enemy_party_strength_for_p"),
+        (val_mul, ":enemy_party_strength", 150), #it was 1.5 in old version, now it is only 1.23 -- back to 1.5
+		(val_div, ":enemy_party_strength", 100),
+			
+		(val_mul, ":enemy_party_defense", 2), #twice as hard to kill defenders, we do this to make taking castles last longer
 		
-		(store_mul, ":player_attack", ":enemy_party_strength_for_p", ":enemy_party_strength_for_p"),
-		(val_div, ":player_attack", ":player_party_defense"),
+		(store_mul, ":strength_contribution_of_player", ":player_party_strength", 100),
+		(val_div, ":strength_contribution_of_player", ":friend_party_strength"),
+	  
+		(store_mul, ":defense_contribution_of_player", ":player_party_defense", 100),
+		(val_div, ":defense_contribution_of_player", ":friend_party_defense"),
+
+##        (assign, reg0, ":player_party_strength"),
+##        (assign, reg1, ":friend_party_strength"),
+##        (assign, reg2, ":enemy_party_strength"),
+##        (assign, reg3, "$g_enemy_party"),
+##        (assign, reg4, "$g_ally_party"),
+##        (display_message, "@{!}player_str={reg0} friend_str={reg1} enemy_str={reg2}"),
+##        (display_message, "@{!}enemy_party={reg3} ally_party={reg4}"),
+
+		(try_begin), # We reduce ennemy's strength to a level closer to the player
+		  (gt, ":enemy_party_strength", ":friend_party_strength"),
+		  (val_add, ":enemy_party_strength", ":friend_party_strength"),
+		  (val_div, ":enemy_party_strength", 2),
+		(else_try), # Unless player has more strength
+		  (store_add, ":ally_strength", ":friend_party_strength", ":enemy_party_strength"),
+		  (val_div, ":ally_strength", 2),
+		(try_end),
+
+		(try_begin), # We do the same for defense, except that we increase defender's defense
+		  (gt, ":enemy_party_defense", ":friend_party_defense"),
+		  (store_add, ":ally_defense", ":friend_party_defense", ":enemy_party_defense"),
+		  (val_div, ":ally_defense", 2),
+
+		  (store_mul, ":player_party_defense", ":ally_defense", ":defense_contribution_of_player"),
+		  (val_div, ":player_party_defense", 100),
+		(else_try),
+		  (val_add, ":enemy_party_defense", ":friend_party_defense"),
+		  (val_div, ":enemy_party_defense", 2),
+		(try_end),
+
+		(try_begin),
+		  (eq, ":friend_party_strength", 0),
+		  (assign, ":enemy_party_strength_for_p", ":enemy_party_strength"),
+		(else_try),
+		  (assign, ":enemy_party_strength_for_p", ":enemy_party_strength"),
+		  (val_mul, ":enemy_party_strength_for_p", ":player_party_strength"),
+		  (val_div, ":enemy_party_strength_for_p", ":friend_party_strength"),
+		(try_end),
+
+        # (val_sub, ":enemy_party_strength", ":enemy_party_strength_for_p"),
+		
+		# (store_mul, ":player_attack", ":enemy_party_strength_for_p", ":enemy_party_strength_for_p"),
+		# (val_div, ":player_attack", ":player_party_defense"),
+		
+		(store_mul, ":player_attacked", ":enemy_party_strength", 100),
+		(val_div, ":player_attacked", ":strength_contribution_of_player"),
+	  
+		(store_div, ":player_reduce_dmg", ":player_attacked", ":player_party_defense"),
+		(val_min, ":player_reduce_dmg", 50),
+		(val_add, ":player_reduce_dmg", 50), # 50% reduction max
+		(store_mul, ":player_attack", ":player_attacked", ":player_reduce_dmg"),
+		(val_div, ":player_attack", 100),
+		(set_fixed_point_multiplier, 1),
+		(store_sqrt, ":player_attack", ":player_attack"),
+
+		(val_sub, ":enemy_party_strength", ":enemy_party_strength_for_p"),
 		
         (inflict_casualties_to_party_group, "p_main_party", ":player_attack", "p_temp_casualties"),
         # (inflict_casualties_to_party_group, "p_main_party", ":enemy_party_strength_for_p", "p_temp_casualties"),
         (call_script, "script_print_casualties_to_s0", "p_temp_casualties", 0),
         (str_store_string_reg, s8, s0),
 		
-		(store_mul, ":ally_attack", ":enemy_party_strength", ":enemy_party_strength"),
-		(val_div, ":ally_attack", ":ally_party_defense"),
+		(val_sub, ":ally_defense", ":player_party_defense"),
+		
+		(store_mul, ":ally_attacked", ":enemy_party_strength", 100),
+		(store_sub, ":ally_contribution", 100, ":strength_contribution_of_player"),
+		(val_div, ":ally_attacked", ":ally_contribution"),
+		
+		# (val_mul, ":ally_attacked", ":ally_attacked"),
+		# (val_div, ":ally_attacked", ":ally_defense"),
+		
+		(store_div, ":ally_reduce_dmg", ":ally_attacked", ":ally_defense"),
+		(val_min, ":ally_reduce_dmg", 50),
+		(val_add, ":ally_reduce_dmg", 50), # 50% reduction max
+		(store_mul, ":ally_attack", ":ally_attacked", ":ally_reduce_dmg"),
+		(val_div, ":ally_attack", 100),
+		(set_fixed_point_multiplier, 1),
+		(store_sqrt, ":ally_attack", ":ally_attack"),
 
         (inflict_casualties_to_party_group, "$g_ally_party", ":ally_attack", "p_temp_casualties"),
         # (inflict_casualties_to_party_group, "$g_ally_party", ":enemy_party_strength", "p_temp_casualties"),
@@ -9369,8 +9674,15 @@ game_menus = [
         (str_store_string_reg, s9, s0),
         (party_collect_attachments_to_party, "$g_ally_party", "p_collective_ally"),
 		
-		(store_mul, ":ennemy_attack", ":friend_party_strength", ":friend_party_strength"),
-		(val_div, ":ennemy_attack", ":enemy_party_defense"),
+		(store_add, ":ally_strength", ":player_party_strength", ":friend_party_strength"),
+	  
+		(store_div, ":ennemy_reduce_dmg", ":ally_strength", ":enemy_party_defense"),
+		(val_min, ":ennemy_reduce_dmg", 50),
+		(val_add, ":ennemy_reduce_dmg", 50), # 50% reduction max
+		(store_mul, ":ennemy_attack", ":ally_strength", ":ennemy_reduce_dmg"),
+		(val_div, ":ennemy_attack", 100),
+		(set_fixed_point_multiplier, 1),
+		(store_sqrt, ":ennemy_attack", ":ennemy_attack"),
 
         (inflict_casualties_to_party_group, "$g_enemy_party", ":ennemy_attack", "p_temp_casualties"),
         # (inflict_casualties_to_party_group, "$g_enemy_party", ":friend_party_strength", "p_temp_casualties"),

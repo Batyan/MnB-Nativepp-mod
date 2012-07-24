@@ -618,56 +618,13 @@ scripts = [
 	  (faction_set_slot, "fac_kingdom_9", slot_faction_banner, "mesh_banner_c16"),
       (faction_set_slot, "fac_kingdom_10", slot_faction_banner,"mesh_banner_d15"),
 	  (faction_set_slot, "fac_kingdom_11", slot_faction_banner,"mesh_banner_a06"),
-
-      # (try_for_range, ":cur_faction", npc_kingdoms_begin, npc_kingdoms_end),
-        # (faction_get_slot, ":cur_faction_king", ":cur_faction", slot_faction_leader),
-        # (faction_get_slot, ":cur_faction_banner", ":cur_faction", slot_faction_banner),
-        # (val_sub, ":cur_faction_banner", banner_meshes_begin),
-        # (val_add, ":cur_faction_banner", banner_scene_props_begin),
-        # (troop_set_slot, ":cur_faction_king", slot_troop_banner_scene_prop, ":cur_faction_banner"),
-      # (try_end),
-      # (assign, ":num_khergit_lords_assigned", 0),
-      # (assign, ":num_sarranid_lords_assigned", 0),
-      # (assign, ":num_other_lords_assigned", 0),
 	  
 	  (call_script, "script_init_banners_slot", 1), # initialize banners with faction slots
 
       (try_for_range, ":kingdom_hero", active_npcs_begin, active_npcs_end),
         (troop_slot_eq, ":kingdom_hero", slot_troop_occupation, slto_kingdom_hero),
-        #(troop_slot_eq, ":kingdom_hero", slot_troop_occupation, slto_inactive_pretender),
-        # (store_troop_faction, ":kingdom_hero_faction", ":kingdom_hero"),
-        # (try_begin),
-          # (eq, ":kingdom_hero_faction", "fac_kingdom_1"),
-          # (troop_set_slot, ":kingdom_hero", slot_troop_banner_scene_prop, "spr_banner_kingdom_f"),
-        # (else_try),
-          # (eq, ":kingdom_hero_faction", "fac_kingdom_2"),
-          # (troop_set_slot, ":kingdom_hero", slot_troop_banner_scene_prop, "spr_banner_kingdom_b"),
-        # (else_try),
-          # (eq, ":kingdom_hero_faction", "fac_kingdom_3"),
-          # (troop_set_slot, ":kingdom_hero", slot_troop_banner_scene_prop, "spr_banner_kingdom_c"),
-        # (else_try),
-          # (eq, ":kingdom_hero_faction", "fac_kingdom_4"),
-          # (troop_set_slot, ":kingdom_hero", slot_troop_banner_scene_prop, "spr_banner_kingdom_a"),
-        # (else_try),
-          # (eq, ":kingdom_hero_faction", "fac_kingdom_5"),
-          # (troop_set_slot, ":kingdom_hero", slot_troop_banner_scene_prop, "spr_banner_kingdom_d"),
-        # (else_try),
-          # (eq, ":kingdom_hero_faction", "fac_kingdom_6"),
-          # (troop_set_slot, ":kingdom_hero", slot_troop_banner_scene_prop, "spr_banner_kingdom_e"),
-		# (else_try),
-          # (eq, ":kingdom_hero_faction", "fac_kingdom_9"),
-          # (troop_set_slot, ":kingdom_hero", slot_troop_banner_scene_prop, "spr_banner_do"),
-		# (else_try),
-          # (eq, ":kingdom_hero_faction", "fac_kingdom_10"),
-          # (troop_set_slot, ":kingdom_hero", slot_troop_banner_scene_prop, "spr_banner_cp"),
-		# (else_try),
-          # (eq, ":kingdom_hero_faction", "fac_kingdom_11"),
-          # (troop_set_slot, ":kingdom_hero", slot_troop_banner_scene_prop, "spr_banner_f"),
-		# (try_end),
 		
 		(call_script, "script_assign_banner", ":kingdom_hero"),
-
-
 
 		## No need of this as we change the equipement of lords and then their renown
 		## Kings have thier renown initialized before
@@ -1064,15 +1021,15 @@ scripts = [
         (assign, ":garrison_strength", 20),
         (try_begin),
           (party_slot_eq, ":center_no", slot_party_type, spt_town),
-          (assign, ":garrison_strength", 50),
+          (assign, ":garrison_strength", 47),
         (try_end),
         (try_for_range, ":unused", 0, ":garrison_strength"),
           (call_script, "script_cf_reinforce_party", ":center_no"),
         (try_end),
         ## ADD some XP initially
-        # (store_div, ":xp_amount", ":garrison_strength", 8),
-        # (val_add, ":xp_amount", 3),
-		(assign, ":xp_amount", 8), # to make castles have less, trained troops
+        (store_div, ":xp_amount", ":garrison_strength", 8),
+        (val_add, ":xp_amount", 5),
+		# (assign, ":xp_amount", 8), # to make castles have less, trained troops
         (try_for_range, ":unused", 0, ":xp_amount"),
           (store_random_in_range, ":xp", 6500, 8500),
           (party_upgrade_with_xp, ":center_no", ":xp", 0),
@@ -3925,31 +3882,59 @@ scripts = [
           (try_end),
           ##diplomacy end+
 
-          (store_div, ":defender_strength", ":defender_strength", 20), # attacker strength is not limited by single ladder
-          # (val_min, ":defender_strength", 50),
+          (val_div, ":defender_strength", 20),
           (val_max, ":defender_strength", 1),
-          (store_div, ":attacker_strength", ":attacker_strength", 20),
-          # (val_min, ":attacker_strength", 50),
+          (val_div, ":attacker_strength", 20),
           (val_add, ":attacker_strength", 1),
 		  
-		  (store_div, ":defender_defense", ":defender_defense", 20),
-          # (val_min, ":defender_defense", 50),
+		  (val_div, ":defender_defense", 20),
           (val_max, ":defender_defense", 1),
-          (store_div, ":attacker_defense", ":attacker_defense", 20),
-          # (val_min, ":attacker_defense", 50),
+          (val_div, ":attacker_defense", 20),
           (val_add, ":attacker_defense", 1),
+		  
           (try_begin),
             #For sieges increase attacker casualties and reduce defender casualties.
             (this_or_next|party_slot_eq, ":root_defender_party", slot_party_type, spt_castle),
             (party_slot_eq, ":root_defender_party", slot_party_type, spt_town),
+			
+		    (try_begin), # We reduce attacker strength to a level closer to the defender's
+		      (gt, ":attacker_strength", ":defender_strength"),
+		      (val_add, ":attacker_strength", ":defender_strength"),
+		      (val_div, ":attacker_strength", 2),
+		    (try_end),
+		    (try_begin), # We do the same for defense, except that we increase defender's defense
+		      (gt, ":attacker_defense", ":defender_defense"),
+		      (val_add, ":defender_defense", ":attacker_defense"),
+		      (val_div, ":defender_defense", 2),
+		    (try_end),
+			
             (val_mul, ":defender_strength", 150), #it was 1.5 in old version, now it is only 1.23 -- back to 1.5
             (val_div, ":defender_strength", 100),
 			
 			(val_mul, ":defender_defense", 2), #twice as hard to kill defenders, we do this to make taking castles last longer
-
-            # (val_mul, ":attacker_strength", 100), #it was 0.5 in old version, now it is only 1 / 1.23
-            # (val_div, ":attacker_strength", 123),
+			
+			
+			
+		  (else_try), # Not a siege
+		    (try_begin), # We reduce attacker strength to a level closer to the defender's
+		      (gt, ":attacker_strength", ":defender_strength"),
+		      (val_add, ":attacker_strength", ":defender_strength"),
+		      (val_div, ":attacker_strength", 2),
+			(else_try), # Unless defender is stronger, then we do the other way
+			  (val_add, ":defender_strength", ":attacker_strength"),
+		      (val_div, ":defender_strength", 2),
+		    (try_end),
+			
+		    (try_begin), # We do the same for defense, except that we increase defender's defense
+		      (gt, ":attacker_defense", ":defender_defense"),
+		      (val_add, ":defender_defense", ":attacker_defense"),
+		      (val_div, ":defender_defense", 2),
+			(else_try),
+			  (val_add, ":attacker_defense", ":defender_defense"),
+		      (val_div, ":attacker_defense", 2),
+		    (try_end),
           (try_end),
+		  
 
           ##diplomacy begin
           (assign, ":defender_percent", 100),
@@ -3998,6 +3983,12 @@ scripts = [
 			(set_fixed_point_multiplier, 1),
 			(store_sqrt, ":attacker_attack", ":attacker_attack"),
 			
+			(try_begin), # Sieges last longer than normal battles
+			  (this_or_next|party_slot_eq, ":root_defender_party", slot_party_type, spt_castle),
+              (party_slot_eq, ":root_defender_party", slot_party_type, spt_town),
+			  (val_div, ":attacker_attack", 2),
+			(try_end),
+			
             (inflict_casualties_to_party_group, ":root_attacker_party", ":attacker_attack", "p_temp_casualties"),
             # (inflict_casualties_to_party_group, ":root_attacker_party", ":defender_strength", "p_temp_casualties"),
             (party_collect_attachments_to_party, ":root_attacker_party", "p_collective_enemy"),
@@ -4021,6 +4012,12 @@ scripts = [
 			(val_div, ":defender_attack", 100),
 			(set_fixed_point_multiplier, 1),
 			(store_sqrt, ":defender_attack", ":defender_attack"),
+			
+			(try_begin), # Sieges last longer than normal battles
+			  (this_or_next|party_slot_eq, ":root_defender_party", slot_party_type, spt_castle),
+              (party_slot_eq, ":root_defender_party", slot_party_type, spt_town),
+			  (val_div, ":defender_attack", 2),
+			(try_end),
 			
             (inflict_casualties_to_party_group, ":root_defender_party", ":defender_attack", "p_temp_casualties"),
             (party_collect_attachments_to_party, ":root_defender_party", "p_collective_ally"),
@@ -5960,7 +5957,7 @@ scripts = [
       (assign, ":limit", 0),
       (store_skill_level, ":skill", "skl_leadership", ":troop_no"),
       (store_attribute_level, ":charisma", ":troop_no", ca_charisma),
-      (val_mul, ":skill", 20),
+      (val_mul, ":skill", 25),
       (val_add, ":limit", ":skill"),
       (val_add, ":limit", ":charisma"),
       (val_add, ":limit", ":charisma"),
@@ -15128,7 +15125,7 @@ scripts = [
 
         (store_skill_level, ":skill", "skl_leadership", ":party_leader"),
         (store_attribute_level, ":charisma", ":party_leader", ca_charisma),
-        (val_mul, ":skill", 20),
+        (val_mul, ":skill", 25),
         (val_add, ":limit", ":skill"),
         (val_add, ":limit", ":charisma"),
 		(val_add, ":limit", ":charisma"),
@@ -39711,7 +39708,7 @@ scripts = [
         (troop_set_slot, "trp_npc17", slot_troop_home, "p_village_69"), #Kwynn
         (troop_set_slot, "trp_npc17", slot_troop_payment_request, 400),
 		(troop_set_slot, "trp_npc17", slot_troop_kingsupport_argument, argument_victory),
-		(troop_set_slot, "trp_npc17", slot_troop_kingsupport_opponent, -1), #
+		(troop_set_slot, "trp_npc17", slot_troop_kingsupport_opponent, -1), # later will be saorie
  		(troop_set_slot, "trp_npc17", slot_troop_town_with_contacts, "p_town_1"), #Sargoth
 		(troop_set_slot, "trp_npc17", slot_lord_reputation_type, lrep_benefactor), #
 
@@ -39726,7 +39723,7 @@ scripts = [
         (troop_set_slot, "trp_npc18", slot_troop_home, "p_village_102"), #Shibal Zumr
         (troop_set_slot, "trp_npc18", slot_troop_payment_request, 0),
 		(troop_set_slot, "trp_npc18", slot_troop_kingsupport_argument, argument_lords),
-		(troop_set_slot, "trp_npc18", slot_troop_kingsupport_opponent, -1), #
+		(troop_set_slot, "trp_npc18", slot_troop_kingsupport_opponent, -1), # later will be aethrod
  		(troop_set_slot, "trp_npc18", slot_troop_town_with_contacts, "p_town_21"), #Ahmerrad
 		(troop_set_slot, "trp_npc18", slot_lord_reputation_type, lrep_benefactor), #
 
@@ -39740,7 +39737,7 @@ scripts = [
         (troop_set_slot, "trp_npc19", slot_troop_home, "p_village_16"), #Shapeshte
         (troop_set_slot, "trp_npc19", slot_troop_payment_request, 0),
 		(troop_set_slot, "trp_npc19", slot_troop_kingsupport_argument, argument_lords),
-		(troop_set_slot, "trp_npc19", slot_troop_kingsupport_opponent, -1), #
+		(troop_set_slot, "trp_npc19", slot_troop_kingsupport_opponent, -1), # later will be seis
  		(troop_set_slot, "trp_npc19", slot_troop_town_with_contacts, "p_town_13"), #Rivacheg
 		(troop_set_slot, "trp_npc19", slot_lord_reputation_type, lrep_selfrighteous), #
 
@@ -39754,89 +39751,89 @@ scripts = [
         (troop_set_slot, "trp_npc20", slot_troop_home, "p_village_16"), #Shapeshte
         (troop_set_slot, "trp_npc20", slot_troop_payment_request, 100),
 		(troop_set_slot, "trp_npc20", slot_troop_kingsupport_argument, argument_lords),
-		(troop_set_slot, "trp_npc20", slot_troop_kingsupport_opponent, -1), #
+		(troop_set_slot, "trp_npc20", slot_troop_kingsupport_opponent, -1), # later will be sverre
  		(troop_set_slot, "trp_npc20", slot_troop_town_with_contacts, "p_town_12"), #Wercheg
 		(troop_set_slot, "trp_npc20", slot_lord_reputation_type, lrep_selfrighteous), #
 		
-		(troop_set_slot, "trp_npc21", slot_troop_morality_type, tmt_egalitarian), #
+		(troop_set_slot, "trp_npc21", slot_troop_morality_type, tmt_egalitarian), # Ilya
         (troop_set_slot, "trp_npc21", slot_troop_morality_value, 3),
         (troop_set_slot, "trp_npc21", slot_troop_2ary_morality_type, -1),
         (troop_set_slot, "trp_npc21", slot_troop_2ary_morality_value, 0),
         (troop_set_slot, "trp_npc21", slot_troop_personalityclash_object, "trp_npc22"), #
         (troop_set_slot, "trp_npc21", slot_troop_personalityclash2_object, "trp_npc24"), #
         (troop_set_slot, "trp_npc21", slot_troop_personalitymatch_object, "trp_npc23"),  #
-        (troop_set_slot, "trp_npc21", slot_troop_home, "p_town_6"), #
-        (troop_set_slot, "trp_npc21", slot_troop_payment_request, 5000),
+        (troop_set_slot, "trp_npc21", slot_troop_home, "p_castle_24"), # Reindi Castle
+        (troop_set_slot, "trp_npc21", slot_troop_payment_request, 2500),
 		(troop_set_slot, "trp_npc21", slot_troop_kingsupport_argument, argument_victory),
 		(troop_set_slot, "trp_npc21", slot_troop_kingsupport_opponent, -1), #
- 		(troop_set_slot, "trp_npc21", slot_troop_town_with_contacts, "p_town_6"), #
+ 		(troop_set_slot, "trp_npc21", slot_troop_town_with_contacts, "p_town_6"), # Praven
 		(troop_set_slot, "trp_npc21", slot_lord_reputation_type, lrep_selfrighteous), #
 		
-		(troop_set_slot, "trp_npc22", slot_troop_morality_type, tmt_egalitarian), #
+		(troop_set_slot, "trp_npc22", slot_troop_morality_type, tmt_egalitarian), # Ysellian
         (troop_set_slot, "trp_npc22", slot_troop_morality_value, 3),
         (troop_set_slot, "trp_npc22", slot_troop_2ary_morality_type, -1),
         (troop_set_slot, "trp_npc22", slot_troop_2ary_morality_value, 0),
         (troop_set_slot, "trp_npc22", slot_troop_personalityclash_object, "trp_npc21"), #
         (troop_set_slot, "trp_npc22", slot_troop_personalityclash2_object, "trp_npc23"), #
         (troop_set_slot, "trp_npc22", slot_troop_personalitymatch_object, "trp_npc25"),  #
-        (troop_set_slot, "trp_npc22", slot_troop_home, "p_town_11"), #
-        (troop_set_slot, "trp_npc22", slot_troop_payment_request, 5000),
+        (troop_set_slot, "trp_npc22", slot_troop_home, "p_castle_8"), # Jeirbe Castle
+        (troop_set_slot, "trp_npc22", slot_troop_payment_request, 2500),
 		(troop_set_slot, "trp_npc22", slot_troop_kingsupport_argument, argument_victory),
 		(troop_set_slot, "trp_npc22", slot_troop_kingsupport_opponent, -1), #
  		(troop_set_slot, "trp_npc22", slot_troop_town_with_contacts, "p_town_11"), #
 		(troop_set_slot, "trp_npc22", slot_lord_reputation_type, lrep_selfrighteous), #
 		
-		(troop_set_slot, "trp_npc23", slot_troop_morality_type, tmt_egalitarian), #
+		(troop_set_slot, "trp_npc23", slot_troop_morality_type, tmt_egalitarian), # Khutza
         (troop_set_slot, "trp_npc23", slot_troop_morality_value, 3),
         (troop_set_slot, "trp_npc23", slot_troop_2ary_morality_type, -1),
         (troop_set_slot, "trp_npc23", slot_troop_2ary_morality_value, 0),
         (troop_set_slot, "trp_npc23", slot_troop_personalityclash_object, "trp_npc22"), #
         (troop_set_slot, "trp_npc23", slot_troop_personalityclash2_object, "trp_npc26"), #
         (troop_set_slot, "trp_npc23", slot_troop_personalitymatch_object, "trp_npc21"),  #
-        (troop_set_slot, "trp_npc23", slot_troop_home, "p_town_18"), #
-        (troop_set_slot, "trp_npc23", slot_troop_payment_request, 5000),
+        (troop_set_slot, "trp_npc23", slot_troop_home, "p_town_14"), # Halmar
+        (troop_set_slot, "trp_npc23", slot_troop_payment_request, 2500),
 		(troop_set_slot, "trp_npc23", slot_troop_kingsupport_argument, argument_victory),
 		(troop_set_slot, "trp_npc23", slot_troop_kingsupport_opponent, -1), #
- 		(troop_set_slot, "trp_npc23", slot_troop_town_with_contacts, "p_town_18"), #
+ 		(troop_set_slot, "trp_npc23", slot_troop_town_with_contacts, "p_town_14"), # Halmar
 		(troop_set_slot, "trp_npc23", slot_lord_reputation_type, lrep_selfrighteous), #
 		
-		(troop_set_slot, "trp_npc24", slot_troop_morality_type, tmt_egalitarian), #
+		(troop_set_slot, "trp_npc24", slot_troop_morality_type, tmt_egalitarian), # Uhtred
         (troop_set_slot, "trp_npc24", slot_troop_morality_value, 3),
         (troop_set_slot, "trp_npc24", slot_troop_2ary_morality_type, -1),
         (troop_set_slot, "trp_npc24", slot_troop_2ary_morality_value, 0),
         (troop_set_slot, "trp_npc24", slot_troop_personalityclash_object, "trp_npc21"), #
         (troop_set_slot, "trp_npc24", slot_troop_personalityclash2_object, "trp_npc25"), #
         (troop_set_slot, "trp_npc24", slot_troop_personalitymatch_object, "trp_npc26"),  #
-        (troop_set_slot, "trp_npc24", slot_troop_home, "p_town_2"), #
-        (troop_set_slot, "trp_npc24", slot_troop_payment_request, 5000),
+        (troop_set_slot, "trp_npc24", slot_troop_home, "p_castle_36"), # Jelbegi Castle
+        (troop_set_slot, "trp_npc24", slot_troop_payment_request, 2000),
 		(troop_set_slot, "trp_npc24", slot_troop_kingsupport_argument, argument_victory),
 		(troop_set_slot, "trp_npc24", slot_troop_kingsupport_opponent, -1), #
- 		(troop_set_slot, "trp_npc24", slot_troop_town_with_contacts, "p_town_2"), #
+ 		(troop_set_slot, "trp_npc24", slot_troop_town_with_contacts, "p_town_2"), # Thir
 		(troop_set_slot, "trp_npc24", slot_lord_reputation_type, lrep_selfrighteous), #
 		
-		(troop_set_slot, "trp_npc25", slot_troop_morality_type, tmt_egalitarian), #
+		(troop_set_slot, "trp_npc25", slot_troop_morality_type, tmt_egalitarian), # Ireth
         (troop_set_slot, "trp_npc25", slot_troop_morality_value, 3),
         (troop_set_slot, "trp_npc25", slot_troop_2ary_morality_type, -1),
         (troop_set_slot, "trp_npc25", slot_troop_2ary_morality_value, 0),
         (troop_set_slot, "trp_npc25", slot_troop_personalityclash_object, "trp_npc24"), #
         (troop_set_slot, "trp_npc25", slot_troop_personalityclash2_object, "trp_npc26"), #
         (troop_set_slot, "trp_npc25", slot_troop_personalitymatch_object, "trp_npc22"),  #
-        (troop_set_slot, "trp_npc25", slot_troop_home, "p_town_15"), #
-        (troop_set_slot, "trp_npc25", slot_troop_payment_request, 5000),
+        (troop_set_slot, "trp_npc25", slot_troop_home, "p_village_90"), # Jamiche
+        (troop_set_slot, "trp_npc25", slot_troop_payment_request, 2500),
 		(troop_set_slot, "trp_npc25", slot_troop_kingsupport_argument, argument_victory),
 		(troop_set_slot, "trp_npc25", slot_troop_kingsupport_opponent, -1), #
- 		(troop_set_slot, "trp_npc25", slot_troop_town_with_contacts, "p_town_15"), #
+ 		(troop_set_slot, "trp_npc25", slot_troop_town_with_contacts, "p_town_5"), # Jelkala
 		(troop_set_slot, "trp_npc25", slot_lord_reputation_type, lrep_selfrighteous), #
 		
-		(troop_set_slot, "trp_npc26", slot_troop_morality_type, tmt_egalitarian), #
+		(troop_set_slot, "trp_npc26", slot_troop_morality_type, tmt_egalitarian), # Merek
         (troop_set_slot, "trp_npc26", slot_troop_morality_value, 3),
         (troop_set_slot, "trp_npc26", slot_troop_2ary_morality_type, -1),
         (troop_set_slot, "trp_npc26", slot_troop_2ary_morality_value, 0),
         (troop_set_slot, "trp_npc26", slot_troop_personalityclash_object, "trp_npc25"), #
         (troop_set_slot, "trp_npc26", slot_troop_personalityclash2_object, "trp_npc23"), #
         (troop_set_slot, "trp_npc26", slot_troop_personalitymatch_object, "trp_npc24"),  #
-        (troop_set_slot, "trp_npc26", slot_troop_home, "p_town_22"), #
-        (troop_set_slot, "trp_npc26", slot_troop_payment_request, 5000),
+        (troop_set_slot, "trp_npc26", slot_troop_home, "p_village_94"), # Mazigh
+        (troop_set_slot, "trp_npc26", slot_troop_payment_request, 2500),
 		(troop_set_slot, "trp_npc26", slot_troop_kingsupport_argument, argument_victory),
 		(troop_set_slot, "trp_npc26", slot_troop_kingsupport_opponent, -1), #
  		(troop_set_slot, "trp_npc26", slot_troop_town_with_contacts, "p_town_22"), #
@@ -73817,7 +73814,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	(agent_set_slot, ":agent", slot_agent_new_division, -1),	
 	(get_player_agent_no, ":player"),	#after_mission_start triggers are called after spawn, so globals can't be used yet
 
-					(try_begin),
+	(try_begin),
 	    (ge, ":player", 0),
 		(agent_is_human, ":agent"),
 		(agent_get_team, ":player_team", ":player"),
@@ -73825,37 +73822,37 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		(this_or_next|main_hero_fallen),
 		(neq, ":team", ":player_team"),
 		(agent_get_troop_id, ":troop", ":agent"),
-						(try_begin),
+		(try_begin),
 			(troop_is_guarantee_horse, ":troop"),
 			(assign, ":target_division", grc_cavalry),
-						(else_try),
+		(else_try),
 			(troop_is_guarantee_ranged, ":troop"),
 			(assign, ":target_division", grc_archers),
-						(else_try),
+		(else_try),
 			(assign, ":target_division", grc_infantry),		
-						(try_end),
+		(try_end),
 		(agent_get_division, ":division", ":agent"),
 		(neq, ":division", ":target_division"),
 		(agent_set_division, ":agent", ":target_division"),
 		(agent_set_slot, ":agent", slot_agent_new_division, ":target_division"),
-					(try_end),
+	(try_end),
    ]),
 					
  ("weather_change_rain_or_snow",
    [
     (party_get_current_terrain, ":terrain_type", "p_main_party"),
-							(try_begin),
+	(try_begin),
       (this_or_next|eq, ":terrain_type", rt_snow),
       (eq, ":terrain_type", rt_snow_forest),
       (assign, ":rain_type", 2),
-							(else_try),
+	(else_try),
       (assign, ":rain_type", 1),
-					(try_end),
+	(try_end),
 
     (assign, reg0, -1),
     (assign, reg1, -1),
     (store_random_in_range, ":rand_rain", 1, 100),
-					(try_begin),
+	(try_begin),
 	  (lt, ":rand_rain", 50),
       (get_global_cloud_amount, ":clouds"),
       (ge, ":clouds", 40),
@@ -73866,7 +73863,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
       (set_rain, ":rain_type", ":rand_strength"),
       (assign, reg0, ":rain_type"),
       (assign, reg1, ":rand_strength"),
-					(try_end),
+	(try_end),
   ]),
 
   #script_weather_affect_proficiency

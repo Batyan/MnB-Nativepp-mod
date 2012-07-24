@@ -649,9 +649,10 @@ common_pbod_triggers = [ #collapse caba_order_triggers into this?
 	]),
 
   #Fix for setting divisions, duplicated in formations code, so disabled in mst_lead_charge
-  (ti_on_agent_spawn, 0, 0, [(neq, "$g_next_menu", "mnu_simple_encounter"),(neq, "$g_next_menu", "mnu_join_battle")], [(store_trigger_param_1, ":agent"),(call_script, "script_prebattle_agent_fix_division", ":agent")]),
-  (0.5, 0, 0, [(neq, "$g_next_menu", "mnu_simple_encounter"), #not mst_lead_charge
-			   (neq, "$g_next_menu", "mnu_join_battle"),
+  (ti_on_agent_spawn, 0, 0, # [(neq, "$g_next_menu", "mnu_simple_encounter"),(neq, "$g_next_menu", "mnu_join_battle")], [(store_trigger_param_1, ":agent"),(call_script, "script_prebattle_agent_fix_division", ":agent")]),
+                            [], [(store_trigger_param_1, ":agent"),(call_script, "script_prebattle_agent_fix_division", ":agent")]),
+  (0.5, 0, 0, [#(neq, "$g_next_menu", "mnu_simple_encounter"), #not mst_lead_charge
+			   #(neq, "$g_next_menu", "mnu_join_battle"),
 			   (store_mission_timer_a, reg0),(gt, reg0, 4)], 
    #Prior conditions: (this_or_next|party_slot_eq, "p_main_party", slot_party_prebattle_customized_divisions, 1),(this_or_next|neg|party_slot_eq, "p_main_party", slot_party_pref_div_no_ammo, 9),(neg|party_slot_eq, "p_main_party", slot_party_pref_div_dehorse, 9)
    [
@@ -662,7 +663,7 @@ common_pbod_triggers = [ #collapse caba_order_triggers into this?
 		(neg|agent_slot_eq, ":agent", slot_agent_new_division, ":division"),
 		(agent_get_slot, ":new_div", ":agent", slot_agent_new_division),
 		(agent_set_division, ":agent", ":new_div"),
-		(try_end),
+	(try_end),
 	]),
 ]
 
