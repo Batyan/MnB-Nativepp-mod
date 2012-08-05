@@ -2784,3 +2784,53 @@ slot_agent_new_division        = 29
 #slot_party_cabadrin_order_d0 = slot_town_arena_melee_mission_tpl #78
 slot_party_gk_order          = slot_town_rebellion_readiness #77
 
+# Stores division state
+slot_team_division_0_state = 351 # inf
+slot_team_division_1_state = 352 # rang
+slot_team_division_2_state = 353 # cav
+slot_team_division_3_state = 354 # aux
+# These will be used for reinforcements
+slot_team_division_4_state = 355 # inf2
+slot_team_division_5_state = 356 # rang2
+slot_team_division_6_state = 357 # cav2
+slot_team_division_7_state = 358 # aux2
+
+stds_preparation = 0 # Getting into position
+stds_reinforcement = 1 # Used for newly spawned divisions
+stds_ready = 2 # Used for hold positions tactics or when moving to the ennemy
+stds_engaging = 3 # Before contact with the ennemy, used when manoeuvring around, or when starting to shot with ranged
+stds_maneuver = 4 # Mostly cavalry when moving to charge position
+stds_battle = 5 # Battle
+stds_reform = 6 # Used when reinforcements have arrived
+stds_disabled = 7 # Divisions 4-7 when no reinforcements 
+stds_retreat = 8 # Retreating group
+
+slot_team_battle_tactic = 359
+
+bt_none = 0							# No leader, no elaborated tactic
+bt_charge = 1						# Blindly charge
+bt_coordinated_charge = 2			# Charge with a quick semi-circling (cav-cav2)
+bt_advance = 3						# Slowly advance towards the ennemy
+bt_circling = 4						# Slowly advance and circle the ennemy with cav/inf
+bt_crossfire = 5					# Slowly advance towards the ennemy with ranged units slightly on the sides
+bt_hold_inf = 6						# Hold a position (inf-rang-cav)
+bt_hold_rang = 7					# Hold a position (rang-inf-cav)
+bt_hold_circling = 8				# Hold a position while moving cavalry to circle the ennemy (cav/cav-cav2)
+bt_retreat = 9						# When a team has no leader they might retreat somewhere to recover (spawn)
+bt_regroup = 10						# Used when the team is moving back to its spawn for regrouping and/or retreating slowly
+
+slot_team_division_3_type = 360 # What kind of division this is
+
+stdt_none = 0			# Does not exist			-- 
+stdt_aux_cav = 1		# Same as group 2 (cavalry)	-- 
+stdt_aux_inf = 2		# Same as group 0 (infantry)-- 
+stdt_wo_shield_inf = 3	# Shieldless infantry 		-- Mostly used by nords, but can also be used for vaegirs or rhodoks
+stdt_aux_rang = 4		# Same as group 1 (ranged)	-- 
+stdt_hrang = 5			# Horse archer group 		-- Mostly used by khergits, but might be used by sarranids, or, in rare occasions, by rhodoks
+stdt_lancer = 6			# Lancer group 				-- Used by swadians, vaegirs, sometimes by sarranids
+
+slot_team_num_agent_in_div0 = 361
+slot_team_num_agent_in_div1 = 362
+slot_team_num_agent_in_div2 = 363
+slot_team_num_agent_in_div3 = 364
+

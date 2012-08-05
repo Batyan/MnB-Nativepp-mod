@@ -46,14 +46,14 @@ party_templates = [
 ##  ("peasant","Peasant",icon_peasant,0,fac_commoners,merchant_personality,[(trp_farmer,1,6),(trp_peasant_woman,0,7)]),
 
 #  ("black_khergit_raiders","Black Khergit Raiders",icon_khergit_horseman_b|carries_goods(2),0,fac_black_khergits,bandit_personality,[(trp_black_khergit_guard,1,10),(trp_black_khergit_horseman,5,5)]),
-  ("steppe_bandits","Steppe Bandits",icon_khergit|carries_goods(6),0,fac_outlaws,bandit_personality,[(trp_steppe_rider,0,9),(trp_steppe_bandit,4,47),(trp_peasant_woman,0,1,pmf_is_prisoner),(trp_farmer,0,1,pmf_is_prisoner),(trp_khergit_tribesman,0,2,pmf_is_prisoner)]),
-  ("taiga_bandits","Tundra Bandits",icon_axeman|carries_goods(3),0,fac_outlaws,bandit_personality,[(trp_tundra_bandit,0,10),(trp_taiga_bandit,4,38),(trp_peasant_woman,0,1,pmf_is_prisoner),(trp_farmer,0,1,pmf_is_prisoner),(trp_vaegir_recruit,0,2,pmf_is_prisoner)]),
-  ("desert_bandits","Desert Bandits",icon_khergit|carries_goods(6),0,fac_outlaws,bandit_personality,[(trp_desert_rider,1,14),(trp_desert_skirmisher,0,7),(trp_desert_bandit,4,40),(trp_peasant_woman,0,1,pmf_is_prisoner),(trp_farmer,0,1,pmf_is_prisoner),(trp_sarranid_recruit,0,2,pmf_is_prisoner)]),
-  ("forest_bandits","Forest Bandits",icon_axeman|carries_goods(3),0,fac_outlaws,bandit_personality,[(trp_forest_warrior,0,11),(trp_forest_hunter,0,7),(trp_forest_bandit,4,38),(trp_peasant_woman,0,1,pmf_is_prisoner),(trp_farmer,0,1,pmf_is_prisoner),(trp_swadian_recruit,0,2,pmf_is_prisoner)]),
-  ("mountain_bandits","Mountain Bandits",icon_axeman|carries_goods(3),0,fac_mountain_bandits,bandit_personality,[(trp_mountain_cavalry,0,7),(trp_mountain_raider,0,10),(trp_mountain_bandit,4,45),(trp_peasant_woman,0,1,pmf_is_prisoner),(trp_farmer,0,1,pmf_is_prisoner),(trp_rhodok_tribesman,0,2,pmf_is_prisoner)]),
-  ("sea_raiders","Sea Raiders",icon_axeman|carries_goods(3),0,fac_outlaws,bandit_personality,[(trp_skull_crusher,0,8),(trp_sea_raider,5,48),(trp_peasant_woman,0,1,pmf_is_prisoner),(trp_farmer,0,1,pmf_is_prisoner),(trp_nord_recruit,0,2,pmf_is_prisoner)]),
+  ("steppe_bandits","Steppe Bandits",icon_khergit|carries_goods(8),0,fac_outlaws,bandit_personality,[(trp_steppe_rider,0,9),(trp_steppe_bandit,4,47),(trp_peasant_woman,0,1,pmf_is_prisoner),(trp_farmer,0,1,pmf_is_prisoner),(trp_khergit_tribesman,0,2,pmf_is_prisoner)]),
+  ("taiga_bandits","Tundra Bandits",icon_axeman|carries_goods(6),0,fac_outlaws,bandit_personality,[(trp_tundra_bandit,0,10),(trp_taiga_bandit,4,38),(trp_peasant_woman,0,1,pmf_is_prisoner),(trp_farmer,0,1,pmf_is_prisoner),(trp_vaegir_recruit,0,2,pmf_is_prisoner)]),
+  ("desert_bandits","Desert Bandits",icon_khergit|carries_goods(8),0,fac_outlaws,bandit_personality,[(trp_desert_rider,1,14),(trp_desert_skirmisher,0,7),(trp_desert_bandit,4,40),(trp_peasant_woman,0,1,pmf_is_prisoner),(trp_farmer,0,1,pmf_is_prisoner),(trp_sarranid_recruit,0,2,pmf_is_prisoner)]),
+  ("forest_bandits","Forest Bandits",icon_axeman|carries_goods(6),0,fac_outlaws,bandit_personality,[(trp_forest_warrior,0,11),(trp_forest_hunter,0,7),(trp_forest_bandit,4,38),(trp_peasant_woman,0,1,pmf_is_prisoner),(trp_farmer,0,1,pmf_is_prisoner),(trp_swadian_recruit,0,2,pmf_is_prisoner)]),
+  ("mountain_bandits","Mountain Bandits",icon_axeman|carries_goods(5),0,fac_mountain_bandits,bandit_personality,[(trp_mountain_cavalry,0,7),(trp_mountain_raider,0,10),(trp_mountain_bandit,4,45),(trp_peasant_woman,0,1,pmf_is_prisoner),(trp_farmer,0,1,pmf_is_prisoner),(trp_rhodok_tribesman,0,2,pmf_is_prisoner)]),
+  ("sea_raiders","Sea Raiders",icon_axeman|carries_goods(7),0,fac_outlaws,bandit_personality,[(trp_skull_crusher,0,8),(trp_sea_raider,5,48),(trp_peasant_woman,0,1,pmf_is_prisoner),(trp_farmer,0,1,pmf_is_prisoner),(trp_nord_recruit,0,2,pmf_is_prisoner)]),
 
-  ("deserters","Deserters",icon_vaegir_knight|carries_goods(10),0,fac_deserters,bandit_personality,[(trp_peasant_woman,0,1,pmf_is_prisoner),(trp_townsman,0,2,pmf_is_prisoner),(trp_manhunter,0,1,pmf_is_prisoner)]),
+  ("deserters","Deserters",icon_vaegir_knight|carries_goods(12),0,fac_deserters,bandit_personality,[(trp_peasant_woman,0,1,pmf_is_prisoner),(trp_townsman,0,2,pmf_is_prisoner),(trp_manhunter,0,1,pmf_is_prisoner)]),
 
   
   
@@ -75,8 +75,8 @@ party_templates = [
 
 
   ("forager_party","Foraging Party",icon_gray_knight|carries_goods(5)|pf_show_faction,0,fac_commoners,merchant_personality,[]),
-  ("scout_party","Scouts",icon_gray_knight|carries_goods(1)|pf_show_faction,0,fac_commoners,bandit_personality,[]),
-  ("patrol_party","Patrol",icon_gray_knight|carries_goods(4)|pf_show_faction,0,fac_commoners,soldier_personality,[]),
+  ("scout_party","Scouts",icon_gray_knight|carries_goods(4)|pf_show_faction,0,fac_commoners,bandit_personality,[]),
+  ("patrol_party","Patrol",icon_gray_knight|carries_goods(6)|pf_show_faction,0,fac_commoners,soldier_personality,[]),
 #  ("war_party", "War Party",icon_gray_knight|carries_goods(3),0,fac_commoners,soldier_personality,[]),
   ("messenger_party","Messenger",icon_gray_knight|pf_show_faction,0,fac_commoners,merchant_personality,[]),
   ("raider_party","Raiders",icon_gray_knight|carries_goods(16)|pf_quest_party,0,fac_commoners,bandit_personality,[]),

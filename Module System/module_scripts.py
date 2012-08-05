@@ -149,7 +149,7 @@ scripts = [
    [
       (faction_set_slot, "fac_player_supporters_faction", slot_faction_state, sfs_inactive),
       (assign, "$g_player_luck", 200),
-	  (assign, "$banner_type", 0),
+	  (assign, "$banner_type", 1), # Now starts with individual banners
       (troop_set_slot, "trp_player", slot_troop_occupation, slto_kingdom_hero),
       (store_random_in_range, ":starting_training_ground", training_grounds_begin, training_grounds_end),
       (party_relocate_near_party, "p_main_party", ":starting_training_ground", 3),
@@ -158,7 +158,7 @@ scripts = [
       (call_script, "script_update_party_creation_random_limits"),
       (assign, "$g_player_party_icon", -1),
 	  (assign, "$do_not_command_troops", 0),
-	  (assign, "$order_parties", 0),
+	  (assign, "$order_parties", 2), # Garison and lords parties are sorted
 
 	  #Warband changes begin -- set this early
 	  (try_for_range, ":npc", 0, kingdom_ladies_end),
@@ -25891,25 +25891,30 @@ scripts = [
         (party_get_slot, ":exact_enemy_strength", ":center_no", slot_center_sortie_enemy_strength),
 
 		(try_begin),
-			(lt, ":exact_enemy_strength", 500),
+			(lt, ":exact_enemy_strength", 5000),
 			(display_message, "@Small bands of enemies spotted near {s1}."),
 		(else_try),
-			(lt, ":exact_enemy_strength", 1000),
+			(lt, ":exact_enemy_strength", 25000),
 			(display_message, "@Enemy patrols spotted near {s1}."),
 		(else_try),
-			(lt, ":exact_enemy_strength", 2000),
+			(lt, ":exact_enemy_strength", 60000),
 			(display_message, "@Medium-sized group of enemies spotted near {s1}."),
 		(else_try),
-			(lt, ":exact_enemy_strength", 4000),
+			(lt, ":exact_enemy_strength", 120000),
 			(display_message, "@Significant group of enemies spotted near {s1}."),
 		(else_try),
-			(lt, ":exact_enemy_strength", 8000),
+			(lt, ":exact_enemy_strength", 180000),
 			(display_message, "@Army of enemies spotted near {s1}."),
 		(else_try),
-			(lt, ":exact_enemy_strength", 16000),
+			(lt, ":exact_enemy_strength", 300000),
 			(display_message, "@Large army of enemies spotted near {s1}."),
 		(else_try),
 			(display_message, "@Great host of enemies spotted near {s1}."),
+		(try_end),
+		(try_begin),
+			(eq, "$test", 1),
+			(assign, reg10, ":exact_enemy_strength"),
+			(display_message, "@Strength : {reg10}"),
 		(try_end),
 		#maybe do audio sound?
 
@@ -31293,11 +31298,12 @@ scripts = [
 
           (position_transform_position_to_parent, pos63, pos61, pos62), #pos63 is 23m away from leader in the direction of the enemy.
           (position_set_z_to_ground_level, pos63),
-		  (position_transform_position_to_parent, pos58, pos61, pos59), #pos58 is 23m away from leader in the direction of the enemy.
-          (position_set_z_to_ground_level, pos58),
+		  # (position_transform_position_to_parent, pos58, pos61, pos59), #pos58 is 23m away from leader in the direction of the enemy.
+          # (position_set_z_to_ground_level, pos58),
           (try_begin),
 		    (eq, ":battle_tactic", btactic_follow_leader_foot),
 			(team_give_order, ":team_no", grc_infantry, mordr_hold),
+			(team_give_order, ":team_no", grc_infantry, mordr_advance),
 			(team_give_order, ":team_no", grc_archers, mordr_hold),
             (team_set_order_position, ":team_no", grc_everyone, pos63),
 			(eq, "$once", 0),
@@ -31308,8 +31314,12 @@ scripts = [
             (team_set_order_position, ":team_no", grc_everyone, pos63),
 			(try_begin),
 			  (eq, ":battle_tactic", btactic_follow_leader_archer),
-			  (team_set_order_position, ":team_no", grc_infantry, pos58),
-			  (team_set_order_position, ":team_no", grc_cavalry, pos58),
+			  (team_give_order, ":team_no", grc_infantry, mordr_advance),
+			  (team_give_order, ":team_no", grc_infantry, mordr_advance),
+			  (team_give_order, ":team_no", grc_cavalry, mordr_advance),
+			(else_try),
+			  (team_give_order, ":team_no", grc_infantry, mordr_advance),
+			  (team_give_order, ":team_no", grc_cavalry, mordr_fall_back),
 			(try_end),
 		  (try_end),
           (agent_get_position, pos1, ":ai_leader"),
@@ -34721,7 +34731,7 @@ scripts = [
    [
      (try_for_agents, ":agent_no"),
        (agent_is_alive, ":agent_no"),
-       (agent_slot_eq, ":agent_no", slot_agent_is_not_reinforcement, 0),
+	   (agent_slot_eq, ":agent_no", slot_agent_is_not_reinforcement, 0),
        (agent_is_defender, ":agent_no"),
        (agent_get_division, ":agent_class", ":agent_no"), # was agent_get_class
        (agent_get_troop_id, ":agent_troop", ":agent_no"),
@@ -34762,8 +34772,8 @@ scripts = [
 		 # (try_end),
 		 # (eq, ":archer_can_move", 1),
 		 
-		 (agent_get_wielded_item, ":cur_weapon", ":agent_no", 0), 				# has a ranged weapon equiped
-		 (is_between, ":cur_weapon", ranged_weapons_begin, ranged_weapons_end), # if a melee weapon -> close to an ennemy -> stop moving
+		 # (agent_get_wielded_item, ":cur_weapon", ":agent_no", 0), 				# has a ranged weapon equiped
+		 # (is_between, ":cur_weapon", ranged_weapons_begin, ranged_weapons_end), # if a melee weapon -> close to an ennemy -> stop moving
 		# keep making them move even if they can see someone, to prevent them from not going to the defending positions
          # (this_or_next|neq, ":agent_cs", 1), # is not preparing to shot
 		 # (neq, ":agent_cs", 3),              # neither is shoting
@@ -34960,6 +34970,12 @@ scripts = [
         (eq, "$g_formation_group8_selected", 1),
         (team_set_order_position, ":team_no", 8, pos1),
       (try_end),
+	# (else_try),
+	  # (eq, ":order", mordr_charge),
+	  # (neg|agent_is_alive, ":leader_agent_no"),
+	  # (try_for_range, ":group", 0, 9),
+	    # (call_script, "script_formation_end", ":team_no", ":group"),
+	  # (try_end),
     (try_end),
     (set_show_messages, 1),
   ]),
@@ -36985,13 +37001,13 @@ scripts = [
   # OUTPUT: none
   ("update_nobles_troops_in_town",
     [
-       (store_script_param, ":center_no", 1),
-       (party_get_slot, ":player_relation", ":center_no", slot_center_player_relation),
-	   (troop_get_slot, ":player_renown", "trp_player", slot_troop_renown),
-       (store_div, ":renown_bonus", ":player_renown", 200),
+		(store_script_param, ":center_no", 1),
+		(party_get_slot, ":player_relation", ":center_no", slot_center_player_relation),
+		(troop_get_slot, ":player_renown", "trp_player", slot_troop_renown),
+		(store_div, ":renown_bonus", ":player_renown", 200),
 
-        (assign, ":upper_limit", 2),
-        (try_begin),
+		(assign, ":upper_limit", 2),
+		(try_begin),
           (lt, ":player_relation", 0),
           (assign, ":upper_limit", 0),
 		(else_try),
@@ -37001,12 +37017,26 @@ scripts = [
 		  # (val_div, ":upper_limit", ":divisor"),
 		  # (val_add, ":upper_limit", 1),
 		  (store_div, ":relation_bonus", ":player_relation", 5), #relation bonus is better than renown bonus
-        (try_end),
-		(val_add, ":upper_limit", ":relation_bonus"),
-		(val_add, ":upper_limit", ":renown_bonus"),
+		  (val_add, ":upper_limit", ":relation_bonus"),
+		  (val_add, ":upper_limit", ":renown_bonus"),
+		(try_end),
+		
 
-       (store_random_in_range, ":amount", 0, ":upper_limit"),
-       (party_set_slot, ":center_no", slot_center_volunteer_troop_amount, ":amount"),
+		(store_random_in_range, ":amount", 0, ":upper_limit"),
+		(party_set_slot, ":center_no", slot_center_volunteer_troop_amount, ":amount"),
+		
+		(store_random_in_range, ":random", 0, 3),
+		(try_begin), # 33% original faction, 67% current faction
+		  (eq, ":random", 0),
+		  (party_get_slot, ":center_culture", "$current_town", slot_center_culture),
+		(else_try),
+		  (store_faction_of_party, ":fac", "$current_town"),
+		  (faction_get_slot, ":center_culture", ":fac", slot_faction_culture),
+		(try_end),
+
+        (faction_get_slot, ":volunteer_troop", ":center_culture", slot_faction_noble_troop),
+		
+		(party_set_slot, ":center_no", slot_center_volunteer_troop_type, ":volunteer_troop"),
      ]),
 ##########################
 ## recruit nobles end   ##
@@ -39139,6 +39169,7 @@ scripts = [
      (party_get_free_companions_capacity, ":free_capacity", "p_main_party"),
      (ge, ":free_capacity", 1),
 	 (party_slot_ge, "$current_town", slot_center_volunteer_troop_amount, 0),
+	 (party_slot_ge, "$current_town", slot_center_volunteer_troop_type, 1),
      ]),
 ##########################
 ## recruit nobles end   ##
@@ -39177,16 +39208,18 @@ scripts = [
 	 (store_div, ":gold_capacity", ":gold", 200),#200 denars per noble
 	 (val_min, ":nobles_amount", ":gold_capacity"),
 
-	 (store_random_in_range, ":random", 0, 3),
-	 (try_begin), # 33% original faction, 67% current faction
-	   (eq, ":random", 0),
-       (party_get_slot, ":center_culture", "$current_town", slot_center_culture),
-	 (else_try),
-	   (store_faction_of_party, ":fac", "$current_town"),
-       (faction_get_slot, ":center_culture", ":fac", slot_faction_culture),
-	 (try_end),
+	 # (store_random_in_range, ":random", 0, 3),
+	 # (try_begin), # 33% original faction, 67% current faction
+	   # (eq, ":random", 0),
+       # (party_get_slot, ":center_culture", "$current_town", slot_center_culture),
+	 # (else_try),
+	   # (store_faction_of_party, ":fac", "$current_town"),
+       # (faction_get_slot, ":center_culture", ":fac", slot_faction_culture),
+	 # (try_end),
 
-     (faction_get_slot, ":volunteer_troop", ":center_culture", slot_faction_noble_troop),
+     # (faction_get_slot, ":volunteer_troop", ":center_culture", slot_faction_noble_troop),
+	 
+	 (party_get_slot, ":volunteer_troop", "$current_town", slot_center_volunteer_troop_type),
 	 (party_add_members, "p_main_party", ":volunteer_troop", ":nobles_amount"),
 	 (party_set_slot, "$current_town", slot_center_volunteer_troop_amount, 0),
      (store_mul, ":cost", ":nobles_amount", 200),#200 denars per noble
@@ -50650,17 +50683,17 @@ scripts = [
 
           (try_begin),
             (lt, ":total_distance", 30), #very close (100p)
-            (assign, ":distance_score", 100),
+            (assign, ":distance_score", 150),
           (else_try),
             (lt, ":total_distance", 80), #close (50p-100p)
             (store_sub, ":distance_score", ":total_distance", 30),
             (val_div, ":distance_score", 1),
-            (store_sub, ":distance_score", 100, ":distance_score"),
+            (store_sub, ":distance_score", 150, ":distance_score"),
           (else_try),
             (lt, ":total_distance", 160), #far (10p-50p)
             (store_sub, ":distance_score", ":total_distance", 80),
-            (val_div, ":distance_score", 2),
-            (store_sub, ":distance_score", 50, ":distance_score"),
+            (val_div, ":distance_score", 1),
+            (store_sub, ":distance_score", 100, ":distance_score"),
           (else_try),
             (assign, ":distance_score", 10), #very far
           (try_end),
@@ -50669,17 +50702,17 @@ scripts = [
 
           (try_begin),
             (lt, ":total_distance", 40), #very close (100p)
-            (assign, ":distance_score", 100),
+            (assign, ":distance_score", 150),
           (else_try),
             (lt, ":total_distance", 140), #close (50p-100p)
             (store_sub, ":distance_score", ":total_distance", 40),
             (val_div, ":distance_score", 2),
-            (store_sub, ":distance_score", 100, ":distance_score"),
+            (store_sub, ":distance_score", 150, ":distance_score"),
           (else_try),
             (lt, ":total_distance", 300), #far (10p-50p)
             (store_sub, ":distance_score", ":total_distance", 140),
-            (val_div, ":distance_score", 4),
-            (store_sub, ":distance_score", 50, ":distance_score"),
+            (val_div, ":distance_score", 2),
+            (store_sub, ":distance_score", 100, ":distance_score"),
           (else_try),
             (assign, ":distance_score", 10), #very far
           (try_end),
@@ -74030,6 +74063,10 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	(try_end),
 	(troop_set_slot, ":lord_no", slot_lord_reputation_type, ":rep"),
 	
+	(store_random_in_range, ":age", 20, 50),
+	
+	(call_script, "script_troop_set_age", ":lord_no", ":age"),
+	
 	(call_script, "script_set_attrib_points", ":lord_no"),  #Change stats before equipement
 	(call_script, "script_change_equipement", ":lord_no"),
 	(call_script, "script_get_name_for_heroes", ":lord_no", 0),
@@ -78985,9 +79022,555 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 
 	   (store_add, ":other_lord_slot", ":lord_no", slot_troop_relations_begin),
 	   (troop_set_slot, ":other_lord", ":other_lord_slot", 0),
-	 
 	 (try_end),
+	 
+	 # Remove family links
+	 # If a lady has no related man, she might take arms, or she may
    ]),
+   
+  # script_select_battle_tactic_expanded
+  ("select_battle_tactic_expanded",
+  [
+	# Init battle tactic -- it could be changing during battle
+	# For now just use one tactic
+	(assign, "$ai_team_1_battle_tactic", bt_advance),
+	(assign, "$ai_team_2_battle_tactic", bt_advance),
+	(team_set_slot, 1, slot_team_battle_tactic, bt_advance), # Ennemies
+	(team_set_slot, 2, slot_team_battle_tactic, bt_advance), # Allies
+	(team_set_slot, 0, slot_team_battle_tactic, bt_advance), # Player team
+  ]),
+  
+  # script_battle_tactic_init_expanded
+  ("battle_tactic_init_expanded",
+  [
+	(assign, "$battle_reinforcements", 0),
+	(get_player_agent_no, ":player_agent"),
+	(team_set_leader, 0, ":player_agent"),
+	# (team_set_leader, 1, -1),
+	# (team_set_leader, 2, -1),
+	
+	(try_for_range, ":team", 0, 3),
+		(try_for_range, ":group", 0, 4),
+			(store_add, ":slot", slot_team_division_0_state, ":group"),
+			(team_set_slot, ":team", ":slot", stds_preparation),
+		(try_end),
+	(try_end),
+  ]),
+  
+  # script_battle_tactic_apply_expanded
+  ("battle_tactic_apply_expanded",
+  [
+	(try_begin),
+		(main_hero_fallen),
+		(party_slot_eq, "p_main_party", slot_party_pref_bc_charge_ko, 2),
+		(team_get_slot, ":tactic", 0, slot_team_battle_tactic),
+		(call_script, "script_battle_tactic_apply_expanded_aux", 0, ":tactic"),
+	(try_end),
+	(team_get_slot, ":tactic1", 1, slot_team_battle_tactic),
+	(call_script, "script_battle_tactic_apply_expanded_aux", 1, ":tactic1"),
+	(try_begin),
+		# (ge, "$ai_team_2", 0),
+		(team_get_slot, ":tactic2", 2, slot_team_battle_tactic),
+		(call_script, "script_battle_tactic_apply_expanded_aux", 2, ":tactic2"),
+	(try_end),
+  ]),
+  
+  ("battle_tactic_apply_expanded_aux",
+  [
+	(store_script_param, ":team", 1),
+	(store_script_param, ":tactic", 2),
+	(try_begin),
+		(team_slot_eq, ":team", slot_team_division_0_state, stds_preparation),
+		
+		(try_begin),
+			(this_or_next|eq, ":team", 0), 	# Player
+			(eq, ":team", 2),				# Or his allies
+			(assign, ":spawn_point", 2),
+		(else_try),
+			(assign, ":spawn_point", 1),	# Ennemies
+		(try_end),
+		(entry_point_get_position, pos21, ":spawn_point"),
+		(team_give_order, ":team", grc_everyone, mordr_hold),
+		(team_set_order_position, ":team", grc_everyone, pos21),
+		
+		(team_give_order, ":team", 1, mordr_advance),
+		
+		(team_give_order, ":team", 0, mordr_advance),
+		(team_give_order, ":team", 0, mordr_advance),
+		(team_give_order, ":team", 0, mordr_advance),
+		
+		(team_give_order, ":team", 2, mordr_fall_back),
+		
+		(try_for_range, ":group", 0, 4),
+			(store_add, ":slot", slot_team_division_0_state, ":group"),
+			(team_set_slot, ":team", ":slot", stds_ready),
+			
+		(try_end),
+		(display_message, "@Groups ready"),
+		(team_give_order, ":team", grc_everyone, mordr_hold_fire),
+		
+	
+	(else_try),
+		# Special actions are taken when reinforcements have arrived
+		# We may retreat if no cavalry is chasing us, else we will back off slowly
+		(team_slot_eq, ":team", slot_team_division_0_state, stds_reform),
+		(try_for_range, ":group", 0, 4),
+			(call_script, "script_reform_battlegroup", ":team", 2, 1),
+		(try_end),
+		(team_set_slot, ":team", slot_team_battle_tactic, bt_advance),
+	(else_try),
+		(eq, ":tactic", bt_none),
+		(store_random_in_range, ":decision_random", 0, 1000),
+		(try_begin), # Pull back slowly
+			(le, ":decision_random", 600),
+			(call_script, "script_reform_battlegroup", ":team", 2, 0), # Cavalry can always go back and retreat -- no help for other groups
+			(try_for_range, ":group", 0, 2),
+				(call_script, "script_reform_battlegroup", ":team", ":group", 1),
+			(try_end),
+			(call_script, "script_reform_battlegroup", ":team", 3, 1),
+			(try_for_range, ":group", 0, 4),
+				(store_add, ":slot", slot_team_division_0_state, ":group"),
+				(team_set_slot, ":team", ":slot", stds_reform),
+			(try_end),
+			(team_set_slot, ":team", slot_team_battle_tactic, bt_regroup),
+			(display_message, "@No leader? Regroup!"),
+		(else_try), # Retreat!
+			(le, ":decision_random", 650),
+			(try_for_range, ":group", 0, 4),
+				(call_script, "script_reform_battlegroup", ":team", ":group", 0),
+			(try_end),
+			# (team_set_slot, ":team", slot_team_battle_tactic, bt_retreat),
+			(display_message, "@No leader? Retreat!"),
+		(else_try), # Charge!
+			(team_set_slot, ":team", slot_team_battle_tactic, bt_charge),
+			(try_for_range, ":group", 0, 4),
+				(team_give_order, ":team", ":group", mordr_charge),
+			(try_end),
+			(display_message, "@No leader? Charge!"),
+		(try_end),
+	(else_try),
+		
+		# For now we will just advance towards the ennemy
+		(team_slot_eq, ":team", slot_team_division_0_state, stds_ready),
+		(try_for_range, ":group", 0, 4),
+			(team_give_order, ":team", ":group", mordr_advance),
+		(try_end),
+		
+		(team_get_order_position, pos22, ":team", 0), # Get infantry position
+		(call_script, "script_team_get_average_position_of_enemies", ":team"),
+		(copy_position, pos23, pos0),
+		
+		(get_distance_between_positions_in_meters, ":distance", pos22, pos23),
+		(store_random_in_range, ":min_dist", 150, 400), # We use randomness to bring little variety on AIs engagements (AIvsAI)
+		(try_begin),
+			(lt, ":distance", ":min_dist"),
+			(try_for_range, ":group", 0, 4),
+				(store_add, ":slot", slot_team_division_0_state, ":group"),
+				(team_set_slot, ":team", ":slot", stds_engaging),
+			(try_end),
+			# Open fire!
+			(team_give_order, ":team", grc_everyone, mordr_fire_at_will),
+			(display_message, "@Engaging ennemies!"),
+		(try_end),
+		
+	(else_try),
+		(team_slot_eq, ":team", slot_team_division_0_state, stds_engaging),
+		
+		(try_begin), # Handles cavalry group
+			(team_slot_eq, ":team", slot_team_division_2_state, stds_engaging),
+			(team_get_order_position, pos22, ":team", 2), # Get cavalry position
+			
+			(call_script, "script_team_get_average_position_of_enemies", ":team"),
+			(copy_position, pos23, pos0),
+			
+			(position_get_x, ":x_pos22", pos22),
+			(position_get_y, ":y_pos22", pos22),
+			(position_get_x, ":x_pos23", pos23),
+			(position_get_y, ":y_pos23", pos23),
+			
+			(store_add, ":middle_x_pos", ":x_pos22", ":x_pos23"),
+			(val_div, ":middle_x_pos", 2),
+			(store_add, ":middle_y_pos", ":y_pos22", ":y_pos23"),
+			(val_div, ":middle_y_pos", 2),
+			
+			(store_sub, ":vector_x", ":x_pos23", ":middle_x_pos"),
+			(store_sub, ":vector_y", ":y_pos23", ":middle_y_pos"),
+			
+			(get_distance_between_positions_in_meters, ":distance", pos22, pos23),
+			(try_begin),
+				(lt, ":distance", 400), # if distance is too short, we increase the size of the vector
+				(val_mul, ":vector_x", 400),
+				(val_div, ":vector_x", ":distance"),
+				
+				(val_mul, ":vector_y", 400),
+				(val_div, ":vector_y", ":distance"),
+			(try_end),
+			
+			(init_position, pos24),
+			(val_add, ":middle_x_pos", ":vector_y"),
+			(val_sub, ":middle_y_pos", ":vector_x"),
+			(position_set_x, pos24, ":middle_x_pos"),
+			(position_set_y, pos24, ":middle_y_pos"),
+			
+			(team_give_order, ":team", 2, mordr_hold),
+			(team_set_order_position, ":team", 2, pos24),
+			
+			(team_set_slot, ":team", slot_team_division_2_state, stds_maneuver),
+			(display_message, "@Cavalry moving!"),
+		(else_try),
+			(team_slot_eq, ":team", slot_team_division_2_state, stds_maneuver),
+			
+			(team_get_order_position, pos22, ":team", 1), # Get archer position as they are the ones less likely to move away or charge from the fight
+			
+			(call_script, "script_team_get_average_position_of_enemies", ":team"),
+			(copy_position, pos23, pos0),
+			
+			(position_get_x, ":x_pos22", pos22),
+			(position_get_y, ":y_pos22", pos22),
+			(position_get_x, ":x_pos23", pos23),
+			(position_get_y, ":y_pos23", pos23),
+			
+			(store_sub, ":vector_x", ":x_pos23", ":x_pos22"),
+			(store_sub, ":vector_y", ":y_pos23", ":y_pos22"),
+			
+			(init_position, pos24),
+			(val_add, ":x_pos22", ":vector_x"),
+			(val_add, ":y_pos22", ":vector_y"),
+			(position_set_x, pos24, ":x_pos22"),
+			(position_set_y, pos24, ":y_pos22"),
+			
+			(team_give_order, ":team", 2, mordr_hold),
+			(team_set_order_position, ":team", 2, pos24),
+			
+		(try_end),
+		
+		(try_begin),
+			(team_give_order, ":team", 0, mordr_advance),
+			(team_give_order, ":team", 4, mordr_advance),
+			(store_random_in_range, ":archer_advance", 0, 2),
+			(try_begin),
+				(eq, ":archer_advance", 1), # Archers will move less than infantry
+				(team_give_order, ":team", 0, mordr_advance),
+			(try_end),
+		(try_end),
+		
+		(try_begin),
+			(team_get_order_position, pos22, ":team", 0), # Get infantry position
+			(call_script, "script_team_get_average_position_of_enemies", ":team"),
+			(copy_position, pos23, pos0),
+		
+			(get_distance_between_positions_in_meters, ":distance", pos22, pos23),
+			
+			(lt, ":distance", 50),
+			# Charge!
+			(team_give_order, ":team", grc_everyone, mordr_charge),
+			(try_for_range, ":group", 0, 4),
+				(neq, ":group", 1), # Archers don't charge
+				(team_give_order, ":team", ":group", mordr_charge),
+				(store_add, ":slot", slot_team_division_0_state, ":group"),
+				(team_set_slot, ":team", ":slot", stds_battle),
+			(try_end),
+			(display_message, "@Charge!"),
+		(try_end),
+		
+		# Charge the ennemy!
+		
+	# (else_try),
+		# Here we need to check on that battlegroup's health and retreat if needed
+		# (team_slot_eq, ":team", slot_team_division_0_state, stds_battle),
+	(try_end),
+  ]),
+  
+  # script_find_new_leader
+  ("find_new_leader",
+  [
+	(store_script_param, ":team", 1),
+	(assign, ":best_pick", -1),
+	#(assign, ":best_troop", 0),
+	(assign, ":best_troop_level", -1),
+	
+	# (get_player_agent_no, ":player_agent"),
+	(try_for_agents, ":agent_no"),
+		(agent_is_alive, ":agent_no"),
+		(agent_is_human, ":agent_no"),
+		(agent_get_team, ":agent_team", ":agent_no"),
+		(eq, ":agent_team", ":team"),
+		
+		# (neq, ":agent_no", ":player_agent"), # Should never happen
+		
+		(agent_get_troop_id, ":agent_troop", ":agent_no"),
+		(try_begin),
+			(troop_is_hero, ":agent_troop"),
+			(store_skill_level, ":level", ":agent_troop", skl_tactics),
+			(val_mul, ":level", 30), # Heroes will be more likely to lead the men
+		(else_try),
+			(is_between, ":agent_troop", noble_troops_begin, noble_troops_end),
+			(store_character_level, ":level", ":agent_troop"),
+		(else_try),
+			(assign, ":level", -1), # Non-noble/non-hero troops cannot lead
+		(try_end),
+		(gt, ":level", ":best_troop_level"),
+		(assign, ":best_pick", ":agent_no"),
+		#(assign, ":best_troop", ":agent_troop"),
+		(assign, ":best_troop_level", ":level"),
+	(try_end),
+	(assign, reg0, ":best_pick"),
+  ]),
+  
+  # script_reassign_agent_division
+  ("reassign_agent_division",
+  [
+	(store_script_param, ":agent_no", 1),
+	(agent_get_team, ":team", ":agent_no"),
+	
+	(agent_get_division, ":old_div", ":agent_no"),
+	
+	(assign, ":div", 0), # Infantry division
+	
+	(team_get_slot, ":div3_type", ":team", slot_team_division_3_type),
+	
+	# Might use diplomacy's slots later
+	(agent_get_horse, ":horse", ":agent_no"),
+	(try_begin), # Horseman
+		(gt, ":horse", 0),
+		(assign, ":div", 2), # Assign as cav first
+		# Cav, cav2, lancer or horse archer
+		(try_begin),
+			(eq, ":div3_type", stdt_aux_cav),
+			(store_random_in_range, ":aux_cav", 0, 2), # Random -- Cav or auxCav
+			(val_add, ":div", ":aux_cav"), 
+			# (agent_set_division, ":agent_no", ":div"),
+		(else_try),
+			(eq, ":div3_type", stdt_hrang),
+			(assign, ":has_ranged", 0),
+			(try_for_range, ":i_slot", ek_item_0, ek_head),
+				(agent_get_item_slot, ":item", ":agent_no", ":i_slot"),
+				(is_between, ":item", ranged_weapons_begin, ranged_weapons_end),
+				(assign, ":has_ranged", 1),
+			(try_end),
+			(try_begin),
+				(eq, ":has_ranged", 1),
+				(agent_get_ammo, ":ammo", ":agent_no"),
+				(gt, ":ammo", 0), # Has still ammunitions
+				(assign, ":div", 3), # Assign as horse archer
+			(try_end),
+		(else_try),
+			(eq, ":div3_type", stdt_lancer),
+			(assign, ":is_lancer", 0),
+			(try_for_range, ":i_slot", ek_item_0, ek_head),
+				(agent_get_item_slot, ":item", ":agent_no", ":i_slot"),
+				(this_or_next|is_between, ":item", "itm_light_lance", "itm_pike"),
+				(eq, ":item", "itm_bamboo_spear"),
+				(assign, ":is_lancer", 1),
+			(try_end),
+			(try_begin),
+				(eq, ":is_lancer", 1),
+				(assign, ":div", 3), # Assign as lancer
+			(try_end),
+		(try_end),
+	(else_try), # Ranged
+		(agent_get_troop_id, ":troop_no", ":agent_no"),
+		(troop_is_guarantee_ranged, ":troop_no"),
+		(agent_get_ammo, ":ammo", ":agent_no"),
+		(gt, ":ammo", 0), # Has still ammunitions
+		(assign, ":div", 1), # Assign as an archer
+	(else_try), # Infantry
+		(assign, ":has_ranged", 0),
+		(assign, ":has_2handed", 1),
+		(try_for_range, ":i_slot", ek_item_0, ek_head),
+			(agent_get_item_slot, ":item", ":agent_no", ":i_slot"),
+			(gt, ":item", 0),
+			(try_begin),
+				(is_between, ":item", "itm_hunting_bow", ranged_weapons_end), # No throwing weapons for archer picking
+				(assign, ":has_ranged", 1),
+			(else_try),
+				(item_get_type, ":item_type", ":item"),
+				(try_begin),
+					(eq, ":item_type", itp_type_two_handed_wpn),
+					(val_add, ":has_2handed", 1),
+				(else_try),
+					(eq, ":item_type", itp_type_shield),
+					(val_sub, ":has_2handed", 1), # That way we can consider one handed weapons without shields to be in the second group
+				(try_end),
+			(try_end),
+		(try_end),
+		(try_begin),
+			(eq, ":has_ranged", 1),
+			(assign, ":div", 1), # Assign as ranged
+			(try_begin),
+				(eq, ":div3_type", stdt_aux_rang),
+				(store_random_in_range, ":aux_rang", 0, 2),
+				(val_mul, ":aux_rang", 2), # Aux ranged group is 3, ranged group is 1, so we need to add 2 or 0 if we want to get both right
+				(val_add, ":div", ":aux_rang"),
+			(try_end),
+		(else_try),
+			(eq, ":div3_type", stdt_wo_shield_inf),
+			(ge, ":has_2handed", 1),
+			(assign, ":div", 3), # Assign as shieldless infantry
+		(else_try),
+			(eq, ":div3_type", stdt_aux_inf),
+			(store_random_in_range, ":aux_inf", 0, 2),
+			(eq, ":aux_inf", 1),
+			(assign, ":div", 3),
+		(try_end),
+	(try_end),
+	
+	(try_begin),
+		(neq, ":old_div", ":div"),
+		(val_add, ":div", 4), # Put as a reinforcement
+		(agent_set_division, ":agent_no", ":div"),
+	(try_end),
+  ]),
+  
+  # script_reform_battlegroup
+  ("reform_battlegroup",
+  [
+	(store_script_param, ":team", 1),
+	(store_script_param, ":group", 2),
+	(store_script_param, ":tactical_retreat", 3), # When this parameter is a 1 it means the group will try to keep an eye on other groups, and help them if needed
+	# That parameter is most of the time at 1 for cavalry groups only, as they can help others more easily
+	# For other groups, it will make them move slowly towards their spawn
+	
+	# Get some parameter to see if a group can retreat or has to help a friend
+	(assign, ":can_retreat", 1),
+	(try_begin),
+		# Scatered groups will retreat anyways, leaving their friends behind
+		(eq, ":tactical_retreat", 1),
+		(assign, ":can_retreat", 0),
+	(try_end),
+	
+	(store_add, ":division_slot", slot_team_division_0_state, ":group"),
+	# Actions block
+	(try_begin),
+		# Retreating
+		(eq, ":can_retreat", 1),
+		(neg|team_slot_eq, ":team", ":division_slot", stds_retreat), # The group is not already retreatng
+		
+		(try_begin),
+			(this_or_next|eq, ":team", 0), 	# Player
+			(eq, ":team", 2),				# Or his allies
+			(assign, ":spawn_point", 2),
+		(else_try),
+			(assign, ":spawn_point", 1),	# Ennemies
+		(try_end),
+		(entry_point_get_position, pos21, ":spawn_point"),
+		(team_give_order, ":team", ":group", mordr_hold),
+		(team_set_order_position, ":team", ":group", pos21),
+		(try_begin),
+			(eq, ":group", 0),
+			(team_give_order, ":team", ":group", mordr_advance),
+		(else_try),
+			(eq, ":group", 2),
+			(team_give_order, ":team", ":group", mordr_advance),
+			(team_give_order, ":team", ":group", mordr_advance),
+			(team_give_order, ":team", ":group", mordr_advance),
+		(else_try),
+			(eq, ":group", 1),
+			(team_give_order, ":team", ":group", mordr_fall_back),
+		(try_end),
+		(team_give_order, ":team", ":group", mordr_hold_fire),
+		(team_set_slot, ":team", ":division_slot", stds_retreat),
+		(display_message, "@Retreat!"),
+	(else_try),
+		(team_give_order, ":team", ":group", mordr_fall_back),
+		(team_give_order, ":team", ":group", mordr_hold_fire),
+		(team_set_slot, ":team", ":division_slot", stds_reform),
+		(display_message, "@Fall back!"),
+	(try_end),
+	
+  ]),
+  
+  # script_assign_combat_division
+  ("assign_combat_division",
+  [
+	(store_script_param, ":assign_inf", 1),
+	(store_script_param, ":assign_rang", 2),
+	(store_script_param, ":assign_cav", 3),
+	(store_script_param, ":assign_aux", 4),
+	(store_script_param, ":team", 5),
+	
+	(try_for_agents, ":agent_no"),
+		(agent_is_alive, ":agent_no"),
+		(agent_is_human, ":agent_no"),
+		(agent_get_division, ":division", ":agent_no"),
+		(assign, ":change", 0),
+		(try_begin),
+			(eq, ":assign_inf", 0),
+			# (this_or_next|eq, ":division", 0),
+			(eq, ":division", 4),
+			(assign, ":change", 1),
+		(else_try),
+			(eq, ":assign_rang", 0),
+			# (this_or_next|eq, ":division", 1),
+			(eq, ":division", 5),
+			(assign, ":change", 1),
+		(else_try),
+			(eq, ":assign_cav", 0),
+			# (this_or_next|eq, ":division", 2),
+			(eq, ":division", 6),
+			(assign, ":change", 1),
+		(else_try),
+			(eq, ":assign_aux", 0),
+			# (this_or_next|eq, ":division", 3),
+			(eq, ":division", 7),
+			(assign, ":change", 1),
+		(try_end),
+		(eq, ":change", 1),
+		(val_sub, ":division", 4),
+		(agent_set_division, ":agent_no", ":division"),
+	(try_end),
+	
+	(try_begin),
+		(eq, ":assign_inf", 0),
+		(team_set_slot, ":team", slot_team_division_0_state, stds_preparation),
+	(try_end),
+	
+	(try_begin),
+		(eq, ":assign_rang", 0),
+		(team_set_slot, ":team", slot_team_division_1_state, stds_preparation),
+	(try_end),
+	
+	(try_begin),
+		(eq, ":assign_cav", 0),
+		(team_set_slot, ":team", slot_team_division_2_state, stds_preparation),
+	(try_end),
+	
+	(try_begin),
+		(eq, ":assign_aux", 0),
+		(team_set_slot, ":team", slot_team_division_3_state, stds_preparation),
+	(try_end),
+  ]),
+  
+  # script_troop_set_age
+  ("troop_set_age",
+	[
+	(store_script_param, ":troop_no", 1),
+	(store_script_param, ":age", 2),
+
+	(store_sub, ":age_minus_20", ":age", 20),
+	# (val_max, ":age_minus_20", 0),
+	
+	(store_mul, ":max_appearance", ":age_minus_20", 4),
+	(store_random_in_range, ":appearance", ":age_minus_20", ":max_appearance"),
+
+	(val_clamp, ":appearance", 1, 100),
+
+	(troop_set_slot, ":troop_no", slot_troop_age, ":age"),
+	(troop_set_slot, ":troop_no", slot_troop_age_appearance, ":appearance"),
+	(troop_set_age, ":troop_no", ":appearance"),
+	]),
+	
+  # script_cf_troop_can_upgrade
+  ("cf_troop_can_upgrade",
+	[
+	(store_script_param, ":troop_no", 1),
+	
+	(troop_get_xp, ":cur_xp", ":troop_no"),
+	
+	(call_script, "script_game_get_upgrade_xp", ":troop_no"),
+	
+	(gt, ":cur_xp", reg0),
+	]),
 ]
 
 

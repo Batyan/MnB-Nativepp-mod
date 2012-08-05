@@ -40,7 +40,7 @@ from header_skills import *
 
 skills = [
   ("trade","Trade",sf_base_att_cha|sf_effects_party,10,"Every level of this skill reduces your trade penalty by 5%%. (Party skill)"),
-  ("leadership","Leadership",sf_base_att_cha,10,"Every point increases maximum number of troops you can command by 20, increases your party morale and reduces troop wages by 5%%. (Leader skill)"),
+  ("leadership","Leadership",sf_base_att_cha,10,"Every point increases maximum number of troops you can command by 25, increases your party morale and reduces troop wages by 5%%. (Leader skill)"),
   ("prisoner_management", "Prisoner Management",sf_base_att_cha,10,"Every level of this skill increases maximum number of prisoners by %d. (Leader skill)"), 
   ("reserved_1","Reserved Skill 1",sf_base_att_cha|sf_inactive,10,"This is a reserved skill."), 
   ("reserved_2","Reserved Skill 2",sf_base_att_cha|sf_inactive,10,"This is a reserved skill."), 
@@ -57,7 +57,7 @@ skills = [
   ("tactics","Tactics",sf_base_att_int|sf_effects_party,10,"Every two levels of this skill increases starting battle advantage by 1. (Party skill)"),
   ("tracking","Tracking",sf_base_att_int|sf_effects_party,10,"Tracks become more informative. (Party skill)"),
   ("trainer","Trainer",sf_base_att_int|sf_inactive,10,"Every day, each hero with this skill adds some experience to every other member of the party whose level is lower than his/hers. Experience gained goes as: {0,4,10,16,23,30,38,46,55,65,80}. (Personal skill)"),
-  ("trainer_replacement","Trainer",sf_base_att_int,10,"Every day, each hero with this skill adds some experience to every other member of the party whose level is lower than his/hers. Experience gained goes as: {0,3,9,15,21,27,33,39,45,51,57}. (Personal skill)"), 
+  ("trainer_replacement","Trainer",sf_base_att_int,10,"Every day, each hero with this skill adds some experience to every other member of the party whose level is lower than his/hers. Experience gained goes as: {0,3,7,12,18,25,33,42,52,61,73}. (Personal skill)"), 
   ("reserved_6","Reserved Skill 6",sf_base_att_int|sf_inactive,10,"This is a reserved skill."), 
   ("reserved_7","Reserved Skill 7",sf_base_att_int|sf_inactive,10,"This is a reserved skill."), 
   ("reserved_8","Reserved Skill 8",sf_base_att_int|sf_inactive,10,"This is a reserved skill."), 

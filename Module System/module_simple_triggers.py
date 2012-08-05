@@ -973,7 +973,7 @@ simple_triggers = [
          
          (store_skill_level, ":trainer_level", skl_trainer_replacement, ":troop_no"),                  
          (val_add, ":trainer_level", 1), #was 2. (average trainer level is 3 for npc lords, worst : 0, best : 6)
-         (store_mul, ":xp_gain", ":trainer_level", 300), #xp gain
+         (store_mul, ":xp_gain", ":trainer_level", 330), #xp gain -- was 300
          
          (assign, ":max_accepted_random_value", 60),  # more chances to get xp, less xp per gain, small lords get less xp (because of very small armies)
          (try_begin),
@@ -985,12 +985,12 @@ simple_triggers = [
              (eq, ":reduce_campaign_ai", 0), #hard
              (assign, ":max_accepted_random_value", 65), # 5% chances bonus for xp
 			 (val_mul, ":xp_gain", 5),
-             (val_div, ":xp_gain", 4), # 25% more xp -> +75
+             (val_div, ":xp_gain", 4), # 25% more xp -> +82
            (else_try),
              (eq, ":reduce_campaign_ai", 2), #easy
              (assign, ":max_accepted_random_value", 55), # 5% chances malus for xp
 			 (val_mul, ":xp_gain", 3),
-             (val_div, ":xp_gain", 4), # 25% less xp -> -75
+             (val_div, ":xp_gain", 4), # 25% less xp -> -82
            (try_end),
          (try_end),
          
@@ -1052,7 +1052,7 @@ simple_triggers = [
 		   (try_end),
 		 (else_try),
 	       (party_slot_eq, ":center_no", slot_center_has_trainer_3, 1), # only for towns
-		   (val_mul, ":xp_gain", 5), # huge amount of xp, because towns have a lot of troops
+		   (val_mul, ":xp_gain", 5), # big amount of xp, because towns have a lot of troops
 		   (party_upgrade_with_xp, ":center_no", ":xp_gain"),
 		   (try_begin),
 		     (party_slot_eq, ":center_no", slot_town_lord, "trp_player"),
@@ -5586,17 +5586,21 @@ simple_triggers = [
 	(try_end),
 	
     (assign, ":total_xp", 0),
+	(assign, ":upgrade_ready", 0),
 	(party_get_num_companion_stacks, ":num_stack", "p_main_party"),
 	(try_for_range, ":trainer_stack", 0, ":num_stack"),
 	  (party_stack_get_troop_id, ":trainer", "p_main_party", ":trainer_stack"),
 	  (troop_is_hero, ":trainer"), # only heroes can train troops
 	  (neg|troop_is_wounded, ":trainer"), # we don't want the wounded to train
 	  (store_character_level, ":trainer_level", ":trainer"),
-      (store_skill_level, ":experience", skl_trainer_replacement, ":trainer"),
-	  (val_sub, ":experience", 1),
-	  (val_mul, ":experience", 6), # 0-1-2-3 -4 -5 -6 -7 -8 -9 -10  -- trainer's skill
-	  (val_add, ":experience", 3), # 0-3-9-15-21-27-33-39-45-51-57  -- experience gained
-	  (val_mul, ":experience", ":total_bonus"), # food is used to have better trainings
+      (store_skill_level, ":skill_level", skl_trainer_replacement, ":trainer"),
+	  (assign, ":experience", 0),
+	  (try_for_range, ":bonus", 0, ":skill_level"),
+	    (store_add, ":experience", ":bonus", 3),
+	  (try_end),
+	  # 0,1,2,3 ,4 ,5 ,6 ,7 ,8 ,9 ,10  -- trainer's skill
+	  # 0,3,7,12,18,25,33,42,52,61,73  -- experience gained
+	  (val_mul, ":experience", ":total_bonus"), # food is used for improved trainings
 	  (val_div, ":experience", 15),
 	  (gt, ":experience", 0),
 	  (try_for_range, ":cur_stack", 0, ":num_stack"),
@@ -5619,6 +5623,13 @@ simple_triggers = [
 	    (display_message, "@Your troops are hungry and earn less experience.", 0xeebbbb),
 	  (else_try), # training was more effective
 		(display_message, "@Your troops are well fed and earn more experience.", 0xbbeebb),
+	  (try_end),
+	  # We start at 1 so we don't check the player !
+	  (try_for_range, ":cur_stack", 1, ":num_stack"), # We do this here, because we don't want to do it for each trainer
+	    (party_stack_get_troop_id, ":cur_troop", "p_main_party", ":cur_stack"),
+	    (call_script, "script_cf_troop_can_upgrade", ":cur_troop"),
+		(display_message, "@Some troops are ready to upgrade.", 0xbbeebb),
+		(assign, ":num_stack", 0), # We only need to know if one troop is ready to upgrade
 	  (try_end),
 	(try_end),
 	]),
@@ -6110,9 +6121,11 @@ simple_triggers = [
 	  
 	  (neq, ":faction_no", "fac_player_supporters_faction"), # mercenaries are not recruited automaticaly for player faction
 	  
+	  (val_add, ":num_lord", ":num_merc"), # We add the two because we don't want mercenaries to be recruited too much by very small factions (less than 3 lords)
+	  
 	  (store_sub, ":diff", ":num_center", ":num_lord"), # if not enough lord take mercenary contracts to compensate
-	  (this_or_next|gt, ":diff", 1), # engage mercenaries if : - not enough lord in the eyes of the king (lot of centers)
-	  (lt, ":num_lord", 4),			 #						   - not enough lord in the kingdom (for small factions)
+	  (this_or_next|gt, ":diff", 0), # engage mercenaries if :	- not enough lord in the eyes of the king (lot of centers)
+	  (lt, ":num_lord", 5),			 #							- not enough lord in the kingdom (for small factions)
 	  (store_random_in_range, ":mercenary", "trp_adventurer_01", "trp_kingdom_1_pretender"),
 	  (store_troop_faction, ":faction", ":mercenary"),
 	  (try_begin),
@@ -6128,6 +6141,11 @@ simple_triggers = [
 		  (eq, ":reputation_type", 13),
 		  (assign, ":reputation_type", 12),
 		(try_end),
+		
+		(store_random_in_range, ":age", 20, 40), # Mercenaries are usualy younger than lords
+	
+		(call_script, "script_troop_set_age", ":mercenary", ":age"),
+		
 		(troop_set_slot, ":mercenary", slot_lord_reputation_type, ":reputation_type"),
 	    (troop_set_slot, ":mercenary", slot_troop_equipement_level, ":random_level"), # get their equipment and stats to a random level
 		(val_mul, ":random_level", 100),

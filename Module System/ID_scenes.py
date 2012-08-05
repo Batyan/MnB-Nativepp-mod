@@ -568,3 +568,4 @@ scn_enterprise_wool_weavery = 566
 scn_enterprise_brewery = 567
 scn_enterprise_oil_press = 568
 scn_intro_battle_plain = 569
+scn_test_field_battle = 570

@@ -49,3 +49,4 @@ mst_meeting_merchant = 47
 mst_town_fight = 48
 mst_multiplayer_duel = 49
 mst_intro_mission = 50
+mst_field_battle_test = 51

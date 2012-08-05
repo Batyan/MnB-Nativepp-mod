@@ -11841,7 +11841,7 @@ presentations = [
         (call_script, "script_party_calculate_strength", "p_main_party", 0),
         (assign, ":offer_value", reg0),
 		(val_add, ":offer_value", reg1),
-        (val_div, ":offer_value", 4),
+        (val_div, ":offer_value", 40), # Was 4
         (val_add, ":offer_value", 30),
         (call_script, "script_round_value", ":offer_value"),
         (val_add, ":net_change", reg0),
