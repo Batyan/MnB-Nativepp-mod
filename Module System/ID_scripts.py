@@ -785,5 +785,7 @@ script_find_new_leader = 783
 script_reassign_agent_division = 784
 script_reform_battlegroup = 785
 script_assign_combat_division = 786
+script_troop_set_age = 787
+script_cf_troop_can_upgrade = 788
 
 

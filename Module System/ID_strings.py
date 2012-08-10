@@ -4092,6 +4092,14 @@ str_mercenary_engaging = 4090
 str_mercenary_screening = 4091
 str_mercenary_accompanying = 4092
 str_mercenary_nothing = 4093
-str_end_of_strings = 4094
+str_stability_90 = 4094
+str_stability_75 = 4095
+str_stability_60 = 4096
+str_stability_45 = 4097
+str_stability_30 = 4098
+str_stability_15 = 4099
+str_stability_0 = 4100
+str_stability_negative = 4101
+str_end_of_strings = 4102
 
 

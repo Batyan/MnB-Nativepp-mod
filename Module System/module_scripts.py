@@ -1308,9 +1308,9 @@ scripts = [
 ##      (call_script, "script_give_center_to_lord", "p_town_16", "trp_player", 0),
 ####      (call_script, "script_give_center_to_lord", "p_castle_10", "trp_player", 0),
 ##      (assign, "$g_castle_requested_by_player", "p_castle_10"),
-      (call_script, "script_get_player_party_morale_values"),
-	  (val_clamp, reg0, 0, 100),
-      (party_set_morale, "p_main_party", reg0),
+      # (call_script, "script_get_player_party_morale_values"),
+	  # (val_clamp, reg0, 0, 100),
+      (party_set_morale, "p_main_party", 99),
 
       (troop_set_note_available, "trp_player", 1),
 
@@ -3210,7 +3210,7 @@ scripts = [
        #getting val2 for some commands
        (eq, ":input", 2),
        (store_script_param, ":val2", 3),
-     (end_try),
+     (try_end),
      (try_begin),
        (eq, ":input", 1),
        (assign, reg0, ":val1"),
@@ -4104,7 +4104,7 @@ scripts = [
             (str_store_troop_name, s13, ":target_troop"),
           (else_try),
             (str_store_party_name, s13, ":target_party"),
-          (end_try),
+          (try_end),
           (party_get_slot, ":gift", ":root_defeated_party", dplmc_slot_party_mission_diplomacy),
 		  (gt, ":gift", 0),
           (str_store_item_name, s12, ":gift"),
@@ -6992,7 +6992,7 @@ scripts = [
                  (player_get_gold, ":player_gold", ":latest_joined_player_no"),
                  (val_add, ":player_gold", ":old_items_value"),
                  (player_set_gold, ":latest_joined_player_no", ":player_gold", multi_max_gold_that_can_be_stored),
-               (end_try),
+               (try_end),
 
                (player_set_troop_id, ":latest_joined_player_no", -1),
                (player_set_team_no, ":latest_joined_player_no", ":team_with_less_players"),
@@ -16962,9 +16962,9 @@ scripts = [
 
       (assign, ":num_looted_items",0),
       (try_begin),
-        (this_or_next|party_slot_eq, "$g_enemy_party", slot_party_type, spt_kingdom_caravan),
-        (this_or_next|party_slot_eq, "$g_enemy_party", slot_party_type, spt_bandit_lair),
-        (party_slot_eq, "$g_enemy_party", slot_party_type, spt_village_farmer),
+        # (this_or_next|party_slot_eq, "$g_enemy_party", slot_party_type, spt_kingdom_caravan),
+        # (this_or_next|party_slot_eq, "$g_enemy_party", slot_party_type, spt_bandit_lair),
+        # (party_slot_eq, "$g_enemy_party", slot_party_type, spt_village_farmer),
         (store_mul, ":plunder_amount", player_loot_share, 30),
         (val_mul, ":plunder_amount", "$g_strength_contribution_of_player"),
         (val_div, ":plunder_amount", 100),
@@ -16981,15 +16981,28 @@ scripts = [
           (assign, ":range_min", food_begin),
           (assign, ":range_max", food_end),
         (else_try),
+		  (party_slot_eq, "$g_enemy_party", slot_party_type, spt_village_farmer),
           (val_div, ":plunder_amount", 5),
           (reset_item_probabilities, 1),
+          (assign, ":range_min", food_begin),
+          (assign, ":range_max", food_end),
+		(else_try),
+		  (party_slot_eq, "$g_enemy_party", slot_party_type, spt_kingdom_hero_party),
+          (val_div, ":plunder_amount", 10),
+          (reset_item_probabilities, 1),
+          (assign, ":range_min", food_begin),
+          (assign, ":range_max", food_end),
+		(else_try),
+          (reset_item_probabilities, 1),
+		  (val_div, ":plunder_amount", 20),
           (assign, ":range_min", food_begin),
           (assign, ":range_max", food_end),
         (try_end),
         (store_sub, ":item_to_price_slot", slot_town_trade_good_prices_begin, trade_goods_begin),
         (try_for_range, ":cur_goods", ":range_min", ":range_max"),
           (try_begin),
-            (neg|party_slot_eq, "$g_enemy_party", slot_party_type, spt_bandit_lair),
+            (this_or_next|party_slot_eq, "$g_enemy_party", slot_party_type, spt_village_farmer),
+			(party_slot_eq, "$g_enemy_party", slot_party_type, spt_kingdom_caravan),
             (store_add, ":cur_price_slot", ":cur_goods", ":item_to_price_slot"),
             (party_get_slot, ":cur_price", "$g_enemy_party", ":cur_price_slot"),
           (else_try),
@@ -17914,6 +17927,7 @@ scripts = [
 	(try_end),
 	(store_add, ":moral_loss", ":troops_loss", ":fight_loss"),
 	(val_add, ":moral_loss", ":total_loss"),
+	(val_div, ":moral_loss", 2),
 
 
     (call_script, "script_change_player_party_morale", ":moral_loss"),
@@ -17928,8 +17942,8 @@ scripts = [
     (try_begin), #here we give positive morale to our troops of with same faction of ally party with 2/3x multipication.
       (ge, "$g_ally_party", 0),
 
-      (store_div, ":ally_faction_morale_change", ":faction_morale_change", 3), #2/3x multipication (less than normal)
-      (val_mul, ":ally_faction_morale_change", 2),
+      (store_div, ":ally_faction_morale_change", ":faction_morale_change", 2), #2/3x multipication (less than normal)
+      # (val_mul, ":ally_faction_morale_change", 2),
       (store_faction_of_party, ":ally_faction", "$g_ally_party"),
       (faction_get_slot, ":faction_morale", ":ally_faction",  slot_faction_morale_of_player_troops),
       (val_add, ":faction_morale", ":ally_faction_morale_change"),
@@ -18309,7 +18323,7 @@ scripts = [
            (assign, ":minimum_distance", ":dist"),
            (copy_position, pos63, pos3),
          (try_end),
-       (end_try),
+       (try_end),
 
        (party_set_position, ":routed_party", pos63),
 
@@ -19565,7 +19579,7 @@ scripts = [
   ##        (store_faction_of_party, reg(23), reg(25)),
   ##        (eq, reg(23), "$pin_faction"),
   ##        (val_add, reg(24), 1),
-  ##      (end_try,0),
+  ##      (try_end,0),
   ##      # reg4 now holds num towns of this faction.
   ##      (gt, reg(24), 0), #Fail if there are no towns
   ##      (store_random, reg(26), reg(24)),
@@ -19577,9 +19591,9 @@ scripts = [
   ##        (try_begin,0),
   ##          (eq, reg(24), reg(26)),
   ##          (assign, "$pout_town", reg(25)), # result is this town
-  ##        (end_try,0),
+  ##        (try_end,0),
   ##        (val_add, reg(24), 1),
-  ##      (end_try,0),
+  ##      (try_end,0),
   ##  ]),
 
 
@@ -22740,18 +22754,10 @@ scripts = [
 		(lt, ":rand", 10), # wounds 10% of the stacks
         (try_begin),
           (neg|troop_is_hero, ":stack_troop"),
-		  (try_begin),
-		    (le, ":rand", 3),
-		    (party_stack_get_size, ":stack_size",":party_no",":i_stack"), # low probability for every troop wounded
-			(try_begin),
-			  (le, ":rand", 1), # or for half the troops wounded
-			  (val_div, ":stack_size", 2),
-			  (val_max, ":stack_size", 1),
-			(try_end),
-		  (else_try),
-		    (assign, ":stack_size", 1),
-		  (try_end),
-          (party_wound_members, ":party_no", ":stack_troop", ":stack_size"),
+		  (party_stack_get_size, ":stack_size",":party_no",":i_stack"),
+		  (val_add, ":stack_size", 1),
+		  (store_random_in_range, ":num_wounded", 1, ":stack_size"), # Minimum of 1 wounded
+          (party_wound_members, ":party_no", ":stack_troop", ":num_wounded"),
         (else_try),
           (troop_set_health, ":stack_troop", 0),
         (try_end),
@@ -25911,11 +25917,11 @@ scripts = [
 		(else_try),
 			(display_message, "@Great host of enemies spotted near {s1}."),
 		(try_end),
-		(try_begin),
-			(eq, "$test", 1),
-			(assign, reg10, ":exact_enemy_strength"),
-			(display_message, "@Strength : {reg10}"),
-		(try_end),
+		# (try_begin),
+			# (eq, "$test", 1),
+			# (assign, reg10, ":exact_enemy_strength"),
+			# (display_message, "@Strength : {reg10}"),
+		# (try_end),
 		#maybe do audio sound?
 
       (try_end),
@@ -28449,9 +28455,77 @@ scripts = [
       (store_script_param_1, ":morale_dif"),
       (party_get_morale, ":cur_morale", "p_main_party"),
       (val_max, ":cur_morale", 0),
+	  
+	  (call_script, "script_get_player_party_morale_values"),
+	  (assign, ":stability", reg0),
+	  (val_div, ":stability", 2),
+	  
+	  # (store_random_in_range, ":loss_chance", 0, ":stability"),
+	  
+	  (try_begin),
+	    (lt, ":morale_dif", 0),
+		
+		(store_div, ":min_loss", ":morale_dif", 4),
+		(store_add, ":max_loss", ":min_loss", -2),
+		
+		(store_random_in_range, ":stability_reduce", 0, ":stability"), # 0% - 50% -- might sometimes give a higher morale loss if stability is too low (below 0)
+		(store_mul, ":reducing", ":stability_reduce", ":max_loss"),
+		(val_div, ":reducing", 100),
+		
+		(val_sub, ":max_loss", ":reducing"),
+		
+		(try_begin), # If min > max we reverse the two
+		  (lt, ":min_loss", ":max_loss"),
+		  (assign, ":storage", ":min_loss"),
+		  (assign, ":min_loss", ":max_loss"),
+		  (assign, ":max_loss", ":storage"),
+		(try_end),
+		
+		(store_random_in_range, ":morale_loss", ":max_loss", ":min_loss"),
+		(store_add, ":new_morale", ":cur_morale", ":morale_loss"), # Negative value
+		
+		# (val_mul, ":loss_chance", -1),
+		# (try_begin),
+		  # (ge, ":loss_chance", ":morale_dif"),
+		  # (store_add, ":new_morale", ":cur_morale", ":morale_dif"),
+		# (else_try),
+		  # (store_mul, ":morale_loss", ":morale_dif", ":morale_dif"),
+		  # (val_div, ":morale_loss", ":loss_chance"),
+		  # (store_add, ":new_morale", ":cur_morale", ":morale_loss"),
+		# (try_end),
+	  (else_try),
+	    (store_div, ":min_loss", ":morale_dif", 4),
+		(store_add, ":max_loss", ":min_loss", 2),
+		
+		(store_random_in_range, ":stability_reduce", 0, ":stability"), # 0% - 50% -- might sometimes give a small morale penality if stability is too low (below 0)
+		(store_mul, ":reducing", ":stability_reduce", ":max_loss"),
+		(val_div, ":reducing", 100),
+		
+		(val_add, ":max_loss", ":reducing"),
+		
+		(try_begin), # If min > max we reverse the two
+		  (gt, ":min_loss", ":max_loss"),
+		  (assign, ":storage", ":min_loss"),
+		  (assign, ":min_loss", ":max_loss"),
+		  (assign, ":max_loss", ":storage"),
+		(try_end),
+		
+		(store_random_in_range, ":morale_loss", ":min_loss", ":max_loss"),
+		(store_add, ":new_morale", ":cur_morale", ":morale_loss"),
+		
+		# (try_begin),
+		  # (ge, ":loss_chance", ":morale_dif"),
+		  # (store_add, ":new_morale", ":cur_morale", ":morale_dif"),
+		# (else_try),
+		  # (store_mul, ":morale_loss", ":morale_dif", ":morale_dif"),
+		  # (val_div, ":morale_loss", ":loss_chance"),
+		  # (store_add, ":new_morale", ":cur_morale", ":morale_loss"),
+		# (try_end),
+	  (try_end),
 
-      (store_add, ":new_morale", ":cur_morale", ":morale_dif"),
+      # (store_add, ":new_morale", ":cur_morale", ":morale_dif"),
       (val_max, ":new_morale", 0),
+	  (val_min, ":new_morale", 100),
 
       (party_set_morale, "p_main_party", ":new_morale"),
       (try_begin),
@@ -28489,6 +28563,90 @@ scripts = [
 
   # script_get_player_party_morale_values
   # Output: reg0 = player_party_morale_target
+  # ("get_player_party_morale_values",
+    # [
+      # (party_get_num_companion_stacks, ":num_stacks","p_main_party"),
+      # (assign, ":num_men", 0),
+      # (try_for_range, ":i_stack", 1, ":num_stacks"),
+        # (party_stack_get_troop_id, ":stack_troop","p_main_party",":i_stack"),
+        # (try_begin),
+          # (troop_is_hero, ":stack_troop"),
+          # (val_add, ":num_men", 1), #it was 3 in "Mount&Blade", now it is 1 in Warband
+        # (else_try),
+          # (party_stack_get_size, ":stack_size","p_main_party",":i_stack"),
+          # (val_add, ":num_men", ":stack_size"),
+        # (try_end),
+      # (try_end),
+	  # (val_mul, ":num_men", 2),
+	  # (val_div, ":num_men", 9),
+      # (assign, "$g_player_party_morale_modifier_party_size", ":num_men"),
+
+      # (store_skill_level, ":player_leadership", "skl_leadership", "trp_player"),
+
+      # (try_begin), ##commented 0.76
+        # (eq, "$players_kingdom", "fac_player_supporters_faction"),
+        # (faction_get_slot, ":cur_faction_king", "$players_kingdom", slot_faction_leader),
+        # (eq, ":cur_faction_king", "trp_player"),
+        # (store_mul, "$g_player_party_morale_modifier_leadership", ":player_leadership", 40),
+      # (else_try),
+      # (store_mul, "$g_player_party_morale_modifier_leadership", ":player_leadership", 5),
+      # (try_end),
+
+      # (assign, ":new_morale", "$g_player_party_morale_modifier_leadership"),
+      # (val_add, ":new_morale", "$g_player_party_morale_modifier_party_size"), ##new 0.76
+
+      # (val_add, ":new_morale", 50),
+
+      # (game_get_reduce_campaign_ai, ":reduce_campaign_ai"),
+      # (try_begin), #hard
+       # (eq, ":reduce_campaign_ai", 0),
+       # (val_add, ":new_morale", 50),
+      # (else_try), #moderate
+       # (eq, ":reduce_campaign_ai", 1),
+       # (val_add, ":new_morale", 60),
+      # (else_try), #easy
+       # (val_add, ":new_morale", 70),
+      # (try_end),
+
+      # (assign, "$g_player_party_morale_modifier_food", 0),
+      # (try_for_range, ":cur_edible", food_begin, food_end),
+        # (call_script, "script_cf_player_has_item_without_modifier", ":cur_edible", imod_rotten),
+        # (item_get_slot, ":food_bonus", ":cur_edible", slot_item_food_bonus),
+
+        # (val_mul, ":food_bonus", 3),
+        # (val_div, ":food_bonus", 2),
+
+        # (val_add, "$g_player_party_morale_modifier_food", ":food_bonus"),
+      # (try_end),
+      # (val_add, ":new_morale", "$g_player_party_morale_modifier_food"),
+
+      # (try_begin),
+        # (eq, "$g_player_party_morale_modifier_food", 0),
+        # (assign, "$g_player_party_morale_modifier_no_food", 30),
+        # (val_sub, ":new_morale", "$g_player_party_morale_modifier_no_food"),
+      # (else_try),
+        # (assign, "$g_player_party_morale_modifier_no_food", 0),
+      # (try_end),
+
+      # (assign, "$g_player_party_morale_modifier_debt", 0),
+      # (try_begin),
+        # (gt, "$g_player_debt_to_party_members", 0),
+        # (call_script, "script_calculate_player_faction_wage"),
+        # (assign, ":total_wages", reg0),
+        # (store_mul, "$g_player_party_morale_modifier_debt", "$g_player_debt_to_party_members", 10),
+		# (val_max, ":total_wages", 1),
+        # (val_div, "$g_player_party_morale_modifier_debt", ":total_wages"),
+        # (val_clamp, "$g_player_party_morale_modifier_debt", 1, 31),
+        # (val_sub, ":new_morale", "$g_player_party_morale_modifier_debt"),
+      # (try_end),
+
+      # (val_clamp, ":new_morale", 0, 100),
+      # (assign, reg0, ":new_morale"),
+      # ]),
+	  
+	  
+  # script_get_player_party_morale_values
+  # Output: reg0 = player_party_morale_target
   ("get_player_party_morale_values",
     [
       (party_get_num_companion_stacks, ":num_stacks","p_main_party"),
@@ -28503,45 +28661,33 @@ scripts = [
           (val_add, ":num_men", ":stack_size"),
         (try_end),
       (try_end),
-	  (val_mul, ":num_men", 2),
-	  (val_div, ":num_men", 9),
+	  (val_div, ":num_men", 3),
       (assign, "$g_player_party_morale_modifier_party_size", ":num_men"),
 
-      (store_skill_level, ":player_leadership", "skl_leadership", "trp_player"),
-
-      # (try_begin), ##commented 0.76
-        # (eq, "$players_kingdom", "fac_player_supporters_faction"),
-        # (faction_get_slot, ":cur_faction_king", "$players_kingdom", slot_faction_leader),
-        # (eq, ":cur_faction_king", "trp_player"),
-        # (store_mul, "$g_player_party_morale_modifier_leadership", ":player_leadership", 40),
-      # (else_try),
-      (store_mul, "$g_player_party_morale_modifier_leadership", ":player_leadership", 5),
-      # (try_end),
+      # (store_skill_level, "$g_player_party_morale_modifier_leadership", "skl_leadership", "trp_player"),
+	  
+	  (store_skill_level, ":player_leadership", "skl_leadership", "trp_player"),
+	  
+	  (store_mul, "$g_player_party_morale_modifier_leadership", ":player_leadership", 2),
 
       (assign, ":new_morale", "$g_player_party_morale_modifier_leadership"),
-      (val_add, ":new_morale", "$g_player_party_morale_modifier_party_size"), ##new 0.76
-
-      (val_add, ":new_morale", 50),
-
-      #(game_get_reduce_campaign_ai, ":reduce_campaign_ai"),
-      #(try_begin), #hard
-      #  (eq, ":reduce_campaign_ai", 0),
-      #  (val_add, ":new_morale", 50),
-      #(else_try), #moderate
-      #  (eq, ":reduce_campaign_ai", 1),
-      #  (val_add, ":new_morale", 60),
-      #(else_try), #easy
-      #  (val_add, ":new_morale", 70),
-      #(try_end),
+      (val_sub, ":new_morale", "$g_player_party_morale_modifier_party_size"),
+	  
+	  (game_get_reduce_campaign_ai, ":reduce_campaign_ai"),
+      (try_begin), #hard
+       (eq, ":reduce_campaign_ai", 0),
+       (val_add, ":new_morale", 50),
+      (else_try), #moderate
+       (eq, ":reduce_campaign_ai", 1),
+       (val_add, ":new_morale", 60),
+      (else_try), #easy
+       (val_add, ":new_morale", 70),
+      (try_end),
 
       (assign, "$g_player_party_morale_modifier_food", 0),
       (try_for_range, ":cur_edible", food_begin, food_end),
         (call_script, "script_cf_player_has_item_without_modifier", ":cur_edible", imod_rotten),
         (item_get_slot, ":food_bonus", ":cur_edible", slot_item_food_bonus),
-
-        (val_mul, ":food_bonus", 3),
-        (val_div, ":food_bonus", 2),
-
         (val_add, "$g_player_party_morale_modifier_food", ":food_bonus"),
       (try_end),
       (val_add, ":new_morale", "$g_player_party_morale_modifier_food"),
@@ -28566,7 +28712,6 @@ scripts = [
         (val_sub, ":new_morale", "$g_player_party_morale_modifier_debt"),
       (try_end),
 
-      # (val_clamp, ":new_morale", 0, 100),
       (assign, reg0, ":new_morale"),
       ]),
 
@@ -29335,7 +29480,7 @@ scripts = [
 				(val_sub, ":cur_kingdom_2", kingdoms_end),
 				(val_add, ":cur_kingdom_2", kingdoms_begin),
 			(try_end),
-	##diplomacy end+
+			##diplomacy end+
 			(neq, ":cur_kingdom", ":cur_kingdom_2"),
 			(faction_slot_eq, ":cur_kingdom_2", slot_faction_state, sfs_active),
 
@@ -29353,42 +29498,42 @@ scripts = [
 
 				(ge, ":kingdom_1_to_kingdom_2", 1),
 
-        ##diplomacy begin
-        (try_begin),
-      	  (store_current_hours, ":cur_hours"),
-          (faction_get_slot, ":faction_ai_last_decisive_event", ":cur_kingdom", slot_faction_ai_last_decisive_event),
-          (store_sub, ":hours_since_last_decisive_event", ":cur_hours", ":faction_ai_last_decisive_event"),
-          (ge, ":hours_since_last_decisive_event", 96), #wait 4 days until you conclude peace after war
-        ##diplomacy end
-          (try_begin),
-            (eq, ":cur_kingdom_2", "fac_player_supporters_faction"),
+				##diplomacy begin
+				(try_begin),
+					(store_current_hours, ":cur_hours"),
+					(faction_get_slot, ":faction_ai_last_decisive_event", ":cur_kingdom", slot_faction_ai_last_decisive_event),
+					(store_sub, ":hours_since_last_decisive_event", ":cur_hours", ":faction_ai_last_decisive_event"),
+					(ge, ":hours_since_last_decisive_event", 96), #wait 4 days until you conclude peace after war
+					##diplomacy end
+					(try_begin),
+						(eq, ":cur_kingdom_2", "fac_player_supporters_faction"),
 
-            (store_mul, ":goodwill_level", ":kingdom_1_to_kingdom_2", 2),
-            (store_random_in_range, ":random", 0, 20),
-            (try_begin),
-              (lt, ":random", ":goodwill_level"),
-              (call_script, "script_add_notification_menu", "mnu_question_peace_offer", ":cur_kingdom", 0),
-            (try_end),
-          (else_try),
-            (call_script, "script_npc_decision_checklist_peace_or_war", ":cur_kingdom_2", ":cur_kingdom", -1),
-            (assign, ":kingdom_2_to_kingdom_1", reg0),
-            (ge, ":kingdom_2_to_kingdom_1", 1),
+						(store_mul, ":goodwill_level", ":kingdom_1_to_kingdom_2", 2),
+						(store_random_in_range, ":random", 0, 20),
+						(try_begin),
+							(lt, ":random", ":goodwill_level"),
+							(call_script, "script_add_notification_menu", "mnu_question_peace_offer", ":cur_kingdom", 0),
+						(try_end),
+					(else_try),
+						(call_script, "script_npc_decision_checklist_peace_or_war", ":cur_kingdom_2", ":cur_kingdom", -1),
+						(assign, ":kingdom_2_to_kingdom_1", reg0),
+						(ge, ":kingdom_2_to_kingdom_1", 1),
 
-            (store_mul, ":goodwill_level", ":kingdom_1_to_kingdom_2", ":kingdom_2_to_kingdom_1"),
-            (store_random_in_range, ":random", 0, 20),
-            (lt, ":random", ":goodwill_level"),
+						(store_mul, ":goodwill_level", ":kingdom_1_to_kingdom_2", ":kingdom_2_to_kingdom_1"),
+						(store_random_in_range, ":random", 0, 20),
+						(lt, ":random", ":goodwill_level"),
 
-            (try_begin),
-              (eq, "$g_include_diplo_explanation", 0),
-              (assign, "$g_include_diplo_explanation", ":cur_kingdom"),
-              (str_store_string, s57, "str_s14"),
-            (try_end),
+						(try_begin),
+							(eq, "$g_include_diplo_explanation", 0),
+							(assign, "$g_include_diplo_explanation", ":cur_kingdom"),
+							(str_store_string, s57, "str_s14"),
+						(try_end),
 
-            (call_script, "script_diplomacy_start_peace_between_kingdoms", ":cur_kingdom", ":cur_kingdom_2", ":initializing_war_peace_cond"),
-          (try_end),
-        ##diplomacy begin
-        (try_end),
-        ##diplomacy end
+						(call_script, "script_diplomacy_start_peace_between_kingdoms", ":cur_kingdom", ":cur_kingdom_2", ":initializing_war_peace_cond"),
+					(try_end),
+					##diplomacy begin
+				(try_end),
+				##diplomacy end
 			(else_try),
 				(ge, ":cur_relation", 0), #AT PEACE
 
@@ -29410,29 +29555,29 @@ scripts = [
 				(store_mul, ":hostility_squared", ":hostility", ":hostility"),
 				(store_random_in_range, ":random", 0, 50),
 
-        ##diplomacy begin
-        #check for pact and lower probability if there is one
-        (try_for_range, ":third_kingdom", kingdoms_begin, kingdoms_end),
-          (neq, ":third_kingdom", ":cur_kingdom"),
-          (neq, ":third_kingdom", ":cur_kingdom_2"),
-		  ##nested diplomacy start+  Faction must be active
-		  (faction_slot_eq, ":third_kingdom", slot_faction_state, sfs_active),
-		  ##nested diplomacy end+
+				##diplomacy begin
+				#check for pact and lower probability if there is one
+				(try_for_range, ":third_kingdom", kingdoms_begin, kingdoms_end),
+					(neq, ":third_kingdom", ":cur_kingdom"),
+					(neq, ":third_kingdom", ":cur_kingdom_2"),
+					##nested diplomacy start+  Faction must be active
+					(faction_slot_eq, ":third_kingdom", slot_faction_state, sfs_active),
+					##nested diplomacy end+
 
-          (store_relation, ":cur_relation", ":cur_kingdom_2", ":third_kingdom"),
-    			(ge, ":cur_relation", 0), #AT PEACE
+					(store_relation, ":cur_relation", ":cur_kingdom_2", ":third_kingdom"),
+					(ge, ":cur_relation", 0), #AT PEACE
 
-          (store_add, ":truce_slot", ":third_kingdom", slot_faction_truce_days_with_factions_begin),
-      		(val_sub, ":truce_slot", kingdoms_begin),
-      		(faction_get_slot, ":truce_days", ":cur_kingdom_2", ":truce_slot"),
-      		##nested diplomacy start+ replace "40" with a named constant
-      		#(gt, ":truce_days", 40),
-      		(gt, ":truce_days", dplmc_treaty_defense_days_expire),
-      		##nested diplomacy end+
-      		(store_div, ":hostility_change", ":truce_days", 20),
-      		(val_sub, ":hostility_squared", ":hostility_change"),
-        (try_end),
-        ##diplomacy end
+					(store_add, ":truce_slot", ":third_kingdom", slot_faction_truce_days_with_factions_begin),
+					(val_sub, ":truce_slot", kingdoms_begin),
+					(faction_get_slot, ":truce_days", ":cur_kingdom_2", ":truce_slot"),
+					##nested diplomacy start+ replace "40" with a named constant
+					#(gt, ":truce_days", 40),
+					(gt, ":truce_days", dplmc_treaty_defense_days_expire),
+					##nested diplomacy end+
+					(store_div, ":hostility_change", ":truce_days", 20),
+					(val_sub, ":hostility_squared", ":hostility_change"),
+				(try_end),
+				##diplomacy end
 
 			    (lt, ":random", ":hostility_squared"),
 
@@ -29454,145 +29599,145 @@ scripts = [
 					(val_sub, ":slot_war_damage_inflicted", kingdoms_begin),
 					(faction_set_slot, ":cur_kingdom", ":slot_war_damage_inflicted", ":war_damage_inflicted"),
 				(try_end),
-      ##diplomacy begin
-      (else_try),
-        (ge, ":cur_relation", 0), #AT PEACE
-        (ge, ":kingdom_1_to_kingdom_2", 1),
+			##diplomacy begin
+			(else_try),
+				(ge, ":cur_relation", 0), #AT PEACE
+				(ge, ":kingdom_1_to_kingdom_2", 1),
 
-        #(assign, ":barrier", 2),
-        (store_add, ":faction1_to_faction2_slot", ":cur_kingdom_2", dplmc_slot_faction_attitude_begin),
-        (party_get_slot, ":barrier",":cur_kingdom", ":faction1_to_faction2_slot"),
+				#(assign, ":barrier", 2),
+				(store_add, ":faction1_to_faction2_slot", ":cur_kingdom_2", dplmc_slot_faction_attitude_begin),
+				(party_get_slot, ":barrier",":cur_kingdom", ":faction1_to_faction2_slot"),
 
-        (try_for_range, ":third_kingdom", kingdoms_begin, kingdoms_end),
-          (neq, ":third_kingdom", ":cur_kingdom"),
-          (neq, ":third_kingdom", ":cur_kingdom_2"),
+				(try_for_range, ":third_kingdom", kingdoms_begin, kingdoms_end),
+					(neq, ":third_kingdom", ":cur_kingdom"),
+					(neq, ":third_kingdom", ":cur_kingdom_2"),
 
-          (store_add, ":slot_truce_days", ":cur_kingdom", slot_faction_truce_days_with_factions_begin),
-          (val_sub, ":slot_truce_days", kingdoms_begin),
-          (faction_get_slot, ":truce_days", ":third_kingdom", ":slot_truce_days"),
-          ##nested diplomacy start+ change to use constants
-          #(gt, ":truce_days", 10),
-          (gt, ":truce_days", dplmc_treaty_truce_days_half_done),
-          ##nested diplomacy end+
-          (val_sub, ":barrier", 1),
+					(store_add, ":slot_truce_days", ":cur_kingdom", slot_faction_truce_days_with_factions_begin),
+					(val_sub, ":slot_truce_days", kingdoms_begin),
+					(faction_get_slot, ":truce_days", ":third_kingdom", ":slot_truce_days"),
+					##nested diplomacy start+ change to use constants
+					#(gt, ":truce_days", 10),
+					(gt, ":truce_days", dplmc_treaty_truce_days_half_done),
+					##nested diplomacy end+
+					(val_sub, ":barrier", 1),
 
-          (try_begin), #debug
-            (eq, "$cheat_mode", 1),
-            (str_store_faction_name, s5, ":cur_kingdom"),
-            (str_store_faction_name, s6, ":third_kingdom"),
-            (str_store_faction_name, s7, ":cur_kingdom_2"),
-            (display_message, "@{!}DEBUG: {s5} has truce with {s6}. Pact with {s7} is harder!"),
-          (try_end),
+					(try_begin), #debug
+						(eq, "$cheat_mode", 1),
+						(str_store_faction_name, s5, ":cur_kingdom"),
+						(str_store_faction_name, s6, ":third_kingdom"),
+						(str_store_faction_name, s7, ":cur_kingdom_2"),
+						(display_message, "@{!}DEBUG: {s5} has truce with {s6}. Pact with {s7} is harder!"),
+					(try_end),
 
-        (try_end),
+				(try_end),
 
-        (val_max, ":barrier", 0),
-        (store_random_in_range, ":random", 0, 130),
-        (le, ":random", ":barrier"),
+				(val_max, ":barrier", 0),
+				(store_random_in_range, ":random", 0, 130),
+				(le, ":random", ":barrier"),
 
-        (store_add, ":slot_truce_days", ":cur_kingdom", slot_faction_truce_days_with_factions_begin),
-        (val_sub, ":slot_truce_days", kingdoms_begin),
-        (faction_get_slot, ":truce_days", ":cur_kingdom_2", ":slot_truce_days"),
+				(store_add, ":slot_truce_days", ":cur_kingdom", slot_faction_truce_days_with_factions_begin),
+				(val_sub, ":slot_truce_days", kingdoms_begin),
+				(faction_get_slot, ":truce_days", ":cur_kingdom_2", ":slot_truce_days"),
 
-        (store_random_in_range, ":random", 0, 3),
-        (assign, ":continue", 0),
-        (try_begin),
-          ##nested diplomacy start+ change to use constants
-          #(is_between, ":truce_days", 0, 50),
-          (is_between, ":truce_days", 0, dplmc_treaty_defense_days_half_done),#50 = halfway from a defensive alliance to a trade treaty
-          ##nested diplomacy end+
-          (ge, ":cur_relation", 20),
-          (try_begin),
-            (le, ":random", 0), #1/3 for alliance, defensive
-            (assign, ":continue", 1),
-          (try_end),
-        (else_try),
-          ##nested diplomacy start+ change to use constants
-          #(is_between, ":truce_days", 0, 10),
-          (is_between, ":truce_days", 0, dplmc_treaty_truce_days_half_done),#10 = halfway done with a truce
-          ##nested diplomacy end+
-          (ge, ":cur_relation", 10),
-          (try_begin),
-            (le, ":random", 1), #2/3 # for trade
-            (assign, ":continue", 1),
-          (try_end),
-        (else_try),
-          (assign, ":continue", 1),  # for non-aggression
-        (try_end),
-        (eq, ":continue", 1),
+				(store_random_in_range, ":random", 0, 3),
+				(assign, ":continue", 0),
+				(try_begin),
+					##nested diplomacy start+ change to use constants
+					#(is_between, ":truce_days", 0, 50),
+					(is_between, ":truce_days", 0, dplmc_treaty_defense_days_half_done),#50 = halfway from a defensive alliance to a trade treaty
+					##nested diplomacy end+
+					(ge, ":cur_relation", 20),
+					(try_begin),
+						(le, ":random", 0), #1/3 for alliance, defensive
+						(assign, ":continue", 1),
+					(try_end),
+				(else_try),
+					##nested diplomacy start+ change to use constants
+					#(is_between, ":truce_days", 0, 10),
+					(is_between, ":truce_days", 0, dplmc_treaty_truce_days_half_done),#10 = halfway done with a truce
+					##nested diplomacy end+
+					(ge, ":cur_relation", 10),
+					(try_begin),
+						(le, ":random", 1), #2/3 # for trade
+						(assign, ":continue", 1),
+					(try_end),
+				(else_try),
+					(assign, ":continue", 1),  # for non-aggression
+				(try_end),
+				(eq, ":continue", 1),
 
-        (try_begin),
-		  ##nested diplomacy start+
-		  (call_script, "script_dplmc_get_troop_standing_in_faction", "trp_player", ":cur_kingdom_2"),
-		  (this_or_next|ge, reg0, DPLMC_FACTION_STANDING_LEADER_SPOUSE),
-		  ##nested diplomacy end+
-          (eq, ":cur_kingdom_2", "fac_player_supporters_faction"),
-          (ge, ":kingdom_1_to_kingdom_2", 1),
+				(try_begin),
+					##nested diplomacy start+
+					(call_script, "script_dplmc_get_troop_standing_in_faction", "trp_player", ":cur_kingdom_2"),
+					(this_or_next|ge, reg0, DPLMC_FACTION_STANDING_LEADER_SPOUSE),
+					##nested diplomacy end+
+					(eq, ":cur_kingdom_2", "fac_player_supporters_faction"),
+					(ge, ":kingdom_1_to_kingdom_2", 1),
 
-          (try_begin),
-            ##nested diplomacy start+ change to use constants
-            #(is_between, ":truce_days", 20, 50),
-            (is_between, ":truce_days", dplmc_treaty_trade_days_expire, dplmc_treaty_defense_days_half_done),
-            ##nested diplomacy end+
-            (ge, ":cur_relation", 30),
-            (faction_slot_eq, ":cur_kingdom", slot_faction_recognized_player, 1), #recognized us
-            (call_script, "script_add_notification_menu", "mnu_dplmc_question_alliance_offer", ":cur_kingdom", 0),
-          (else_try),
-            ##nested diplomacy start+ change to use constants
-            #(is_between, ":truce_days", 0, 30), #you need a non-aggression or trade aggreement for an defensive pact
-            (is_between, ":truce_days", 0, dplmc_treaty_trade_days_half_done),
-            ##nested diplomacy end+
-            (ge, ":cur_relation", 20),
-            (faction_slot_eq, ":cur_kingdom", slot_faction_recognized_player, 1), #recognized us
-            (call_script, "script_add_notification_menu", "mnu_dplmc_question_defensive_offer", ":cur_kingdom", 0),
-          (else_try),
-            ##nested diplomacy start+ change to use constants
-            #(is_between, ":truce_days", 0, 10),
-            (is_between, ":truce_days", 0, dplmc_treaty_truce_days_half_done),
-            ##diplomacy end+
-            (ge, ":cur_relation", 10),
-            (faction_slot_eq, ":cur_kingdom", slot_faction_recognized_player, 1), #recognized us
-            (call_script, "script_add_notification_menu", "mnu_dplmc_question_trade_offer", ":cur_kingdom", 0),
-          (else_try),
-            (eq, ":truce_days", 0),
-            (ge, ":cur_relation", 5),
-            (call_script, "script_add_notification_menu", "mnu_dplmc_question_nonaggression_offer", ":cur_kingdom", 0),
-          (try_end),
-        (else_try),
-          (ge, ":kingdom_1_to_kingdom_2", 1),
+					(try_begin),
+						##nested diplomacy start+ change to use constants
+						#(is_between, ":truce_days", 20, 50),
+						(is_between, ":truce_days", dplmc_treaty_trade_days_expire, dplmc_treaty_defense_days_half_done),
+						##nested diplomacy end+
+						(ge, ":cur_relation", 30),
+						(faction_slot_eq, ":cur_kingdom", slot_faction_recognized_player, 1), #recognized us
+						(call_script, "script_add_notification_menu", "mnu_dplmc_question_alliance_offer", ":cur_kingdom", 0),
+					(else_try),
+						##nested diplomacy start+ change to use constants
+						#(is_between, ":truce_days", 0, 30), #you need a non-aggression or trade aggreement for an defensive pact
+						(is_between, ":truce_days", 0, dplmc_treaty_trade_days_half_done),
+						##nested diplomacy end+
+						(ge, ":cur_relation", 20),
+						(faction_slot_eq, ":cur_kingdom", slot_faction_recognized_player, 1), #recognized us
+						(call_script, "script_add_notification_menu", "mnu_dplmc_question_defensive_offer", ":cur_kingdom", 0),
+					(else_try),
+						##nested diplomacy start+ change to use constants
+						#(is_between, ":truce_days", 0, 10),
+						(is_between, ":truce_days", 0, dplmc_treaty_truce_days_half_done),
+						##diplomacy end+
+						(ge, ":cur_relation", 10),
+						(faction_slot_eq, ":cur_kingdom", slot_faction_recognized_player, 1), #recognized us
+						(call_script, "script_add_notification_menu", "mnu_dplmc_question_trade_offer", ":cur_kingdom", 0),
+					(else_try),
+						(eq, ":truce_days", 0),
+						(ge, ":cur_relation", 5),
+						(call_script, "script_add_notification_menu", "mnu_dplmc_question_nonaggression_offer", ":cur_kingdom", 0),
+					(try_end),
+				(else_try),
+					(ge, ":kingdom_1_to_kingdom_2", 1),
 
-          (call_script, "script_npc_decision_checklist_peace_or_war", ":cur_kingdom_2", ":cur_kingdom", -1),
-          (assign, ":kingdom_2_to_kingdom_1", reg0),
-          (ge, ":kingdom_2_to_kingdom_1", 1),
+					(call_script, "script_npc_decision_checklist_peace_or_war", ":cur_kingdom_2", ":cur_kingdom", -1),
+					(assign, ":kingdom_2_to_kingdom_1", reg0),
+					(ge, ":kingdom_2_to_kingdom_1", 1),
 
-          (try_begin),
-            ##nested diplomacy start+ change to use constants
-            #(is_between, ":truce_days", 20, 50),
-            (is_between, ":truce_days", dplmc_treaty_trade_days_expire, dplmc_treaty_defense_days_half_done),
-            ##nested diplomacy end+
-            (ge, ":cur_relation", 30),
-            (call_script, "script_dplmc_start_alliance_between_kingdoms", ":cur_kingdom", ":cur_kingdom_2", ":initializing_war_peace_cond"),
-          (else_try),
-            ##nested diplomacy start+ change to use constants
-            #(is_between, ":truce_days", 0, 30), #you need a non-aggression or trade aggreement for an defensive pact
-            (is_between, ":truce_days", 0, dplmc_treaty_trade_days_half_done),
-            ##nested diplomacy end+
-            (ge, ":cur_relation", 20),
-            (call_script, "script_dplmc_start_defensive_between_kingdoms", ":cur_kingdom", ":cur_kingdom_2", ":initializing_war_peace_cond"),
-          (else_try),
-            ##nested diplomacy start+ change to use constants
-            #(is_between, ":truce_days", 0, 10),
-            (is_between, ":truce_days", 0, dplmc_treaty_truce_days_half_done),
-            ##nested diplomacy end+
-            (ge, ":cur_relation", 10),
-            (call_script, "script_dplmc_start_trade_between_kingdoms", ":cur_kingdom", ":cur_kingdom_2", ":initializing_war_peace_cond"),
-          (else_try),
-            (eq, ":truce_days", 0),
-            (call_script, "script_dplmc_start_nonaggression_between_kingdoms", ":cur_kingdom", ":cur_kingdom_2", ":initializing_war_peace_cond"),
-          (try_end),
-        (try_end),
-      ##diplomacy end
-      (try_end),
+					(try_begin),
+						##nested diplomacy start+ change to use constants
+						#(is_between, ":truce_days", 20, 50),
+						(is_between, ":truce_days", dplmc_treaty_trade_days_expire, dplmc_treaty_defense_days_half_done),
+						##nested diplomacy end+
+						(ge, ":cur_relation", 30),
+						(call_script, "script_dplmc_start_alliance_between_kingdoms", ":cur_kingdom", ":cur_kingdom_2", ":initializing_war_peace_cond"),
+					(else_try),
+						##nested diplomacy start+ change to use constants
+						#(is_between, ":truce_days", 0, 30), #you need a non-aggression or trade aggreement for an defensive pact
+						(is_between, ":truce_days", 0, dplmc_treaty_trade_days_half_done),
+						##nested diplomacy end+
+						(ge, ":cur_relation", 20),
+						(call_script, "script_dplmc_start_defensive_between_kingdoms", ":cur_kingdom", ":cur_kingdom_2", ":initializing_war_peace_cond"),
+					(else_try),
+						##nested diplomacy start+ change to use constants
+						#(is_between, ":truce_days", 0, 10),
+						(is_between, ":truce_days", 0, dplmc_treaty_truce_days_half_done),
+						##nested diplomacy end+
+						(ge, ":cur_relation", 10),
+						(call_script, "script_dplmc_start_trade_between_kingdoms", ":cur_kingdom", ":cur_kingdom_2", ":initializing_war_peace_cond"),
+					(else_try),
+						(eq, ":truce_days", 0),
+						(call_script, "script_dplmc_start_nonaggression_between_kingdoms", ":cur_kingdom", ":cur_kingdom_2", ":initializing_war_peace_cond"),
+					(try_end),
+				(try_end),
+				##diplomacy end
+			(try_end),
 		(try_end),
 	(try_end),
 
@@ -30096,7 +30241,7 @@ scripts = [
         (mission_tpl_entry_clear_override_items, ":mission_template_no", 0),
         (mission_tpl_entry_add_override_item, ":mission_template_no", 0, "itm_pilgrim_hood"),
         (mission_tpl_entry_add_override_item, ":mission_template_no", 0, "itm_pilgrim_disguise"),
-        (mission_tpl_entry_add_override_item, ":mission_template_no", 0, "itm_practice_staff"),
+        (mission_tpl_entry_add_override_item, ":mission_template_no", 0, "itm_quarter_staff"), # Changed from itm_practice_staff
         (mission_tpl_entry_add_override_item, ":mission_template_no", 0, "itm_throwing_daggers"),
       (try_end),
       #new added end
@@ -32261,7 +32406,7 @@ scripts = [
         (val_div, ":morale_adder", ":total_casualties"),
         (val_mul, ":morale_adder", ":ally_casualties"),
         (val_div, ":morale_adder", ":total_allies"),
-        (val_mul, ":morale_adder", -30),
+        (val_mul, ":morale_adder", -20),
         (val_div, ":morale_adder", 100),
         (call_script, "script_change_player_party_morale", ":morale_adder"),
       (try_end),
@@ -33899,7 +34044,7 @@ scripts = [
           (agent_set_animation, ":agent_no", "anim_stand_townguard"),
         (else_try),
           (agent_set_animation, ":agent_no", "anim_stand_townguard"),
-        (end_try),
+        (try_end),
       (else_try),
         (is_between, ":troop_no", kingdom_ladies_begin, kingdom_ladies_end),
         (assign, ":stand_animation", "anim_stand_lady"),
@@ -62624,7 +62769,7 @@ scripts = [
 		##diplomacy start+
 		(try_end),
 		##diplomacy end+
-    (end_try),
+    (try_end),
   ]),
 
   # script_refresh_center_weaponsmiths
@@ -71275,7 +71420,7 @@ scripts = [
 
                  # Relation to liege
                  (call_script, "script_get_troop_relation_to_player_string", s47, ":liege"),
-             (end_try),
+             (try_end),
 
              # Holdings
              (call_script, "script_get_troop_holdings", ":troop_no"),
@@ -71326,7 +71471,7 @@ You are a {s44} of {s45}^{reg45?{reg46?Your liege, {s46},{s47}:You are the ruler
                (val_sub, ":origin_faction", npc_kingdoms_begin),
                (val_add, ":origin_faction", "str_kingdom_1_adjective"),
                (str_store_string, s44, ":origin_faction"),
-             (end_try),
+             (try_end),
              (str_store_faction_name, s45, ":faction"),
 
              # Current liege - deduced from current faction
@@ -71340,7 +71485,7 @@ You are a {s44} of {s45}^{reg45?{reg46?Your liege, {s46},{s47}:You are the ruler
                # Relation to liege
                (call_script, "script_troop_get_relation_with_troop", ":troop_no", ":liege"),
                (assign, reg47, reg0),
-             (end_try),
+             (try_end),
 
              # Promised a fief ?
              (troop_get_slot, reg51, ":troop_no", slot_troop_promised_fief),
@@ -71437,7 +71582,7 @@ Days since last meeting: {reg49}^^Fiefs {reg51?(was promised a fief):}:^  {reg50
                (val_sub, ":origin_faction", npc_kingdoms_begin),
                (val_add, ":origin_faction", "str_kingdom_1_adjective"),
                (str_store_string, s44, ":origin_faction"),
-             (end_try),
+             (try_end),
              (str_store_faction_name, s45, ":faction"),
 
              # Father/Guardian
@@ -75743,7 +75888,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		(store_character_level, ":troop_level", ":troop_id"),
 		(gt, ":troop_level", ":max_level"),
 		(assign, ":max_level", ":troop_level"),
-	(end_try),
+	(try_end),
 	(assign, ":column", 1),
 	(assign, ":rank_dimension", 1),
 	(store_mul, ":neg_y_distance", ":y_distance", -1),
@@ -75783,8 +75928,8 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 			(try_end),			
 			(assign, ":column", 1),
 			(val_add, ":rank_dimension", 1),
-		(end_try),
-	(end_try),
+		(try_end),
+	(try_end),
   ]),
 	   
   # script_form_archers by motomataru
@@ -75899,7 +76044,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 			(try_end),			
 			(assign, ":column", 1),		
 			(val_add, ":rank", 1),
-		(end_try),
+		(try_end),
 		
 	(else_try),
 		(eq, ":infantry_formation", formation_wedge),
@@ -75910,7 +76055,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 			(store_character_level, ":troop_level", ":troop_id"),
 			(gt, ":troop_level", ":max_level"),
 			(assign, ":max_level", ":troop_level"),
-		(end_try),
+		(try_end),
 
 		(assign, ":rank_dimension", 1),
 		(store_div, ":wedge_adj", ":distance", 2),
@@ -75955,8 +76100,8 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 				(try_end),			
 				(assign, ":column", 1),
 				(val_add, ":rank_dimension", 1),
-			(end_try),
-		(end_try),
+			(try_end),
+		(try_end),
 		
 	(else_try),
 		(eq, ":infantry_formation", formation_ranks),
@@ -75969,7 +76114,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 			(store_character_level, ":troop_level", ":troop_id"),
 			(gt, ":troop_level", ":max_level"),
 			(assign, ":max_level", ":troop_level"),
-		(end_try),
+		(try_end),
 
 
 		(val_add, ":max_level", 1),
@@ -76012,8 +76157,8 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 				(try_end),			
 				(assign, ":column", 1),
 				(val_add, ":rank", 1),
-			(end_try),
-		(end_try),
+			(try_end),
+		(try_end),
 		
 	(else_try),
 		(eq, ":infantry_formation", formation_shield),

@@ -32,7 +32,7 @@ from module_constants import *
 # 
 ####################################################################################################################
 
-pilgrim_disguise = [itm_pilgrim_hood,itm_pilgrim_disguise,itm_practice_staff, itm_throwing_daggers]
+pilgrim_disguise = [itm_pilgrim_hood,itm_pilgrim_disguise,itm_quarter_staff, itm_throwing_daggers]
 af_castle_lord = af_override_horse | af_override_weapons| af_require_civilian
 
 ##diplomacy begin
@@ -18148,7 +18148,7 @@ mission_templates = [
 			]),
 			
 		(10, 0, 0, # Reassign new leader if old one is unable to lead
-			[],    # Redoing it all the time might be a waste of resources, but a new leader might appear when reinforced
+			[],    # Redoing it all the time might be a waste of resources, but a new leader might appear when reinforced (nobles can lead)
 			[
 				(try_for_range, ":team", 0, 3),
 					(team_get_leader, ":leader", ":team"),
@@ -18285,7 +18285,7 @@ mission_templates = [
 						
 						(get_distance_between_positions_in_meters, ":distance", pos25, pos26),
 						
-						(lt, ":distance", 200),
+						(lt, ":distance", 100),
 						(assign, ":num_inf", 0),
 						
 						(try_begin),
@@ -18309,7 +18309,7 @@ mission_templates = [
 						
 						(get_distance_between_positions_in_meters, ":distance", pos25, pos26),
 						
-						(lt, ":distance", 200),
+						(lt, ":distance", 100),
 						(assign, ":num_rang", 0),
 						
 						(try_begin),
@@ -18333,7 +18333,7 @@ mission_templates = [
 						
 						(get_distance_between_positions_in_meters, ":distance", pos25, pos26),
 						
-						(lt, ":distance", 200),
+						(lt, ":distance", 100),
 						(assign, ":num_cav", 0),
 						
 						(try_begin),
@@ -18357,7 +18357,7 @@ mission_templates = [
 						
 						(get_distance_between_positions_in_meters, ":distance", pos25, pos26),
 						
-						(lt, ":distance", 200),
+						(lt, ":distance", 100),
 						(assign, ":num_aux", 0),
 						
 						(try_begin),

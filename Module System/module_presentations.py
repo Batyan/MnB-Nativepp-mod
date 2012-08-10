@@ -11975,6 +11975,7 @@ presentations = [
 		(overlay_set_position, reg1, pos1),
 
 		(troop_get_slot, reg0, ":cur_merc", slot_troop_mercenary_payment_for_player),
+		(val_mul, reg0, -1),
 		(create_text_overlay, reg1, "@{!}{reg0}", tf_right_align|tf_single_line),
         (overlay_set_color, reg1, 0xFF0000),
 		(position_set_x, pos1, 900),
@@ -11985,7 +11986,7 @@ presentations = [
         (overlay_set_position, reg1, pos1),
         (val_sub, ":cur_y", 27),
 		
-		(val_sub, ":net_change", reg0),
+		(val_add, ":net_change", reg0),
 	  (try_end),
 
       (try_for_parties, ":party_no"),
@@ -12993,7 +12994,7 @@ presentations = [
           (overlay_add_item, "$g_presentation_obj_1", s2),
           (assign, "$demanded_castle", ":castle"),
           (val_add, ":castle_count", 1),
-        (end_try),
+        (try_end),
         (assign, "$diplomacy_var2", 0),
         (position_set_x, pos1, 300),
         (position_set_y, pos1, 250),

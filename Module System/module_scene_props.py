@@ -829,7 +829,7 @@ scene_props = [
         (try_end),
         (position_rotate_x, 2, ":damage"),
         (display_message, "str_delivered_damage"),
-        (prop_instance_animate_to_position, ":instance_no", 2, 30), #animate to position 1 in 0.3 second
+        (prop_instance_animate_to_position, ":instance_no", 2, 30), #animate to position 2 in 0.3 second
         (play_sound, "snd_dummy_hit"),
         (particle_system_burst, "psys_dummy_smoke", pos1, 3),
         (particle_system_burst, "psys_dummy_straw", pos1, 10),
