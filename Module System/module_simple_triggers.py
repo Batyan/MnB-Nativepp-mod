@@ -5522,7 +5522,8 @@ simple_triggers = [
 		(eq, ":behavior", ai_bhvr_in_town),
 		(party_get_attached_to, ":attached", ":party_no"),
 		(try_begin),
-		  (is_between, ":attached", walled_centers_begin, walled_centers_end), # is in a center
+		  (this_or_next|is_between, ":attached", walled_centers_begin, walled_centers_end), # is in a center
+		  (party_is_in_any_town, ":party_no"),
 		  (neg|call_script, "script_cf_mercenary_join_centers_faction", ":merc_no", ":attached"),
 		  ## If script succed it means the mercenary will join the faction, meaning we don't have to care about its behavior anymore
 		  (party_get_num_companions, ":party_size", ":party_no"),
@@ -5550,6 +5551,7 @@ simple_triggers = [
 	    (try_begin), # if the mercenary gets stuck inside a center
 		  (party_get_attached_to, ":attached", ":party_no"),
 		  (is_between, ":attached", walled_centers_begin, walled_centers_end),
+		  # (party_is_in_any_town, ":party_no"),
 		  (party_detach, ":party_no"),
 		(try_end),
 	    (party_set_ai_behavior, ":party_no", ai_bhvr_patrol_location),

@@ -781,11 +781,16 @@ script_select_battle_tactic_expanded = 779
 script_battle_tactic_init_expanded = 780
 script_battle_tactic_apply_expanded = 781
 script_battle_tactic_apply_expanded_aux = 782
-script_find_new_leader = 783
-script_reassign_agent_division = 784
-script_reform_battlegroup = 785
-script_assign_combat_division = 786
-script_troop_set_age = 787
-script_cf_troop_can_upgrade = 788
+script_decide_infantry_group = 783
+script_decide_ranged_group = 784
+script_decide_cavalry_group = 785
+script_decide_auxiliary_group = 786
+script_decide_reinforcements = 787
+script_find_new_leader = 788
+script_reassign_agent_division = 789
+script_reform_battlegroup = 790
+script_assign_combat_division = 791
+script_troop_set_age = 792
+script_cf_troop_can_upgrade = 793
 
 

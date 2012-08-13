@@ -2805,7 +2805,7 @@ stds_reform = 6 # Used when reinforcements have arrived
 stds_disabled = 7 # Divisions 4-7 when no reinforcements 
 stds_retreat = 8 # Retreating group
 
-slot_team_battle_tactic = 359
+slot_team_battle_tactic = 359		# Tactics can change during the battle (usualy after reinforcements come)
 
 bt_none = 0							# No leader, no elaborated tactic
 bt_charge = 1						# Blindly charge
@@ -2826,8 +2826,10 @@ stdt_aux_cav = 1		# Same as group 2 (cavalry)	--
 stdt_aux_inf = 2		# Same as group 0 (infantry)-- 
 stdt_wo_shield_inf = 3	# Shieldless infantry 		-- Mostly used by nords, but can also be used for vaegirs or rhodoks
 stdt_aux_rang = 4		# Same as group 1 (ranged)	-- 
-stdt_hrang = 5			# Horse archer group 		-- Mostly used by khergits, but might be used by sarranids, or, in rare occasions, by rhodoks
-stdt_lancer = 6			# Lancer group 				-- Used by swadians, vaegirs, sometimes by sarranids
+stdt_hrang = 5			# Horse archer group 		-- Mostly used by khergits, but might be used by sarranids, or, in rare occasions, by rhodoks or vaegirs
+stdt_lancer = 6			# Lancer group 				-- Used by swadians, vaegirs, khergits, sometimes by sarranids
+stdt_throw = 7			# Thrower group				-- Mostly used by sarranids, sometimes nords
+stdt_shield_rang = 8	# Ranged units with shields -- Only used by swadians and rhodoks; serves as a mobile, lone group of archers able to defend themselves
 
 slot_team_num_agent_in_div0 = 361
 slot_team_num_agent_in_div1 = 362
