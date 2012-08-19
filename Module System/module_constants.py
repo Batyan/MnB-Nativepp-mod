@@ -625,6 +625,35 @@ slot_party_money_carried_state = 352
 slot_party_money_carried_lord  = 353
 ## bank end
 
+#############################################################################
+# Population for towns, villages and casltes
+# 
+# All center has a population
+# It allow them to recruit people
+# Player will recruit from the population
+# Looting will slightly decrease the population
+# (with increased chance for nobles and fighters)
+# and later on, people will leave because of poor prosperity
+# 
+# Villages will now be able to hold nobles
+# But only in rare occasions
+# The population will also help during village raid
+# So more nobles or fighters means better defense
+# Sometimes the population will try to defend itself
+# against an looting party
+# Nobles and fighters will take part in the fight
+# They will most of the time too few to do anything though
+#
+# Towns   : 50-95% common;  0-20% fighter;  5-15% nobles;  maxpop : 200?
+# Castles :  5-15% common; 50-90% fighter;  5-25% nobles;  maxpop : 50?
+# Villages: 75-100%common;  0-10% fighter;  0- 5% nobles;  maxpop : 2000?
+# 
+#############################################################################
+
+# slot_center_population_common = 354
+# slot_center_population_noble  = 355
+# slot_center_population_fighters = 356
+
 slot_center_smith_item  = 398
 slot_center_hours_to_finish  = 399
 

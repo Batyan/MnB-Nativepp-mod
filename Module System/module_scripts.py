@@ -1820,6 +1820,7 @@ scripts = [
       (item_set_slot, "itm_archers_vest", slot_item_multiplayer_item_class, multi_item_class_type_light_armor),
       (item_set_slot, "itm_sarranid_leather_armor", slot_item_multiplayer_item_class, multi_item_class_type_light_armor),
       (item_set_slot, "itm_sarranid_cloth_robe", slot_item_multiplayer_item_class, multi_item_class_type_light_armor),
+      (item_set_slot, "itm_sarranid_cloth_robe_b", slot_item_multiplayer_item_class, multi_item_class_type_light_armor),
 	  (item_set_slot, "itm_sarranid_cavalry_robe", slot_item_multiplayer_item_class, multi_item_class_type_light_armor),
 
       (item_set_slot, "itm_sarranid_mail_shirt", slot_item_multiplayer_item_class, multi_item_class_type_medium_armor),
@@ -2563,6 +2564,7 @@ scripts = [
       #6-Sarranid Warriors
       #5a-Sarranid thrower
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_sarranid_cloth_robe", "trp_sarranid_archer_multiplayer"),
+      (call_script, "script_multiplayer_set_item_available_for_troop", "itm_sarranid_cloth_robe_b", "trp_sarranid_archer_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_skirmisher_armor", "trp_sarranid_archer_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_archers_vest", "trp_sarranid_archer_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_arabian_armor_b", "trp_sarranid_archer_multiplayer"),
@@ -2596,6 +2598,7 @@ scripts = [
 
 	  #Sarranid footman
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_sarranid_cloth_robe", "trp_sarranid_footman_multiplayer"),
+      (call_script, "script_multiplayer_set_item_available_for_troop", "itm_sarranid_cloth_robe_b", "trp_sarranid_footman_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_skirmisher_armor", "trp_sarranid_footman_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_archers_vest", "trp_sarranid_footman_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_sarranid_leather_armor", "trp_sarranid_footman_multiplayer"),
@@ -2644,6 +2647,7 @@ scripts = [
 
 	  #Sarranid mamluke
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_sarranid_cloth_robe", "trp_sarranid_mamluke_multiplayer"),
+      (call_script, "script_multiplayer_set_item_available_for_troop", "itm_sarranid_cloth_robe_b", "trp_sarranid_mamluke_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_skirmisher_armor", "trp_sarranid_mamluke_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_archers_vest", "trp_sarranid_mamluke_multiplayer"),
 	  (call_script, "script_multiplayer_set_item_available_for_troop", "itm_sarranid_leather_armor", "trp_sarranid_mamluke_multiplayer"),
@@ -2695,6 +2699,7 @@ scripts = [
 	  
 	  #5d-Sarranid archer
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_sarranid_cloth_robe", "trp_sarranid_merc_multiplayer"),
+      (call_script, "script_multiplayer_set_item_available_for_troop", "itm_sarranid_cloth_robe_b", "trp_sarranid_merc_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_skirmisher_armor", "trp_sarranid_merc_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_archers_vest", "trp_sarranid_merc_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_arabian_armor_b", "trp_sarranid_merc_multiplayer"),
@@ -3908,10 +3913,11 @@ scripts = [
 		      (val_div, ":defender_defense", 2),
 		    (try_end),
 			
-            (val_mul, ":defender_strength", 150), #it was 1.5 in old version, now it is only 1.23 -- back to 1.5
-            (val_div, ":defender_strength", 100),
+			(val_mul, ":defender_strength", 2), # Defenders have a big advantage
+            # (val_mul, ":defender_strength", 150), #it was 1.5 in old version, now it is only 1.23 -- back to 1.5
+            # (val_div, ":defender_strength", 100),
 			
-			(val_mul, ":defender_defense", 2), #twice as hard to kill defenders, we do this to make taking castles last longer
+			(val_mul, ":defender_defense", 3), #three times as hard to kill defenders, we do this to make taking castles last longer
 			
 			
 			
@@ -13643,9 +13649,9 @@ scripts = [
      (store_script_param, ":item_no", 1),
      (store_script_param, ":troop_no", 2),
      (try_begin),
-       (call_script, "script_cf_multiplayer_is_item_default_for_troop", ":item_no", ":troop_no"),
-       (assign, ":item_value", 0),
-     (else_try),
+       # (call_script, "script_cf_multiplayer_is_item_default_for_troop", ":item_no", ":troop_no"),
+       # (assign, ":item_value", 0),
+     # (else_try),
        (store_item_value, ":item_value", ":item_no"),
        (store_troop_faction, ":faction_no", ":troop_no"),
        (store_sub, ":faction_slot", ":faction_no", npc_kingdoms_begin),
@@ -38922,13 +38928,13 @@ scripts = [
 		  (gt, ":num_parties", 8), # if more than 8 parties, lair is spawning faster
 		  (store_random_in_range, ":random_num", 0, 3),
 		(else_try),
-		  (store_random_in_range, ":random_num", 0, 6),
+		  (store_random_in_range, ":random_num", 0, 7),
 		(try_end),
 		
 		
 		(eq, ":random_num", 0),
 		(party_template_get_slot, ":bandit_lair_party", ":bandit_template", slot_party_template_lair_party),
-		(le, ":bandit_lair_party", 0),
+		(lt, ":bandit_lair_party", 0),
 
 		(party_template_get_slot, ":bandit_lair_template", ":bandit_template", slot_party_template_lair_type),
 		(party_template_get_slot, ":bandit_lair_template_spawnpoint", ":bandit_template", slot_party_template_lair_spawnpoint),
@@ -39006,7 +39012,7 @@ scripts = [
 			(str_store_party_name, s4, ":new_camp"),
 			(remove_party, ":new_camp"),
 			(party_template_set_slot, ":bandit_template", slot_party_template_lair_party, 0),
-		(else_try),
+		# (else_try),
 		(try_end),
 	(try_end),
      ]),
@@ -79448,7 +79454,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		
 			(get_distance_between_positions_in_meters, ":distance", pos22, pos23),
 			
-			(store_random_in_range, ":engaging_distance", 50, 150),
+			(store_random_in_range, ":engaging_distance", 50, 100),
 			(lt, ":distance", ":engaging_distance"),
 			
 			(team_set_slot, ":team", slot_team_division_1_state, stds_engaging),
@@ -79469,7 +79475,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		
 			(get_distance_between_positions_in_meters, ":distance", pos22, pos23),
 			
-			(store_random_in_range, ":disengaging_distance", 200, 300),
+			(store_random_in_range, ":disengaging_distance", 100, 175),
 			(gt, ":distance", ":disengaging_distance"),
 			
 			(team_set_slot, ":team", slot_team_division_1_state, stds_ready),
@@ -80250,11 +80256,12 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		(try_end),
 	(try_end),
 	
-	(try_begin),
-		(neq, ":old_div", ":div"),
-		(val_add, ":div", 4), # Put as a reinforcement
-		(agent_set_division, ":agent_no", ":div"),
-	(try_end),
+	# Disable for now, until we find a solution
+	# (try_begin),
+		# (neq, ":old_div", ":div"),
+		# (val_add, ":div", 4), # Put as a reinforcement
+		# (agent_set_division, ":agent_no", ":div"),
+	# (try_end),
   ]),
   
   # script_reform_battlegroup

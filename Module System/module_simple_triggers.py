@@ -1846,24 +1846,24 @@ simple_triggers = [
 			(jump_to_menu, "mnu_debug_alert_from_s65"),
 		(try_end),
 	(try_end),
-     (eq, "$g_recalculate_ais", 1),
-     (assign, "$g_recalculate_ais", 0),
-     (call_script, "script_recalculate_ais"),
+    (eq, "$g_recalculate_ais", 1),
+    (assign, "$g_recalculate_ais", 0),
+    (call_script, "script_recalculate_ais"),
    ]),
 	
     # Count faction armies
     (24,
     [
-       (try_for_range, ":faction_no", kingdoms_begin, kingdoms_end),
-         (call_script, "script_faction_recalculate_strength", ":faction_no"),
-		 (call_script, "script_faction_count_centers_in_slot", ":faction_no"), #new 0.76
-       (try_end),
-	   ##diplomacy start+ Add support for promoted kingdom ladies
-	   ##OLD:
-	   #(try_for_range, ":active_npc", active_npcs_begin, active_npcs_end),
-	   ##NEW:
-	   (try_for_range, ":active_npc", heroes_begin, heroes_end),
-	    (this_or_next|is_between, ":active_npc", active_npcs_begin, active_npcs_end),
+	(try_for_range, ":faction_no", kingdoms_begin, kingdoms_end),
+		(call_script, "script_faction_recalculate_strength", ":faction_no"),
+		(call_script, "script_faction_count_centers_in_slot", ":faction_no"), #new 0.76
+	(try_end),
+	##diplomacy start+ Add support for promoted kingdom ladies
+	##OLD:
+	#(try_for_range, ":active_npc", active_npcs_begin, active_npcs_end),
+	##NEW:
+	(try_for_range, ":active_npc", heroes_begin, heroes_end),
+		(this_or_next|is_between, ":active_npc", active_npcs_begin, active_npcs_end),
 	    (troop_slot_eq, ":active_npc", slot_troop_occupation, slto_kingdom_hero),
 	   ##diplomacy end+
 		(store_faction_of_troop, ":active_npc_faction", ":active_npc"),
@@ -1876,11 +1876,10 @@ simple_triggers = [
 		
 		(val_add, "$total_vassal_days_on_campaign", 1),
 		
-	    (party_slot_eq, ":active_npc_party", slot_party_ai_state, spai_accompanying_army),
+		(party_slot_eq, ":active_npc_party", slot_party_ai_state, spai_accompanying_army),
 		(val_add, "$total_vassal_days_responding_to_campaign", 1),
 		
-	   
-	   (try_end),
+	(try_end),
 	   
     ]),
 
@@ -5520,11 +5519,16 @@ simple_triggers = [
 	  (else_try),
 	    (this_or_next|eq, ":behavior", ai_bhvr_travel_to_party),
 		(eq, ":behavior", ai_bhvr_in_town),
-		(party_get_attached_to, ":attached", ":party_no"),
+		(assign, ":town", -1),
 		(try_begin),
-		  (this_or_next|is_between, ":attached", walled_centers_begin, walled_centers_end), # is in a center
-		  (party_is_in_any_town, ":party_no"),
-		  (neg|call_script, "script_cf_mercenary_join_centers_faction", ":merc_no", ":attached"),
+		  (try_begin),
+		    (party_get_cur_town, ":town", ":party_no"),
+			(gt, ":town", 0),
+		  (else_try),
+		    (party_get_attached_to, ":town", ":party_no"),
+		  (try_end),
+		  (is_between, ":town", walled_centers_begin, walled_centers_end), # is in a center
+		  (neg|call_script, "script_cf_mercenary_join_centers_faction", ":merc_no", ":town"),
 		  ## If script succed it means the mercenary will join the faction, meaning we don't have to care about its behavior anymore
 		  (party_get_num_companions, ":party_size", ":party_no"),
 		  (call_script, "script_party_get_ideal_size", ":party_no"),
