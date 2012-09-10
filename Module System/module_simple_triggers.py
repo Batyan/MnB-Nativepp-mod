@@ -5643,16 +5643,16 @@ simple_triggers = [
 	      (lt, ":total_bonus", 15),
 	      (display_message, "@Your troops are hungry and earn less experience.", 0xeebbbb),
 	    (else_try), # training was more effective
-	  	(display_message, "@Your troops are well fed and earn more experience.", 0xbbeebb),
+	  	  (display_message, "@Your troops are well fed and earn more experience.", 0xbbeebb),
 	    (try_end),
 	    # We start at 1, we don't need to check the player!
-	    (try_for_range, ":cur_stack", 1, ":num_stack"), # We do this here, because we don't want to do it for each trainer
-	      (party_stack_get_troop_id, ":cur_troop", "p_main_party", ":cur_stack"),
-	  	(neg|troop_is_hero, ":cur_troop"), # No need to check for heroes as we know when they've upgraded
-	      (call_script, "script_cf_troop_can_upgrade", ":cur_troop"),
-	  	(display_message, "@Some troops are ready to upgrade.", 0xbbeebb),
-	  	(assign, ":num_stack", 0), # We only need to know if one troop is ready to upgrade, so we break the loop
-	    (try_end),
+	    # (try_for_range, ":cur_stack", 1, ":num_stack"), # We do this here, because we don't want to do it for each trainer
+	      # (party_stack_get_troop_id, ":cur_troop", "p_main_party", ":cur_stack"),
+	  	  # (neg|troop_is_hero, ":cur_troop"), # No need to check for heroes as we know when they've upgraded
+	      # (call_script, "script_cf_troop_can_upgrade", ":cur_troop"),
+	  	  # (display_message, "@Some troops are ready to upgrade.", 0xbbeebb),
+	  	  # (assign, ":num_stack", 0), # We only need to know if one troop is ready to upgrade, so we break the loop
+	    # (try_end),
 	  (try_end),
 	(try_end),
 	]),

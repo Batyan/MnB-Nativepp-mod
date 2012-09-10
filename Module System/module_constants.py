@@ -238,6 +238,18 @@ slot_faction_war_damage_inflicted_on_factions_end 	= slot_faction_sum_advice_abo
 slot_faction_sum_advice_about_factions_end			= 160
 ##diplomacy end+
 
+
+slot_faction_troop_1 = 208 # swa_militia; 		vae_inas; 			khe_clans; 			nor_raider; 		rho_spearman; 				sar_daylami
+slot_faction_troop_2 = 209 # swa_militia;		vae_cserkesz; 		khe_clans; 			nor_raider; 		rho_crossbowman; 			sar_daylami
+slot_faction_troop_3 = 210 # swa_fighter; 		vae_harcos; 		khe_steppe_rider; 	nor_trained_raider; rho_trained_spearman; 		sar_silihdar
+slot_faction_troop_4 = 211 # swa_infantry; 		vae_gyalogsag; 		khe_light_lancer; 	nor_warrior; 		rho_veteran_spearman; 		sar_hajib
+slot_faction_troop_5 = 212 # swa_skirmisher; 	vae_csatar; 		khe_horse_archer;	nor_huntsman; 		rho_trained_crossbowman;	sar_talaiah
+slot_faction_troop_6 = 213 # swa_sniper; 		vae_ijasz;	 		khe_archer; 		nor_longbowman; 	rho_veteran_crossbowman;	sar_ramat
+slot_faction_troop_7 = 214 # swa_cavalryman; 	vae_konnyu_lovasag; khe_steppe_fighter; nor_trained_raider; rho_trained_swordsman; 		sar_forsan
+slot_faction_troop_8 = 215 # swa_man_at_arms; 	vae_nehezlovassag; 	khe_soldier; 		nor_veteran; 		rho_mounted_tr_skirmisher; 	sar_mamalik_kitabeya
+slot_faction_troop_9 = 216 # Noble
+slot_faction_troop_10 = 217 # Noble
+
 #revolts -- notes for self
 #type 1 -- minor revolt, aimed at negotiating change without changing the ruler
 #type 2 -- alternate ruler revolt (ie, pretender, chinese dynastic revolt -- keep the same polity but switch the ruler)
@@ -457,29 +469,25 @@ slot_party_last_traded_center     = 126
 
 
 
-slot_center_has_manor            = 130 #village
-slot_center_has_fish_pond        = 131 #village
-slot_center_has_watch_tower      = 132 #village
-slot_center_has_school           = 133 #village
-slot_center_has_messenger_post   = 134 #town, castle, village
-slot_center_has_prisoner_tower   = 135 #town, castle
-slot_center_has_trainer_1        = 136 #town, castle
-slot_center_has_trainer_2        = 137 #town, castle
-slot_center_has_trainer_3        = 138 #town
-slot_center_has_recruitment_camp = 139 #town, castle
-slot_center_has_bank             = 140 #town
+slot_center_has_manor            = 130 									#				village
+slot_center_has_fish_pond        = slot_center_has_manor + 1 			#				village
+slot_center_has_watch_tower      = slot_center_has_fish_pond + 1 		#				village
+slot_center_has_school           = slot_center_has_watch_tower + 1 		#				village
+slot_center_has_barrack          = slot_center_has_school + 1 			#town, 	castle, village
+slot_center_has_messenger_post   = slot_center_has_barrack + 1 			#town,	castle, village
+slot_center_has_prisoner_tower   = slot_center_has_messenger_post + 1 	#town,	castle
+slot_center_has_trainer_1        = slot_center_has_prisoner_tower + 1 	#town,	castle
+slot_center_has_trainer_2        = slot_center_has_trainer_1 + 1 		#town,	castle
+slot_center_has_trainer_3        = slot_center_has_trainer_2 + 1 		#town
+slot_center_has_recruitment_camp = slot_center_has_trainer_3 + 1 		#town,	castle
+slot_center_has_bank             = slot_center_has_recruitment_camp + 1 #town 					=141
 
 village_improvements_begin = slot_center_has_manor
-village_improvements_end          = 135
+village_improvements_end   = slot_center_has_messenger_post + 1
 
-walled_center_improvements_begin = slot_center_has_messenger_post
-walled_center_improvements_end               = 141
+walled_center_improvements_begin = slot_center_has_barrack
+walled_center_improvements_end   = 142 # Max would be 147? Only 5 more buildings possible?
 
-## bank_begin
-slot_center_bank_interest_stored = 144
-slot_center_bank_money      = 145
-slot_center_bank_money_last = 146
-## bank_end
 
 slot_center_player_enterprise     				  = 147 #noted with the item produced
 slot_center_player_enterprise_production_order    = 148
@@ -623,7 +631,14 @@ slot_center_last_reconnoitered_by_faction_time 				= 350
 slot_party_money_carried       = 351
 slot_party_money_carried_state = 352
 slot_party_money_carried_lord  = 353
-## bank end
+
+# We use the same slot as they can't overwrite each other
+# That allows for more buildings
+
+slot_center_bank_interest_stored 	= slot_party_money_carried
+slot_center_bank_money      		= slot_party_money_carried_state
+slot_center_bank_money_last 		= slot_party_money_carried_lord
+## bank_end
 
 #############################################################################
 # Population for towns, villages and casltes

@@ -9206,6 +9206,8 @@ scripts = [
       (val_add, ":prosperity", ":random_prosperity_adder"),
       (val_clamp, ":prosperity", 0, 100),
       (party_set_slot, ":center_no", slot_town_prosperity, ":prosperity"),
+	  
+	  # (call_script, "script_center_set_population", ":center_no", ":prosperity"),
 	(try_end),
 
 	(call_script, "script_calculate_castle_prosperities_by_using_its_villages"),
@@ -20002,6 +20004,16 @@ scripts = [
 				(try_end),
 				(store_random_in_range, ":quest_target_item", "itm_smoked_fish", "itm_siege_supply"),
 	            (store_random_in_range, ":quest_target_amount", 1, 4),
+				
+				(store_item_value, ":quest_gold_reward", ":quest_target_item"),
+				(val_mul, ":quest_gold_reward", ":quest_target_amount"),
+				
+				# (store_skill_level, ":mult", skl_persuasion, "trp_player"),
+				# (val_add, ":mult", 1), # No 0 reward
+				
+				# (val_mul, ":quest_gold_reward", ":mult"),
+				# (val_div, ":quest_gold_reward", 25),
+				
 				(assign, ":quest_xp_reward", 250),
 	            (assign, ":quest_expiration_days", 30),
 	            (assign, ":quest_dont_give_again_period", 20),
@@ -37176,13 +37188,14 @@ scripts = [
 		(store_random_in_range, ":amount", 0, ":upper_limit"),
 		(party_set_slot, ":center_no", slot_center_volunteer_troop_amount, ":amount"),
 		
+		(assign, ":center_culture", 0),
 		(store_random_in_range, ":random", 0, 3),
 		(try_begin), # 33% original faction, 67% current faction
 		  (eq, ":random", 0),
-		  (party_get_slot, ":center_culture", "$current_town", slot_center_culture),
+		  (party_get_slot, ":center_culture", ":center_no", slot_center_culture),
 		(else_try),
-		  (store_faction_of_party, ":fac", "$current_town"),
-		  (faction_get_slot, ":center_culture", ":fac", slot_faction_culture),
+		  (store_faction_of_party, ":faction", ":center_no"),
+		  (faction_get_slot, ":center_culture", ":faction", slot_faction_culture),
 		(try_end),
 
         (faction_get_slot, ":volunteer_troop", ":center_culture", slot_faction_noble_troop),
@@ -39446,6 +39459,8 @@ scripts = [
      (else_try),
        (party_set_slot, ":center_no", slot_town_prosperity, ":new_prosperity"),
      (try_end),
+	 
+	 # (call_script, "script_center_set_population", ":center_no", ":new_prosperity"),
 
 	 (try_begin),
 		(store_current_hours, ":hours"),
@@ -55925,6 +55940,8 @@ scripts = [
 	    (try_end),
 
 	    (party_set_slot, ":cur_castle", slot_town_prosperity, ":castle_prosperity"),
+		
+		# (call_script, "script_center_set_population", ":cur_castle", ":castle_prosperity"),
 	  (try_end),
 	]),
 
@@ -79305,16 +79322,18 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	(else_try),
 		# Infantry follow archers for now
 		(team_slot_eq, ":team", slot_team_division_0_state, stds_ready),
-		(team_slot_ge, ":team", slot_team_battle_tactic, bt_charge), # Everyone ready
+		# (team_slot_ge, ":team", slot_team_battle_tactic, bt_charge), # Everyone ready
+		
+		(neg|team_slot_eq, ":team", slot_team_num_agent_in_div1, 0),
 		
 		(team_get_order_position, pos21, ":team", 1), # Get archer position
 		
 		(team_give_order, ":team", grc_infantry, mordr_hold),
 		(team_set_order_position, ":team", grc_infantry, pos21),
 		
-		(team_give_order, ":team", grc_infantry, mordr_fall_back),
+		(team_give_order, ":team", grc_infantry, mordr_advance),
 		# (try_begin),
-			# (team_give_order, ":team", grc_infantry, mordr_fall_back),
+			# (team_give_order, ":team", grc_infantry, mordr_advance),
 		# (try_end),
 		
 		(try_begin), # Archers are shoting!
@@ -79336,11 +79355,34 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		(try_end),
 		
 	(else_try),
+		(team_slot_eq, ":team", slot_team_division_0_state, stds_ready),
+		
+		(team_give_order, ":team", grc_infantry, mordr_advance),
+		
+		(team_get_order_position, pos1, ":team", 0), # Get infantry position
+		
+		(store_random_in_range, ":min_charge_dist", 0, 20),
+		(call_script, "script_get_closest3_distance_of_enemies_at_pos1", ":team"),
+		
+		(try_begin), # We wait until the ennemy is close enough then we charge!
+			(lt, reg0, ":min_charge_dist"),
+			(team_give_order, ":team", grc_infantry, mordr_charge),
+			(team_set_slot, ":team", slot_team_division_0_state, stds_battle),
+			(display_message, "@Infantry is charging!", 0xbbbbee),
+		(try_end),
+		
+	(else_try),
 		(team_slot_eq, ":team", slot_team_division_0_state, stds_engaging),
 		
 		(team_get_order_position, pos1, ":team", 1), # Get archer position
-		(call_script, "script_get_closest3_distance_of_enemies_at_pos1", ":team"),
+		
+		(team_give_order, ":team", grc_infantry, mordr_hold),
+		(team_set_order_position, ":team", grc_infantry, pos1),
+		
+		(team_give_order, ":team", grc_infantry, mordr_fall_back),
+		
 		(store_random_in_range, ":min_charge_dist", 20, 40),
+		(call_script, "script_get_closest3_distance_of_enemies_at_pos1", ":team"),
 		
 		(try_begin), # We wait until the ennemy is close enough then we charge!
 			(lt, reg0, ":min_charge_dist"),
@@ -79409,6 +79451,18 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	# (store_script_param, ":tactic", 2),
 	
 	(try_begin),
+		(team_slot_eq, ":team", slot_team_num_agent_in_div1, 0),
+		(team_set_slot, ":team", slot_team_division_1_state, stds_preparation),
+		
+		(try_begin),
+			(neg|team_slot_eq, ":team", slot_team_division_0_state, stds_battle),
+			(team_set_slot, ":team", slot_team_division_0_state, stds_ready),
+		(try_end),
+		(try_begin),
+			(neg|team_slot_eq, ":team", slot_team_division_2_state, stds_battle),
+			(team_set_slot, ":team", slot_team_division_2_state, stds_ready),
+		(try_end),
+	(else_try),
 		(team_slot_eq, ":team", slot_team_division_1_state, stds_preparation),
 		
 		(try_begin),
@@ -79445,18 +79499,27 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		(display_message, "@Archers ready!", 0xeebbbb),
 	(else_try),
 		(team_slot_eq, ":team", slot_team_division_1_state, stds_ready),
-		(team_slot_ge, ":team", slot_team_battle_tactic, bt_charge), # Everyone ready
+		# (team_slot_ge, ":team", slot_team_battle_tactic, bt_charge), # Everyone ready
 		
 		(try_begin), # See what the other team is doing, as well as checking if we have no dead on our side
-			(team_get_order_position, pos22, ":team", 1), # Get archer position
+			(team_get_order_position, pos1, ":team", 1), # Get archer position
 			(call_script, "script_team_get_average_position_of_enemies", ":team"),
 			(copy_position, pos23, pos0),
 		
-			(get_distance_between_positions_in_meters, ":distance", pos22, pos23),
+			(get_distance_between_positions_in_meters, ":distance", pos1, pos23),
 			
-			(store_random_in_range, ":engaging_distance", 50, 100),
+			(store_random_in_range, ":engaging_distance", 30, 100),
 			(lt, ":distance", ":engaging_distance"),
 			
+			# Find a high ground when shoting, prevents archers from trying to shot behind a hill
+			# (call_script, "script_find_high_ground_around_pos1", ":team", 30),
+			# (copy_position, pos1, pos52),
+			# (call_script, "script_find_high_ground_around_pos1", ":team", 30), # call again just in case we are not at peak point.
+			# (copy_position, pos1, pos52),
+			(call_script, "script_find_high_ground_around_pos1", ":team", 30), # Only once, we don't want the archers to move too much
+			(team_give_order, ":team", grc_everyone, mordr_hold),
+			(team_set_order_position, ":team", grc_archers, pos52),
+		
 			(team_set_slot, ":team", slot_team_division_1_state, stds_engaging),
 			(team_give_order, ":team", grc_archers, mordr_fire_at_will),
 			(display_message, "@Archers engaging ennemies!", 0xeebbbb),
@@ -79479,7 +79542,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 			(gt, ":distance", ":disengaging_distance"),
 			
 			(team_set_slot, ":team", slot_team_division_1_state, stds_ready),
-			
+			(team_give_order, ":team", grc_archers, mordr_hold_fire),
 			(display_message, "@Archers disengaging ennemies!", 0xeebbbb),
 		(else_try),
 			(eq, 0, 1),
@@ -79564,7 +79627,9 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	(else_try),
 		# Cavalry will follow archers and infantry
 		(team_slot_eq, ":team", slot_team_division_2_state, stds_ready),
-		(team_slot_ge, ":team", slot_team_battle_tactic, bt_charge), # Everyone ready
+		# (team_slot_ge, ":team", slot_team_battle_tactic, bt_charge), # Everyone ready
+		
+		(neg|team_slot_eq, ":team", slot_team_num_agent_in_div1, 0),
 		
 		(team_get_order_position, pos21, ":team", 1), # Get archer position
 		
@@ -79594,6 +79659,28 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 				(display_message, "@Cavalry is charging!", 0xbbeebb),
 			(try_end),
 		(try_end),
+		
+	(else_try),
+		(team_slot_eq, ":team", slot_team_division_2_state, stds_ready),
+		
+		(team_get_order_position, pos1, ":team", 0), # Get infantry position
+		
+		(team_give_order, ":team", grc_cavalry, mordr_hold),
+		(team_set_order_position, ":team", grc_cavalry, pos1),
+		
+		(team_give_order, ":team", grc_cavalry, mordr_fall_back),
+		(team_give_order, ":team", grc_cavalry, mordr_fall_back),
+		
+		(call_script, "script_get_closest3_distance_of_enemies_at_pos1", ":team"),
+		(store_random_in_range, ":min_charge_dist", 10, 30),
+		
+		(try_begin), # We wait until the ennemy is close enough then we flank!
+			(lt, reg0, ":min_charge_dist"),
+			(team_give_order, ":team", grc_cavalry, mordr_charge),
+			(team_set_slot, ":team", slot_team_division_2_state, stds_battle),
+			(display_message, "@Cavalry is charging!", 0xbbeebb),
+		(try_end),
+	
 	(else_try),
 		(team_slot_eq, ":team", slot_team_division_2_state, stds_engaging),
 		
@@ -79625,6 +79712,8 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 				(val_add, ":x_axis", -40),
 				(val_add, ":y_axis", 5),
 			(try_end),
+			(position_set_x, pos22, ":x_axis"),
+			(position_set_y, pos22, ":y_axis"),
 		(else_try),
 			(position_transform_position_to_local, pos22, pos21, pos22),
 			# (position_get_x, ":x_axis", pos22),
@@ -79637,6 +79726,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 				# (val_add, ":x_axis", -30),
 				(val_add, ":y_axis", 30),
 			(try_end),
+			(position_set_y, pos22, ":y_axis"),
 		(try_end),
 		(position_transform_position_to_parent, pos22, pos21, pos22),
 		(team_give_order, ":team", grc_cavalry, mordr_hold),
@@ -80173,7 +80263,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	# Might use diplomacy's slots later
 	(agent_get_horse, ":horse", ":agent_no"),
 	(try_begin), # Horseman
-		(gt, ":horse", 0),
+		(ge, ":horse", 0),
 		(assign, ":div", 2), # Assign as cav first
 		# Cav, cav2, lancer or horse archer
 		(try_begin),
@@ -80191,7 +80281,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 			(try_end),
 			(try_begin),
 				(eq, ":has_ranged", 1),
-				(agent_get_ammo, ":ammo", ":agent_no"),
+				(agent_get_ammo, ":ammo", ":agent_no", 0),
 				(gt, ":ammo", 0), # Has still ammunitions
 				(assign, ":div", 3), # Assign as horse archer
 			(try_end),
@@ -80209,12 +80299,12 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 				(assign, ":div", 3), # Assign as lancer
 			(try_end),
 		(try_end),
-	(else_try), # Ranged
-		(agent_get_troop_id, ":troop_no", ":agent_no"),
-		(troop_is_guarantee_ranged, ":troop_no"),
-		(agent_get_ammo, ":ammo", ":agent_no"),
-		(gt, ":ammo", 0), # Has still ammunitions
-		(assign, ":div", 1), # Assign as an archer
+	# (else_try), # Ranged
+		# (agent_get_troop_id, ":troop_no", ":agent_no"),
+		# (troop_is_guarantee_ranged, ":troop_no"),
+		# (agent_get_ammo, ":ammo", ":agent_no", 0),
+		# (gt, ":ammo", 0), # Has still ammunitions
+		# (assign, ":div", 1), # Assign as an archer
 	(else_try), # Infantry
 		(assign, ":has_ranged", 0),
 		(assign, ":has_2handed", 1),
@@ -80235,8 +80325,12 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 				(try_end),
 			(try_end),
 		(try_end),
+		(agent_get_troop_id, ":troop_no", ":agent_no"),
 		(try_begin),
-			(eq, ":has_ranged", 1),
+			(this_or_next|eq, ":has_ranged", 1),
+			(troop_is_guarantee_ranged, ":troop_no"),
+			(agent_get_ammo, ":ammo", ":agent_no", 0),
+			(gt, ":ammo", 0), # Has still ammunitions
 			(assign, ":div", 1), # Assign as ranged
 			(try_begin),
 				(eq, ":div3_type", stdt_aux_rang),
@@ -80256,12 +80350,12 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		(try_end),
 	(try_end),
 	
-	# Disable for now, until we find a solution
-	# (try_begin),
-		# (neq, ":old_div", ":div"),
+	# Disabled for now, until we find a solution to reinforcements
+	(try_begin),
+		(neq, ":old_div", ":div"),
 		# (val_add, ":div", 4), # Put as a reinforcement
-		# (agent_set_division, ":agent_no", ":div"),
-	# (try_end),
+		(agent_set_division, ":agent_no", ":div"),
+	(try_end),
   ]),
   
   # script_reform_battlegroup

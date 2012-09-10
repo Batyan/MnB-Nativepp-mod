@@ -359,7 +359,7 @@ items = [
 ["courtly_outfit", "Courtly Outfit", [("nobleman_outf",0)], itp_type_body_armor|itp_covers_legs|itp_civilian   ,0, 38 , weight(4)|abundance(100)|head_armor(0)|body_armor(5)|leg_armor(4)|difficulty(0) ,imodbits_cloth ],
 ["nobleman_outfit", "Nobleman Outfit", [("nobleman_outfit_b_new",0)], itp_type_body_armor|itp_covers_legs|itp_civilian   ,0, 38 , weight(4)|abundance(100)|head_armor(0)|body_armor(5)|leg_armor(4)|difficulty(0) ,imodbits_cloth ], 
 ["nomad_armor", "Nomad Armor", [("nomad_armor_new",0)], itp_merchandise| itp_type_body_armor |itp_covers_legs   ,0, 25 , weight(2)|abundance(100)|head_armor(0)|body_armor(24)|leg_armor(0)|difficulty(0) ,imodbits_cloth ],
-["khergit_armor", "Khergit Armor", [("khergit_armor_new",0)], itp_merchandise| itp_type_body_armor | itp_covers_legs ,0, 38 , weight(2)|abundance(100)|head_armor(0)|body_armor(14)|leg_armor(0)|difficulty(0) ,imodbits_cloth ],
+["khergit_armor", "Khergit Armor", [("khergit_armor_new",0)], itp_merchandise| itp_type_body_armor | itp_covers_legs ,0, 115 , weight(2)|abundance(100)|head_armor(0)|body_armor(14)|leg_armor(4)|difficulty(0) ,imodbits_cloth ],
 ["leather_jacket", "Leather Jacket", [("leather_jacket_new",0)], itp_merchandise| itp_type_body_armor | itp_covers_legs  |itp_civilian ,0, 50 , weight(3)|abundance(100)|head_armor(0)|body_armor(13)|leg_armor(4)|difficulty(0) ,imodbits_cloth ],
 
 #NEW:
@@ -583,7 +583,7 @@ items = [
 ["fur_hat", "Fur Hat", [("fur_hat_a_new",0)], itp_merchandise|itp_type_head_armor |itp_civilian  ,0, 4 , weight(0.5)|abundance(100)|head_armor(8)|body_armor(0)|leg_armor(0)|difficulty(0) ,imodbits_cloth ],
 ["nomad_cap", "Nomad Cap", [("nomad_cap_a_new",0)], itp_merchandise|itp_type_head_armor|itp_civilian  ,0, 10 , weight(0.75)|abundance(100)|head_armor(12)|body_armor(0)|leg_armor(0)|difficulty(0) ,imodbits_cloth ],
 ["nomad_cap_b", "Nomad Cap", [("nomad_cap_b_new",0)], itp_merchandise|itp_type_head_armor|itp_civilian  ,0, 12 , weight(0.75)|abundance(100)|head_armor(13)|body_armor(0)|leg_armor(0)|difficulty(0) ,imodbits_cloth ],
-["steppe_cap", "Steppe Cap", [("steppe_cap_a_new",0)], itp_merchandise|itp_type_head_armor|itp_civilian ,0, 14 , weight(1)|abundance(100)|head_armor(13)|body_armor(0)|leg_armor(0)|difficulty(0) ,imodbits_cloth ],
+["steppe_cap", "Steppe Cap", [("steppe_cap_a_new",0)], itp_merchandise|itp_type_head_armor|itp_civilian ,0, 55 , weight(1)|abundance(100)|head_armor(16)|body_armor(0)|leg_armor(0)|difficulty(0) ,imodbits_cloth ],
 ["padded_coif", "Padded Coif", [("padded_coif_a_new",0)], itp_merchandise|itp_type_head_armor   ,0, 6 , weight(1)|abundance(100)|head_armor(11)|body_armor(0)|leg_armor(0)|difficulty(0) ,imodbits_cloth ],
 ["woolen_cap", "Woolen Cap", [("woolen_cap_new",0)], itp_merchandise|itp_type_head_armor|itp_civilian ,0, 2 , weight(1)|abundance(100)|head_armor(6)|body_armor(0)|leg_armor(0)|difficulty(0) ,imodbits_cloth ],
 ["felt_hat", "Felt Hat", [("felt_hat_a_new",0)], itp_merchandise|itp_type_head_armor|itp_civilian,0, 4 , weight(1)|abundance(100)|head_armor(8)|body_armor(0)|leg_armor(0)|difficulty(0) ,imodbits_cloth ],
@@ -591,13 +591,13 @@ items = [
 ["leather_cap", "Leather Cap", [("leather_cap_a_new",0)], itp_merchandise|itp_type_head_armor|itp_civilian ,0, 6 , weight(1)|abundance(100)|head_armor(10)|body_armor(0)|leg_armor(0)|difficulty(0) ,imodbits_cloth ],
 ["female_hood", "Lady's Hood", [("ladys_hood_new",0)], itp_merchandise|itp_type_head_armor|itp_civilian  ,0, 9 , weight(1)|abundance(100)|head_armor(10)|body_armor(0)|leg_armor(0)|difficulty(0) ,imodbits_cloth ],
 ["leather_steppe_cap_a", "Steppe Cap", [("leather_steppe_cap_a_new",0)], itp_merchandise|itp_type_head_armor ,0,
- 25 , weight(1)|abundance(100)|head_armor(14)|body_armor(0)|leg_armor(0) ,imodbits_cloth ],
+ 25 , weight(1)|abundance(100)|head_armor(13)|body_armor(0)|leg_armor(0) ,imodbits_cloth ],
 ["leather_steppe_cap_b", "Steppe Cap ", [("tattered_steppe_cap_b_new",0)], itp_merchandise|itp_type_head_armor ,0,
- 50 , weight(1)|abundance(100)|head_armor(17)|body_armor(0)|leg_armor(0) ,imodbits_cloth ],
+ 75 , weight(1)|abundance(100)|head_armor(19)|body_armor(0)|leg_armor(0) ,imodbits_cloth ],
 ["leather_steppe_cap_c", "Steppe Cap", [("leather_steppe_cap_b",0)], itp_merchandise|itp_type_head_armor ,0,
- 35 , weight(1)|abundance(100)|head_armor(16)|body_armor(0)|leg_armor(0) ,imodbits_cloth ],
+ 55 , weight(1)|abundance(100)|head_armor(16)|body_armor(0)|leg_armor(0) ,imodbits_cloth ],
 ["leather_warrior_cap", "Leather Warrior Cap", [("skull_cap_new_b",0)], itp_merchandise|itp_type_head_armor|itp_civilian ,0,
- 14 , weight(1)|abundance(100)|head_armor(18)|body_armor(0)|leg_armor(0)|difficulty(0) ,imodbits_cloth ],
+ 70 , weight(1)|abundance(100)|head_armor(18)|body_armor(0)|leg_armor(0)|difficulty(0) ,imodbits_cloth ],
 ["skullcap", "Skullcap", [("skull_cap_new_a",0)], itp_merchandise|itp_type_head_armor ,0,
  60 , weight(1.0)|abundance(100)|head_armor(16)|body_armor(0)|leg_armor(0)|difficulty(0) ,imodbits_plate ],
 ["mail_coif", "Mail Coif", [("mail_coif_new",0)], itp_merchandise|itp_type_head_armor ,0,
@@ -986,7 +986,7 @@ items = [
 ["shortened_spear",         "Shortened Spear", [("spear_g_1-9m",0)], itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary|itp_wooden_parry, itc_staff|itcf_carry_spear,
  80 , weight(2.0)|difficulty(0)|spd_rtng(95) | weapon_length(120)|swing_damage(17 , blunt) | thrust_damage(29 ,  pierce),imodbits_polearm ],
 ["spear",         "Spear", [("spear_h_2-15m",0)], itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary|itp_wooden_parry, itc_staff|itcf_carry_spear,
- 135 , weight(2.25)|difficulty(0)|spd_rtng(93) | weapon_length(135)|swing_damage(18 , blunt) | thrust_damage(30 ,  pierce),imodbits_polearm ],
+ 135 , weight(2.25)|difficulty(6)|spd_rtng(93) | weapon_length(135)|swing_damage(18 , blunt) | thrust_damage(30 ,  pierce),imodbits_polearm ],
 
 ["bamboo_spear",         "Bamboo Spear", [("arabian_spear_a_3m",0)], itp_couchable|itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary|itp_penalty_with_shield|itp_wooden_parry, itc_spear|itcf_carry_spear,
  440 , weight(2.75)|difficulty(10)|spd_rtng(76) | weapon_length(200)|swing_damage(0 , blunt) | thrust_damage(27 ,  pierce),imodbits_polearm , [], [fac_kingdom_6]],
@@ -995,7 +995,7 @@ items = [
 
 
 ["war_spear",         "War Spear", [("spear_i_2-3m",0)], itp_type_polearm|itp_offset_lance|itp_merchandise| itp_primary|itp_wooden_parry, itc_staff|itcf_carry_spear,
- 210 , weight(2.5)|difficulty(0)|spd_rtng(92) | weapon_length(150)|swing_damage(18 , blunt) | thrust_damage(31 ,  pierce),imodbits_polearm ],
+ 210 , weight(2.5)|difficulty(7)|spd_rtng(92) | weapon_length(150)|swing_damage(18 , blunt) | thrust_damage(31 ,  pierce),imodbits_polearm ],
 #TODO:["shortened_spear",         "shortened_spear", [("spear_e_2-1m",0)], itp_type_polearm|itp_merchandise| itp_primary|itp_wooden_parry, itc_staff|itcf_carry_spear,
 # 65 , weight(2.0)|difficulty(0)|spd_rtng(98) | weapon_length(110)|swing_damage(17 , blunt) | thrust_damage(23 ,  pierce),imodbits_polearm ],
 #TODO:["spear_2-4m",         "spear", [("spear_e_2-25m",0)], itp_type_polearm|itp_merchandise| itp_primary|itp_penalty_with_shield|itp_wooden_parry, itc_staff|itcf_carry_spear,

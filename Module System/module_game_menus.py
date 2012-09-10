@@ -20142,9 +20142,9 @@ goods, and books will never be sold. ^^You can change some settings here freely.
 	  ("intereset_store",[(party_get_slot, reg16, "$current_town", slot_center_bank_interest_stored),
 						  (try_begin),
 						    (eq, reg16, 0),
-							(str_store_string, s10, "@You keep the interests in the bank (clic to change)"),
+							(str_store_string, s10, "@You keep the interest in the bank (clic to change)"),
 						  (else_try),
-						    (str_store_string, s10, "@You add the interests to your weekly incomes (clic to change)"),
+						    (str_store_string, s10, "@You add the interest to your weekly incomes (clic to change)"),
 						  (try_end),
 	  ],"{s10}",
 	   [
@@ -20162,9 +20162,10 @@ goods, and books will never be sold. ^^You can change some settings here freely.
   ),
   
   ("deposit",0,
-    "You can take money from here, but you will not be warned if you take more than what you actually have. (you have {reg0})",
+    "How much money do you want to deposit? (you have {reg0} denars in the bank, you carry {reg1})",
     "none",
     [(party_get_slot, reg0, "$current_town", slot_center_bank_money),
+	 (store_troop_gold, reg1, "trp_player"),
 	],
 	
     [
@@ -20213,9 +20214,10 @@ goods, and books will never be sold. ^^You can change some settings here freely.
   ),
   
   ("withdraw",0,
-    "How much money do you want to deposit? (you have {reg0})",
+    "You can take money from here, but you will not be warned if you take more than what you actually have. (you have {reg0} denars in the bank, you carry {reg1})",
     "none",
     [(party_get_slot, reg0, "$current_town", slot_center_bank_money),
+	 (store_troop_gold, reg1, "trp_player"),
 	],
 	
     [
