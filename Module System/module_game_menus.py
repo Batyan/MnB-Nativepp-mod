@@ -20415,13 +20415,14 @@ goods, and books will never be sold. ^^You can change some settings here freely.
 	 ],
     [
 	("accept",[],"Accept the money.",
-       [(call_script, "script_change_player_relation_with_troop", reg42, 1),
+       [
+	    # (call_script, "script_change_player_relation_with_troop", reg42, 1),
 	   
 		# (call_script, "script_cf_create_kingdom_party", reg44, spt_prisoner_train),
 		(assign, ":party_template", "pt_prisoner_train_party"),
 		
 		(set_spawn_radius, 1),
-		(spawn_around_party, reg44, ":party_template"),
+		(spawn_around_party, reg40, ":party_template"),
 		(assign, ":result", reg0),
 		(party_set_faction, ":result", "fac_neutral"),
 		
@@ -20437,7 +20438,7 @@ goods, and books will never be sold. ^^You can change some settings here freely.
 	   ]),
 	("refuse",[],"Refuse, you don't need this money.",
        [(call_script, "script_change_player_honor", 2),
-	    (call_script, "script_change_player_relation_with_troop", reg42, 5),
+	    (call_script, "script_change_player_relation_with_troop", reg42, 4),
 		(change_screen_return),
 	   ]),
 	("all",[(lt, reg43, reg41),],"Ask that everything has to be given to you ({reg41} denars).",
@@ -20448,7 +20449,7 @@ goods, and books will never be sold. ^^You can change some settings here freely.
 		(assign, ":party_template", "pt_prisoner_train_party"),
 		
 		(set_spawn_radius, 1),
-		(spawn_around_party, reg44, ":party_template"),
+		(spawn_around_party, reg40, ":party_template"),
 		(assign, ":result", reg0),
 		(party_set_faction, ":result", "fac_neutral"),
 		

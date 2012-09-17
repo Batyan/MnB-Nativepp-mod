@@ -98,7 +98,7 @@ party_templates = [
 #  ("default_reinforcements_a","default_reinforcements_a",0,0,fac_commoners,0,[(trp_caravan_guard,1,10),(trp_watchman,3,16),(trp_farmer,9,24)]),
 #  ("default_reinforcements_b","default_reinforcements_b",0,0,fac_commoners,0,[(trp_mercenary,1,7),(trp_caravan_guard,3,10),(trp_watchman,3,15)]),
 #  ("default_reinforcements_c","default_reinforcements_c",0,0,fac_commoners,0,[(trp_hired_blade,1,7),(trp_mercenary,3,10),(trp_caravan_guard,3,15)]),
-#																								|Nobles							|Top tier/Tier2						|Tier1/Tier1 Ranged					|Tier3
+#																								|Nobles							|Top tier/Tier2						|Tier1/Tier2 Ranged					|Tier3
 #############################################################################################################################################################################################################################################################################################
   ("kingdom_1_reinforcements_a", "{!}kingdom_1_reinforcements_a", 0, 0, fac_commoners, 0, [										(trp_swadian_militia,7,14),			(trp_swadian_recruit,5,10)]),
   ("kingdom_1_reinforcements_b", "{!}kingdom_1_reinforcements_b", 0, 0, fac_commoners, 0, [		(trp_swadian_noble,1,2),		(trp_swadian_militia,6,12),			(trp_swadian_skirmisher,3,6),		(trp_swadian_footman,1,2),	(trp_watchman,0,1)]),
@@ -126,13 +126,13 @@ party_templates = [
 #############################################################################################################################################################################################################################################################################################
   ("kingdom_3_reinforcements_a", "{!}kingdom_3_reinforcements_a", 0, 0, fac_commoners, 0, [										(trp_khergit_skirmisher,8,16),		(trp_khergit_tribesman,5,10),		(trp_khergit_steppe_fighter,2,4)]),
   ("kingdom_3_reinforcements_b", "{!}kingdom_3_reinforcements_b", 0, 0, fac_commoners, 0, [		(trp_khergit_noble,1,2),		(trp_khergit_skirmisher,10,20),											(trp_khergit_steppe_fighter,1,2),	(trp_khergit_archer,1,2),	(trp_watchman,0,1)]),
-  ("kingdom_3_reinforcements_c", "{!}kingdom_3_reinforcements_c", 0, 0, fac_commoners, 0, [		(trp_khergit_noble,2,4),		(trp_khergit_horseman,6,12),		(trp_khergit_soldier,1,2)]),
+  ("kingdom_3_reinforcements_c", "{!}kingdom_3_reinforcements_c", 0, 0, fac_commoners, 0, [		(trp_khergit_noble,2,4),		(trp_khergit_horseman,6,12),											(trp_khergit_soldier,1,2)]),
   ("kingdom_3_reinforcements_aa", "{!}kingdom_3_reinforcements_aa", 0, 0, fac_commoners, 0, [									(trp_khergit_skirmisher,8,16),		(trp_khergit_tribesman,5,10),		(trp_khergit_steppe_fighter,2,4)]),
   ("kingdom_3_reinforcements_ab", "{!}kingdom_3_reinforcements_ab", 0, 0, fac_commoners, 0, [	(trp_khergit_noble,1,2),		(trp_khergit_skirmisher,8,16),											(trp_khergit_steppe_fighter,3,6),	(trp_khergit_archer,1,2),	(trp_watchman,0,1)]),
-  ("kingdom_3_reinforcements_ac", "{!}kingdom_3_reinforcements_ac", 0, 0, fac_commoners, 0, [	(trp_khergit_noble,2,4),		(trp_khergit_horseman,5,10),		(trp_khergit_soldier,2,4)]),
+  ("kingdom_3_reinforcements_ac", "{!}kingdom_3_reinforcements_ac", 0, 0, fac_commoners, 0, [	(trp_khergit_noble,2,4),		(trp_khergit_horseman,5,10),											(trp_khergit_soldier,2,4)]),
   ("kingdom_3_reinforcements_ba", "{!}kingdom_3_reinforcements_ba", 0, 0, fac_commoners, 0, [									(trp_khergit_skirmisher,7,14),		(trp_khergit_tribesman,5,10),		(trp_khergit_steppe_fighter,2,4),								(trp_watchman,1,2)]),
   ("kingdom_3_reinforcements_bb", "{!}kingdom_3_reinforcements_bb", 0, 0, fac_commoners, 0, [	(trp_khergit_noble,1,2),		(trp_khergit_skirmisher,8,16),											(trp_khergit_steppe_fighter,1,2),	(trp_khergit_archer,1,2),	(trp_watchman,2,5)]),
-  ("kingdom_3_reinforcements_bc", "{!}kingdom_3_reinforcements_bc", 0, 0, fac_commoners, 0, [	(trp_khergit_noble,2,4),		(trp_khergit_horseman,6,10),		(trp_khergit_soldier,1,2)]),
+  ("kingdom_3_reinforcements_bc", "{!}kingdom_3_reinforcements_bc", 0, 0, fac_commoners, 0, [	(trp_khergit_noble,2,4),		(trp_khergit_horseman,6,10),											(trp_khergit_soldier,1,2)]),
   ("kingdom_3_reinforcements_d", "{!}kingdom_3_reinforcements_d", 0, 0, fac_commoners, 0, [		(trp_khergit_noble4,1,2),		(trp_khergit_noble3,1,4)]),
 #############################################################################################################################################################################################################################################################################################
 #############################################################################################################################################################################################################################################################################################
@@ -149,14 +149,14 @@ party_templates = [
 #############################################################################################################################################################################################################################################################################################
 #############################################################################################################################################################################################################################################################################################
   ("kingdom_5_reinforcements_a", "{!}kingdom_5_reinforcements_a", 0, 0, fac_commoners, 0, [										(trp_rhodok_spearman,6,12),			(trp_rhodok_tribesman,5,10),		(trp_rhodok_swordman,1,2)]),
-  ("kingdom_5_reinforcements_b", "{!}kingdom_5_reinforcements_b", 0, 0, fac_commoners, 0, [		(trp_rhodok_noble,1,2),			(trp_rhodok_spearman,2,4),			(trp_rhodok_trained_spearman,2,4),	(trp_rhodok_crossbowman,6,12),			(trp_watchman,0,1)]),
-  ("kingdom_5_reinforcements_c", "{!}kingdom_5_reinforcements_c", 0, 0, fac_commoners, 0, [		(trp_rhodok_noble,2,4),												(trp_rhodok_trained_spearman,3,6),	(trp_rhodok_trained_crossbowman,3,6)]),
+  ("kingdom_5_reinforcements_b", "{!}kingdom_5_reinforcements_b", 0, 0, fac_commoners, 0, [		(trp_rhodok_noble,1,2),			(trp_rhodok_spearman,4,8),			(trp_rhodok_crossbowman,6,12),												(trp_watchman,0,1)]),
+  ("kingdom_5_reinforcements_c", "{!}kingdom_5_reinforcements_c", 0, 0, fac_commoners, 0, [		(trp_rhodok_noble,2,4),			(trp_rhodok_trained_spearman,3,6),										(trp_rhodok_trained_crossbowman,3,6)]),
   ("kingdom_5_reinforcements_aa", "{!}kingdom_5_reinforcements_aa", 0, 0, fac_commoners, 0, [									(trp_rhodok_spearman,6,12),			(trp_rhodok_tribesman,5,10),		(trp_rhodok_swordman,1,2)]),
-  ("kingdom_5_reinforcements_ab", "{!}kingdom_5_reinforcements_ab", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,1,2),			(trp_rhodok_spearman,2,4),												(trp_rhodok_crossbowman,8,16),			(trp_watchman,0,1)]),
-  ("kingdom_5_reinforcements_ac", "{!}kingdom_5_reinforcements_ac", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,2,4),												(trp_rhodok_trained_spearman,2,4),	(trp_rhodok_trained_crossbowman,4,8)]),
+  ("kingdom_5_reinforcements_ab", "{!}kingdom_5_reinforcements_ab", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,1,2),			(trp_rhodok_spearman,2,4),			(trp_rhodok_crossbowman,8,16),												(trp_watchman,0,1)]),
+  ("kingdom_5_reinforcements_ac", "{!}kingdom_5_reinforcements_ac", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,2,4),			(trp_rhodok_trained_spearman,2,4),										(trp_rhodok_trained_crossbowman,4,8)]),
   ("kingdom_5_reinforcements_ba", "{!}kingdom_5_reinforcements_ba", 0, 0, fac_commoners, 0, [									(trp_rhodok_spearman,5,10),			(trp_rhodok_tribesman,5,10),		(trp_rhodok_swordman,1,2),				(trp_watchman,1,2)]),
-  ("kingdom_5_reinforcements_bb", "{!}kingdom_5_reinforcements_bb", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,1,2),			(trp_rhodok_spearman,2,4),												(trp_rhodok_crossbowman,6,12),			(trp_watchman,2,5)]),
-  ("kingdom_5_reinforcements_bc", "{!}kingdom_5_reinforcements_bc", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,2,4),												(trp_rhodok_trained_spearman,3,6),	(trp_rhodok_trained_crossbowman,3,6)]),
+  ("kingdom_5_reinforcements_bb", "{!}kingdom_5_reinforcements_bb", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,1,2),			(trp_rhodok_spearman,2,4),			(trp_rhodok_crossbowman,6,12),												(trp_watchman,2,5)]),
+  ("kingdom_5_reinforcements_bc", "{!}kingdom_5_reinforcements_bc", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,2,4),			(trp_rhodok_trained_spearman,3,6),										(trp_rhodok_trained_crossbowman,3,6)]),
   ("kingdom_5_reinforcements_d", "{!}kingdom_5_reinforcements_d", 0, 0, fac_commoners, 0, [		(trp_rhodok_noble4,1,2),		(trp_rhodok_noble3,1,4)]),
 #############################################################################################################################################################################################################################################################################################
 #############################################################################################################################################################################################################################################################################################
@@ -208,15 +208,15 @@ party_templates = [
   ("kingdom_9_reinforcements_d", "{!}kingdom_9_reinforcements_d", 0, 0, fac_commoners, 0, [		(trp_khergit_noble4,1,2),		(trp_khergit_noble3,1,4)]),
 #############################################################################################################################################################################################################################################################################################
 #############################################################################################################################################################################################################################################################################################
-  ("kingdom_5a_reinforcements_a", "{!}kingdom_5a_reinforcements_a", 0, 0, fac_commoners, 0, [									(trp_rhodok_swordman,5,10),			(trp_rhodok_tribesman,5,10),			(trp_rhodok_spearman,2,4)]),
-  ("kingdom_5a_reinforcements_b", "{!}kingdom_5a_reinforcements_b", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,1,2),			(trp_rhodok_swordman,5,10),			(trp_rhodok_crossbowman,5,10),										(trp_watchman,0,1)]),
-  ("kingdom_5a_reinforcements_c", "{!}kingdom_5a_reinforcements_c", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,2,4),			(trp_rhodok_trained_swordman,4,8),	(trp_rhodok_trained_crossbowman,2,4)]),
-  ("kingdom_5a_reinforcements_aa", "{!}kingdom_5a_reinforcements_aa", 0, 0, fac_commoners, 0, [									(trp_rhodok_swordman,4,8),			(trp_rhodok_tribesman,5,10),			(trp_rhodok_spearman,3,6)]),
-  ("kingdom_5a_reinforcements_ab", "{!}kingdom_5a_reinforcements_ab", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,1,2),			(trp_rhodok_swordman,4,8),			(trp_rhodok_crossbowman,6,12),										(trp_watchman,0,1)]),
-  ("kingdom_5a_reinforcements_ac", "{!}kingdom_5a_reinforcements_ac", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,2,4),			(trp_rhodok_trained_swordman,3,6),	(trp_rhodok_trained_crossbowman,3,6)]),
-  ("kingdom_5a_reinforcements_ba", "{!}kingdom_5a_reinforcements_ba", 0, 0, fac_commoners, 0, [									(trp_rhodok_swordman,5,10),			(trp_rhodok_tribesman,5,10),			(trp_rhodok_spearman,1,2),	(trp_watchman,1,2)]),
-  ("kingdom_5a_reinforcements_bb", "{!}kingdom_5a_reinforcements_bb", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,1,2),			(trp_rhodok_swordman,2,4),			(trp_rhodok_crossbowman,4,8),										(trp_watchman,2,5)]),
-  ("kingdom_5a_reinforcements_bc", "{!}kingdom_5a_reinforcements_bc", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,2,4),			(trp_rhodok_trained_swordman,4,8),	(trp_rhodok_trained_crossbowman,2,4)]),
+  ("kingdom_5a_reinforcements_a", "{!}kingdom_5a_reinforcements_a", 0, 0, fac_commoners, 0, [									(trp_rhodok_swordman,5,10),			(trp_rhodok_tribesman,5,10),		(trp_rhodok_spearman,2,4)]),
+  ("kingdom_5a_reinforcements_b", "{!}kingdom_5a_reinforcements_b", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,1,2),			(trp_rhodok_swordman,5,10),			(trp_rhodok_crossbowman,5,10),												(trp_watchman,0,1)]),
+  ("kingdom_5a_reinforcements_c", "{!}kingdom_5a_reinforcements_c", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,2,4),			(trp_rhodok_trained_swordman,4,8),										(trp_rhodok_trained_crossbowman,2,4)]),
+  ("kingdom_5a_reinforcements_aa", "{!}kingdom_5a_reinforcements_aa", 0, 0, fac_commoners, 0, [									(trp_rhodok_swordman,4,8),			(trp_rhodok_tribesman,5,10),		(trp_rhodok_spearman,3,6)]),
+  ("kingdom_5a_reinforcements_ab", "{!}kingdom_5a_reinforcements_ab", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,1,2),			(trp_rhodok_swordman,4,8),			(trp_rhodok_crossbowman,6,12),												(trp_watchman,0,1)]),
+  ("kingdom_5a_reinforcements_ac", "{!}kingdom_5a_reinforcements_ac", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,2,4),			(trp_rhodok_trained_swordman,3,6),										(trp_rhodok_trained_crossbowman,3,6)]),
+  ("kingdom_5a_reinforcements_ba", "{!}kingdom_5a_reinforcements_ba", 0, 0, fac_commoners, 0, [									(trp_rhodok_swordman,5,10),			(trp_rhodok_tribesman,5,10),		(trp_rhodok_spearman,1,2),				(trp_watchman,1,2)]),
+  ("kingdom_5a_reinforcements_bb", "{!}kingdom_5a_reinforcements_bb", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,1,2),			(trp_rhodok_swordman,2,4),			(trp_rhodok_crossbowman,4,8),												(trp_watchman,2,5)]),
+  ("kingdom_5a_reinforcements_bc", "{!}kingdom_5a_reinforcements_bc", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble,2,4),			(trp_rhodok_trained_swordman,4,8),										(trp_rhodok_trained_crossbowman,2,4)]),
   ("kingdom_5a_reinforcements_d", "{!}kingdom_5a_reinforcements_d", 0, 0, fac_commoners, 0, [	(trp_rhodok_noble4,1,2),		(trp_rhodok_noble3,1,4)]),
 #############################################################################################################################################################################################################################################################################################
 

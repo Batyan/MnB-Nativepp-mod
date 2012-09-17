@@ -1254,7 +1254,7 @@ troops = [
   ["vaegir_noble2", "Nemes Lovassag", "Nemes Lovassag", tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_horse|tf_guarantee_shield|tf_guarantee_gloves,0,0,fac_kingdom_2,
    [itm_scimitar,itm_battle_axe,itm_light_lance,itm_javelin,itm_tab_shield_kite_cav_a,
    itm_leather_gloves,itm_mail_chausses,itm_tribal_warrior_outfit,itm_studded_leather_coat,itm_vaegir_spiked_helmet,itm_vaegir_fur_helmet,itm_steppe_horse,itm_steppe_horse,itm_hunter],
-   str_15|agi_14|int_9|cha_11|	level(18),	wpex(105,110,105,90,70,100),knows_common|knows_athletics_2|knows_riding_3|knows_ironflesh_2|knows_shield_1|knows_power_strike_2|knows_power_throw_2|knows_horse_archery_1,vaegir_face_young_1, vaegir_face_young_2],
+   str_15|agi_14|int_9|cha_11|	level(18),	wpex(105,110,105,90,70,100),knows_common|knows_athletics_2|knows_riding_3|knows_ironflesh_2|knows_shield_1|knows_power_strike_2|knows_power_throw_1|knows_horse_archery_1,vaegir_face_young_1, vaegir_face_young_2],
   ["vaegir_noble3", "Lovag", "Lovagok", tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_horse|tf_guarantee_shield|tf_guarantee_gloves|tf_guarantee_helmet,0,0,fac_kingdom_2,
    [itm_scimitar,itm_bardiche,itm_lance,itm_javelin,itm_javelin,itm_tab_shield_kite_cav_a,
    itm_mail_mittens,itm_mail_chausses,itm_lamellar_vest,itm_brigandine_red,itm_vaegir_lamellar_helmet,itm_vaegir_spiked_helmet,itm_vaegir_helmet,itm_hunter],

@@ -569,6 +569,95 @@ scripts = [
       (party_set_slot,"p_castle_41", slot_center_siege_with_belfry, 1),
       (party_set_slot,"p_castle_42", slot_center_siege_with_belfry, 1),
       (party_set_slot,"p_castle_43", slot_center_siege_with_belfry, 1),
+	  
+	  # Set party surrounding centers (for besieging)
+	  (try_for_range, ":town_no", towns_begin, towns_end),
+	    (try_for_range, ":slot", slot_center_to_capture_1, slot_center_to_capture_end),
+		  (party_set_slot, ":town_no", ":slot", -1),
+		(try_end),
+	  (try_end),
+	  (party_set_slot, "p_town_1", slot_center_to_capture_1, "p_castle_11"),#Sargoth
+	  (party_set_slot, "p_town_1", slot_center_to_capture_2, "p_castle_5"),#Sargoth
+	  
+	  (party_set_slot, "p_town_2", slot_center_to_capture_1, "p_castle_11"),#Tihr
+	  (party_set_slot, "p_town_2", slot_center_to_capture_2, "p_castle_34"),#Tihr
+	  (party_set_slot, "p_town_2", slot_center_to_capture_3, "p_castle_36"),#Tihr
+	  
+	  (party_set_slot, "p_town_3", slot_center_to_capture_1, "p_town_5"),#Veluca
+	  (party_set_slot, "p_town_3", slot_center_to_capture_2, "p_castle_15"),#Veluca
+	  (party_set_slot, "p_town_3", slot_center_to_capture_3, "p_castle_28"),#Veluca
+	  (party_set_slot, "p_town_3", slot_center_to_capture_4, "p_castle_33"),#Veluca
+	  
+	  (party_set_slot, "p_town_4", slot_center_to_capture_1, "p_town_6"),#Suno
+	  (party_set_slot, "p_town_4", slot_center_to_capture_2, "p_town_7"),#Suno
+	  (party_set_slot, "p_town_4", slot_center_to_capture_3, "p_castle_25"),#Suno
+	  (party_set_slot, "p_town_4", slot_center_to_capture_4, "p_castle_31"),#Suno
+	  
+	  (party_set_slot, "p_town_5", slot_center_to_capture_1, "p_town_3"),#Jelkala
+	  (party_set_slot, "p_town_5", slot_center_to_capture_2, "p_castle_21"),#Jelkala
+	  (party_set_slot, "p_town_5", slot_center_to_capture_3, "p_castle_33"),#Jelkala
+	  
+	  (party_set_slot, "p_town_6", slot_center_to_capture_1, "p_town_4"),#Praven
+	  (party_set_slot, "p_town_6", slot_center_to_capture_2, "p_castle_23"),#Praven
+	  (party_set_slot, "p_town_6", slot_center_to_capture_3, "p_castle_35"),#Praven
+	  
+	  (party_set_slot, "p_town_7", slot_center_to_capture_1, "p_castle_13"),#Uxkhal
+	  (party_set_slot, "p_town_7", slot_center_to_capture_2, "p_castle_31"),#Uxkhal
+	  
+	  (party_set_slot, "p_town_8", slot_center_to_capture_1, "p_castle_37"),#Reyvadin
+	  (party_set_slot, "p_town_8", slot_center_to_capture_2, "p_castle_19"),#Reyvadin
+	  (party_set_slot, "p_town_8", slot_center_to_capture_3, "p_castle_4"),#Reyvadin
+	  
+	  (party_set_slot, "p_town_9", slot_center_to_capture_1, "p_town_13"),#Khudan
+	  (party_set_slot, "p_town_9", slot_center_to_capture_2, "p_castle_19"),#Khudan
+	  (party_set_slot, "p_town_9", slot_center_to_capture_3, "p_castle_7"),#Khudan
+	  
+	  (party_set_slot, "p_town_10", slot_center_to_capture_1, "p_town_18"),#Tulga
+	  (party_set_slot, "p_town_10", slot_center_to_capture_2, "p_castle_17"),#Tulga
+	  (party_set_slot, "p_town_10", slot_center_to_capture_3, "p_castle_30"),#Tulga
+	  
+	  (party_set_slot, "p_town_11", slot_center_to_capture_1, "p_castle_4"),#Curaw
+	  (party_set_slot, "p_town_11", slot_center_to_capture_2, "p_castle_39"),#Curaw
+	  (party_set_slot, "p_town_11", slot_center_to_capture_3, "p_castle_18"),#Curaw
+	  
+	  (party_set_slot, "p_town_12", slot_center_to_capture_1, "p_castle_10"),#Wercheg
+	  
+	  (party_set_slot, "p_town_13", slot_center_to_capture_1, "p_town_9"),#Rivacheg
+	  (party_set_slot, "p_town_13", slot_center_to_capture_2, "p_castle_3"),#Rivacheg
+	  
+	  (party_set_slot, "p_town_14", slot_center_to_capture_1, "p_castle_24"),#Halmar
+	  (party_set_slot, "p_town_14", slot_center_to_capture_2, "p_castle_40"),#Halmar
+	  (party_set_slot, "p_town_14", slot_center_to_capture_3, "p_castle_22"),#Halmar
+	  (party_set_slot, "p_town_14", slot_center_to_capture_4, "p_castle_41"),#Halmar
+	  
+	  (party_set_slot, "p_town_15", slot_center_to_capture_1, "p_castle_14"),#Yalen
+	  (party_set_slot, "p_town_15", slot_center_to_capture_2, "p_castle_33"),#Yalen
+	  
+	  (party_set_slot, "p_town_16", slot_center_to_capture_1, "p_castle_20"),#Dhirim
+	  (party_set_slot, "p_town_16", slot_center_to_capture_2, "p_castle_24"),#Dhirim
+	  (party_set_slot, "p_town_16", slot_center_to_capture_3, "p_castle_26"),#Dhirim
+	  
+	  (party_set_slot, "p_town_17", slot_center_to_capture_1, "p_castle_7"),#Ichamur
+	  (party_set_slot, "p_town_17", slot_center_to_capture_2, "p_castle_17"),#Ichamur
+	  (party_set_slot, "p_town_17", slot_center_to_capture_3, "p_castle_38"),#Ichamur
+	  
+	  (party_set_slot, "p_town_18", slot_center_to_capture_1, "p_castle_2"),#Narra
+	  (party_set_slot, "p_town_18", slot_center_to_capture_2, "p_castle_40"),#Narra
+	  
+	  (party_set_slot, "p_town_19", slot_center_to_capture_1, "p_castle_45"),#Shariz
+	  (party_set_slot, "p_town_19", slot_center_to_capture_2, "p_castle_46"),#Shariz
+	  
+	  (party_set_slot, "p_town_20", slot_center_to_capture_1, "p_castle_41"),#Durquba
+	  (party_set_slot, "p_town_20", slot_center_to_capture_2, "p_castle_42"),#Durquba
+	  (party_set_slot, "p_town_20", slot_center_to_capture_3, "p_castle_44"),#Durquba
+	  (party_set_slot, "p_town_20", slot_center_to_capture_4, "p_castle_47"),#Durquba
+	  
+	  (party_set_slot, "p_town_21", slot_center_to_capture_1, "p_castle_44"),#Ahmerrad
+	  (party_set_slot, "p_town_21", slot_center_to_capture_2, "p_castle_47"),#Ahmerrad
+	  (party_set_slot, "p_town_21", slot_center_to_capture_3, "p_castle_48"),#Ahmerrad
+	  
+	  (party_set_slot, "p_town_22", slot_center_to_capture_1, "p_castle_44"),#Bariyye
+	  (party_set_slot, "p_town_22", slot_center_to_capture_2, "p_castle_48"),#Bariyye
 
 	  # Villages characters
       (try_for_range, ":village_no", villages_begin, villages_end),
@@ -22767,18 +22856,28 @@ scripts = [
 
       (party_get_num_companion_stacks, ":num_stacks",":party_no"),
       (try_for_range, ":i_stack", 0, ":num_stacks"),
-        (party_stack_get_troop_id, ":stack_troop",":party_no",":i_stack"),
+        (party_stack_get_troop_id, ":stack_troop", ":party_no", ":i_stack"),
 		(store_random_in_range, ":rand", 0, 100),
-		(lt, ":rand", 10), # wounds 10% of the stacks
-        (try_begin),
-          (neg|troop_is_hero, ":stack_troop"),
-		  (party_stack_get_size, ":stack_size",":party_no",":i_stack"),
-		  (val_add, ":stack_size", 1),
-		  (store_random_in_range, ":num_wounded", 1, ":stack_size"), # Minimum of 1 wounded
-          (party_wound_members, ":party_no", ":stack_troop", ":num_wounded"),
-        (else_try),
-          (troop_set_health, ":stack_troop", 0),
-        (try_end),
+		(try_begin),
+		  (lt, ":rand", 10), # wounds 10% of the stacks
+          (try_begin),
+            (neg|troop_is_hero, ":stack_troop"),
+		    (party_stack_get_size, ":stack_size", ":party_no", ":i_stack"),
+		    (val_add, ":stack_size", 1),
+		    (store_random_in_range, ":num_wounded", 1, ":stack_size"), # Minimum of 1 wounded
+            (party_wound_members, ":party_no", ":stack_troop", ":num_wounded"),
+          (else_try), # Don't instantly wound heroes, instead, damage him a little bit
+		    (store_troop_health, ":hero_health", ":stack_troop", 0),
+			(val_sub, ":hero_health", ":rand"),
+			(val_max, ":hero_health", 0),
+            (troop_set_health, ":stack_troop", ":hero_health"), 
+          (try_end),
+		(else_try),
+		  (neg|troop_is_hero, ":stack_troop"),
+		  (party_stack_get_size, ":stack_size", ":party_no", ":i_stack"),
+		  (gt, ":stack_size", ":rand"),
+		  (party_remove_members, ":party_no", ":stack_troop", 1), # Slowly kills members if stack is big enough
+		(try_end),
       (try_end),
       (party_get_num_attached_parties, ":num_attached_parties", ":party_no"),
       (try_for_range, ":attached_party_rank", 0, ":num_attached_parties"),
@@ -28483,8 +28582,8 @@ scripts = [
 	  (try_begin),
 	    (lt, ":morale_dif", 0),
 		
-		(store_div, ":min_loss", ":morale_dif", 4),
-		(store_add, ":max_loss", ":min_loss", -2),
+		(store_div, ":min_loss", ":morale_dif", 3), # was 4
+		(store_add, ":max_loss", ":min_loss", -4), # was -2
 		
 		(store_random_in_range, ":stability_reduce", 0, ":stability"), # 0% - 50% -- might sometimes give a higher morale loss if stability is too low (below 0)
 		(store_mul, ":reducing", ":stability_reduce", ":max_loss"),
@@ -28512,7 +28611,7 @@ scripts = [
 		  # (store_add, ":new_morale", ":cur_morale", ":morale_loss"),
 		# (try_end),
 	  (else_try),
-	    (store_div, ":min_loss", ":morale_dif", 4),
+	    (store_div, ":min_loss", ":morale_dif", 3), # was 4
 		(store_add, ":max_loss", ":min_loss", 2),
 		
 		(store_random_in_range, ":stability_reduce", 0, ":stability"), # 0% - 50% -- might sometimes give a small morale penality if stability is too low (below 0)
@@ -54605,6 +54704,26 @@ scripts = [
         (is_between, ":potential_target", villages_begin, villages_end),
         (assign, ":result", -1),
         (assign, ":explainer_string", "str_center_marshal_does_not_want_to_attack_innocents"),
+	  #TOWN NOT ACCESSSIBLE -- SURROUNDING CENTERS ARE ENNEMIES
+	  (else_try), # No town attacked if close centers are not taken/friendly
+	    (is_between, ":potential_target", towns_begin, towns_end),
+		
+		(assign, ":is_capturable", 0),
+		(try_for_range, ":slot", slot_center_to_capture_1, slot_center_to_capture_end),
+		  (party_get_slot, ":surrounding_center", ":potential_target", ":slot"),
+		  (ge, ":surrounding_center", 0),
+		  (store_faction_of_party, ":surrounding_center_faction", ":surrounding_center"),
+          (store_relation, ":relation", ":surrounding_center_faction", ":faction_no"),
+          (ge, ":relation", 0),
+		  (assign, ":is_capturable", 1),
+		(try_end),
+		# Might aswell only include alliances, defences and trade agreements
+		# Neutral factions will not accept an army marching through their territory
+		# But for now we keep it like this until further testings
+		(eq, ":is_capturable", 0),
+		
+		(assign, ":result", -1),
+		(assign, ":explainer_string", "str_center_is_not_accessible"),
       (else_try),
         (assign, ":distance_from_our_closest_walled_center", 1000),
         (try_for_range, ":cur_center", walled_centers_begin, walled_centers_end),
@@ -74519,7 +74638,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
      (eq, ":culture", "fac_culture_8"), # freeriders
 	 (store_random_in_range, ":troop_no", "trp_mercenary_landsknecht", "trp_mercenary_horse_archer"),
    (else_try),
-     (eq, ":culture", "fac_culture_7"), # mercs
+     # (eq, ":culture", "fac_culture_7"), # mercs
 	 (store_random_in_range, ":troop_no", "trp_mercenary_landsknecht", "trp_mercenary_horse_archer"),
    (try_end),
    (troop_set_slot, ":lord_no", slot_troop_special_unit, ":troop_no"),

@@ -4505,6 +4505,8 @@ We apologize sincerely if you contributed your suggestions and feedback but were
   ("center_strength_weakly_defended", "We believe it to be weakly defended"),
 
   ("center_distant_from_concentration", "is close to us than it is to the main enemy army, which we have located. It could be attacked and destroyed before they are able to respond"),
+  
+  ("center_is_not_accessible", "cannot be taken if we don't take other forteresses before."),
 
   ("plus", "+"),
   ("minus", "-"),

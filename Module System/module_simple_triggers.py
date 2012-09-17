@@ -6107,7 +6107,7 @@ simple_triggers = [
 	  # (faction_slot_eq, ":faction_no", slot_faction_rebel_without_player, 0),
       (assign, ":num_lord", 0),
 	  (assign, ":num_merc", 0),
-      (try_for_range, ":lord_no", lords_begin, lords_end),
+      (try_for_range, ":lord_no", heroes_begin, heroes_end), # Fix for promoted companions
 	    (store_troop_faction, ":fac", ":lord_no"),
 		(eq, ":fac", ":faction_no"),
 	    (try_begin),

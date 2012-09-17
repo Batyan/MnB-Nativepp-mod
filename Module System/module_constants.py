@@ -444,6 +444,13 @@ slot_center_tavern_bookseller     = 98
 slot_center_tavern_minstrel       = 99
 slot_center_smith                 = 100
 
+slot_center_to_capture_1		  = 101
+slot_center_to_capture_2		  = 102
+slot_center_to_capture_3		  = 103
+slot_center_to_capture_4		  = 104
+slot_center_to_capture_end		  = 105
+
+
 num_party_loot_slots    = 5
 slot_party_next_looted_item_slot  = 109
 slot_party_looted_item_1          = 110
@@ -469,21 +476,21 @@ slot_party_last_traded_center     = 126
 
 
 
-slot_center_has_manor            = 130 									#				village
-slot_center_has_fish_pond        = slot_center_has_manor + 1 			#				village
-slot_center_has_watch_tower      = slot_center_has_fish_pond + 1 		#				village
-slot_center_has_school           = slot_center_has_watch_tower + 1 		#				village
-slot_center_has_barrack          = slot_center_has_school + 1 			#town, 	castle, village
-slot_center_has_messenger_post   = slot_center_has_barrack + 1 			#town,	castle, village
-slot_center_has_prisoner_tower   = slot_center_has_messenger_post + 1 	#town,	castle
-slot_center_has_trainer_1        = slot_center_has_prisoner_tower + 1 	#town,	castle
-slot_center_has_trainer_2        = slot_center_has_trainer_1 + 1 		#town,	castle
-slot_center_has_trainer_3        = slot_center_has_trainer_2 + 1 		#town
-slot_center_has_recruitment_camp = slot_center_has_trainer_3 + 1 		#town,	castle
-slot_center_has_bank             = slot_center_has_recruitment_camp + 1 #town 					=141
+slot_center_has_manor            = 130 	#				village
+slot_center_has_fish_pond        = 131 	#				village
+slot_center_has_watch_tower      = 132 	#				village
+slot_center_has_school           = 133 	#				village
+slot_center_has_barrack          = 134 	#town, 	castle, village
+slot_center_has_messenger_post   = 135 	#town,	castle, village
+slot_center_has_prisoner_tower   = 136 	#town,	castle
+slot_center_has_trainer_1        = 137 	#town,	castle
+slot_center_has_trainer_2        = 138 	#town,	castle
+slot_center_has_trainer_3        = 139 	#town
+slot_center_has_recruitment_camp = 140 	#town,	castle
+slot_center_has_bank             = 141	#town
 
 village_improvements_begin = slot_center_has_manor
-village_improvements_end   = slot_center_has_messenger_post + 1
+village_improvements_end   = slot_center_has_prisoner_tower
 
 walled_center_improvements_begin = slot_center_has_barrack
 walled_center_improvements_end   = 142 # Max would be 147? Only 5 more buildings possible?
