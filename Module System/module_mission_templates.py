@@ -3666,12 +3666,11 @@ common_siege_change_men_defence_point = (
       (eq, ":team", "$defender_team_2"),
 	  (agent_get_division, ":division", ":agent_no"),
 	  (try_begin), ## change infantries with ranged weapon to archers to search for good shoting position
-		(neq, ":division", grc_archers),	## will reduce the number of defending soldiers at the ladders
-		(agent_get_wielded_item, ":cur_weapon", ":agent_no", 0),	## can cause problems with khergits -- ToDo : test with khergits defenders
+		(neq, ":division", grc_archers), ## will reduce the number of defending soldiers at the ladders
+		(agent_get_wielded_item, ":cur_weapon", ":agent_no", 0),
 		(is_between, ":cur_weapon", ranged_weapons_begin, ranged_weapons_end),
 		(agent_get_ammo, ":ammo", ":agent_no", 1),
 		(gt, ":ammo", 0),
-		# (lt, ":num_archers", 48), ## to avoid too few defenders we want ~7 archers per shoting position ? -- ToDo : disabled for testing
 		(try_begin),
 		  (eq, ":division", 0), # infantry
 		  (val_add, ":difference", -1),

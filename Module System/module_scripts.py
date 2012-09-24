@@ -710,6 +710,17 @@ scripts = [
 	  
 	  (call_script, "script_init_banners_slot", 1), # initialize banners with faction slots
 
+	  (troop_set_slot, "trp_kingdom_1_lord", slot_troop_banner_scene_prop, "spr_banner_a"),
+	  (troop_set_slot, "trp_kingdom_2_lord", slot_troop_banner_scene_prop, "spr_banner_b"),
+	  (troop_set_slot, "trp_kingdom_3_lord", slot_troop_banner_scene_prop, "spr_banner_cu"),
+	  (troop_set_slot, "trp_kingdom_4_lord", slot_troop_banner_scene_prop, "spr_banner_c"),
+	  (troop_set_slot, "trp_kingdom_5_lord", slot_troop_banner_scene_prop, "spr_banner_d"),
+	  (troop_set_slot, "trp_kingdom_6_lord", slot_troop_banner_scene_prop, "spr_banner_f01"),
+	  
+	  (troop_set_slot, "trp_kingdom_9_lord", slot_troop_banner_scene_prop, "spr_banner_f"),
+	  (troop_set_slot, "trp_kingdom_10_lord", slot_troop_banner_scene_prop, "spr_banner_cp"),
+	  (troop_set_slot, "trp_kingdom_11_lord", slot_troop_banner_scene_prop, "spr_banner_do"),
+	  
       (try_for_range, ":kingdom_hero", active_npcs_begin, active_npcs_end),
         (troop_slot_eq, ":kingdom_hero", slot_troop_occupation, slto_kingdom_hero),
 		
@@ -1107,7 +1118,7 @@ scripts = [
         (try_end),
         (party_set_slot, ":center_no", slot_town_wealth, ":initial_wealth"),
 
-        (assign, ":garrison_strength", 20),
+        (assign, ":garrison_strength", 18),
         (try_begin),
           (party_slot_eq, ":center_no", slot_party_type, spt_town),
           (assign, ":garrison_strength", 47),
@@ -60573,11 +60584,7 @@ scripts = [
   [
     (store_script_param, ":cur_troop_id", 1),
 	(store_troop_faction, ":defeated_troop_faction", ":cur_troop_id"),
-    (try_for_range, ":center_no", centers_begin, centers_end),
-	   (party_slot_eq, ":center_no", slot_town_lord, ":cur_troop_id"),
-	   (party_set_slot, ":center_no", slot_town_lord, stl_unassigned),
-	   (party_set_banner_icon, ":center_no", 0),
-	(try_end),
+    
 	(try_begin),
 	  (is_between, ":cur_troop_id", kingdom_mercenaries_begin, kingdom_mercenaries_end),
 	  # (troop_slot_eq, ":cur_troop_id", slot_troop_occupation, slto_kingdom_mercenary),
@@ -60588,10 +60595,16 @@ scripts = [
 	  (troop_get_slot, ":origin_faction", ":cur_troop_id", slot_troop_original_faction),
 	  (troop_set_faction, ":cur_troop_id", ":origin_faction"),
 	(try_end),
+	(call_script, "script_reset_lord_relations", ":cur_troop_id"),
 	(troop_set_slot, ":cur_troop_id", slot_troop_occupation, slto_inactive),
 	(troop_set_slot, ":cur_troop_id", slot_troop_equipement_level, 0),
 	(troop_set_slot, ":cur_troop_id", slot_troop_lord_level, 0),
-	(call_script, "script_reset_lord_relations", ":cur_troop_id"),
+	# Remove fief
+	(try_for_range, ":center_no", centers_begin, centers_end),
+	   (party_slot_eq, ":center_no", slot_town_lord, ":cur_troop_id"),
+	   (party_set_slot, ":center_no", slot_town_lord, stl_unassigned),
+	   (party_set_banner_icon, ":center_no", 0),
+	(try_end),
 	(try_begin),
 	  (eq, "$test", 1),
 	  (str_store_troop_name, s31, ":cur_troop_id"),
@@ -79334,7 +79347,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	 (try_end),
 	 
 	 # Remove family links
-	 # If a lady has no related man, she might take arms, or she may
+	 (call_script, "script_remove_family_links", ":lord_no"),
    ]),
    
   # script_select_battle_tactic_expanded
@@ -80645,6 +80658,130 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	(call_script, "script_game_get_upgrade_xp", ":troop_no"),
 	
 	(gt, ":cur_xp", reg0),
+	]),
+	
+  # script_remove_family_links
+  # This script removes family link from a troop
+  # Used when a lord dies to remove all links from other lords
+  ("remove_family_links",
+    [
+	(store_script_param, ":troop_no", 1),
+	
+	# If a lady lose his husband, she might take arms
+	(troop_get_slot, ":spouse", ":troop_no", slot_troop_spouse),
+	(try_begin),
+	  (gt, ":spouse", 0), # No player here
+	  (troop_get_slot, ":reputation", ":spouse", slot_lord_reputation
+	  # Only try on ladies -- for now ladies can't die, but later they might. We will need to change this check then
+	  (troop_get_type, ":is_female", ":spouse"),
+	  (neg|troop_slot_eq, ":spouse", slot_troop_occupation, slto_kingdom_hero),
+	  (try_begin),
+	    # Conventional ladies will think they don't have a place
+        (eq, ":reputation", lrep_conventional),
+        (assign, ":chances", 5),
+      (else_try),
+	    # High chances for adventurous ladies
+        (eq, ":reputation", lrep_adventurous),
+        (assign, ":chances", 90),
+      (else_try),
+	    # Otherwordly ladies won't really give away their dreamings
+        (eq, ":reputation", lrep_otherworldly),
+        (assign, ":chances", 15),
+      (else_try),
+	    # Ambitious ladies will think it's a way to earn reputation
+        (eq, ":reputation", lrep_ambitious),
+        (assign, ":chances", 50),
+      (else_try),
+	    # Morale would say it's a bad idea to fight wars
+        (eq, ":reputation", lrep_moralist),
+        (assign, ":chances", 10),
+      (else_try),
+	    (assign, ":chances", 20),
+	  (try_end),
+	  (store_random_in_range, ":rand", 0, 100),
+	  (gt, ":chances", ":rand"),
+	  (call_script, "script_lady_take_arms", ":spouse", ":troop_no"),
+	(try_end),
+	
+	# Remove links from this troop
+	(try_for_range, ":relation", dplmc_slot_troop_relatives_begin, dplmc_slot_troop_relatives_including_betrothed_end),
+	  (troop_get_slot, ":relative", ":troop_no", ":relation"),
+	  (ge, ":relative", 0),
+	  (troop_set_slot, ":troop_no", ":relation", -1),
+	(try_end),
+	
+	# Remove links from other troops
+	(try_for_range, ":other_npc", active_npcs_begin, active_npcs_end),
+	  (try_for_range, ":relation", dplmc_slot_troop_relatives_begin, dplmc_slot_troop_relatives_including_betrothed_end),
+	    (troop_get_slot, ":relative", ":other_npc", ":relation"),
+		(eq, ":relative", ":troop_no"),
+		(troop_set_slot, ":other_npc", ":relation", -1),
+	  (try_end),
+	(try_end),
+	
+	# Remove love interests
+	(try_for_range, ":relation", slot_troop_love_interest_1, slot_troop_love_interests_end),
+	  (troop_get_slot, ":relative", ":troop_no", ":relation"),
+	  (ge, ":relative", 0),
+	  (troop_set_slot, ":troop_no", ":relation", -1),
+	(try_end),
+	]),
+	
+  # script_ladt_take_arms
+  # Script_used to allow a lady to lead an army after his husband has been killed
+  ("lady_take_arms",
+    [
+	(store_script_param, ":lady_no", 1),
+	(store_script_param, ":relative_lord", 2),
+	
+	(try_begin),
+	  (eq, "$test", 1),
+	  (str_store_troop_name_link, s21, ":lady_no"),
+	  (display_message, "@{s21} taking arms!"),
+	(try_end),
+
+	# Will take it's spouse's fiefs (or most of it)
+	(troop_get_slot, ":level", ":relative_lord", slot_troop_equipement_level),
+	(val_div, ":level", 2),
+	
+	(troop_set_slot, ":lady_no", slot_troop_occupation, slto_kingdom_hero),
+	(troop_set_slot, ":lady_no", slot_troop_equipement_level, ":level"),
+	(troop_set_slot, ":lady_no", slot_troop_spawned_before, 1), #No troop added
+	
+	# Give some of the relative's fief to the lady (not all, max weight is 4)
+	(assign, ":added_weight", 0),
+	(assign, ":end_try", centers_end),
+	(try_for_range, ":center_no", centers_begin, ":end_try"),
+	  (party_slot_eq, ":center_no", slot_town_lord, ":relative_lord"),
+	  (try_begin),
+	    (party_slot_eq, ":center_no", slot_party_type, spt_town),
+		# (val_add, ":added_weight", 5),
+		
+		(assign, ":end_try", 0),
+	  (else_try),
+	    (party_slot_eq, ":center_no", slot_party_type, spt_castle),
+		(val_add, ":added_weight", 3),
+		
+		(try_begin),
+		  (ge, ":added_weight", 4),
+		  (assign, ":end_try", 0),
+		(try_end),
+	  (else_try),
+	    (party_slot_eq, ":center_no", slot_party_type, spt_village),
+		(val_add, ":added_weight", 1),
+		
+		(try_begin),
+		  (ge, ":added_weight", 4),
+		  (assign, ":end_try", 0),
+		(try_end),
+	  (try_end),
+	  # Give ownership to lady
+	  (call_script, "script_give_center_to_lord", ":center_no", ":lady_no", 0),
+	(try_end),
+	
+	(call_script, "script_set_attrib_points", ":lady_no"),  #Change stats before equipement
+	(call_script, "script_change_equipement", ":lady_no"),
+	(call_script, "script_get_name_for_heroes", ":lady_no", 0),
 	]),
 ]
 

@@ -3440,7 +3440,7 @@ game_menus = [
 	   ]
        ),	   
 
-      ("camp_cheat_find_item",[], "Change weather..",
+      ("camp_cheat_find_weather",[], "Change weather..",
        [
          (jump_to_menu, "mnu_cheat_change_weather"),
 	   ]
