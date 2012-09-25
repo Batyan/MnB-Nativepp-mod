@@ -792,5 +792,7 @@ script_reform_battlegroup = 790
 script_assign_combat_division = 791
 script_troop_set_age = 792
 script_cf_troop_can_upgrade = 793
+script_remove_family_links = 794
+script_lady_take_arms = 795
 
 

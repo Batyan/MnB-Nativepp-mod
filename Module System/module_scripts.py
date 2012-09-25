@@ -710,17 +710,6 @@ scripts = [
 	  
 	  (call_script, "script_init_banners_slot", 1), # initialize banners with faction slots
 
-	  (troop_set_slot, "trp_kingdom_1_lord", slot_troop_banner_scene_prop, "spr_banner_a"),
-	  (troop_set_slot, "trp_kingdom_2_lord", slot_troop_banner_scene_prop, "spr_banner_b"),
-	  (troop_set_slot, "trp_kingdom_3_lord", slot_troop_banner_scene_prop, "spr_banner_cu"),
-	  (troop_set_slot, "trp_kingdom_4_lord", slot_troop_banner_scene_prop, "spr_banner_c"),
-	  (troop_set_slot, "trp_kingdom_5_lord", slot_troop_banner_scene_prop, "spr_banner_d"),
-	  (troop_set_slot, "trp_kingdom_6_lord", slot_troop_banner_scene_prop, "spr_banner_f01"),
-	  
-	  (troop_set_slot, "trp_kingdom_9_lord", slot_troop_banner_scene_prop, "spr_banner_f"),
-	  (troop_set_slot, "trp_kingdom_10_lord", slot_troop_banner_scene_prop, "spr_banner_cp"),
-	  (troop_set_slot, "trp_kingdom_11_lord", slot_troop_banner_scene_prop, "spr_banner_do"),
-	  
       (try_for_range, ":kingdom_hero", active_npcs_begin, active_npcs_end),
         (troop_slot_eq, ":kingdom_hero", slot_troop_occupation, slto_kingdom_hero),
 		
@@ -747,6 +736,17 @@ scripts = [
 
         # (troop_set_slot, ":kingdom_hero", slot_troop_renown, ":renown"),
       (try_end),
+	  
+	  (troop_set_slot, "trp_kingdom_1_lord", slot_troop_banner_scene_prop, "spr_banner_a"),
+	  (troop_set_slot, "trp_kingdom_2_lord", slot_troop_banner_scene_prop, "spr_banner_b"),
+	  (troop_set_slot, "trp_kingdom_3_lord", slot_troop_banner_scene_prop, "spr_banner_cu"),
+	  (troop_set_slot, "trp_kingdom_4_lord", slot_troop_banner_scene_prop, "spr_banner_c"),
+	  (troop_set_slot, "trp_kingdom_5_lord", slot_troop_banner_scene_prop, "spr_banner_d"),
+	  (troop_set_slot, "trp_kingdom_6_lord", slot_troop_banner_scene_prop, "spr_banner_f01"),
+	  
+	  (troop_set_slot, "trp_kingdom_9_lord", slot_troop_banner_scene_prop, "spr_banner_f"),
+	  (troop_set_slot, "trp_kingdom_10_lord", slot_troop_banner_scene_prop, "spr_banner_cp"),
+	  (troop_set_slot, "trp_kingdom_11_lord", slot_troop_banner_scene_prop, "spr_banner_do"),
 
       (try_for_range, ":troop_no", "trp_player", "trp_merchants_end"),
         (add_troop_note_tableau_mesh, ":troop_no", "tableau_troop_note_mesh"),
@@ -4017,7 +4017,8 @@ scripts = [
             # (val_mul, ":defender_strength", 150), #it was 1.5 in old version, now it is only 1.23 -- back to 1.5
             # (val_div, ":defender_strength", 100),
 			
-			(val_mul, ":defender_defense", 3), #three times as hard to kill defenders, we do this to make taking castles last longer
+			# (val_mul, ":defender_defense", 3), #three times as hard to kill defenders, we do this to make taking castles last longer
+			(val_div, ":attacker_strength", 2), # Less damage for attackers
 			
 			
 			
@@ -80671,9 +80672,10 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	(troop_get_slot, ":spouse", ":troop_no", slot_troop_spouse),
 	(try_begin),
 	  (gt, ":spouse", 0), # No player here
-	  (troop_get_slot, ":reputation", ":spouse", slot_lord_reputation
+	  (troop_get_slot, ":reputation", ":spouse", slot_lord_reputation_type),
 	  # Only try on ladies -- for now ladies can't die, but later they might. We will need to change this check then
 	  (troop_get_type, ":is_female", ":spouse"),
+	  (eq, ":is_female", 1),
 	  (neg|troop_slot_eq, ":spouse", slot_troop_occupation, slto_kingdom_hero),
 	  (try_begin),
 	    # Conventional ladies will think they don't have a place
