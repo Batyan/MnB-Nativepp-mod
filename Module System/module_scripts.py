@@ -434,6 +434,7 @@ scripts = [
         (val_add, ":offset", slot_town_trade_good_prices_begin),
         (try_for_range, ":center_no", centers_begin, centers_end),
           (party_set_slot, ":center_no", ":offset", average_price_factor), #1000
+		  (party_set_slot, ":center_no", slot_center_bank_money, 0),
         (try_end),
       (try_end),
 
@@ -1348,7 +1349,7 @@ scripts = [
 	  ##further develop the idea of ladies as pursuing agendas even if they aren't
 	  ##leading warbands, which would benefit from giving them relations with other
 	  ##people.
-     (try_for_range, ":lady", kingdom_ladies_begin, kingdom_ladies_end),
+      (try_for_range, ":lady", kingdom_ladies_begin, kingdom_ladies_end),
 		(troop_slot_eq, ":lady", slot_troop_occupation, slto_kingdom_lady),
 		(troop_get_slot, ":lady_faction", ":lady", slot_troop_original_faction),
 
@@ -1374,7 +1375,7 @@ scripts = [
 
 			(store_random_in_range, ":random", 0, 11),
 			(call_script, "script_troop_change_relation_with_troop", ":lady", ":other_hero", ":random"),
-	  (try_end),
+		(try_end),
 	  (try_end),
 	  ##diplomacy end+
 
@@ -4448,23 +4449,33 @@ scripts = [
 			   (store_random_in_range, ":rand", 0, 10),
 			   (try_begin),
 			     (le, ":rand", 2),
-				 (store_random_in_range, ":improvement", 134, 137),
+				 (store_random_in_range, ":improvement", walled_center_improvements_begin, walled_center_improvements_end),
 				 (try_begin),
-				   (eq, ":improvement", 136),
-				   (assign, ":improvement", 140),
+				   (eq, ":improvement", slot_center_has_bank),
+				   # (assign, ":improvement", 140),
+				   (party_slot_eq, ":root_defeated_party", slot_center_has_bank, 1),
 				   (party_get_slot, ":money", ":root_defeated_party", slot_center_bank_money),
-				   (neq, ":money", 0),
+				   (gt, ":money", 0),
 				   (assign, reg41, ":money"),
 				   (assign, reg40, ":root_defeated_party"),
 				   (party_set_slot, ":root_defeated_party", slot_center_bank_money, 0),
 				   (jump_to_menu, "mnu_bank_destroyed"),
+				 (else_try),
+				   (eq, ":improvement", slot_center_has_trainer_1),
+				   (party_set_slot, ":root_defeated_party", slot_center_has_trainer_3, 0),
+				   (party_set_slot, ":root_defeated_party", slot_center_has_trainer_2, 0),
+				 (else_try),
+				   (eq, ":improvement", slot_center_has_trainer_2),
+				   (party_set_slot, ":root_defeated_party", slot_center_has_trainer_3, 0),
 				 (try_end),
+				 
 				 (party_set_slot, ":root_defeated_party", ":improvement", 0),
 			   (else_try),
-			     (le, ":rand", 8),
-			     (try_for_range, ":improvement", 134, 141),
+			     (le, ":rand", 5),
+			     (try_for_range, ":improvement", walled_center_improvements_begin, walled_center_improvements_end),
 				   (party_set_slot, ":root_defeated_party", ":improvement", 0),
 				 (try_end),
+				 (party_slot_eq, ":root_defeated_party", slot_center_has_bank, 1),
 				 (party_get_slot, ":money", ":root_defeated_party", slot_center_bank_money),
 				 (neq, ":money", 0),
 				 (assign, reg41, ":money"),
@@ -25497,27 +25508,27 @@ scripts = [
 				   (eq, ":slot", 0),
 				   (party_slot_eq, ":village_no", slot_center_has_manor, 1),
 				   (party_set_slot, ":village_no", slot_center_has_manor, 0),
-				   (display_log_message, "@The manor built in the village of {s1} has been destroyed"),
+				   # (display_log_message, "@The manor has been destroyed!"),
 				 (else_try),
 				   (eq, ":slot", 1),
 				   (party_slot_eq, ":village_no", slot_center_has_fish_pond, 1),
 				   (party_set_slot, ":village_no", slot_center_has_fish_pond, 0),
-				   (display_log_message, "@The mill built in the village of {s1} has been destroyed"),
+				   # (display_log_message, "@The mill has been destroyed!"),
 				 (else_try),
 				   (eq, ":slot", 2),
 				   (party_slot_eq, ":village_no", slot_center_has_watch_tower, 1),
 				   (party_set_slot, ":village_no", slot_center_has_watch_tower, 0),
-				   (display_log_message, "@The watch tower built in the village of {s1} has been destroyed"),
+				   # (display_log_message, "@The watch tower has been destroyed!"),
 				 (else_try),
 				   (eq, ":slot", 3),
 				   (party_slot_eq, ":village_no", slot_center_has_school, 1),
 				   (party_set_slot, ":village_no", slot_center_has_school, 0),
-				   (display_log_message, "@The school built in the village of {s1} has been destroyed"),
+				   # (display_log_message, "@The school has been destroyed!"),
 				 (else_try),
 				   (eq, ":slot", 4),
 				   (party_slot_eq, ":village_no", slot_center_has_messenger_post, 1),
 				   (party_set_slot, ":village_no", slot_center_has_messenger_post, 0),
-				   (display_log_message, "@The messenger post built in the village of {s1} has been destroyed"),
+				   # (display_log_message, "@The messenger post has been destroyed!"),
 				 (try_end),
 			   (try_end),
 
@@ -30588,6 +30599,7 @@ scripts = [
       (try_end),
       (try_for_range, ":cur_troop", kingdom_ladies_begin, kingdom_ladies_end),
 	    (neq, ":cur_troop", "trp_knight_1_1_wife"), #The one who should not appear in game
+		(neg|troop_slot_eq, ":cur_troop", slot_troop_occupation, slto_kingdom_hero),
         #(troop_slot_eq, ":cur_troop", slot_troop_occupation, slto_kingdom_lady),
         (troop_slot_eq, ":cur_troop", slot_troop_cur_center, ":center_no"),
 		(assign, ":lady_meets_visitors", 0),
@@ -60606,6 +60618,7 @@ scripts = [
 	   (party_set_slot, ":center_no", slot_town_lord, stl_unassigned),
 	   (party_set_banner_icon, ":center_no", 0),
 	(try_end),
+	(troop_set_note_available, ":cur_troop_id", 0),
 	(try_begin),
 	  (eq, "$test", 1),
 	  (str_store_troop_name, s31, ":cur_troop_id"),
@@ -74504,7 +74517,8 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		  (assign, ":banner_icon_id", "icon_banner_06"),
         (try_end),
 	  (try_end),
-	(else_try),
+	  
+	(else_try), # Individual banners
 	  (try_begin), # tries to take a random banner
 	    (troop_slot_eq, ":lord_no", slot_troop_occupation, slto_kingdom_hero),
 		(troop_get_slot, ":faction_no", ":lord_no", slot_troop_original_faction),
@@ -77507,8 +77521,8 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 			(try_end),
 			(this_or_next|troop_is_guarantee_horse, ":troop"),
 			(eq, ":continue", 1),
-			(agent_get_horse, ":horse", ":agent"), # Fix for dehorsed troops being assigned to cavalry group
-			(gt, ":horse", 0),
+			# (agent_get_horse, ":horse", ":agent"), # Fix for dehorsed troops being assigned to cavalry group
+			# (gt, ":horse", 0),
 			(assign, ":target_division", grc_cavalry),
 		(else_try),
 			(assign, ":continue", 0),
@@ -80750,6 +80764,8 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	(troop_set_slot, ":lady_no", slot_troop_equipement_level, ":level"),
 	(troop_set_slot, ":lady_no", slot_troop_spawned_before, 1), #No troop added
 	
+	# (troop_get_slot, ":banner_id", ":relative_lord", slot_troop_banner_scene_prop),
+	
 	# Give some of the relative's fief to the lady (not all, max weight is 4)
 	(assign, ":added_weight", 0),
 	(assign, ":end_try", centers_end),
@@ -80783,7 +80799,9 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	
 	(call_script, "script_set_attrib_points", ":lady_no"),  #Change stats before equipement
 	(call_script, "script_change_equipement", ":lady_no"),
-	(call_script, "script_get_name_for_heroes", ":lady_no", 0),
+	(call_script, "script_get_name_for_heroes", ":lady_no", ":level"),
+	
+	(call_script, "script_assign_banner", ":lady_no"),
 	]),
 ]
 

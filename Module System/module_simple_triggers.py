@@ -6219,7 +6219,7 @@ simple_triggers = [
 	]),
 	
   (24, ## change names corresponding to the occupation
-   [(try_for_range, ":lord_no", companions_begin, lords_end),  # companions can have changing names too
+   [(try_for_range, ":lord_no", heroes_begin, heroes_end),  # companions can have changing names too
       (neg|is_between, ":lord_no", kings_begin, kings_end), # don't want the kings to change names
 	  (troop_slot_eq, ":lord_no", slot_troop_occupation, slto_kingdom_hero), # need this now
       (assign, ":level", 0),
@@ -6244,7 +6244,7 @@ simple_triggers = [
    (24*7,  # trigger to change equipement  ## TRIGGER 115
     [
 	 
-	 (try_for_range, ":lord_no", lords_begin, lords_end),
+	 (try_for_range, ":lord_no", lords_begin, heroes_end),
 	   (troop_slot_eq, ":lord_no", slot_troop_occupation, slto_kingdom_hero),
 	   (troop_get_slot, ":max_level", ":lord_no", slot_troop_lord_level),
 	   (troop_get_slot, ":equipement_level", ":lord_no", slot_troop_equipement_level),

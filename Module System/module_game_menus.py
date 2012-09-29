@@ -20377,7 +20377,7 @@ goods, and books will never be sold. ^^You can change some settings here freely.
   
 ## bank begin
   ("bank_destroyed",0, # reg40 should be center, reg41 should be money
-    "The recent siege of {s41} destroyed the bank in which you had money, {s40} offers you {reg43} denars to compensate for the money you had ({reg41} denars).",
+    "The recent siege of {s40} destroyed the bank in which you had money, {s40} offers you {reg43} denars to compensate for the money you had ({reg41} denars).",
     "none",
 	[(party_get_slot, reg42, reg40, slot_town_lord),
 	 (store_faction_of_party, reg44, reg40),
