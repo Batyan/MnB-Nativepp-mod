@@ -708,46 +708,6 @@ scripts = [
 	  (faction_set_slot, "fac_kingdom_9", slot_faction_banner, "mesh_banner_c16"),
       (faction_set_slot, "fac_kingdom_10", slot_faction_banner,"mesh_banner_d15"),
 	  (faction_set_slot, "fac_kingdom_11", slot_faction_banner,"mesh_banner_a06"),
-	  
-	  (call_script, "script_init_banners_slot", 1), # initialize banners with faction slots
-
-      (try_for_range, ":kingdom_hero", active_npcs_begin, active_npcs_end),
-        (troop_slot_eq, ":kingdom_hero", slot_troop_occupation, slto_kingdom_hero),
-		
-		(call_script, "script_assign_banner", ":kingdom_hero"),
-
-		## No need of this as we change the equipement of lords and then their renown
-		## Kings have thier renown initialized before
-        # (store_character_level, ":level", ":kingdom_hero"),
-        # (store_mul, ":renown", ":level", ":level"),
-        # (val_div, ":renown", 4), #for top lord, is about 400
-
-		# (troop_get_slot, ":age", ":kingdom_hero", slot_troop_age),
-        # (store_mul, ":age_addition", ":age", ":age"),
-        # (val_div, ":age_addition", 8), #for top lord, is about 400
-		# (val_add, ":renown", ":age_addition"),
-
-        # (try_begin),
-          # (faction_slot_eq, ":kingdom_hero_faction", slot_faction_leader, ":kingdom_hero"),
-          # (store_random_in_range, ":random_renown", 250, 500),
-        # (else_try),
-          # (store_random_in_range, ":random_renown", 0, 200),
-        # (try_end),
-        # (val_add, ":renown", ":random_renown"),
-
-        # (troop_set_slot, ":kingdom_hero", slot_troop_renown, ":renown"),
-      (try_end),
-	  
-	  (troop_set_slot, "trp_kingdom_1_lord", slot_troop_banner_scene_prop, "spr_banner_a"),
-	  (troop_set_slot, "trp_kingdom_2_lord", slot_troop_banner_scene_prop, "spr_banner_b"),
-	  (troop_set_slot, "trp_kingdom_3_lord", slot_troop_banner_scene_prop, "spr_banner_cu"),
-	  (troop_set_slot, "trp_kingdom_4_lord", slot_troop_banner_scene_prop, "spr_banner_c"),
-	  (troop_set_slot, "trp_kingdom_5_lord", slot_troop_banner_scene_prop, "spr_banner_d"),
-	  (troop_set_slot, "trp_kingdom_6_lord", slot_troop_banner_scene_prop, "spr_banner_f01"),
-	  
-	  (troop_set_slot, "trp_kingdom_9_lord", slot_troop_banner_scene_prop, "spr_banner_f"),
-	  (troop_set_slot, "trp_kingdom_10_lord", slot_troop_banner_scene_prop, "spr_banner_cp"),
-	  (troop_set_slot, "trp_kingdom_11_lord", slot_troop_banner_scene_prop, "spr_banner_do"),
 
       (try_for_range, ":troop_no", "trp_player", "trp_merchants_end"),
         (add_troop_note_tableau_mesh, ":troop_no", "tableau_troop_note_mesh"),
@@ -1078,6 +1038,25 @@ scripts = [
 	  (try_for_range, ":troop_id", "trp_adventurer_01", "trp_kingdom_1_pretender"),
 	    (troop_set_slot, ":troop_id", slot_troop_original_faction, "fac_kingdom_7"),
 	  (try_end),
+	  
+	  
+	  (call_script, "script_init_banners_slot", 1), # initialize banners with faction slots
+
+      (try_for_range, ":kingdom_hero", active_npcs_begin, active_npcs_end),
+        (troop_slot_eq, ":kingdom_hero", slot_troop_occupation, slto_kingdom_hero),
+		(call_script, "script_assign_banner", ":kingdom_hero"),
+      (try_end),
+	  
+	  (troop_set_slot, "trp_kingdom_1_lord", slot_troop_banner_scene_prop, "spr_banner_a"),
+	  (troop_set_slot, "trp_kingdom_2_lord", slot_troop_banner_scene_prop, "spr_banner_b"),
+	  (troop_set_slot, "trp_kingdom_3_lord", slot_troop_banner_scene_prop, "spr_banner_cu"),
+	  (troop_set_slot, "trp_kingdom_4_lord", slot_troop_banner_scene_prop, "spr_banner_c"),
+	  (troop_set_slot, "trp_kingdom_5_lord", slot_troop_banner_scene_prop, "spr_banner_d"),
+	  (troop_set_slot, "trp_kingdom_6_lord", slot_troop_banner_scene_prop, "spr_banner_f01"),
+	  
+	  (troop_set_slot, "trp_kingdom_9_lord", slot_troop_banner_scene_prop, "spr_banner_f"),
+	  (troop_set_slot, "trp_kingdom_10_lord", slot_troop_banner_scene_prop, "spr_banner_cp"),
+	  (troop_set_slot, "trp_kingdom_11_lord", slot_troop_banner_scene_prop, "spr_banner_do"),
 	  
 	  
 	  ## Might want to test if it is any good use to get them to the level they should be : more randomisation - less balance between factions ?
