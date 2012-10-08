@@ -80640,6 +80640,8 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	(troop_set_slot, ":troop_no", slot_troop_age, ":age"),
 	(troop_set_slot, ":troop_no", slot_troop_age_appearance, ":appearance"),
 	(troop_set_age, ":troop_no", ":appearance"),
+	
+	(call_script, "script_update_troop_notes", ":troop_no"),
 	]),
 	
   # script_cf_troop_can_upgrade
@@ -80711,6 +80713,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	    (troop_get_slot, ":relative", ":other_npc", ":relation"),
 		(eq, ":relative", ":troop_no"),
 		(troop_set_slot, ":other_npc", ":relation", -1),
+		(call_script, "script_update_troop_notes", ":other_npc"),
 	  (try_end),
 	(try_end),
 	
@@ -80719,7 +80722,10 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	  (troop_get_slot, ":relative", ":troop_no", ":relation"),
 	  (ge, ":relative", 0),
 	  (troop_set_slot, ":troop_no", ":relation", -1),
+	  # (call_script, "script_update_troop_notes", ":troop_no"),
 	(try_end),
+	
+	(call_script, "script_update_troop_notes", ":troop_no"),
 	]),
 	
   # script_ladt_take_arms
