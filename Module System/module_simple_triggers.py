@@ -6251,10 +6251,10 @@ simple_triggers = [
 	   (store_sub, ":chance", ":max_level", ":equipement_level"), ## can be <0
 	   (assign, ":new", 0),
 	   (try_begin),
-	     (neg|troop_slot_eq, ":lord_no", slot_troop_equipement_level, 6),
+	     (neq, ":equipement_level", 6),
 	     (gt, ":chance", 0),
 		 (val_mul, ":chance", ":chance"),
-		 (val_mul, ":chance", 3), # slightly higher chances - was 2
+		 (val_mul, ":chance", 4), # slightly higher chances - was 2, then 3
 		 (try_begin),
 		   (troop_slot_eq, ":lord_no", slot_troop_equipement_level, 0), ## lvl 0 lords can progress faster
 		   (val_add, ":chance", 20),
@@ -6265,6 +6265,7 @@ simple_triggers = [
 	   (else_try),
 	     (lt, ":chance", 0),
 		 (val_mul, ":chance", ":chance"),
+		 (val_mul, ":chance", 2), # slightly higher chances
 		 (store_random_in_range, ":rand", 0, 100),
 		 (lt, ":rand", ":chance"),
 		 (assign, ":new", -1),

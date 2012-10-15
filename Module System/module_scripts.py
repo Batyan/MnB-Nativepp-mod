@@ -35011,7 +35011,7 @@ scripts = [
 		 (agent_get_slot, ":entry_point", ":agent_no", slot_agent_target_entry_point),
          (entry_point_get_position, pos1, ":entry_point"),
          (get_distance_between_positions, ":dist", pos0, pos1),
-         (lt, ":dist", 200),
+         (lt, ":dist", 250),
          (agent_clear_scripted_mode, ":agent_no"),
          (agent_set_slot, ":agent_no", slot_agent_is_in_scripted_mode, 0),
          (agent_set_slot, ":agent_no", slot_agent_is_not_reinforcement, 1),
@@ -35019,10 +35019,10 @@ scripts = [
          (assign, reg0, ":agent_no"),
 #         (display_message, "@{s1} ({reg0}) reached pos"),
        (else_try),
-         (agent_get_simple_behavior, ":agent_sb", ":agent_no"),
+         # (agent_get_simple_behavior, ":agent_sb", ":agent_no"),
          # (agent_get_combat_state, ":agent_cs", ":agent_no"),
-         (this_or_next|eq, ":agent_sb", aisb_ranged),
-         (eq, ":agent_sb", aisb_go_to_pos),#scripted mode
+         # (this_or_next|eq, ":agent_sb", aisb_ranged),
+         # (eq, ":agent_sb", aisb_go_to_pos),#scripted mode
 		 
 		 
 		 ## is there an ennemy close to the archer ?
@@ -35043,23 +35043,23 @@ scripts = [
          # (this_or_next|neq, ":agent_cs", 1), # is not preparing to shot
 		 # (neq, ":agent_cs", 3),              # neither is shoting
 
-         (try_begin),
+         # (try_begin),
            (agent_slot_eq, ":agent_no", slot_agent_is_in_scripted_mode, 0),
            (agent_set_scripted_destination, ":agent_no", pos1, 0),
            (agent_set_slot, ":agent_no", slot_agent_is_in_scripted_mode, 1),
            (str_store_troop_name, s1, ":agent_troop"),
            (assign, reg0, ":agent_no"),
 #           (display_message, "@{s1} ({reg0}) moving to pos"),
-         (try_end),
-       (else_try),
-         (try_begin),
-           (agent_slot_eq, ":agent_no", slot_agent_is_in_scripted_mode, 1),
-           (agent_clear_scripted_mode, ":agent_no"),
-           (agent_set_slot, ":agent_no", slot_agent_is_in_scripted_mode, 0),
-           (str_store_troop_name, s1, ":agent_troop"),
-           (assign, reg0, ":agent_no"),
+         # (try_end),
+       # (else_try),
+         # (try_begin),
+           # (agent_slot_eq, ":agent_no", slot_agent_is_in_scripted_mode, 1),
+           # (agent_clear_scripted_mode, ":agent_no"),
+           # (agent_set_slot, ":agent_no", slot_agent_is_in_scripted_mode, 0),
+           # (str_store_troop_name, s1, ":agent_troop"),
+           # (assign, reg0, ":agent_no"),
 #           (display_message, "@{s1} ({reg0}) seeing target or changed mode"),
-         (try_end),
+         # (try_end),
        (try_end),
      (try_end),
      ]),
@@ -79508,10 +79508,16 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		(team_get_order_position, pos1, ":team", 0), # Get infantry position
 		
 		(store_random_in_range, ":min_charge_dist", 0, 20),
-		(call_script, "script_get_closest3_distance_of_enemies_at_pos1", ":team"),
+		# (call_script, "script_get_closest3_distance_of_enemies_at_pos1", ":team"),
+		
+		(call_script, "script_team_get_average_position_of_enemies", ":team"),
+		(copy_position, pos23, pos0),
+		
+		(get_distance_between_positions_in_meters, ":distance", pos1, pos23),
 		
 		(try_begin), # We wait until the ennemy is close enough then we charge!
-			(lt, reg0, ":min_charge_dist"),
+			# (lt, reg0, ":min_charge_dist"),
+			(lt, ":distance", ":min_charge_dist"),
 			(team_give_order, ":team", grc_infantry, mordr_charge),
 			(team_set_slot, ":team", slot_team_division_0_state, stds_battle),
 			(display_message, "@Infantry is charging!", 0xbbbbee),
@@ -79528,10 +79534,16 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		(team_give_order, ":team", grc_infantry, mordr_fall_back),
 		
 		(store_random_in_range, ":min_charge_dist", 20, 40),
-		(call_script, "script_get_closest3_distance_of_enemies_at_pos1", ":team"),
+		# (call_script, "script_get_closest3_distance_of_enemies_at_pos1", ":team"),
+		
+		(call_script, "script_team_get_average_position_of_enemies", ":team"),
+		(copy_position, pos23, pos0),
+		
+		(get_distance_between_positions_in_meters, ":distance", pos1, pos23),
 		
 		(try_begin), # We wait until the ennemy is close enough then we charge!
-			(lt, reg0, ":min_charge_dist"),
+			# (lt, reg0, ":min_charge_dist"),
+			(lt, ":distance", ":min_charge_dist"),
 			(team_give_order, ":team", grc_infantry, mordr_charge),
 			(team_set_slot, ":team", slot_team_division_0_state, stds_battle),
 			(display_message, "@Infantry is charging!", 0xbbbbee),
@@ -79545,8 +79557,16 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		
 		(team_give_order, ":team", grc_infantry, mordr_advance),
 	
-	# (else_try), # For now nothing is done when we charge
-		# (team_slot_eq, ":team", slot_team_division_0_state, stds_battle),
+	(else_try), # For now nothing is done when we charge
+		(team_slot_eq, ":team", slot_team_division_0_state, stds_battle),
+		
+		(try_begin),
+			(neg|team_slot_eq, ":team", slot_team_num_agent_in_div1, 0),
+			(team_slot_eq, ":team", slot_team_division_1_state, stds_ready),
+			
+			(team_set_slot, ":team", slot_team_division_0_state, stds_ready),
+			(display_message, "@Infantry heading back!", 0xbbeebb),
+		(try_end),
 	(else_try),
 		(team_slot_eq, ":team", slot_team_division_0_state, stds_reform),
 		(team_get_order_position, pos1, ":team", grc_infantry), # Get infantry position
@@ -79662,7 +79682,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 			# (copy_position, pos1, pos52),
 			# (call_script, "script_find_high_ground_around_pos1", ":team", 30), # call again just in case we are not at peak point.
 			# (copy_position, pos1, pos52),
-			(call_script, "script_find_high_ground_around_pos1", ":team", 30), # Only once, we don't want the archers to move too much
+			(call_script, "script_find_high_ground_around_pos1", ":team", 10), # Only once, we don't want the archers to move too much
 			(team_give_order, ":team", grc_everyone, mordr_hold),
 			(team_set_order_position, ":team", grc_archers, pos52),
 		
@@ -79831,11 +79851,20 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		(team_slot_eq, ":team", slot_team_division_2_state, stds_engaging),
 		
 		(team_get_order_position, pos1, ":team", 1), # Get archer position
-		(call_script, "script_get_closest3_distance_of_enemies_at_pos1", ":team"),
-		(store_random_in_range, ":min_charge_dist", 25, 50),
+		# (call_script, "script_get_closest3_distance_of_enemies_at_pos1", ":team"),
+		# (store_random_in_range, ":min_charge_dist", 25, 50),
 		
-		(try_begin), # We wait until the ennemy is close enough then we flank!
-			(lt, reg0, ":min_charge_dist"),
+		(call_script, "script_team_get_average_position_of_enemies", ":team"),
+		(copy_position, pos23, pos0),
+		
+		(get_distance_between_positions_in_meters, ":distance", pos1, pos23),
+		
+		(store_random_in_range, ":min_charge_dist", 25, 50),
+		(try_begin),
+		  (lt, ":distance", ":min_charge_dist"),
+		
+		# (try_begin), # We wait until the ennemy is close enough then we flank!
+			# (lt, reg0, ":min_charge_dist"),
 			(team_set_slot, ":team", slot_team_division_2_state, stds_maneuver),
 			(display_message, "@Cavalry is maneuvering!", 0xbbeebb),
 		(try_end),
@@ -79843,7 +79872,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		(team_slot_eq, ":team", slot_team_division_2_state, stds_maneuver),
 		
 		(team_get_order_position, pos21, ":team", grc_infantry), # Get infantry position
-		(team_get_order_position, pos22, ":team", grc_cavalry), # Get infantry position
+		(team_get_order_position, pos22, ":team", grc_cavalry), # Get cavalry position
 		
 		(try_begin),
 			(position_is_behind_position, pos22, pos21),
@@ -79880,7 +79909,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		
 		(call_script, "script_team_get_average_position_of_enemies", ":team"),
 		(try_begin),
-			(position_is_behind_position, pos22, pos21),
+			(position_is_behind_position, pos22, pos0),
 			(team_give_order, ":team", grc_cavalry, mordr_charge),
 			(team_set_slot, ":team", slot_team_division_2_state, stds_battle),
 		(try_end),
@@ -79893,12 +79922,24 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		
 		# (team_give_order, ":team", grc_infantry, mordr_advance),
 	
-	(else_try), # For now nothing is done when we charge
+	(else_try), # When we charge, if we are too far away from our archers, we will head back
 		(team_slot_eq, ":team", slot_team_division_2_state, stds_battle),
+		
+		# (team_get_order_position, pos1, ":team", grc_archers), # Get archers position
+		# (call_script, "script_team_get_average_position_of_enemies", ":team"),
+		(try_begin),
+			(neg|team_slot_eq, ":team", slot_team_num_agent_in_div1, 0),
+			# (get_distance_between_positions_in_meters, ":dist", pos1, pos0),
+			# (gt, ":dist", 100),
+			(team_slot_eq, ":team", slot_team_division_1_state, stds_ready),
+			
+			(team_set_slot, ":team", slot_team_division_2_state, stds_ready),
+			(display_message, "@Cavalry heading back!", 0xbbeebb),
+		(try_end),
 		
 		(try_begin), # We just handle reinforcements
 			(team_slot_eq, ":team", slot_team_division_1_state, stds_reform), # Archers are retreating
-			(team_get_order_position, pos1, ":team", grc_archers), # Get infantry position
+			(team_get_order_position, pos1, ":team", grc_archers), # Get archers position
 			(call_script, "script_get_closest3_distance_of_enemies_at_pos1", ":team"),
 			(gt, reg0, 30), # Enemy is far away
 			(team_set_slot, ":team", slot_team_division_2_state, stds_reform),
@@ -80677,7 +80718,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
         (eq, ":reputation", lrep_conventional),
         (assign, ":chances", 5),
       (else_try),
-	    # High chances for adventurous ladies
+	    # High chances for adventurous ladies, they wish for adventure, they will get it this way
         (eq, ":reputation", lrep_adventurous),
         (assign, ":chances", 90),
       (else_try),
@@ -80685,7 +80726,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
         (eq, ":reputation", lrep_otherworldly),
         (assign, ":chances", 15),
       (else_try),
-	    # Ambitious ladies will think it's a way to earn reputation
+	    # Ambitious ladies will think it's a way to earn reputation and a place amoungst men
         (eq, ":reputation", lrep_ambitious),
         (assign, ":chances", 50),
       (else_try),

@@ -3151,7 +3151,7 @@ game_menus = [
     (assign, ":party_size_limit", reg0),
 
     (store_skill_level, ":leadership", "skl_leadership", "trp_player"),
-    (val_mul, ":leadership", 20),
+    (val_mul, ":leadership", 25),
     (store_attribute_level, ":charisma", "trp_player", ca_charisma),
 	(val_mul, ":charisma", 2),
 

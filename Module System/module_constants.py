@@ -2846,29 +2846,29 @@ slot_team_division_5_state = 356 # rang2
 slot_team_division_6_state = 357 # cav2
 slot_team_division_7_state = 358 # aux2
 
-stds_preparation = 0 # Getting into position
-stds_reinforcement = 1 # Used for newly spawned divisions
-stds_ready = 2 # Used for hold positions tactics or when moving to the ennemy
-stds_engaging = 3 # Before contact with the ennemy, used when manoeuvring around, or when starting to shot with ranged
-stds_maneuver = 4 # Mostly cavalry when moving to charge position
-stds_battle = 5 # Battle
-stds_reform = 6 # Used when reinforcements have arrived
-stds_disabled = 7 # Divisions 4-7 when no reinforcements 
-stds_retreat = 8 # Retreating group
+stds_preparation = 0	# Getting into position
+stds_reinforcement = 1	# Used for newly spawned divisions
+stds_ready = 2			# Used for hold positions tactics or when moving to the ennemy
+stds_engaging = 3		# Before contact with the ennemy, used when manoeuvring around, or when starting to shot with ranged
+stds_maneuver = 4		# Mostly cavalry when moving to charge position
+stds_battle = 5			# Battle
+stds_reform = 6			# Used when reinforcements have arrived
+stds_disabled = 7		# Divisions 4-7 when no reinforcements 
+stds_retreat = 8		# Retreating group
 
-slot_team_battle_tactic = 359		# Tactics can change during the battle (usualy after reinforcements come)
-
-bt_none = 0							# No leader, no elaborated tactic
-bt_charge = 1						# Blindly charge
-bt_coordinated_charge = 2			# Charge with a quick semi-circling (cav-cav2)
-bt_advance = 3						# Slowly advance towards the ennemy
-bt_circling = 4						# Slowly advance and circle the ennemy with cav/inf
-bt_crossfire = 5					# Slowly advance towards the ennemy with ranged units slightly on the sides
-bt_hold_inf = 6						# Hold a position (inf-rang-cav)
-bt_hold_rang = 7					# Hold a position (rang-inf-cav)
-bt_hold_circling = 8				# Hold a position while moving cavalry to circle the ennemy (cav/cav-cav2)
-bt_retreat = 9						# When a team has no leader they might retreat somewhere to recover (spawn)
-bt_regroup = 10						# Used when the team is moving back to its spawn for regrouping and/or retreating slowly
+slot_team_battle_tactic = 359	# Tactics can change during the battle (usualy after reinforcements come)
+# These might not be used
+bt_none = 0						# No leader, no elaborated tactic
+bt_charge = 1					# Blindly charge
+bt_coordinated_charge = 2		# Charge with a quick semi-circling (cav-cav2)
+bt_advance = 3					# Slowly advance towards the ennemy
+bt_circling = 4					# Slowly advance and circle the ennemy with cav/inf
+bt_crossfire = 5				# Slowly advance towards the ennemy with ranged units slightly on the sides
+bt_hold_inf = 6					# Hold a position (inf-rang-cav)
+bt_hold_rang = 7				# Hold a position (rang-inf-cav)
+bt_hold_circling = 8			# Hold a position while moving cavalry to circle the ennemy (cav/cav-cav2)
+bt_retreat = 9					# When a team has no leader they might retreat somewhere to recover (spawn)
+bt_regroup = 10					# Used when the team is moving back to its spawn for regrouping and/or retreating slowly
 
 slot_team_division_3_type = 360 # What kind of division this is
 
