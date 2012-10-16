@@ -2777,7 +2777,7 @@ scripts = [
 	  (call_script, "script_multiplayer_set_item_available_for_troop", "itm_scale_gauntlets", "trp_sarranid_mamluke_multiplayer"),
 	  
 	  
-	  #5d-Sarranid archer
+	  #6d-Sarranid archer
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_sarranid_cloth_robe", "trp_sarranid_merc_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_sarranid_cloth_robe_b", "trp_sarranid_merc_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_skirmisher_armor", "trp_sarranid_merc_multiplayer"),
@@ -3038,6 +3038,8 @@ scripts = [
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_tab_shield_small_round_c", "trp_khergit_t_horseman_multiplayer"),
 	  (call_script, "script_multiplayer_set_item_available_for_troop", "itm_light_lance", "trp_khergit_t_horseman_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_lance", "trp_khergit_t_horseman_multiplayer"),
+      (call_script, "script_multiplayer_set_item_available_for_troop", "itm_hafted_blade_a", "trp_khergit_t_horseman_multiplayer"),
+      (call_script, "script_multiplayer_set_item_available_for_troop", "itm_hafted_blade_b", "trp_khergit_t_horseman_multiplayer"),
 	  
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_leather_steppe_cap_a", "trp_khergit_t_horseman_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_leather_steppe_cap_b", "trp_khergit_t_horseman_multiplayer"),

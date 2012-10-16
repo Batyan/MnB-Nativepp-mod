@@ -1264,7 +1264,7 @@ troops = [
    itm_mail_boots,itm_mail_mittens,itm_lamellar_armor,itm_banded_armor,itm_vaegir_noble_helmet,itm_vaegir_helmet,itm_vaegir_war_helmet,itm_warhorse_steppe,itm_warhorse],
    str_22|agi_21|int_16|cha_15|	level(32),	wpex(145,150,140,110,90,140),knows_common|knows_athletics_4|knows_riding_5|knows_ironflesh_4|knows_shield_3|knows_power_strike_4|knows_power_throw_3|knows_horse_archery_2,vaegir_face_old_1, vaegir_face_old_2],
   ["vaegir_noble5", "Nagymester Lovag", "Nagymester Lovagok", tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_horse|tf_guarantee_shield|tf_guarantee_gloves|tf_guarantee_helmet,0,0,fac_kingdom_2,
-   [itm_scimitar_b,itm_great_bardiche,itm_heavy_lance,itm_jarid,itm_tab_shield_kite_cav_bitm_jarid,,
+   [itm_scimitar_b,itm_great_bardiche,itm_heavy_lance,itm_jarid,itm_jarid,itm_tab_shield_kite_cav_b,
    itm_iron_greaves,itm_gauntlets,itm_banded_armor,itm_lamellar_armor,itm_vaegir_elite_armor,itm_vaegir_war_helmet,itm_vaegir_mask,itm_warhorse_steppe,itm_warhorse],
    str_25|agi_26|int_20|cha_18|	level(40),	wpex(175,180,170,130,110,170),knows_common|knows_athletics_4|knows_riding_6|knows_ironflesh_5|knows_shield_3|knows_power_strike_5|knows_power_throw_4|knows_horse_archery_3,vaegir_face_older_1, vaegir_face_older_2],
    

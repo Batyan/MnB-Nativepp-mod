@@ -642,9 +642,9 @@ slot_party_money_carried_lord  = 353
 # We use the same slot as they can't overwrite each other
 # That allows for more buildings
 
-slot_center_bank_interest_stored 	= slot_party_money_carried
-slot_center_bank_money      		= slot_party_money_carried_state
-slot_center_bank_money_last 		= slot_party_money_carried_lord
+slot_center_bank_interest_stored 	= 354 # slot_party_money_carried
+slot_center_bank_money      		= 355 # slot_party_money_carried_state
+slot_center_bank_money_last 		= 356 # slot_party_money_carried_lord
 ## bank_end
 
 #############################################################################
@@ -2166,7 +2166,7 @@ dplmc_slot_party_recruiter_needed_recruits = 233           # Amount of recruits 
 dplmc_slot_party_recruiter_origin = 234                    # Walled center from where the recruiter was hired.
 dplmc_slot_village_reserved_by_recruiter = 235            # This prevents recruiters from going to villages targeted by other recruiters.
 dplmc_slot_party_recruiter_needed_recruits_faction = 236   # Alkhadias Master, you forgot this one from the PM you sent me :D
-dplmc_spt_recruiter     = 12
+dplmc_spt_recruiter     = 14
 # recruiter kit end
 ##diplomacy start+ Re-use those slots for other party types
 dplmc_slot_party_origin = dplmc_slot_party_recruiter_origin
