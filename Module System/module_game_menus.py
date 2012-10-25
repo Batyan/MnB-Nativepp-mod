@@ -5453,7 +5453,7 @@ game_menus = [
           
            #add new party to map (routed_warriors)
           (call_script, "script_add_routed_party"),
-        (end_try),
+        (try_end),
         		
 		(try_begin),
 			(check_quest_active, "qst_track_down_bandits"),

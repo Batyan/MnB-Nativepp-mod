@@ -2207,7 +2207,7 @@ scripts = [
       #(call_script, "script_multiplayer_set_item_available_for_troop", "itm_splinted_leather_greaves", "trp_vaegir_archer_multiplayer"),
 	  (call_script, "script_multiplayer_set_item_available_for_troop", "itm_leather_boots", "trp_vaegir_archer_multiplayer"),
 	  (call_script, "script_multiplayer_set_item_available_for_troop", "itm_leather_gloves", "trp_vaegir_archer_multiplayer"),
-      (call_script, "script_multiplayer_set_item_available_for_troop", "itm_nomad_cap", "trp_vaegir_archer_multiplayer"),
+      # (call_script, "script_multiplayer_set_item_available_for_troop", "itm_nomad_cap", "trp_vaegir_archer_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_vaegir_fur_cap", "trp_vaegir_archer_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_vaegir_fur_helmet", "trp_vaegir_archer_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_vaegir_spiked_helmet", "trp_vaegir_archer_multiplayer"),
@@ -2673,6 +2673,7 @@ scripts = [
 	  (call_script, "script_multiplayer_set_item_available_for_troop", "itm_leather_gloves", "trp_sarranid_archer_multiplayer"),
 
 	  (call_script, "script_multiplayer_set_item_available_for_troop", "itm_tab_shield_small_round_a", "trp_sarranid_archer_multiplayer"),
+	  (call_script, "script_multiplayer_set_item_available_for_troop", "itm_tab_shield_small_round_b", "trp_sarranid_archer_multiplayer"),
 
 
 
@@ -35021,10 +35022,10 @@ scripts = [
          (assign, reg0, ":agent_no"),
 #         (display_message, "@{s1} ({reg0}) reached pos"),
        (else_try),
-         # (agent_get_simple_behavior, ":agent_sb", ":agent_no"),
+         (agent_get_simple_behavior, ":agent_sb", ":agent_no"),
          # (agent_get_combat_state, ":agent_cs", ":agent_no"),
          # (this_or_next|eq, ":agent_sb", aisb_ranged),
-         # (eq, ":agent_sb", aisb_go_to_pos),#scripted mode
+         (eq, ":agent_sb", aisb_go_to_pos),#scripted mode
 		 
 		 
 		 ## is there an ennemy close to the archer ?
@@ -35045,23 +35046,24 @@ scripts = [
          # (this_or_next|neq, ":agent_cs", 1), # is not preparing to shot
 		 # (neq, ":agent_cs", 3),              # neither is shoting
 
-         # (try_begin),
+         (try_begin),
            (agent_slot_eq, ":agent_no", slot_agent_is_in_scripted_mode, 0),
            (agent_set_scripted_destination, ":agent_no", pos1, 0),
            (agent_set_slot, ":agent_no", slot_agent_is_in_scripted_mode, 1),
            (str_store_troop_name, s1, ":agent_troop"),
            (assign, reg0, ":agent_no"),
 #           (display_message, "@{s1} ({reg0}) moving to pos"),
-         # (try_end),
-       # (else_try),
-         # (try_begin),
-           # (agent_slot_eq, ":agent_no", slot_agent_is_in_scripted_mode, 1),
-           # (agent_clear_scripted_mode, ":agent_no"),
-           # (agent_set_slot, ":agent_no", slot_agent_is_in_scripted_mode, 0),
+         (try_end),
+       (else_try),
+         (try_begin),
+           (agent_slot_eq, ":agent_no", slot_agent_is_in_scripted_mode, 1),
+           (agent_clear_scripted_mode, ":agent_no"),
+           (agent_set_slot, ":agent_no", slot_agent_is_in_scripted_mode, 0),
+		   (agent_set_slot, ":agent_no", slot_agent_is_not_reinforcement, 1),
            # (str_store_troop_name, s1, ":agent_troop"),
            # (assign, reg0, ":agent_no"),
 #           (display_message, "@{s1} ({reg0}) seeing target or changed mode"),
-         # (try_end),
+         (try_end),
        (try_end),
      (try_end),
      ]),
