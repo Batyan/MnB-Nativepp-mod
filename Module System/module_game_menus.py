@@ -5688,7 +5688,7 @@ game_menus = [
             (jump_to_menu, "mnu_dplmc_manage_loot_pool"),
 		  (else_try),
 			#Old behavior:
-          (change_screen_loot, "trp_temp_troop"),
+            (change_screen_loot, "trp_temp_troop"),
 		  (try_end),
 		  ##diplomacy end+
         (else_try),

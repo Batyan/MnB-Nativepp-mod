@@ -17178,7 +17178,8 @@ scripts = [
         (try_end),
       (try_end),
 
-      (assign, reg0, ":num_player_party_shares"),
+	  (store_div, reg0, ":num_player_party_shares", 2), # Increase loot and gold by x2
+      # (assign, reg0, ":num_player_party_shares"),
   ]),
 
   #script_party_give_xp_and_gold:
@@ -17233,6 +17234,13 @@ scripts = [
         (party_stack_get_troop_id, ":stack_troop","p_main_party",":i_stack"),
         (try_begin),
           (troop_is_hero, ":stack_troop"),
+		  # Looting skill increase gold earned after a battle
+		  # By 33% at looting skill = 10
+		  (store_skill_level, ":loot_skill", "skl_looting", ":stack_troop"),
+		  (val_add, ":loot_skill", 30),
+		  (store_mul, ":troop_gold_gain", ":player_gold_gain", ":loot_skill"),
+		  (val_div, ":troop_gold_gain", 30),
+		  
           (call_script, "script_troop_add_gold", ":stack_troop", ":player_gold_gain"),
         (try_end),
       (try_end),
