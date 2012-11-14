@@ -11455,7 +11455,7 @@ presentations = [
 	    (store_troop_faction, ":fac", ":merc_no"),
 		(eq, ":fac", "fac_player_supporters_faction"),
 		(troop_slot_eq, ":merc_no", slot_troop_occupation, slto_kingdom_mercenary),
-		(troop_slot_ge, ":merc_no", slot_troop_mercenary_time, 1),
+		# (troop_slot_ge, ":merc_no", slot_troop_mercenary_time, 1),
 		(val_add, ":num_lines", 1),
 	  (try_end),
 
@@ -11967,7 +11967,7 @@ presentations = [
 	    (store_troop_faction, ":fac", ":cur_merc"),
 		(eq, ":fac", "fac_player_supporters_faction"),
 		(troop_slot_eq, ":merc_no", slot_troop_occupation, slto_kingdom_mercenary),
-		(troop_slot_ge, ":merc_no", slot_troop_mercenary_time, 1),
+		# (troop_slot_ge, ":merc_no", slot_troop_mercenary_time, 1),
 		
 	    (str_store_troop_name, s0, ":cur_merc"),
 	    (create_text_overlay, reg1, "str_mercenary_payment_for_s0", 0),

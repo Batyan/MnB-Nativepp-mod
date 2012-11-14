@@ -642,9 +642,13 @@ slot_party_money_carried_lord  = 353
 # We use the same slot as they can't overwrite each other
 # That allows for more buildings
 
-slot_center_bank_interest_stored 	= 354 # slot_party_money_carried
-slot_center_bank_money      		= 355 # slot_party_money_carried_state
-slot_center_bank_money_last 		= 356 # slot_party_money_carried_lord
+# slot_center_bank_interest_stored 	= 354 # slot_party_money_carried
+# slot_center_bank_money      		= 355 # slot_party_money_carried_state
+# slot_center_bank_money_last 		= 356 # slot_party_money_carried_lord
+
+slot_center_bank_interest_stored 	= 361
+slot_center_bank_money      		= 362
+slot_center_bank_money_last 		= 363
 ## bank_end
 
 #############################################################################
