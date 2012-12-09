@@ -56545,24 +56545,24 @@ scripts = [
 	 (try_begin),
 	   (store_random_in_range, ":rand", 0, 6), ## civilian cloth
 	   (try_begin),
-		   (eq, ":rand", 0),
-		   (troop_add_item, ":lord_no", "itm_fur_coat", 0),
-		 (else_try),
-		   (eq, ":rand", 1),
-		   (troop_add_item, ":lord_no", "itm_short_tunic", 0),
-		 (else_try),
-		   (eq, ":rand", 2),
-		   (troop_add_item, ":lord_no", "itm_leather_jacket", 0),
-		 (else_try),
-		   (eq, ":rand", 3),
-		   (troop_add_item, ":lord_no", "itm_rich_outfit", 0),
-		 (else_try),
-		   (eq, ":rand", 4),
-		   (troop_add_item, ":lord_no", "itm_coarse_tunic", 0),
-		 (else_try),
-		   (eq, ":rand", 5),
-		   (troop_add_item, ":lord_no", "itm_courtly_outfit", 0),
-		 (try_end),
+		 (eq, ":rand", 0),
+		 (troop_add_item, ":lord_no", "itm_fur_coat", 0),
+	   (else_try),
+		 (eq, ":rand", 1),
+		 (troop_add_item, ":lord_no", "itm_short_tunic", 0),
+	   (else_try),
+		 (eq, ":rand", 2),
+		 (troop_add_item, ":lord_no", "itm_leather_jacket", 0),
+	   (else_try),
+		 (eq, ":rand", 3),
+		 (troop_add_item, ":lord_no", "itm_rich_outfit", 0),
+	   (else_try),
+		 (eq, ":rand", 4),
+		 (troop_add_item, ":lord_no", "itm_coarse_tunic", 0),
+	   (else_try),
+		 (eq, ":rand", 5),
+		 (troop_add_item, ":lord_no", "itm_courtly_outfit", 0),
+	   (try_end),
 	   (try_begin),
 	     (troop_slot_eq, ":lord_no", slot_troop_equipement_level, 0), ## lvl 0 / begining
 	     (try_begin),
@@ -60412,9 +60412,9 @@ scripts = [
   ]),
 
 
-  # script_initialize_player_faction_troop_type   #############
-  ("initialize_player_faction_troop_type",        ##new 0.751##
-  [                                               #############
+  # script_initialize_player_faction_troop_type
+  ("initialize_player_faction_troop_type",
+  [
       (try_for_range, ":faction_no", "fac_player_faction", "fac_kingdom_1"),
         (try_begin),
           (faction_slot_eq, ":faction_no", slot_faction_culture, "fac_culture_1"),
@@ -60536,7 +60536,7 @@ scripts = [
 	   (try_end),
      (try_end),
 	 # (val_div, ":num_centers", 3),
-	 (val_max, ":num_centers", 5), ## slightly less lords on the field then before to prevent too much defections
+	 (val_max, ":num_centers", 5), ## slightly less lords on the field than before to prevent too much defections
 	 (faction_set_slot, ":faction_no", slot_faction_num_center, ":num_centers"),
   ]),
 
@@ -60718,7 +60718,7 @@ scripts = [
   ]),
   
   ("initialize_adventurer", ## initilalise adventurers for use in the map
-   [
+   [						## It iss disabled, adventurers are replaced by mercenaries
          (store_script_param, ":troop_no", 1),
 	     # (store_random_in_range, ":culture", 0, 14), ## ToDo : make all culture
 		 (assign, ":culture", 0),
@@ -62740,7 +62740,7 @@ scripts = [
 
   # script_refresh_center_inventories
   ("refresh_center_inventories",
-  [   	
+  [
     (set_merchandise_modifier_quality,150),
     (reset_item_probabilities,100),	    
 
@@ -74351,8 +74351,8 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	
 	(call_script, "script_troop_set_age", ":lord_no", ":age"),
 	
-	(call_script, "script_set_attrib_points", ":lord_no"),  #Change stats before equipement
-	(call_script, "script_change_equipement", ":lord_no"),
+	(call_script, "script_set_attrib_points", ":lord_no"), # Change stats before equipement
+	(call_script, "script_change_equipement", ":lord_no"), # Else he wouldn't be able to use his weapons when they are added
 	(call_script, "script_get_name_for_heroes", ":lord_no", 0),
 	(call_script, "script_assign_banner", ":lord_no"),
 	
@@ -74596,48 +74596,91 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
    (troop_get_slot, ":rep", ":lord_no", slot_lord_reputation_type),
    (store_troop_faction, ":faction_no", ":lord_no"),
    (faction_get_slot, ":culture", ":faction_no", slot_faction_culture),
-   (try_begin),
-     (eq, ":culture", "fac_culture_1"), # swadians
-	 (assign, ":troop_no", "trp_mercenary_zweihander"),
-   (else_try),
-     (eq, ":culture", "fac_culture_2"), # vaegirs
+   (try_begin), # Swadians
+     (eq, ":culture", "fac_culture_1"),
+	 # (store_random_in_range, ":rand", 0, 5),
+	 (store_random_in_range, ":rand", 0, 2),
 	 (try_begin),
-	   (this_or_next|eq, ":rep", lrep_upstanding),
-	   (eq, ":rep", lrep_benefactor),
+	   # (eq, ":rand", 0),
+	   # (neq, ":rep", lrep_upstanding),
+	   # (neq, ":rep", lrep_goodnatured),
+	   # (neq, ":rep", lrep_martial),
+	   # (assign, ":troop_no", "trp_forest_bandit"),
+	 # (else_try),
+	   # (eq, ":rand", 1),
+	   # (assign, ":troop_no", "trp_manhunter"),
+	 # (else_try),
+	   # (eq, ":rand", 2),
+	   # (assign, ":troop_no", "trp_follower_woman"),
+	 # (else_try),
+	   # (eq, ":rand", 3),
+	   (eq, ":rand", 0),
+	   (assign, ":troop_no", "trp_mercenary_landsknecht"),
+	 (else_try),
+	   (assign, ":troop_no", "trp_mercenary_zweihander"),
+	 (try_end),
+	 
+	 
+   (else_try), # Vaegirs
+     (eq, ":culture", "fac_culture_2"),
+	 (store_random_in_range, ":rand", 0, 1),
+	 (try_begin),
+	   (neq, ":rep", lrep_upstanding),
+	   (neq, ":rep", lrep_benefactor),
+	   (eq, ":rand", 0),
 	   (assign, ":troop_no", "trp_mercenary_ormester"),
 	 (else_try),
-	   (store_random_in_range, ":troop_no", "trp_mercenary_horse_archer", "trp_mercenary_viking"),
+	   (assign, ":troop_no", "trp_mercenary_horse_archer"),
 	 (try_end),
-   (else_try),
-     (this_or_next|eq, ":culture", "fac_culture_3"), # khergits
-	 (eq, ":culture", "fac_culture_3"),
-	 (store_random_in_range, ":troop_no", "trp_mercenary_horse_archer", "trp_mercenary_ormester"),
-   (else_try),
-     (eq, ":culture", "fac_culture_4"), # nords
+	 
+   (else_try), # Khergits
+     (this_or_next|eq, ":culture", "fac_culture_3"),
+	 (eq, ":culture", "fac_culture_9"),
+	 (assign, ":troop_no", "trp_mercenary_horse_archer"),
+	 
+   (else_try), # Nords
+     (eq, ":culture", "fac_culture_4"),
 	 (assign, ":troop_no", "trp_mercenary_viking"),
-   (else_try),
-     (this_or_next|eq, ":culture", "fac_culture_5"), # rhodoks
+	 
+   (else_try), # Rhodoks
+     (this_or_next|eq, ":culture", "fac_culture_5"),
 	 (eq, ":culture", "fac_culture_5a"),
+	 (store_random_in_range, ":rand", 0, 3),
 	 (try_begin),
-	   (this_or_next|eq, ":rep", lrep_upstanding),
-	   (eq, ":rep", lrep_benefactor),
-	   (assign, ":troop_no", "trp_mercenary_master"),
+	   (neq, ":rep", lrep_upstanding),
+	   (neq, ":rep", lrep_benefactor),
+	   (eq, ":rand", 0),
+	   (assign, ":troop_no", "trp_mercenary_landsknecht"),
 	 (else_try),
-	   (store_random_in_range, ":troop_no", "trp_mercenary_landsknecht", "trp_mercenary_veteran_horse_archer"),
-	   (try_begin),
-	     (eq, ":troop_no", "trp_mercenary_horse_archer"),
-		 (assign, ":troop_no", "trp_mercenary_master"),
-	   (try_end),
+	   (eq, ":rand", 1),
+	   (assign, ":troop_no", "trp_mercenary_zweihander"),
+	 (else_try),
+	   (assign, ":troop_no", "trp_mercenary_master"),
 	 (try_end),
-   (else_try),
-     (eq, ":culture", "fac_culture_6"), # sarranids
-	 (store_random_in_range, ":troop_no", "trp_mercenary_horse_archer", "trp_mercenary_ormester"),
-   (else_try),
-     (eq, ":culture", "fac_culture_8"), # freeriders
-	 (store_random_in_range, ":troop_no", "trp_mercenary_landsknecht", "trp_mercenary_horse_archer"),
-   (else_try),
-     # (eq, ":culture", "fac_culture_7"), # mercs
-	 (store_random_in_range, ":troop_no", "trp_mercenary_landsknecht", "trp_mercenary_horse_archer"),
+	 
+   (else_try), # Sarranids
+     (eq, ":culture", "fac_culture_6"),
+	 (assign, ":troop_no", "trp_mercenary_horse_archer"),
+	 
+   (else_try), # Freeriders
+     (eq, ":culture", "fac_culture_8"),
+	 (store_random_in_range, ":rand", 0, 2),
+	 (try_begin),
+	   (eq, ":rand", 0),
+	   (assign, ":troop_no", "trp_mercenary_landsknecht"),
+	 (else_try),
+	   (assign, ":troop_no", "trp_mercenary_zweihander"),
+	 (try_end),
+	 
+   (else_try), # Mercs
+     # (eq, ":culture", "fac_culture_7"),
+	 (store_random_in_range, ":rand", 0, 2),
+	 (try_begin),
+	   (eq, ":rand", 0),
+	   (assign, ":troop_no", "trp_mercenary_landsknecht"),
+	 (else_try),
+	   (assign, ":troop_no", "trp_mercenary_zweihander"),
+	 (try_end),
    (try_end),
    (troop_set_slot, ":lord_no", slot_troop_special_unit, ":troop_no"),
   ]
