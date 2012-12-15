@@ -23950,6 +23950,32 @@ scripts = [
 				(try_end),
 			(try_end),
 			##diplomacy end+
+			
+			(try_begin),
+				# Companions don't have levels so they won't be affected
+				(neg|is_between, ":other_lord", companions_begin, companions_end),
+				(troop_get_slot, ":equipement_level", ":other_lord", slot_troop_equipement_level),
+				(troop_get_slot, ":lord_level", ":other_lord", slot_troop_lord_level),
+				(try_begin),
+					# Lord has been granted a fief recently, and is still increasing his level
+					(lt, ":equipement_level", ":lord_level"),
+					(lt, ":relation_with_liege_change", 0),
+					(store_sub, ":relation_bonus", ":lord_level", ":equipement_level"),
+					(val_div, ":relation_bonus", 2),
+					(val_add, ":relation_bonus", 1),
+					(val_add, ":relation_with_liege_change", ":relation_bonus"),
+					# This bonus can compensate the loss of relation points, but it will not give positive relation points
+					(val_min, ":relation_with_liege_change", 0),
+				(else_try),
+					# Lord has recently lost a fief, so he will want to be the first to have a new one
+					(gt, ":equipement_level", ":lord_level"),
+					
+					(store_sub, ":relation_loss", ":lord_level", ":equipement_level"),
+					(val_div, ":relation_loss", 2),
+					(val_add, ":relation_loss", -1),
+					(val_add, ":relation_with_liege_change", ":relation_loss"),
+				(try_end),
+			(try_end),
 
 		    (neq, ":relation_with_liege_change", 0),
 			#removed Nov 2010
@@ -35010,7 +35036,7 @@ scripts = [
 	   (agent_slot_eq, ":agent_no", slot_agent_is_not_reinforcement, 0),
        (agent_is_defender, ":agent_no"),
        (agent_get_division, ":agent_class", ":agent_no"), # was agent_get_class
-       (agent_get_troop_id, ":agent_troop", ":agent_no"),
+       # (agent_get_troop_id, ":agent_troop", ":agent_no"),
        (eq, ":agent_class", grc_archers),
        (try_begin),
          (neg|agent_slot_ge, ":agent_no", slot_agent_target_entry_point, 40),
@@ -35026,40 +35052,21 @@ scripts = [
          (agent_clear_scripted_mode, ":agent_no"),
          (agent_set_slot, ":agent_no", slot_agent_is_in_scripted_mode, 0),
          (agent_set_slot, ":agent_no", slot_agent_is_not_reinforcement, 1),
-         (str_store_troop_name, s1, ":agent_troop"),
-         (assign, reg0, ":agent_no"),
+         # (str_store_troop_name, s1, ":agent_troop"),
+         # (assign, reg0, ":agent_no"),
 #         (display_message, "@{s1} ({reg0}) reached pos"),
        (else_try),
          (agent_get_simple_behavior, ":agent_sb", ":agent_no"),
          # (agent_get_combat_state, ":agent_cs", ":agent_no"),
          # (this_or_next|eq, ":agent_sb", aisb_ranged),
          (eq, ":agent_sb", aisb_go_to_pos),#scripted mode
-		 
-		 
-		 ## is there an ennemy close to the archer ?
-		 # (assign, ":archer_can_move", 1),
-		 # (try_for_agents, ":possible_ennemy"),
-		   # (agent_is_alive, ":possible_ennemy"),
-           # (neg|agent_is_defender, ":possible_ennemy"),
-		   # (agent_get_position, pos2, ":possible_ennemy"),
-		   # (get_distance_between_positions, ":dist", pos0, pos2),
-		   # (lt, ":dist", 200),
-		   # (assign, ":archer_can_move", 0),
-		 # (try_end),
-		 # (eq, ":archer_can_move", 1),
-		 
-		 # (agent_get_wielded_item, ":cur_weapon", ":agent_no", 0), 				# has a ranged weapon equiped
-		 # (is_between, ":cur_weapon", ranged_weapons_begin, ranged_weapons_end), # if a melee weapon -> close to an ennemy -> stop moving
-		# keep making them move even if they can see someone, to prevent them from not going to the defending positions
-         # (this_or_next|neq, ":agent_cs", 1), # is not preparing to shot
-		 # (neq, ":agent_cs", 3),              # neither is shoting
 
          (try_begin),
            (agent_slot_eq, ":agent_no", slot_agent_is_in_scripted_mode, 0),
            (agent_set_scripted_destination, ":agent_no", pos1, 0),
            (agent_set_slot, ":agent_no", slot_agent_is_in_scripted_mode, 1),
-           (str_store_troop_name, s1, ":agent_troop"),
-           (assign, reg0, ":agent_no"),
+           # (str_store_troop_name, s1, ":agent_troop"),
+           # (assign, reg0, ":agent_no"),
 #           (display_message, "@{s1} ({reg0}) moving to pos"),
          (try_end),
        (else_try),

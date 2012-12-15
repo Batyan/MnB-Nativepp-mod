@@ -9211,7 +9211,13 @@ game_menus = [
       ("dont_renew_oath",[],"Become free of your bond.",
        [
          (call_script, "script_player_leave_faction", 1), #1 means give back fiefs
+		 (try_begin),
+		   (eq, "$g_player_banner_granted", 0),
+		   (troop_set_slot, "trp_player", slot_troop_banner_scene_prop, 0),
+		   (party_set_banner_icon, "p_main_party", 0),
+		 (try_end),
          (change_screen_return),
+		 
          ]),
     ]
   ),
