@@ -80851,6 +80851,9 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	(call_script, "script_get_name_for_heroes", ":lady_no", ":level"),
 	
 	(call_script, "script_assign_banner", ":lady_no"),
+	
+	# This used to make a problem with asking where the lady was
+	(troop_set_slot, ":lady_no", slot_troop_cur_center, 0),
 	]),
 ]
 
