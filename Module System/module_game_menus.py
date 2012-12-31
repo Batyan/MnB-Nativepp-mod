@@ -3420,6 +3420,9 @@ game_menus = [
 	  ("deactivate_testing", [], "Deactivate testing mode",
 	   [(assign, "$test", 0),
 	    (jump_to_menu, "mnu_camp"),]),
+		
+	  ("presentation_testing", [], "Open presentation test",
+	   [(start_presentation, "prsnt_troop_control_modifier"),]),
 	  
 	  ("back",[],"Go back",
 	    [(jump_to_menu, "mnu_camp"),

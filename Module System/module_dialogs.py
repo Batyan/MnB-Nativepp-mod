@@ -15329,8 +15329,8 @@ What kind of recruits do you want?", "dplmc_constable_recruit_select",
 	(str_store_string, s9, ":string"),
     ],
 	"{s9}", "close_window", [
-	(call_script, "script_troop_change_relation_with_troop", "$g_talk_troop", "trp_player", -10), # useless ?
-	(call_script, "script_change_troop_faction", "$g_talk_troop", "fac_neutral"), # never see him again
+	# (call_script, "script_troop_change_relation_with_troop", "$g_talk_troop", "trp_player", -10), # useless ?
+	(call_script, "script_change_troop_faction", "$g_talk_troop", "fac_outlaws"), # never see him again
 	]],
 
 #Indicted lords

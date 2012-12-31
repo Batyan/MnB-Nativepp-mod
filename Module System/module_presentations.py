@@ -19013,4 +19013,134 @@ presentations = [
 ## Prebattle Orders & Deployment End
 	
 	
+("troop_control_modifier", 0, mesh_load_window, 
+[
+	(ti_on_presentation_load, 
+	[
+		(set_fixed_point_multiplier, 1000),
+		
+		(assign, ":boxes_x_axis", 300),
+		(assign, ":combo_x_axis", 450),
+		
+		(create_game_button_overlay, "$g_presentation_obj_trp_control_done", "@Done"),
+		(position_set_x, pos1, 900),
+		(position_set_y, pos1, 25),
+		(overlay_set_position, "$g_presentation_obj_trp_control_done", pos1),
+		
+		# Horse archers
+		(create_check_box_overlay, "$g_presentation_obj_trp_control_horsearchers"),
+		(position_set_x, pos1, ":boxes_x_axis"),
+		(position_set_y, pos1, 600),
+		(overlay_set_position, "$g_presentation_obj_trp_control_horsearchers", pos1),
+		
+		(create_combo_button_overlay, reg1),
+		(position_set_x, pos1, ":combo_x_axis"),
+		(position_set_y, pos1, 600),
+		(overlay_set_position, reg1, pos1),
+		
+		(try_for_range, ":button_class", 0, 9),
+			(str_store_class_name, s0, ":button_class"),
+			(overlay_add_item, reg1, s0),
+		(try_end),
+		
+		# Cavalry
+		(create_check_box_overlay, "$g_presentation_obj_trp_control_cavalries"),
+		(position_set_x, pos1, ":boxes_x_axis"),
+		(position_set_y, pos1, 550),
+		(overlay_set_position, "$g_presentation_obj_trp_control_cavalries", pos1),
+		
+		(create_combo_button_overlay, reg1),
+		(position_set_x, pos1, ":combo_x_axis"),
+		(position_set_y, pos1, 550),
+		(overlay_set_position, reg1, pos1),
+		
+		(try_for_range, ":button_class", 0, 9),
+			(str_store_class_name, s0, ":button_class"),
+			(overlay_add_item, reg1, s0),
+		(try_end),
+		
+		# Archers
+		(create_check_box_overlay, "$g_presentation_obj_trp_control_archers"),
+		(position_set_x, pos1, ":boxes_x_axis"),
+		(position_set_y, pos1, 500),
+		(overlay_set_position, "$g_presentation_obj_trp_control_archers", pos1),
+		
+		(create_combo_button_overlay, reg1),
+		(position_set_x, pos1, ":combo_x_axis"),
+		(position_set_y, pos1, 500),
+		(overlay_set_position, reg1, pos1),
+		
+		(try_for_range, ":button_class", 0, 9),
+			(str_store_class_name, s0, ":button_class"),
+			(overlay_add_item, reg1, s0),
+		(try_end),
+		
+		# Throwing
+		(create_check_box_overlay, "$g_presentation_obj_trp_control_throwers"),
+		(position_set_x, pos1, ":boxes_x_axis"),
+		(position_set_y, pos1, 450),
+		(overlay_set_position, "$g_presentation_obj_trp_control_throwers", pos1),
+		
+		(create_combo_button_overlay, reg1),
+		(position_set_x, pos1, ":combo_x_axis"),
+		(position_set_y, pos1, 450),
+		(overlay_set_position, reg1, pos1),
+		
+		(try_for_range, ":button_class", 0, 9),
+			(str_store_class_name, s0, ":button_class"),
+			(overlay_add_item, reg1, s0),
+		(try_end),
+		
+		# Shielded
+		(create_check_box_overlay, "$g_presentation_obj_trp_control_shielders"),
+		(position_set_x, pos1, ":boxes_x_axis"),
+		(position_set_y, pos1, 400),
+		(overlay_set_position, "$g_presentation_obj_trp_control_shielders", pos1),
+		
+		(create_combo_button_overlay, reg1),
+		(position_set_x, pos1, ":combo_x_axis"),
+		(position_set_y, pos1, 400),
+		(overlay_set_position, reg1, pos1),
+		
+		(try_for_range, ":button_class", 0, 9),
+			(str_store_class_name, s0, ":button_class"),
+			(overlay_add_item, reg1, s0),
+		(try_end),
+		
+		# Rest
+		# (create_check_box_overlay, "$g_presentation_obj_trp_control_rest"),
+		# (position_set_x, pos1, 250),
+		# (position_set_y, pos1, 850),
+		# (overlay_set_position, "$g_presentation_obj_trp_control_rest", pos1),
+		
+		(create_combo_button_overlay, reg1),
+		(position_set_x, pos1, ":combo_x_axis"),
+		(position_set_y, pos1, 350),
+		(overlay_set_position, reg1, pos1),
+		
+		(try_for_range, ":button_class", 0, 9),
+			(str_store_class_name, s0, ":button_class"),
+			(overlay_add_item, reg1, s0),
+		(try_end),
+		
+		# (create_game_button_overlay, "$g_presentation_obj_trp_control_"),
+		# (position_set_x, pos1, ),
+		# (position_set_y, pos1, ),
+		# (overlay_set_position, "$g_presentation_obj_trp_control_", pos1),
+		
+		(presentation_set_duration, 999999),
+	]),
+	
+	(ti_on_presentation_event_state_change,
+	[
+		(store_trigger_param_1, ":object"),
+		(store_trigger_param_2, ":value"),
+		
+		(try_begin),
+			(eq, ":object", "$g_presentation_obj_trp_control_done"),
+			(presentation_set_duration, 0),
+		(try_end),
+	]),
+]),
+	
 ]
