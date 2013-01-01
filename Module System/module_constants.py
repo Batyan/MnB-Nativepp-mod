@@ -52,13 +52,13 @@ slot_item_adventurer_preference_begin = 60 #to make the adventurers buy weapons 
 										   
 										   
 ## crafting is not used at the moment but might be added in the future
-slot_item_reciepe_known = 61 # does the player know how to craft the item
-slot_item_crafting_item_1 = 62 # first item used for crafting
-slot_item_crafting_number_1   = 65
-slot_item_crafting_item_2 = 63 # second item used for crafting -- can be -1 if only 1 item used
-slot_item_crafting_number_2   = 66
-slot_item_crafting_item_3 = 64 # third item used for crafting -- can be -1 if less than 3 item used
-slot_item_crafting_number_3   = 67
+# slot_item_reciepe_known = 61 # does the player know how to craft the item
+# slot_item_crafting_item_1 = 62 # first item used for crafting
+# slot_item_crafting_number_1   = 65
+# slot_item_crafting_item_2 = 63 # second item used for crafting -- can be -1 if only 1 item used
+# slot_item_crafting_number_2   = 66
+# slot_item_crafting_item_3 = 64 # third item used for crafting -- can be -1 if less than 3 item used
+# slot_item_crafting_number_3   = 67
 
 slot_item_multiplayer_item_class   = 230 #temporary, can be moved to higher values
 slot_item_multiplayer_availability_linked_list_begin = 231 #temporary, can be moved to higher values
@@ -2890,4 +2890,12 @@ slot_team_num_agent_in_div0 = 361
 slot_team_num_agent_in_div1 = 362
 slot_team_num_agent_in_div2 = 363
 slot_team_num_agent_in_div3 = 364
+
+slot_h_archer_control	= 88
+slot_cavalry_control	= 89
+slot_archer_control		= 90
+slot_throwing_control	= 91
+slot_shield_control		= 92
+slot_rest_control		= 93
+slot_companion_control	= 94
 
