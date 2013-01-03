@@ -19021,6 +19021,7 @@ presentations = [
 		
 		(assign, ":boxes_x_axis", 450),
 		(assign, ":combo_x_axis", 600),
+		(assign, ":text_x_axis", 150),
 		
 		# ############ #
 		# Leave button #
@@ -19056,12 +19057,15 @@ presentations = [
 			# (try_end),
 		# (try_end),
 		
+		(assign, ":cur_y", 500),
+		(assign, ":step", 50),
+		
 		# ############# #
 		# Horse archers #
 		# ############# #
 		(create_check_box_overlay, "$g_presentation_obj_trp_control_horsearchers", "mesh_checkbox_off", "mesh_checkbox_on"),
 		(position_set_x, pos1, ":boxes_x_axis"),
-		(position_set_y, pos1, 600),
+		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, "$g_presentation_obj_trp_control_horsearchers", pos1),
 		
 		(party_get_slot, ":value", "p_main_party", slot_h_archer_control),
@@ -19077,7 +19081,7 @@ presentations = [
 		
 		(create_combo_button_overlay, reg1),
 		(position_set_x, pos1, ":combo_x_axis"),
-		(position_set_y, pos1, 600),
+		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, reg1, pos1),
 		
 		(try_for_range, ":button_class", 0, 9),
@@ -19087,12 +19091,14 @@ presentations = [
 		
 		(overlay_set_val, reg1, ":value"),
 		
+		(val_sub, ":cur_y", ":step"),
+		
 		# ####### #
 		# Cavalry #
 		# ####### #
 		(create_check_box_overlay, "$g_presentation_obj_trp_control_cavalries", "mesh_checkbox_off", "mesh_checkbox_on"),
 		(position_set_x, pos1, ":boxes_x_axis"),
-		(position_set_y, pos1, 550),
+		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, "$g_presentation_obj_trp_control_cavalries", pos1),
 		
 		(party_get_slot, ":value", "p_main_party", slot_cavalry_control),
@@ -19108,7 +19114,7 @@ presentations = [
 		
 		(create_combo_button_overlay, reg1),
 		(position_set_x, pos1, ":combo_x_axis"),
-		(position_set_y, pos1, 550),
+		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, reg1, pos1),
 		
 		(try_for_range, ":button_class", 0, 9),
@@ -19118,12 +19124,14 @@ presentations = [
 		
 		(overlay_set_val, reg1, ":value"),
 		
+		(val_sub, ":cur_y", ":step"),
+		
 		# ####### #
 		# Archers #
 		# ####### #
 		(create_check_box_overlay, "$g_presentation_obj_trp_control_archers", "mesh_checkbox_off", "mesh_checkbox_on"),
 		(position_set_x, pos1, ":boxes_x_axis"),
-		(position_set_y, pos1, 500),
+		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, "$g_presentation_obj_trp_control_archers", pos1),
 		
 		(party_get_slot, ":value", "p_main_party", slot_archer_control),
@@ -19139,7 +19147,7 @@ presentations = [
 		
 		(create_combo_button_overlay, reg1),
 		(position_set_x, pos1, ":combo_x_axis"),
-		(position_set_y, pos1, 500),
+		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, reg1, pos1),
 		
 		(try_for_range, ":button_class", 0, 9),
@@ -19149,12 +19157,14 @@ presentations = [
 		
 		(overlay_set_val, reg1, ":value"),
 		
+		(val_sub, ":cur_y", ":step"),
+		
 		# ######## #
 		# Throwing #
 		# ######## #
 		(create_check_box_overlay, "$g_presentation_obj_trp_control_throwers", "mesh_checkbox_off", "mesh_checkbox_on"),
 		(position_set_x, pos1, ":boxes_x_axis"),
-		(position_set_y, pos1, 450),
+		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, "$g_presentation_obj_trp_control_throwers", pos1),
 		
 		(party_get_slot, ":value", "p_main_party", slot_throwing_control),
@@ -19170,7 +19180,7 @@ presentations = [
 		
 		(create_combo_button_overlay, reg1),
 		(position_set_x, pos1, ":combo_x_axis"),
-		(position_set_y, pos1, 450),
+		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, reg1, pos1),
 		
 		(try_for_range, ":button_class", 0, 9),
@@ -19180,12 +19190,14 @@ presentations = [
 		
 		(overlay_set_val, reg1, ":value"),
 		
+		(val_sub, ":cur_y", ":step"),
+		
 		# ######## #
 		# Shielded #
 		# ######## #
 		(create_check_box_overlay, "$g_presentation_obj_trp_control_shielders", "mesh_checkbox_off", "mesh_checkbox_on"),
 		(position_set_x, pos1, ":boxes_x_axis"),
-		(position_set_y, pos1, 400),
+		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, "$g_presentation_obj_trp_control_shielders", pos1),
 		
 		(party_get_slot, ":value", "p_main_party", slot_shield_control),
@@ -19201,7 +19213,7 @@ presentations = [
 		
 		(create_combo_button_overlay, reg1),
 		(position_set_x, pos1, ":combo_x_axis"),
-		(position_set_y, pos1, 400),
+		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, reg1, pos1),
 		
 		(try_for_range, ":button_class", 0, 9),
@@ -19211,12 +19223,14 @@ presentations = [
 		
 		(overlay_set_val, reg1, ":value"),
 		
+		(val_sub, ":cur_y", ":step"),
+		
 		# #### #
 		# Rest #
 		# #### #
-		(create_check_box_overlay, "$g_presentation_obj_trp_control_rest"),
+		(create_check_box_overlay, "$g_presentation_obj_trp_control_rest", "mesh_checkbox_off", "mesh_checkbox_on"),
 		(position_set_x, pos1, ":boxes_x_axis"),
-		(position_set_y, pos1, 300),
+		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, "$g_presentation_obj_trp_control_rest", pos1),
 		
 		(party_get_slot, ":value", "p_main_party", slot_rest_control),
@@ -19232,7 +19246,7 @@ presentations = [
 		
 		(create_combo_button_overlay, reg1),
 		(position_set_x, pos1, ":combo_x_axis"),
-		(position_set_y, pos1, 300),
+		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, reg1, pos1),
 		
 		(try_for_range, ":button_class", 0, 9),
@@ -19240,13 +19254,15 @@ presentations = [
 			(overlay_add_item, reg1, s0),
 		(try_end),
 		
+		(val_sub, ":cur_y", ":step"),
+		
 		# ######### #
 		# Companion #
 		# ######### #
-		(create_check_box_overlay, "$g_presentation_obj_trp_control_companions"),
+		(create_check_box_overlay, "$g_presentation_obj_trp_control_companions", "mesh_checkbox_off", "mesh_checkbox_on"),
 		(position_set_x, pos1, ":boxes_x_axis"),
-		(position_set_y, pos1, 350),
-		(overlay_set_position, "$g_presentation_obj_trp_control_rest", pos1),
+		(position_set_y, pos1, ":cur_y"),
+		(overlay_set_position, "$g_presentation_obj_trp_control_companions", pos1),
 		
 		(party_get_slot, ":value", "p_main_party", slot_companion_control),
 		(overlay_set_val, "$g_presentation_obj_trp_control_companions", ":value"),
@@ -19256,6 +19272,58 @@ presentations = [
 		# (position_set_x, pos1, ),
 		# (position_set_y, pos1, ),
 		# (overlay_set_position, "$g_presentation_obj_trp_control_", pos1),
+		
+		# ##### #
+		# Texts #
+		# ##### #
+		(assign, ":cur_y", 500),
+		
+		(create_text_overlay, reg1, "@Control Horse Archers"),
+		(position_set_x, pos1, ":text_x_axis"),
+		(position_set_y, pos1, ":cur_y"),
+		(overlay_set_position, reg1, pos1),
+		
+		(val_sub, ":cur_y", ":step"),
+		
+		(create_text_overlay, reg1, "@Control Cavalry"),
+		(position_set_x, pos1, ":text_x_axis"),
+		(position_set_y, pos1, ":cur_y"),
+		(overlay_set_position, reg1, pos1),
+		
+		(val_sub, ":cur_y", ":step"),
+		
+		(create_text_overlay, reg1, "@Control Archers"),
+		(position_set_x, pos1, ":text_x_axis"),
+		(position_set_y, pos1, ":cur_y"),
+		(overlay_set_position, reg1, pos1),
+		
+		(val_sub, ":cur_y", ":step"),
+		
+		(create_text_overlay, reg1, "@Control Throwers"),
+		(position_set_x, pos1, ":text_x_axis"),
+		(position_set_y, pos1, ":cur_y"),
+		(overlay_set_position, reg1, pos1),
+		
+		(val_sub, ":cur_y", ":step"),
+		
+		(create_text_overlay, reg1, "@Control Shielders"),
+		(position_set_x, pos1, ":text_x_axis"),
+		(position_set_y, pos1, ":cur_y"),
+		(overlay_set_position, reg1, pos1),
+		
+		(val_sub, ":cur_y", ":step"),
+		
+		(create_text_overlay, reg1, "@Control Rest"),
+		(position_set_x, pos1, ":text_x_axis"),
+		(position_set_y, pos1, ":cur_y"),
+		(overlay_set_position, reg1, pos1),
+		
+		(val_sub, ":cur_y", ":step"),
+		
+		(create_text_overlay, reg1, "@Control Companions"),
+		(position_set_x, pos1, ":text_x_axis"),
+		(position_set_y, pos1, ":cur_y"),
+		(overlay_set_position, reg1, pos1),
 		
 		(presentation_set_duration, 999999),
 	]),
