@@ -19013,7 +19013,7 @@ presentations = [
 ## Prebattle Orders & Deployment End
 	
 	
-("troop_control_modifier", 0, mesh_load_window, 
+("troop_division_control_modifier", 0, mesh_load_window, 
 [
 	(ti_on_presentation_load, 
 	[

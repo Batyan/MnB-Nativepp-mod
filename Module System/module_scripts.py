@@ -2713,7 +2713,6 @@ scripts = [
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_sarranid_two_handed_mace_1", "trp_sarranid_footman_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_bamboo_spear", "trp_sarranid_footman_multiplayer"),
 
-      (call_script, "script_multiplayer_set_item_available_for_troop", "itm_jarid", "trp_sarranid_footman_multiplayer"),
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_javelin", "trp_sarranid_footman_multiplayer"),
 
       (call_script, "script_multiplayer_set_item_available_for_troop", "itm_tab_shield_kite_a", "trp_sarranid_footman_multiplayer"),
@@ -23959,6 +23958,11 @@ scripts = [
 				(troop_get_slot, ":equipement_level", ":other_lord", slot_troop_equipement_level),
 				(troop_get_slot, ":lord_level", ":other_lord", slot_troop_lord_level),
 				(try_begin),
+					# Lords with max level should not have a decrease in relations
+					(ge, ":equipement_level", 6),
+					(lt, ":relation_with_liege_change", 0),
+					(assign, ":relation_with_liege_change", 0),
+				(else_try),
 					# Lord has been granted a fief recently, and is still increasing his level
 					(lt, ":equipement_level", ":lord_level"),
 					(lt, ":relation_with_liege_change", 0),
@@ -23977,6 +23981,12 @@ scripts = [
 					(val_add, ":relation_loss", -1),
 					(val_add, ":relation_with_liege_change", ":relation_loss"),
 				(try_end),
+			(else_try),
+				# Companions, the same way as lords, should not have a decrease in relations if have enough fief : 6
+				(troop_get_slot, ":companion_level", ":other_lord", slot_troop_lord_level),
+				(ge, ":companion_level", 6),
+				(lt, ":relation_with_liege_change", 0),
+				(assign, ":relation_with_liege_change", 0),
 			(try_end),
 
 		    (neq, ":relation_with_liege_change", 0),
@@ -40892,13 +40902,14 @@ scripts = [
 	 (store_faction_of_party, ":faction_no", ":center_no"),
 	 (faction_get_slot, ":culture", ":faction_no", slot_faction_culture),
 	 
+	 (faction_get_slot, ":noble_troop", ":culture", slot_faction_noble_troop),
 	 (try_begin),
 	   (eq, ":culture", "fac_culture_1"),
-	   (assign, ":begin_troop", "trp_swadian_footman"),
+	   (assign, ":begin_troop", "trp_swadian_militia"),
 	   (assign, ":end_troop", "trp_swadian_messenger"),
 	 (else_try),
 	   (eq, ":culture", "fac_culture_2"),
-	   (assign, ":begin_troop", "trp_vaegir_skirmisher"),
+	   (assign, ":begin_troop", "trp_vaegir_footman"),
 	   (assign, ":end_troop", "trp_vaegir_messenger"),
 	 (else_try),
 	   (this_or_next|eq, ":culture", "fac_culture_3"),
@@ -40920,10 +40931,10 @@ scripts = [
 	   (assign, ":end_troop", "trp_sarranid_messenger"),
 	 (else_try),
 	   (eq, ":culture", "fac_culture_8"),
-	   (assign, ":begin_troop", "trp_scout"),
+	   (assign, ":begin_troop", "trp_spotter"),
 	   (assign, ":end_troop", "trp_original_prison_guard"),
 	 (else_try),
-	   (assign, ":begin_troop", "trp_town_watch"),
+	   (assign, ":begin_troop", "trp_watchman"),
 	   (assign, ":end_troop", "trp_mercenaries_end"),
 	 (try_end),
 
@@ -40981,14 +40992,20 @@ scripts = [
          (troop_set_slot, "trp_tournament_participants", ":cur_slot", "trp_champion_fighter"),
        (else_try),
          (eq, ":random_no", 3),
-         (troop_set_slot, "trp_tournament_participants", ":cur_slot", "trp_sword_sister"),
+         (store_random_in_range, ":troop_to_add", "trp_swordwoman", "trp_refugee"),
+		 (troop_set_slot, "trp_tournament_participants", ":cur_slot", ":troop_to_add"),
        (else_try),
          (eq, ":random_no", 4),
-         (troop_set_slot, "trp_tournament_participants", ":cur_slot", "trp_hired_blade"),
+		 # Add mercenaries? All of them?
+         (store_random_in_range, ":troop_to_add", "trp_mercenary_swordsman", "trp_mercenaries_end"),
+		 (troop_set_slot, "trp_tournament_participants", ":cur_slot", ":troop_to_add"),
        (else_try),
 	     (eq, ":random_no", 5),
-         (troop_set_slot, "trp_tournament_participants", ":cur_slot", "trp_mercenary_swordsman"),
+		 (store_random_in_range, ":rand_add", 0, 5),
+		 (store_add, ":troop_to_add", ":noble_troop", ":rand_add"),
+         (troop_set_slot, "trp_tournament_participants", ":cur_slot", ":troop_to_add"),
 	   (else_try),
+	     # Most of them are faction members
 	     (store_random_in_range, ":troop_to_add", ":begin_troop", ":end_troop"),
 		 (troop_set_slot, "trp_tournament_participants", ":cur_slot", ":troop_to_add"),
        (try_end),
@@ -60394,7 +60411,7 @@ scripts = [
 	  
 	  (troop_equip_items, ":lord_no"),
 	  (troop_get_slot, ":renown", ":lord_no", slot_troop_equipement_level),
-	  (val_mul, ":renown", 200),
+	  (val_mul, ":renown", 250),
 	  (store_random_in_range, ":rand", 250, 500),
 	  (val_add, ":renown", ":rand"),
 	  (troop_set_slot, ":lord_no", slot_troop_renown, ":renown"),
@@ -60555,6 +60572,12 @@ scripts = [
   [
     (store_script_param, ":cur_troop_id", 1),
 	(store_troop_faction, ":defeated_troop_faction", ":cur_troop_id"),
+	
+	(try_begin),
+		# Remove marshall if dead
+		(faction_slot_eq, ":defeated_troop_faction", slot_faction_marshall, ":cur_troop_id"),
+		(faction_set_slot, ":faction_no", slot_faction_marshall, -1),
+	(try_end),
     
 	(try_begin),
 	  (is_between, ":cur_troop_id", kingdom_mercenaries_begin, kingdom_mercenaries_end),
@@ -70691,7 +70714,7 @@ scripts = [
 		(neg|is_between, ":faction_no", npc_kingdoms_begin, npc_kingdoms_end),
 	(else_try),
 		#If the leader has that gender, no prejudice.
-	(faction_get_slot, ":active_npc", ":faction_no", slot_faction_leader),
+		(faction_get_slot, ":active_npc", ":faction_no", slot_faction_leader),
 		(gt, ":active_npc", -1),
 		(call_script, "script_dplmc_store_troop_is_female", ":active_npc"),
 		(eq, reg0, ":test_gender"),

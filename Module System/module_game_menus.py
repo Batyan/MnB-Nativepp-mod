@@ -3422,7 +3422,7 @@ game_menus = [
 	    (jump_to_menu, "mnu_camp"),]),
 		
 	  ("presentation_testing", [], "Open presentation test",
-	   [(start_presentation, "prsnt_troop_control_modifier"),]),
+	   [(start_presentation, "prsnt_troop_division_control_modifier"),]),
 	  
 	  ("back",[],"Go back",
 	    [(jump_to_menu, "mnu_camp"),
@@ -20151,9 +20151,9 @@ goods, and books will never be sold. ^^You can change some settings here freely.
 	  ("intereset_store",[(party_get_slot, reg16, "$current_town", slot_center_bank_interest_stored),
 						  (try_begin),
 						    (eq, reg16, 0),
-							(str_store_string, s10, "@You keep the interest in the bank (clic to change)"),
+							(str_store_string, s10, "@You keep the interest in the bank (click to change)"),
 						  (else_try),
-						    (str_store_string, s10, "@You add the interest to your weekly incomes (clic to change)"),
+						    (str_store_string, s10, "@You add the interest to your weekly incomes (click to change)"),
 						  (try_end),
 	  ],"{s10}",
 	   [
