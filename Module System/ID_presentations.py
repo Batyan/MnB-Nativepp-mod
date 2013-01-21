@@ -58,4 +58,4 @@ prsnt_pbod_redefine_keys = 56
 prsnt_caba_order_display = 57
 prsnt_caba_camera_mode_display = 58
 prsnt_prebattle_custom_divisions = 59
-prsnt_troop_control_modifier = 60
+prsnt_troop_division_control_modifier = 60

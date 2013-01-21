@@ -1657,7 +1657,7 @@ field_ai_triggers = [
 			(this_or_next|team_slot_eq, ":team", ":slot", sdt_cavalry),
 			(team_slot_eq, ":team", ":slot", sdt_harcher),
 			(team_give_order, ":team", ":division", mordr_mount),
-		(try_end),		
+		(try_end),
 	(try_end),
 	(set_show_messages, 1),
    ]),
@@ -2086,6 +2086,18 @@ field_ai_triggers = [
         (agent_set_slot, "$fplayer_agent_no", slot_agent_player_braced, 0), #CABA
     ]), 
   ##Spearwall Kit - Edited from The Mercenary by Caba'drin
+  
+  (5, 0, 0, [(eq, "$test", 1),],
+    [(get_player_agent_no, ":player"),
+	 (ge, ":player", 0),
+	 (agent_get_team, ":player_team", ":player"),
+	 (try_for_agents, ":agent_no"),
+	   (agent_is_alive, ":agent_no"),
+	   (agent_is_human, ":agent_no"),
+	   (agent_get_team, ":team", ":agent_no"),
+	   (eq, ":team", ":player_team"),
+	   (call_script, "script_agent_set_division_controled", ":agent_no"),
+	 (try_end),]),
  ] 
 
 bodyguard_triggers = [

@@ -1444,6 +1444,14 @@ scripts = [
 	(try_for_range, ":lord_no", heroes_begin, heroes_end),
 	  (call_script, "script_get_special_troop", ":lord_no"),
 	(try_end),
+	
+	(party_set_slot, "p_main_party", slot_h_archer_control, -3),
+	(party_set_slot, "p_main_party", slot_cavalry_control, 2),
+	(party_set_slot, "p_main_party", slot_archer_control, 1),
+	(party_set_slot, "p_main_party", slot_throwing_control, -1),
+	(party_set_slot, "p_main_party", slot_shield_control, -1),
+	(party_set_slot, "p_main_party", slot_rest_control, 0),
+	(party_set_slot, "p_main_party", slot_companion_control, 0),
     ]),
 
   #script_game_get_use_string
@@ -38939,6 +38947,7 @@ scripts = [
        (val_add,":spawn_point","p_mountain_bandit_spawn_point"),
        (set_spawn_radius, 25),
        (spawn_around_party,":spawn_point","pt_mountain_bandits"),
+	   (party_add_template, reg0, "pt_mountain_bandits_female", 0),
      (try_end),
      (try_begin),
        (store_num_parties_of_template, ":num_parties", "pt_forest_bandits"),
@@ -38951,6 +38960,7 @@ scripts = [
        (val_add,":spawn_point","p_forest_bandit_spawn_point"),
        (set_spawn_radius, 25),
        (spawn_around_party,":spawn_point","pt_forest_bandits"),
+	   (party_add_template, reg0, "pt_forest_bandits_female", 0),
      (try_end),
      (try_begin),
        (store_num_parties_of_template, ":num_parties", "pt_sea_raiders"),
@@ -38963,6 +38973,7 @@ scripts = [
        (val_add,":spawn_point","p_sea_raider_spawn_point_1"),
        (set_spawn_radius, 25),
        (spawn_around_party,":spawn_point","pt_sea_raiders"),
+	   (party_add_template, reg0, "pt_sea_raiders_female", 0),
      (try_end),
      (try_begin),
        (store_num_parties_of_template, ":num_parties", "pt_steppe_bandits"),
@@ -38975,6 +38986,7 @@ scripts = [
        (val_add, ":spawn_point", "p_steppe_bandit_spawn_point"),
        (set_spawn_radius, 25),
        (spawn_around_party, ":spawn_point", "pt_steppe_bandits"),
+	   (party_add_template, reg0, "pt_steppe_bandits_female", 0),
      (try_end),
      (try_begin),
        (store_num_parties_of_template, ":num_parties", "pt_taiga_bandits"),
@@ -38987,6 +38999,7 @@ scripts = [
        (val_add, ":spawn_point", "p_taiga_bandit_spawn_point"),
        (set_spawn_radius, 25),
        (spawn_around_party, ":spawn_point", "pt_taiga_bandits"),
+	   (party_add_template, reg0, "pt_taiga_bandits_female", 0),
      (try_end),
      (try_begin),
        (store_num_parties_of_template, ":num_parties", "pt_desert_bandits"),
@@ -38999,6 +39012,7 @@ scripts = [
        (val_add, ":spawn_point", "p_desert_bandit_spawn_point"),
        (set_spawn_radius, 25),
        (spawn_around_party, ":spawn_point", "pt_desert_bandits"),
+	   (party_add_template, reg0, "pt_desert_bandits_female", 0),
      (try_end),
      (try_begin),
        (store_num_parties_of_template, ":num_parties", "pt_looters"),
@@ -60576,7 +60590,7 @@ scripts = [
 	(try_begin),
 		# Remove marshall if dead
 		(faction_slot_eq, ":defeated_troop_faction", slot_faction_marshall, ":cur_troop_id"),
-		(faction_set_slot, ":faction_no", slot_faction_marshall, -1),
+		(faction_set_slot, ":defeated_troop_faction", slot_faction_marshall, -1),
 	(try_end),
     
 	(try_begin),
@@ -73217,9 +73231,9 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
         (agent_is_alive, ":agent"),
 		(agent_is_non_player, ":agent"),
 		(try_begin),
-        (agent_is_human, ":agent"),
-		(agent_get_troop_id, ":troop",":agent"),
-        (agent_get_wielded_item, ":wielded", ":agent", 0),
+			(agent_is_human, ":agent"),
+			(agent_get_troop_id, ":troop",":agent"),
+			(agent_get_wielded_item, ":wielded", ":agent", 0),
 			(neg|troop_is_guarantee_ranged, ":troop"), #Not an archer
 			(neg|troop_is_guarantee_horse, ":troop"), #Not Mounted
 			(agent_get_ammo, ":has_ammo", ":agent", 0), #Double-check this one doesn't have throwing weapons, etc
@@ -73247,14 +73261,14 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 			(agent_is_active, ":agent"), 
 			(agent_get_troop_id, ":troop",":agent"),
 			(agent_get_wielded_item, ":wielded", ":agent", 0),
-        (try_begin),
-			(neg|troop_is_guarantee_ranged, ":troop"), # Not a horsearcher
-            (try_begin),
-                #(this_or_next|is_between, ":wielded", "itm_jousting_lance","itm_glaive"), # Is it a lance?
-                #(is_between, ":wielded", "itm_light_lance","itm_pike"), # Is it a lance?
-                (gt, ":wielded", 0),
-				(item_slot_eq, ":wielded", slot_item_couchable, 1),
-				(agent_set_slot, ":agent", slot_agent_lance, ":wielded"),
+			(try_begin),
+				(neg|troop_is_guarantee_ranged, ":troop"), # Not a horsearcher
+				(try_begin),
+					#(this_or_next|is_between, ":wielded", "itm_jousting_lance","itm_glaive"), # Is it a lance?
+					#(is_between, ":wielded", "itm_light_lance","itm_pike"), # Is it a lance?
+					(gt, ":wielded", 0),
+					(item_slot_eq, ":wielded", slot_item_couchable, 1),
+					(agent_set_slot, ":agent", slot_agent_lance, ":wielded"),
 					(agent_set_slot, ":agent", slot_agent_spear, 0), #double-check
             (else_try),    
    # Force the NPC to wield a lance, but this will only happen if they
@@ -73265,7 +73279,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 				    (gt, ":item", 0),
 				    (item_slot_eq, ":item", slot_item_couchable, 1),
 				    (agent_set_slot, ":agent", slot_agent_lance, ":item"),
-						(agent_set_slot, ":agent", slot_agent_spear, 0), #double-check
+					(agent_set_slot, ":agent", slot_agent_spear, 0), #double-check
 					(agent_set_wielded_item, ":agent", ":item"),
 				    (assign, ":end", ek_item_0),
 				(try_end),
@@ -73275,7 +73289,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		    (try_begin),
                 (is_between, ":wielded", "itm_hunting_bow", "itm_crossbow"), # Is it a bow or a horse-useful crossbow?
                 (agent_set_slot, ":agent", slot_agent_horsebow, ":wielded"),
-					(agent_set_slot, ":agent", slot_agent_spear, 0), #double-check
+				(agent_set_slot, ":agent", slot_agent_spear, 0), #double-check
             (else_try),
    # Force the NPC to wield their bow, but this will only happen if they
    # actually have a bow equipped.  Otherwise this does nothing.
@@ -73284,7 +73298,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
                     (agent_has_item_equipped, ":agent", ":item"),
                     (agent_set_wielded_item, ":agent", ":item"),
                     (agent_set_slot, ":agent", slot_agent_horsebow, ":item"), #Mark horse archers for later use
-						(agent_set_slot, ":agent", slot_agent_spear, 0), #double-check
+					(agent_set_slot, ":agent", slot_agent_spear, 0), #double-check
                     (assign, ":end", "itm_hunting_bow"),#loop breaker      
                 (try_end),
 			(try_end),
@@ -74090,7 +74104,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		(neq, ":troop_id", "trp_player"),
 		(neg|troop_is_hero, ":troop_id"),
 		(troop_set_slot, ":troop_id", slot_troop_prebattle_alt_division_amount, 0),
-		(try_end),
+	(try_end),
 
     #Counting Loop
     (try_for_agents, ":agent"), 
@@ -74112,7 +74126,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		(val_add, ":amount", 1),
 		(troop_set_slot, ":troop_id", slot_troop_prebattle_alt_division_amount, ":amount"),
 		#(agent_set_slot, ":agent", slot_agent_alt_div_check, 1), #moved to change loop
-		(try_end),
+	(try_end),
 		
 	#Loop through all troops in stack, take "amount" and "percent" and convert to # to change
 	(try_for_range, ":i", 0, ":num_of_stacks"),
@@ -74127,7 +74141,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		(val_div, ":num_to_change", 100),
 			
 		(troop_set_slot, ":troop_id", slot_troop_prebattle_alt_division_amount, ":num_to_change"),
-			(try_end),
+	(try_end),
 
 	#Actually Change Division Loop
 	(try_for_agents, ":agent"), 
@@ -74149,7 +74163,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	    (troop_get_slot, ":amount", ":troop_id", slot_troop_prebattle_alt_division_amount),
 	    (val_sub, ":amount", 1),
 	    (troop_set_slot, ":troop_id", slot_troop_prebattle_alt_division_amount, ":amount"),
-				(try_end),
+	(try_end),
    ]),
 				
   #script_prebattle_agent_fix_division
@@ -77521,7 +77535,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
   #This is called after agent_reassign_team, so can safely assume correct team is set
   ("agent_fix_division",
    [
-    (store_script_param_1, ":agent"),	
+    (store_script_param_1, ":agent"),
 	(agent_set_slot, ":agent", slot_agent_new_division, -1),	
 	(get_player_agent_no, ":player"),	#after_mission_start triggers are called after spawn, so globals can't be used yet
 	
@@ -80495,7 +80509,6 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	
 	(team_get_slot, ":div3_type", ":team", slot_team_division_3_type),
 	
-	# Might use diplomacy's slots later
 	(agent_get_horse, ":horse", ":agent_no"),
 	(try_begin), # Horseman
 		(ge, ":horse", 0),
@@ -80879,6 +80892,142 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	
 	# This used to make a problem with asking where the lady was
 	(troop_set_slot, ":lady_no", slot_troop_cur_center, 0),
+	]),
+	
+	
+  # script_set_default_troop_division_control
+  # Reset troop_division control slots
+  ("set_default_troop_division_control", 
+    [
+	(party_set_slot, "p_main_party", slot_h_archer_control, -3),
+	(party_set_slot, "p_main_party", slot_cavalry_control, 2),
+	(party_set_slot, "p_main_party", slot_archer_control, 1),
+	(party_set_slot, "p_main_party", slot_throwing_control, -1),
+	(party_set_slot, "p_main_party", slot_shield_control, -1),
+	(party_set_slot, "p_main_party", slot_rest_control, 0),
+	(party_set_slot, "p_main_party", slot_companion_control, 0),
+	
+	(try_for_range, ":cur_obj", "$g_presentation_obj_trp_control_horsearchers", "$g_presentation_obj_trp_control_companions"),
+	  (store_sub, ":obj_offset", ":cur_obj", "$g_presentation_obj_trp_control_horsearchers"),
+	  (store_mod, ":obj_type", ":obj_offset", 2),
+	  (val_div, ":obj_offset", 2),
+	  (store_add, ":obj_slot", ":obj_offset", slot_h_archer_control),
+	  (try_begin),
+	    (eq, ":obj_type", 0),
+		# CheckBox
+		(party_get_slot, ":value", "p_main_party", ":obj_slot"),
+		(assign, ":control", 0),
+		(try_begin),
+			(ge, ":value", 0),
+			(assign, ":control", 1),
+		(try_end),
+		(overlay_set_val, ":cur_obj", ":control"),
+	  (else_try),
+	    # ComboBox
+		(party_get_slot, ":value", "p_main_party", ":obj_slot"),
+		(try_begin),
+		  (lt, ":value", 0),
+		  (val_add, ":value", 1),
+		  (val_mul, ":value", -1),
+		(try_end),
+		(overlay_set_val, ":cur_obj", ":value"),
+	  (try_end),
+	(try_end),
+	
+	(party_get_slot, ":value", "p_main_party", slot_companion_control),
+	(overlay_set_val, "$g_presentation_obj_trp_control_companions", ":value"),
+    ]),
+	
+	
+  # script_agent_set_division_controled
+  ("agent_set_division_controled",
+    [
+	(store_script_param, ":agent_no", 1),
+	(agent_get_troop_id, ":troop_no", ":agent_no"),
+	
+	(assign, ":new_div", -1),
+	
+	(try_begin),
+	  (this_or_next|party_slot_eq, "p_main_party", slot_companion_control, 1),
+	  (neg|troop_is_hero, ":troop_no"),
+	  
+	  (agent_get_horse, ":horse", ":agent_no"),
+	  (agent_get_ammo, ":ammo", ":agent_no", 0),
+	  
+	  (assign, ":has_ranged", 0),
+	  (assign, ":has_shield", 0),
+	  # 2 Is xbow/bow 1 is throwing
+	  (try_for_range, ":i_slot", ek_item_0, ek_head),
+	    (agent_get_item_slot, ":item", ":agent_no", ":i_slot"),
+	    (try_begin),
+	      (is_between, ":item", "itm_darts", "itm_hunting_bow"),
+	      (val_add, ":has_ranged", 1),
+	    (else_try),
+	      (is_between, ":item", "itm_hunting_bow", "itm_torch"),
+	      (val_add, ":has_ranged", 2),
+	    (else_try),
+	      (is_between, ":item", shields_begin, shields_end),
+	      (assign, ":has_shield", 1),
+	    (try_end),
+	  (try_end),
+	  
+	  (try_begin),
+	    (gt, ":horse", 0),
+	    (assign, ":break", 0),
+	    (try_begin),
+	      # Horse archer
+	      (party_get_slot, ":h_archer_div", "p_main_party", slot_h_archer_control),
+	      (ge, ":h_archer_div", 0),
+	      (gt, ":has_ranged", 0),
+	      (gt, ":ammo", 0),
+	  	(assign, ":break", 1),
+	      (assign, ":new_div", ":h_archer_div"),
+	    (else_try),
+	      # Horseman
+	      (party_get_slot, ":cavalry_div", "p_main_party", slot_cavalry_control),
+	      (ge, ":cavalry_div", 0),
+	  	(assign, ":break", 1),
+	      (assign, ":new_div", ":cavalry_div"),
+	    (try_end),
+	    (eq, ":break", 1),
+	  (else_try),
+	    (gt, ":ammo", 0),
+	    (assign, ":break", 0),
+	    (try_begin),
+	      (party_get_slot, ":archer_div", "p_main_party", slot_archer_control),
+	      (ge, ":archer_div", 0),
+	      (ge, ":has_ranged", 2), # 2 or 3, bow/xbow or bow/xbow+throw
+	      (assign, ":break", 1),
+	      (assign, ":new_div", ":archer_div"),
+	    (else_try),
+	      (party_get_slot, ":throwing_div", "p_main_party", slot_throwing_control),
+	      (ge, ":throwing_div", 0),
+	      (this_or_next|eq, ":has_ranged", 1),
+	      (eq, ":has_ranged", 3),
+	  	(assign, ":break", 1),
+	      (assign, ":new_div", ":throwing_div"),
+	    (try_end),
+	    (eq, ":break", 1),
+	    # Division assigned, break
+	  (else_try),
+	    (party_get_slot, ":shield_div", "p_main_party", slot_shield_control),
+	    (ge, ":shield_div", 0),
+	    (eq, ":has_shield", 1),
+	    (assign, ":new_div", ":shield_div"),
+	  (else_try),
+	    (party_get_slot, ":rest_div", "p_main_party", slot_rest_control),
+	    (ge, ":rest_div", 0),
+	    (assign, ":new_div", ":rest_div"),
+	  (try_end),
+	(try_end),
+	
+	(try_begin),
+	  (is_between, ":new_div", 0, 9),
+	  (agent_get_division, ":old_div", ":agent_no"),
+	  (neq, ":new_div", ":old_div"),
+	  (agent_set_division, ":agent_no", ":new_div"),
+	  (agent_set_slot, ":agent_no", slot_agent_new_division, ":new_div"),
+	(try_end),
 	]),
 ]
 

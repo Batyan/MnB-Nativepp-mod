@@ -794,5 +794,7 @@ script_troop_set_age = 792
 script_cf_troop_can_upgrade = 793
 script_remove_family_links = 794
 script_lady_take_arms = 795
+script_set_default_troop_division_control = 796
+script_agent_set_division_controled = 797
 
 

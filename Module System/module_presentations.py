@@ -19019,9 +19019,10 @@ presentations = [
 	[
 		(set_fixed_point_multiplier, 1000),
 		
-		(assign, ":boxes_x_axis", 450),
-		(assign, ":combo_x_axis", 600),
+		(assign, ":boxes_x_axis", 350),
+		(assign, ":combo_x_axis", 500),
 		(assign, ":text_x_axis", 150),
+		(assign, ":help_text_x_axis", 630),
 		
 		# ############ #
 		# Leave button #
@@ -19030,6 +19031,11 @@ presentations = [
 		(position_set_x, pos1, 900),
 		(position_set_y, pos1, 25),
 		(overlay_set_position, "$g_presentation_obj_trp_control_done", pos1),
+		
+		(create_game_button_overlay, "$g_presentation_obj_trp_control_reset", "@Reset"),
+		(position_set_x, pos1, 700),
+		(position_set_y, pos1, 25),
+		(overlay_set_position, "$g_presentation_obj_trp_control_reset", pos1),
 		
 		# ##### #
 		# (try_for_range, ":cur_),
@@ -19058,7 +19064,7 @@ presentations = [
 		# (try_end),
 		
 		(assign, ":cur_y", 500),
-		(assign, ":step", 50),
+		(assign, ":step", 60),
 		
 		# ############# #
 		# Horse archers #
@@ -19278,52 +19284,98 @@ presentations = [
 		# ##### #
 		(assign, ":cur_y", 500),
 		
-		(create_text_overlay, reg1, "@Control Horse Archers"),
+		# Half the size
+		(position_set_x, pos2, 700),
+		(position_set_y, pos2, 800),
+		
+		(create_text_overlay, reg1, "@Horse Archers"),
 		(position_set_x, pos1, ":text_x_axis"),
 		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, reg1, pos1),
+		
+		(create_text_overlay, reg1, "@Horse archers include mounted archer,^mounted crossbowmen ^and mounted throwers."),
+		(position_set_x, pos1, ":help_text_x_axis"),
+		(position_set_y, pos1, ":cur_y"),
+		(overlay_set_position, reg1, pos1),
+		(overlay_set_size, reg1, pos2),
 		
 		(val_sub, ":cur_y", ":step"),
 		
-		(create_text_overlay, reg1, "@Control Cavalry"),
+		(create_text_overlay, reg1, "@Cavalry"),
 		(position_set_x, pos1, ":text_x_axis"),
 		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, reg1, pos1),
+		
+		(create_text_overlay, reg1, "@Cavalry includes any mounted troop."),
+		(position_set_x, pos1, ":help_text_x_axis"),
+		(position_set_y, pos1, ":cur_y"),
+		(overlay_set_position, reg1, pos1),
+		(overlay_set_size, reg1, pos2),
 		
 		(val_sub, ":cur_y", ":step"),
 		
-		(create_text_overlay, reg1, "@Control Archers"),
+		(create_text_overlay, reg1, "@Archers"),
 		(position_set_x, pos1, ":text_x_axis"),
 		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, reg1, pos1),
+		
+		(create_text_overlay, reg1, "@Any troop equiped with a bow or a crossbow.^Troop needs to have ammunitions."),
+		(position_set_x, pos1, ":help_text_x_axis"),
+		(position_set_y, pos1, ":cur_y"),
+		(overlay_set_position, reg1, pos1),
+		(overlay_set_size, reg1, pos2),
 		
 		(val_sub, ":cur_y", ":step"),
 		
-		(create_text_overlay, reg1, "@Control Throwers"),
+		(create_text_overlay, reg1, "@Throwers"),
 		(position_set_x, pos1, ":text_x_axis"),
 		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, reg1, pos1),
+		
+		(create_text_overlay, reg1, "@Throwers are troops with throwing weapons.^Troop needs to have ammunitions."),
+		(position_set_x, pos1, ":help_text_x_axis"),
+		(position_set_y, pos1, ":cur_y"),
+		(overlay_set_position, reg1, pos1),
+		(overlay_set_size, reg1, pos2),
 		
 		(val_sub, ":cur_y", ":step"),
 		
-		(create_text_overlay, reg1, "@Control Shielders"),
+		(create_text_overlay, reg1, "@Shielders"),
 		(position_set_x, pos1, ":text_x_axis"),
 		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, reg1, pos1),
+		
+		(create_text_overlay, reg1, "@Any troop with a shield, even if not equiped."),
+		(position_set_x, pos1, ":help_text_x_axis"),
+		(position_set_y, pos1, ":cur_y"),
+		(overlay_set_position, reg1, pos1),
+		(overlay_set_size, reg1, pos2),
 		
 		(val_sub, ":cur_y", ":step"),
 		
-		(create_text_overlay, reg1, "@Control Rest"),
+		(create_text_overlay, reg1, "@Rest"),
 		(position_set_x, pos1, ":text_x_axis"),
 		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, reg1, pos1),
+		
+		(create_text_overlay, reg1, "@Any troop that is not in the categories above.^Uncheck to leave the troop in its current division."),
+		(position_set_x, pos1, ":help_text_x_axis"),
+		(position_set_y, pos1, ":cur_y"),
+		(overlay_set_position, reg1, pos1),
+		(overlay_set_size, reg1, pos2),
 		
 		(val_sub, ":cur_y", ":step"),
 		
-		(create_text_overlay, reg1, "@Control Companions"),
+		(create_text_overlay, reg1, "@Control heroes"),
 		(position_set_x, pos1, ":text_x_axis"),
 		(position_set_y, pos1, ":cur_y"),
 		(overlay_set_position, reg1, pos1),
+		
+		(create_text_overlay, reg1, "@Are heroes (companions, lords) affected by division change."),
+		(position_set_x, pos1, ":help_text_x_axis"),
+		(position_set_y, pos1, ":cur_y"),
+		(overlay_set_position, reg1, pos1),
+		(overlay_set_size, reg1, pos2),
 		
 		(presentation_set_duration, 999999),
 	]),
@@ -19338,6 +19390,9 @@ presentations = [
 		(try_begin),
 			(eq, ":object", "$g_presentation_obj_trp_control_done"),
 			(presentation_set_duration, 0),
+		(else_try),
+			(eq, ":object", "$g_presentation_obj_trp_control_reset"),
+			(call_script, "script_set_default_troop_division_control"),
 		(else_try),
 			(lt, ":object", "$g_presentation_obj_trp_control_companions"),
 			(store_sub, ":cur_object", ":object", "$g_presentation_obj_trp_control_horsearchers"),
