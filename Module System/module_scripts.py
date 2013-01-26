@@ -80959,15 +80959,37 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	  # 2 Is xbow/bow 1 is throwing
 	  (try_for_range, ":i_slot", ek_item_0, ek_head),
 	    (agent_get_item_slot, ":item", ":agent_no", ":i_slot"),
+		(gt, ":item", 0),
+		(item_get_type, ":item_type", ":item"),
 	    (try_begin),
 	      (is_between, ":item", "itm_darts", "itm_hunting_bow"),
-	      (val_add, ":has_ranged", 1),
+		  (lt, ":has_ranged", 1),
+	      (assign, ":has_ranged", 1),
 	    (else_try),
 	      (is_between, ":item", "itm_hunting_bow", "itm_torch"),
-	      (val_add, ":has_ranged", 2),
+		  (try_begin),
+		    # Long bow not usable on horse
+		    (this_or_next|is_between, ":item", "itm_long_bow", "itm_khergit_bow"),
+			# Heavy crossbows not usable on horse
+			(is_between, ":item", "itm_crossbow", "itm_flintlock_pistol"),
+		    (lt, ":has_ranged", 2),
+	        (assign, ":has_ranged", 2),
+		  (else_try),
+		    (lt, ":has_ranged", 3),
+	        (assign, ":has_ranged", 3),
+		  (try_end),
 	    (else_try),
 	      (is_between, ":item", shields_begin, shields_end),
-	      (assign, ":has_shield", 1),
+	      (val_add, ":has_shield", 4),
+		(else_try),
+		  (this_or_next|eq, ":item_type", itp_type_one_handed_wpn),
+		  (this_or_next|eq, ":item_type", itp_type_polearm), # We consider all polearms to be usable with a shield, even if it's false
+		  # Following is because 1h/2h weapons are considered 2h weapons and would not enter the previous check
+		  (this_or_next|eq, ":item", "itm_morningstar"),
+		  (this_or_next|eq, ":item", "itm_fighting_axe"),
+		  (this_or_next|eq, ":item", "itm_club_with_spike_head"),
+		  (is_between, ":item", "itm_bastard_sword_a", "itm_one_handed_war_axe_a"), # Bastard swords
+		  (val_add, ":has_shield", 1),
 	    (try_end),
 	  (try_end),
 	  
@@ -80978,7 +81000,8 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	      # Horse archer
 	      (party_get_slot, ":h_archer_div", "p_main_party", slot_h_archer_control),
 	      (ge, ":h_archer_div", 0),
-	      (gt, ":has_ranged", 0),
+	      (this_or_next|eq, ":has_ranged", 1), # Throw
+		  (eq, ":has_ranged", 3), # Bows/Light xbows
 	      (gt, ":ammo", 0),
 	  	(assign, ":break", 1),
 	      (assign, ":new_div", ":h_archer_div"),
@@ -80986,7 +81009,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	      # Horseman
 	      (party_get_slot, ":cavalry_div", "p_main_party", slot_cavalry_control),
 	      (ge, ":cavalry_div", 0),
-	  	(assign, ":break", 1),
+	  	  (assign, ":break", 1),
 	      (assign, ":new_div", ":cavalry_div"),
 	    (try_end),
 	    (eq, ":break", 1),
@@ -80996,15 +81019,14 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	    (try_begin),
 	      (party_get_slot, ":archer_div", "p_main_party", slot_archer_control),
 	      (ge, ":archer_div", 0),
-	      (ge, ":has_ranged", 2), # 2 or 3, bow/xbow or bow/xbow+throw
+	      (ge, ":has_ranged", 2),
 	      (assign, ":break", 1),
 	      (assign, ":new_div", ":archer_div"),
 	    (else_try),
 	      (party_get_slot, ":throwing_div", "p_main_party", slot_throwing_control),
 	      (ge, ":throwing_div", 0),
-	      (this_or_next|eq, ":has_ranged", 1),
-	      (eq, ":has_ranged", 3),
-	  	(assign, ":break", 1),
+	      (eq, ":has_ranged", 1),
+	  	  (assign, ":break", 1),
 	      (assign, ":new_div", ":throwing_div"),
 	    (try_end),
 	    (eq, ":break", 1),
@@ -81012,7 +81034,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	  (else_try),
 	    (party_get_slot, ":shield_div", "p_main_party", slot_shield_control),
 	    (ge, ":shield_div", 0),
-	    (eq, ":has_shield", 1),
+	    (ge, ":has_shield", 5), # Needs a shield (4) plus a 1h weapon/polearm (1)
 	    (assign, ":new_div", ":shield_div"),
 	  (else_try),
 	    (party_get_slot, ":rest_div", "p_main_party", slot_rest_control),

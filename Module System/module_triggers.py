@@ -1370,6 +1370,7 @@ triggers = [
 				(troop_slot_eq, ":npc", slot_troop_current_mission, npc_mission_kingsupport),
 
 				(troop_get_slot, ":other_npc", ":npc", slot_troop_kingsupport_opponent),
+				(gt, ":other_npc", 0),
 				(troop_slot_eq, ":other_npc", slot_troop_kingsupport_objection_state, 0),
 				
 				(troop_set_slot, ":other_npc", slot_troop_kingsupport_objection_state, 1),
