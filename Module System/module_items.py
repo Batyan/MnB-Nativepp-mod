@@ -1090,7 +1090,7 @@ items = [
  40 , weight(4.4)|hit_points(80)|body_armor(11)|spd_rtng(100)|shield_width(40),imodbits_shield ],
 
 ["shield_heater_c", "Heater Shield", [("shield_heater_c",0)], itp_merchandise|itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  
- 180 , weight(4.0)|hit_points(100)|body_armor(18)|spd_rtng(80)|shield_width(30)|shield_height(50),imodbits_shield ],
+ 140 , weight(4.0)|hit_points(100)|body_armor(18)|spd_rtng(80)|shield_width(30)|shield_height(50),imodbits_shield ],
 #["shield_heater_d", "Heater Shield", [("shield_heater_d",0)], itp_merchandise|itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  477 , weight(3.5)|hit_points(710)|body_armor(4)|spd_rtng(80)|shield_width(60),imodbits_shield ],
 
 #["shield_kite_g",         "Kite Shield g", [("shield_kite_g",0)], itp_merchandise|itp_type_shield|itp_wooden_parry, itcf_carry_kite_shield,  118 , weight(2.5)|hit_points(480)|body_armor(1)|spd_rtng(82)|shield_width(90),imodbits_shield ],
