@@ -2088,16 +2088,18 @@ field_ai_triggers = [
   ##Spearwall Kit - Edited from The Mercenary by Caba'drin
   
   (5, 0, 0, [(eq, "$test", 1),],
-    [(get_player_agent_no, ":player"),
-	 (ge, ":player", 0),
-	 (agent_get_team, ":player_team", ":player"),
-	 (try_for_agents, ":agent_no"),
-	   (agent_is_alive, ":agent_no"),
-	   (agent_is_human, ":agent_no"),
-	   (agent_get_team, ":team", ":agent_no"),
-	   (eq, ":team", ":player_team"),
-	   (call_script, "script_agent_set_division_controled", ":agent_no"),
-	 (try_end),]),
+  [
+	(get_player_agent_no, ":player"),
+	(ge, ":player", 0),
+	(agent_get_team, ":player_team", ":player"),
+	(try_for_agents, ":agent_no"),
+		(agent_is_alive, ":agent_no"),
+		(agent_is_human, ":agent_no"),
+		(agent_get_team, ":team", ":agent_no"),
+		(eq, ":team", ":player_team"),
+		(call_script, "script_agent_set_division_controled", ":agent_no"),
+	(try_end),
+  ]),
  ] 
 
 bodyguard_triggers = [
@@ -3613,35 +3615,36 @@ common_battle_combat_skill_2 = ( ## disabled for now
 	
 common_siege_change_men_defence_point = (
   5, 0, 0,
+  [], 
   [
-    (assign, ":num_gr_1", 0),
+	(assign, ":num_gr_1", 0),
 	(assign, ":num_gr_2", 0),
 	(assign, ":num_archers", 0),
-    (try_for_agents, ":agent_no"),
+	(try_for_agents, ":agent_no"),
 	  (agent_is_alive, ":agent_no"),
-      (agent_is_human, ":agent_no"),
+	  (agent_is_human, ":agent_no"),
 	  (agent_get_team, ":team", ":agent_no"),
-      (this_or_next|eq, ":team", "$defender_team"),
-      (eq, ":team", "$defender_team_2"),
+	  (this_or_next|eq, ":team", "$defender_team"),
+	  (eq, ":team", "$defender_team_2"),
 	  (agent_get_division, ":division", ":agent_no"),
 	  (try_begin),
-	    (eq, ":division", grc_infantry),
+		(eq, ":division", grc_infantry),
 		(val_add, ":num_gr_1", 1),
 	  (else_try),
-	    (eq, ":division", grc_cavalry),
+		(eq, ":division", grc_cavalry),
 		(val_add, ":num_gr_2", 1),
 	  (else_try),
-	    (eq, ":division", grc_archers),
+		(eq, ":division", grc_archers),
 		(val_add, ":num_archers", 1),
 	  (try_end),
 	(try_end),
 	(store_sub, ":difference", ":num_gr_1", ":num_gr_2"),
 	(try_for_agents, ":agent_no"),
 	  (agent_is_alive, ":agent_no"),
-      (agent_is_human, ":agent_no"),
+	  (agent_is_human, ":agent_no"),
 	  (agent_get_team, ":team", ":agent_no"),
-      (this_or_next|eq, ":team", "$defender_team"),
-      (eq, ":team", "$defender_team_2"),
+	  (this_or_next|eq, ":team", "$defender_team"),
+	  (eq, ":team", "$defender_team_2"),
 	  (agent_get_division, ":division", ":agent_no"),
 	  (try_begin), ## change infantries with ranged weapon to archers to search for good shoting position
 		(neq, ":division", grc_archers), ## will reduce the number of defending soldiers at the ladders
@@ -3672,20 +3675,46 @@ common_siege_change_men_defence_point = (
 		  (agent_set_slot, ":agent_no", slot_agent_is_in_scripted_mode, 0),
 		(try_end),
 	  (else_try),
-	    (try_begin),
-	      (lt, ":difference", -1),
-	      (agent_set_division, ":agent_no", grc_infantry),
+		(try_begin),
+		  (lt, ":difference", -1),
+		  (agent_set_division, ":agent_no", grc_infantry),
 		  (val_add, ":difference", 2),
-	    (else_try),
-	      (gt, ":difference", 1),
-	      (agent_set_division, ":agent_no", grc_cavalry),
+		(else_try),
+		  (gt, ":difference", 1),
+		  (agent_set_division, ":agent_no", grc_cavalry),
 		  (val_add, ":difference", -2),
-	    (try_end),
+		(try_end),
 	  (try_end),
 	(try_end),
-	
-    ], [])
+  ])
 
+# common_battle_control_division = (
+  # 5, 0, 0, [(eq, "$test", 1),],
+  # [
+	# (get_player_agent_no, ":player"),
+	# (ge, ":player", 0),
+	# (agent_get_team, ":player_team", ":player"),
+	# (try_for_agents, ":agent_no"),
+		# (agent_is_alive, ":agent_no"),
+		# (agent_is_human, ":agent_no"),
+		# (agent_get_team, ":team", ":agent_no"),
+		# (eq, ":team", ":player_team"),
+		# (call_script, "script_agent_set_division_controled", ":agent_no"),
+	# (try_end),
+  # ]),
+  
+common_siege_control_division = (
+  5, 0, 0, [(eq, "$test", 1),],
+  [
+	(try_for_agents, ":agent_no"),
+		(agent_is_alive, ":agent_no"),
+		(agent_is_human, ":agent_no"),
+		(agent_get_team, ":team", ":agent_no"),
+		(this_or_next|eq, ":team", "$attacker_team"),
+		(eq, ":team", "$attacker_team_2"),
+		(call_script, "script_agent_set_division_controled", ":agent_no"),
+	(try_end),
+  ])
 
 tournament_triggers = [
   (ti_before_mission_start, 0, 0, [], [(call_script, "script_change_banners_and_chest"),
@@ -5879,6 +5908,7 @@ mission_templates = [
       common_siege_rotate_belfry,
       common_siege_assign_men_to_belfry,
 	  common_siege_change_men_defence_point,
+	  common_siege_control_division,
     ] + common_pbod_triggers + prebattle_orders_triggers + prebattle_deployment_triggers + caba_order_triggers + custom_camera_triggers,
   ),
 
@@ -5924,6 +5954,7 @@ mission_templates = [
       common_inventory_not_available,
 	  
 	  common_siege_change_men_defence_point,
+	  common_siege_control_division,
 
       (ti_on_agent_killed_or_wounded, 0, 0, [],
        [
@@ -6056,6 +6087,7 @@ mission_templates = [
       common_inventory_not_available,
 	  
 	  common_siege_change_men_defence_point,
+	  common_siege_control_division,
 
       (ti_on_agent_killed_or_wounded, 0, 0, [],
        [

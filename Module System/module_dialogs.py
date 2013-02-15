@@ -20724,12 +20724,12 @@ You can wait for {reg0?her:his} family to pay {reg0?her:his} ransom of course, b
 
 		(troop_get_slot, ":persuasion_random", "$g_talk_troop", slot_troop_recruitment_random),
 
-        (try_begin),
-          (eq, "$cheat_mode", 1),
+        # (try_begin),
+          # (eq, "$cheat_mode", 1),
 		  #(assign, reg3, ":persuasion_skill"),
 		  #(assign, reg4, ":persuasion_random"),
 		  #(display_message, "str_trump_check_random_reg4_skill_reg3"),
-		(try_end),
+		# (try_end),
 
 		(val_mul, ":persuasion_skill", 7),
 		(ge, ":persuasion_skill", ":persuasion_random"),
@@ -41272,9 +41272,13 @@ I suppose there are plenty of bounty hunters around to get the job done . . .", 
   [anyone, "mercenary_give_land_accept", [],
   "I shall not disapoint you.", "close_window",
   [(call_script, "script_give_center_to_lord", "$fief_selected", "$g_talk_troop", 0),
+   (troop_set_slot, "$g_talk_troop", slot_troop_occupation, slto_kingdom_hero),
+   (call_script, "script_assign_banner", "$g_talk_troop"),
+   (troop_set_note_available, "$g_talk_troop", 1),
    # (str_store_party_name, s1, "$fief_selected"),
    # (str_store_troop_name, s2, "$g_talk_troop"),
    (call_script, "script_add_log_entry", logent_castle_given_to_lord_by_player, "trp_player", "$fief_selected", "$g_talk_troop", "$players_kingdom"),
+   (assign, "$g_leave_encounter",1),
    ]],
   
   [anyone, "mercenary_give_land_reject", [

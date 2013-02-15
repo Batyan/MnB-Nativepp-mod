@@ -3091,7 +3091,8 @@ game_menus = [
 
 	("continue",[(eq,"$cheat_mode",1)],"{!}CHEAT! - increase Right to Rule",
        [
-	   (val_add, "$player_right_to_rule", 10),
+	   # (val_add, "$player_right_to_rule", 10),
+	   (call_script, "script_change_player_right_to_rule", 10),
 	   (jump_to_menu, "mnu_character_report"),
        ]
        ),
