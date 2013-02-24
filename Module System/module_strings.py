@@ -2663,7 +2663,9 @@ strings = [
   ("kingdom_10_adjective",                    "Freerider's"),
   ("kingdom_11_adjective",                    "Mudles"),
   
-  ("kingdom_foreign_adjective",               "Foreign"),
+  ("kingdom_foreign_adjective1",               "Foreign"),
+  ("kingdom_foreign_adjective2",               "Foreign"),
+  ("kingdom_foreign_adjective3",               "Foreign"),
   
 
   ("credits_1", "Mount&Blade: Warband Copyright 2008-2010 Taleworlds Entertainment"),

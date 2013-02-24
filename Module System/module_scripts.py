@@ -1380,8 +1380,8 @@ scripts = [
 	  (faction_set_slot, "fac_kingdom_11",slot_faction_adjective, "str_kingdom_11_adjective"),
 	  
 	  # Fix 
-	  (faction_set_slot, "fac_neutral",   slot_faction_adjective, "str_kingdom_foreign_adjective"),
-	  (faction_set_slot, "fac_neutral_4", slot_faction_adjective, "str_kingdom_foreign_adjective"),
+	  (faction_set_slot, "fac_neutral",   slot_faction_adjective, "str_kingdom_foreign_adjective1"),
+	  (faction_set_slot, "fac_neutral_4", slot_faction_adjective, "str_kingdom_foreign_adjective1"),
 
 ##      (assign, "$players_kingdom", "fac_kingdom_1"),
 ##      (call_script, "script_give_center_to_lord", "p_town_7", "trp_player", 0),
@@ -30933,7 +30933,7 @@ scripts = [
       (assign, ":ai_perc_infantry", reg0),
       (assign, ":ai_perc_archers",  reg1),
       (assign, ":ai_perc_cavalry",  reg2),
-      (call_script, "script_team_get_class_percentages", ":team_no", 1),#enemies of the ai_team
+      # (call_script, "script_team_get_class_percentages", ":team_no", 1),#enemies of the ai_team
       #      (assign, ":enemy_perc_infantry", reg0),
       #      (assign, ":enemy_perc_archers",  reg1),
       #      (assign, ":enemy_perc_cavalry",  reg2),
@@ -30983,10 +30983,10 @@ scripts = [
 		  (try_end),
         (else_try),
 		  (neg|party_slot_eq, "p_main_party", slot_party_pref_formations, 1),
-		  (lt, ":rand", 85),
+		  (lt, ":rand", 55),
 		  (ge, ":ai_perc_cavalry", 33),
 		  (le, ":ai_perc_cavalry", 80),
-		  (lt, ":rand", 55),
+		  # (lt, ":rand", 55),
 		  (assign, ":battle_tactic", btactic_cav_charge),
 		(else_try),
 		  (lt, ":rand", 75),
@@ -31049,8 +31049,21 @@ scripts = [
         (call_script, "script_find_high_ground_around_pos1", ":team_no", 30), # call again just in case we are not at peak point.
         (team_give_order, ":team_no", grc_everyone, mordr_hold),
         (team_set_order_position, ":team_no", grc_everyone, pos52),
-        (team_give_order, ":team_no", grc_archers, mordr_advance),
-        (team_give_order, ":team_no", grc_archers, mordr_advance),
+		(store_random_in_range, ":random", 0, 2),
+		(try_begin),
+		  (eq, ":random", 0),
+		  (team_give_order, ":team_no", grc_cavalry, mordr_fall_back),
+          (team_give_order, ":team_no", grc_archers, mordr_advance),
+		(else_try),
+		  (eq, ":random", 1),
+		  (team_give_order, ":team_no", grc_cavalry, mordr_fall_back),
+          (team_give_order, ":team_no", grc_archers, mordr_advance),
+		  
+          (team_give_order, ":team_no", grc_infantry, mordr_advance),
+          (team_give_order, ":team_no", grc_infantry, mordr_advance),
+          (team_give_order, ":team_no", grc_infantry, mordr_advance),
+		(try_end),
+		
 		(try_begin), #new
 		  (eq, ":battle_tactic", btactic_cav_charge),
 		  (team_give_order, ":team_no", grc_infantry, mordr_stand_closer),
@@ -31069,9 +31082,12 @@ scripts = [
         (team_set_order_position, ":team_no", grc_everyone, pos60),
 		(try_begin), #new
 		  (eq, ":battle_tactic", btactic_follow_leader_pack),
-		  (team_give_order, ":team_no", grc_everyone, mordr_stand_closer),
-		  (team_give_order, ":team_no", grc_everyone, mordr_stand_closer),
-		  (team_give_order, ":team_no", grc_everyone, mordr_stand_closer),
+		  (team_give_order, ":team_no", grc_infantry, mordr_stand_closer),
+		  (team_give_order, ":team_no", grc_infantry, mordr_stand_closer),
+		  (team_give_order, ":team_no", grc_infantry, mordr_stand_closer),
+		  
+		  (team_give_order, ":team_no", grc_archers, mordr_spread_out),
+		  (team_give_order, ":team_no", grc_cavalry, mordr_spread_out),
 		(else_try), #new
 		  (eq, ":battle_tactic", btactic_follow_leader_foot),
 		  (assign, "$once", 0),
@@ -31621,9 +31637,11 @@ scripts = [
       (store_script_param, ":team_no", 1),
       (store_script_param, ":battle_tactic", 2),
       (store_mission_timer_a, ":mission_time"),
+	  (team_get_leader, ":ai_leader", ":team_no"),
+	  (agent_get_position, pos63, ":ai_leader"),
       (try_begin),
         (eq, ":battle_tactic", btactic_hold),
-        (copy_position, pos1, pos52),
+        (copy_position, pos1, pos63),
         (call_script, "script_get_closest3_distance_of_enemies_at_pos1", ":team_no", 1),
         (assign, ":avg_dist", reg0),
         (assign, ":min_dist", reg1),
@@ -31638,14 +31656,14 @@ scripts = [
 		(this_or_next|eq, ":battle_tactic", btactic_follow_leader_pack), ## grouped version
 		(this_or_next|eq, ":battle_tactic", btactic_follow_leader_archer),
 		(eq, ":battle_tactic", btactic_follow_leader_foot),
-        (team_get_leader, ":ai_leader", ":team_no"),
+        # (team_get_leader, ":ai_leader", ":team_no"),
         (try_begin),
 		  (ge, ":ai_leader", 0),
           (agent_is_alive, ":ai_leader"),
           # (agent_set_speed_limit, ":ai_leader", 9),
           # (call_script, "script_team_get_average_position_of_enemies", ":team_no"),
           # (copy_position, pos60, pos0),
-          (agent_get_position, pos63, ":ai_leader"),
+          
           # (position_transform_position_to_local, pos62, pos61, pos60), #pos62 = vector to enemy w.r.t leader
           # (position_normalize_origin, ":distance_to_enemy", pos62),
           # (convert_from_fixed_point, ":distance_to_enemy"),
@@ -31733,7 +31751,7 @@ scripts = [
 		  (gt, ":horse", 0),
 		  (assign, ":charge", 0),
 		(try_end),
-		(copy_position, pos1, pos52),
+		(copy_position, pos1, pos63),
         (call_script, "script_get_closest3_distance_of_enemies_at_pos1", ":team_no", 1),
         (assign, ":avg_dist", reg0),
         (assign, ":min_dist", reg1),
@@ -74291,6 +74309,8 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		(agent_get_team, ":team", ":agent"),
 		(this_or_next|main_hero_fallen),
 		(neq, ":team", ":player_team"),
+		(team_get_leader, ":leader", ":team"),
+		(neq, ":agent", ":leader"),
 		(agent_get_troop_id, ":troop", ":agent"),
 		(try_begin),
 			(troop_is_guarantee_horse, ":troop"),

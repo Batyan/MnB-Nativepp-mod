@@ -981,24 +981,28 @@ simple_triggers = [
          
          (store_skill_level, ":trainer_level", skl_trainer_replacement, ":troop_no"),                  
          (val_add, ":trainer_level", 1), #was 2. (average trainer level is 3 for npc lords, worst : 0, best : 6)
-         (store_mul, ":xp_gain", ":trainer_level", 330), #xp gain -- was 300
+		 
+		 (store_mul, ":trainer_bonus", ":trainer_level", ":trainer_level"),
+		 (val_div, ":trainer_bonus", 10), # Only level 6 to 3 lords would get a bonus
+		 (val_add, ":trainer_level", ":trainer_bonus"),
+         (store_mul, ":xp_gain", ":trainer_level", 280), #xp gain -- was 330
          
          (assign, ":max_accepted_random_value", 60),  # more chances to get xp, less xp per gain, small lords get less xp (because of very small armies)
          (try_begin),
            (store_troop_faction, ":cur_troop_faction", ":troop_no"),
-           (neq, ":cur_troop_faction", "$players_kingdom"),
+           (neq, ":cur_troop_faction", "fac_player_supporters_faction"),
            
            (game_get_reduce_campaign_ai, ":reduce_campaign_ai"),
            (try_begin),
              (eq, ":reduce_campaign_ai", 0), #hard
-             (assign, ":max_accepted_random_value", 65), # 5% chances bonus for xp
+             (val_add, ":max_accepted_random_value", 5), # 5% chances bonus for xp
 			 (val_mul, ":xp_gain", 5),
-             (val_div, ":xp_gain", 4), # 25% more xp -> +82
+             (val_div, ":xp_gain", 4), # 25% more xp
            (else_try),
              (eq, ":reduce_campaign_ai", 2), #easy
-             (assign, ":max_accepted_random_value", 55), # 5% chances malus for xp
+             (val_add, ":max_accepted_random_value", -5), # 5% chances malus for xp
 			 (val_mul, ":xp_gain", 3),
-             (val_div, ":xp_gain", 4), # 25% less xp -> -82
+             (val_div, ":xp_gain", 4), # 25% less xp
            (try_end),
          (try_end),
          

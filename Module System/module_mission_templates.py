@@ -18037,7 +18037,7 @@ mission_templates = [
 		(1,mtef_visitor_source|mtef_team_1,0,aif_start_alarmed,1,[]), # Team1
 		(2,mtef_visitor_source|mtef_team_2,0,aif_start_alarmed,1,[]), # Team2
 		
-		(3,mtef_visitor_source|mtef_team_0,0,0,1,[]), # Player's men -- for future tests with player
+		(3,mtef_visitor_source|mtef_team_0,0,aif_start_alarmed,1,[]), # Player's men -- for future tests with player
 		
 	],
 	[
