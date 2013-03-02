@@ -277,7 +277,7 @@ scripts = [
 
 	  (faction_set_slot, "fac_culture_7", slot_faction_tier_1_troop, "trp_farmer"),
       (faction_set_slot, "fac_culture_7", slot_faction_tier_2_troop, "trp_watchman"),
-      (faction_set_slot, "fac_culture_7", slot_faction_tier_3_troop, "trp_caravan_guard"),
+      (faction_set_slot, "fac_culture_7", slot_faction_tier_3_troop, "trp_town_watch"),
       (faction_set_slot, "fac_culture_7", slot_faction_tier_4_troop, "trp_mercenary_swordsman"),
       (faction_set_slot, "fac_culture_7", slot_faction_tier_5_troop, "trp_hired_blade"),
 	  (faction_set_slot, "fac_culture_7", slot_faction_noble_troop,  "trp_player_noble"),
@@ -8049,7 +8049,7 @@ scripts = [
           (faction_slot_eq, ":faction_no", slot_faction_culture, "fac_culture_8"),
 
           (faction_set_slot, ":faction_no", slot_faction_deserter_troop, "trp_light_cavalry"),
-          (faction_set_slot, ":faction_no", slot_faction_guard_troop, "trp_guard"),
+          (faction_set_slot, ":faction_no", slot_faction_guard_troop, "trp_medium_infantry"),
           (faction_set_slot, ":faction_no", slot_faction_messenger_troop, "trp_scout"),
           (faction_set_slot, ":faction_no", slot_faction_prison_guard_troop, "trp_original_prison_guard"),
           (faction_set_slot, ":faction_no", slot_faction_castle_guard_troop, "trp_original_castle_guard"),
@@ -31077,6 +31077,11 @@ scripts = [
         (team_get_leader, ":ai_leader", ":team_no"),
         (ge, ":ai_leader", 0),
         (agent_set_speed_limit, ":ai_leader", 8),
+		(agent_get_horse, ":horse", ":ai_leader"),
+		(try_begin),
+		  (ge, ":horse", 0),
+		  (agent_set_speed_limit, ":horse", 8),
+		(try_end),
         (agent_get_position, pos60, ":ai_leader"),
         (team_give_order, ":team_no", grc_everyone, mordr_hold),
         (team_set_order_position, ":team_no", grc_everyone, pos60),
@@ -31669,7 +31674,7 @@ scripts = [
 		  
 		  (agent_set_division, ":ai_leader", 3),
 		  (agent_set_slot, ":ai_leader", slot_agent_new_division, 3),
-          # (agent_set_speed_limit, ":ai_leader", 9),
+          (agent_set_speed_limit, ":ai_leader", 6),
           # (call_script, "script_team_get_average_position_of_enemies", ":team_no"),
           # (copy_position, pos60, pos0),
           
@@ -31738,8 +31743,8 @@ scripts = [
           (assign, ":min_dist", reg1),
 		  # (display_message, "@min: {reg1}, avg: {reg0}"),
           (try_begin),
-            (lt, ":min_dist", 50),
-            (ge, ":mission_time", 360),
+            (lt, ":min_dist", 1000),
+            # (ge, ":mission_time", 60),
             (assign, ":battle_tactic", 0),
             (team_give_order, ":team_no", grc_everyone, mordr_charge),
             (agent_set_speed_limit, ":ai_leader", 60),
@@ -31755,10 +31760,11 @@ scripts = [
 		  (agent_is_alive, ":cur_agent"),
 		  (agent_is_human, ":cur_agent"),
 		  (agent_is_non_player, ":cur_agent"),
-		  (agent_get_class, ":agent_class", ":cur_agent"),
-		  (eq, ":agent_class", grc_cavalry), ##because lords have horses, but are not cavalry ??
 		  (agent_get_team, ":team", ":cur_agent"),
 		  (eq, ":team", ":team_no"),
+		  (agent_get_division, ":agent_class", ":cur_agent"),
+		  (eq, ":agent_class", grc_cavalry),
+		  
 		  (agent_get_horse, ":horse", ":cur_agent"), ## when all cavalrymen = dead/unhorsed -> charge
 		  (gt, ":horse", 0),
 		  (assign, ":charge", 0),

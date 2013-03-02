@@ -12625,6 +12625,11 @@ What kind of recruits do you want?", "dplmc_constable_recruit_select",
 
    ],"And who will you choose to receive the fief?{s12}", "minister_grant_fief_select_recipient_choice",
    []],
+   
+   [anyone|plyr, "minister_grant_fief_select_recipient_choice",
+   [
+   ],"Myself", "minister_grant_fief_complete",
+   [(assign, "$lord_selected", "trp_player"),]],
 
    [anyone|plyr|repeat_for_troops, "minister_grant_fief_select_recipient_choice",
    [
@@ -12671,7 +12676,7 @@ What kind of recruits do you want?", "dplmc_constable_recruit_select",
    [
    (store_repeat_object, "$lord_selected"),
    ]],
-
+   
    [anyone|plyr, "minister_grant_fief_select_recipient_choice",
    [
    ],"Never mind", "minister_pretalk",

@@ -5398,8 +5398,13 @@ simple_triggers = [
 	  (party_get_num_companions, ":num_companions", ":party_no"),
 	  (party_get_num_prisoners, ":num_prisoners", ":party_no"),
 	  
+	  (assign, ":end", 0),
 	  (try_begin),
-	    (party_get_attached_to, ":center", ":party_no"),
+		(party_get_attached_to, ":center", ":party_no"),
+		(try_begin),
+		  (lt, ":center", 0),
+		  (party_get_cur_town, ":center", ":party_no"),
+		(try_end),
 		(is_between, ":center", walled_centers_begin, walled_centers_end),
 		(store_faction_of_party, ":center_faction", ":center"),
 		(eq, ":center_faction", ":party_faction"),
@@ -5424,9 +5429,13 @@ simple_triggers = [
 		  (try_end),
 		  
 		  (remove_party, ":party_no"),
+		  (assign, ":end", 1),
 		(try_end),
+	  (try_end),
+	  
+	  (eq, ":end", 0),
 		
-	  (else_try),
+	  (try_begin),
 	  
 	    (faction_get_slot, ":leader", ":party_faction", slot_faction_leader),
 	    (faction_get_slot, ":marshall", ":party_faction", slot_faction_marshall),
@@ -5580,13 +5589,20 @@ simple_triggers = [
 		    (party_get_attached_to, ":town", ":party_no"),
 		  (try_end),
 		  (is_between, ":town", walled_centers_begin, walled_centers_end), # is in a center
+		  (assign, ":leave", 0),
+		  (try_begin), # If the mercenary is in a besieged center, he should leave it
+		    (party_slot_ge, ":town", slot_center_is_besieged_by, 0),
+			(assign, ":leave", 1),
+		  (try_end),
 		  (neg|call_script, "script_cf_mercenary_join_centers_faction", ":merc_no", ":town"),
 		  ## If script succed it means the mercenary will join the faction, meaning we don't have to care about its behavior anymore
 		  (party_get_num_companions, ":party_size", ":party_no"),
 		  (call_script, "script_party_get_ideal_size", ":party_no"),
 		  (store_div, ":minimum_size", reg0, 3), # to allow the mercenary to patrol around a center, must have enough troops to fight bandits
+		  (this_or_next|eq, ":leave", 1),
 		  (ge, ":party_size", ":minimum_size"),
 		  (store_random_in_range, ":random", 0, 3),
+		  (this_or_next|eq, ":leave", 1),
 		  (eq, ":random", 0), # if in a center, can go out to patrol
 		  (party_detach, ":party_no"),
 		  (party_set_ai_behavior, ":party_no", ai_bhvr_patrol_location),
@@ -5598,8 +5614,23 @@ simple_triggers = [
 		(eq, ":random", 0),
 		(store_random_in_range, ":faction_no", kingdoms_begin, kingdoms_end),
 		
-		(call_script, "script_cf_select_random_walled_center_with_faction", ":faction_no", -1),
-		(assign, ":target_city", reg0),
+		(assign, ":target_city", -1),
+		(store_random_in_range, ":random", 0, 2),
+		(try_begin), # Mercenaries should head to the capital of the kingdom more often
+		  (eq, ":random", 0),
+		  (faction_get_slot, ":leader", ":faction_no", slot_faction_leader),
+		  (try_begin),
+		    (eq, ":leader", "trp_player"),
+			(assign, ":target_city", "$g_player_court"),
+		  (else_try),
+		    (gt, ":leader", 0),
+		    (troop_get_slot, ":target_city", ":leader", slot_troop_home),
+		  (try_end),
+		(else_try),
+		  (call_script, "script_cf_select_random_walled_center_with_faction", ":faction_no", -1),
+		  (assign, ":target_city", reg0),
+		(try_end),
+		
 		(is_between, ":target_city", walled_centers_begin, walled_centers_end),
 		(party_set_ai_behavior, ":party_no", ai_bhvr_travel_to_party),
 		(party_set_ai_object, ":party_no", ":target_city"),
