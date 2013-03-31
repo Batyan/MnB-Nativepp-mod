@@ -5029,45 +5029,59 @@ mission_templates = [
       common_music_situation_update,
       common_battle_check_friendly_kills,
 
-      (1, 0, 5, [
-                              
-      #new (25.11.09) starts (sdsd = TODO : make a similar code to also helping ally encounters)
-      #count all total (not dead) enemy soldiers (in battle area + not currently placed in battle area)
-      (call_script, "script_party_count_members_with_full_health", "p_collective_enemy"),
-      (assign, ":total_enemy_soldiers", reg0),
-      #decrease number of agents already in battle area to find all number of reinforcement enemies
-      (assign, ":enemy_soldiers_in_battle_area", 0),
-      (try_for_agents,":cur_agent"),
-        (agent_is_human, ":cur_agent"),
-        (agent_get_party_id, ":agent_party", ":cur_agent"),
-        (try_begin),
-          (neq, ":agent_party", "p_main_party"),
-          (neg|agent_is_ally, ":cur_agent"),
-          (val_add, ":enemy_soldiers_in_battle_area", 1),
-        (try_end),
-      (try_end),
-      (store_sub, ":total_enemy_reinforcements", ":total_enemy_soldiers", ":enemy_soldiers_in_battle_area"),
-      (try_begin),
-        (lt, ":total_enemy_reinforcements", 15),
-        (ge, "$defender_reinforcement_stage", 2),
-        (eq, "$defender_reinforcement_limit_increased", 0),
-        (val_add, "$g_defender_reinforcement_limit", 1),                    
-        (assign, "$defender_reinforcement_limit_increased", 1),
-      (try_end),    
-      #new (25.11.09) ends
-      (lt,"$defender_reinforcement_stage","$g_defender_reinforcement_limit"),
-                 (store_mission_timer_a,":mission_time"),
-                 (ge,":mission_time",10),
-                 (store_normalized_team_count,":num_defenders", 0),
-                 (lt,":num_defenders",6)],
-           [(add_reinforcements_to_entry,0,7),(assign, "$defender_reinforcement_limit_increased", 0),(val_add,"$defender_reinforcement_stage",1)]),
+      (1, 0, 5, 
+          [
+		    (assign, ":continue", 0),
+			(try_begin),
+			  (lt, "$defender_reinforcement_stage", "$g_defender_reinforcement_limit"),
+              (store_mission_timer_a, ":mission_time"),
+              (ge, ":mission_time", 10),
+              (store_normalized_team_count, ":num_defenders", 0),
+              (lt, ":num_defenders", 7),
+			  (assign, ":continue", 1),
+			(else_try),
+			  (store_normalized_team_count, ":num_defenders", 0),
+              (lt, ":num_defenders", 7),
+              #new (25.11.09) starts (sdsd = TODO : make a similar code to also helping ally encounters)
+              #count all total (not dead) enemy soldiers (in battle area + not currently placed in battle area)
+              (call_script, "script_party_count_members_with_full_health", "p_collective_enemy"),
+              (assign, ":total_enemy_soldiers", reg0),
+              #decrease number of agents already in battle area to find all number of reinforcement enemies
+              (assign, ":enemy_soldiers_in_battle_area", 0),
+              (try_for_agents,":cur_agent"),
+                (agent_is_human, ":cur_agent"),
+                (agent_get_party_id, ":agent_party", ":cur_agent"),
+                (try_begin),
+                  (neq, ":agent_party", "p_main_party"),
+                  (neg|agent_is_ally, ":cur_agent"),
+                  (val_add, ":enemy_soldiers_in_battle_area", 1),
+                (try_end),
+              (try_end),
+              (store_sub, ":total_enemy_reinforcements", ":total_enemy_soldiers", ":enemy_soldiers_in_battle_area"),
+              (try_begin),
+                (lt, ":total_enemy_reinforcements", 15),
+                (ge, "$defender_reinforcement_stage", 2),
+                (eq, "$defender_reinforcement_limit_increased", 0),
+                (val_add, "$g_defender_reinforcement_limit", 1),                    
+                (assign, "$defender_reinforcement_limit_increased", 1),
+              (try_end),
+              #new (25.11.09) ends
+			(try_end),
+			(eq, ":continue", 1),
+          ],
+		   
+          [
+		    (add_reinforcements_to_entry,0,8),
+		    (assign, "$defender_reinforcement_limit_increased", 0),
+		    (val_add,"$defender_reinforcement_stage",1)
+		  ]),
       
       (1, 0, 5, [(lt,"$attacker_reinforcement_stage",3),
                  (store_mission_timer_a,":mission_time"),
                  (ge,":mission_time",10),
                  (store_normalized_team_count,":num_attackers", 1),
-                 (lt,":num_attackers",6)],
-           [(add_reinforcements_to_entry,3,7),(val_add,"$attacker_reinforcement_stage",1)]),
+                 (lt,":num_attackers",7)],
+           [(add_reinforcements_to_entry,3,8),(val_add,"$attacker_reinforcement_stage",1)]),
 
       common_battle_check_victory_condition,
       common_battle_victory_display,

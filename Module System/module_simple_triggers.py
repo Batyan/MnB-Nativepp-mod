@@ -544,22 +544,17 @@ simple_triggers = [
    [
       (call_script, "script_get_player_party_morale_values"),
       (assign, ":stability", reg0),
-	  (val_div, ":stability", 10),
-	  (val_add, ":stability", 10),
+	  # (val_div, ":stability", 10),
+	  # (val_add, ":stability", 10),
       (party_get_morale, ":cur_morale", "p_main_party"),
 	  
-	  (store_sub, ":dif", 100, ":cur_morale"),
+	  # (assign, ":dif", ":stability"),
 	  
-	  (try_begin),
-	    (neq, ":dif", 0),
-		
-		(store_random_in_range, ":morale_bonus", 0, ":dif"),
-		
-		(val_div, ":morale_bonus", 33),
-		(val_add, ":morale_bonus", 1),
-		
-		(val_add, ":cur_morale", ":morale_bonus"),
-	  (try_end),
+	  (store_random_in_range, ":morale_bonus", 0, ":stability"),
+	  (val_div, ":morale_bonus", 20), # Average : 2
+	  (val_add, ":morale_bonus", 1),
+	  
+	  (val_add, ":cur_morale", ":morale_bonus"),
 	  
 	  (val_min, ":cur_morale", 100),
 	  
