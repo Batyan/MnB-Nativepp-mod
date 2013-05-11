@@ -463,7 +463,7 @@ troops = [
   ["mercenary_ormester","Ormester","Ormesterek",tf_guarantee_boots|tf_guarantee_shield|tf_guarantee_armor|tf_guarantee_gloves|tf_guarantee_ranged|tf_guarantee_helmet,no_scene,reserved,fac_commoners,
    [itm_nomad_bow,itm_plate_covered_round_shield,itm_scimitar,itm_scimitar_b,itm_scimitar_c,itm_bodkin_arrows,
     itm_vaegir_helmet,itm_vaegir_noble_helmet,itm_vaegir_war_helmet,itm_lamellar_armor,itm_mail_mittens,itm_mail_boots],
-   str_18|agi_19|int_13|cha_12|	level(26),	wpex(105,95,90,85,55,65),knows_common|knows_ironflesh_3|knows_power_strike_2|knows_shield_2|knows_athletics_1|knows_power_draw_4,vaegir_face_middle_1, vaegir_face_older_2],
+   str_18|agi_19|int_13|cha_11|	level(26),	wpex(105,95,90,85,55,65),knows_common|knows_ironflesh_3|knows_power_strike_2|knows_shield_2|knows_athletics_1|knows_power_draw_4,vaegir_face_middle_1, vaegir_face_older_2],
 
   # Mounted nordic-themed troop with a longbow for use when dismounted.
   ["mercenary_viking","Viking","Vikings",tf_mounted|tf_guarantee_boots|tf_guarantee_shield|tf_guarantee_armor|tf_guarantee_gloves|tf_guarantee_helmet|tf_guarantee_horse,no_scene,reserved,fac_commoners,

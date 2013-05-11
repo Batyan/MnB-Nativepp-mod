@@ -15383,7 +15383,7 @@ scripts = [
 			(assign, ":limit", 270),#average starting castle garrison size
 			(try_begin),
 			   (party_slot_eq, ":party_no", slot_party_type, spt_town),
-				(assign, ":limit", 480),#average starting town garrison size
+				(assign, ":limit", 520),#average starting town garrison size
 			(try_end),
          #(store_faction_of_party, ":faction_id", ":party_no"),
       ##diplomacy end+
@@ -81217,6 +81217,63 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	  (agent_set_division, ":agent_no", ":new_div"),
 	  (agent_set_slot, ":agent_no", slot_agent_new_division, ":new_div"),
 	(try_end),
+	]),
+	
+	# script_get_mercenary_payment
+	# Returns the payment to receive as a mercenary
+	# is based upon troop wages but is not modified by leadership
+	# it means if your leadership gets higher, wages will be lower, but the pay will be the same
+	# effectively giving you more money
+	("get_mercenary_payment",
+	[
+		(assign, ":total_wage", 0),
+		(party_get_num_companion_stacks, ":num_stacks", "p_main_party"),
+		(try_for_range, ":i_stack", 0, ":num_stacks"),
+			(party_stack_get_troop_id, ":troop_id", "p_main_party", ":i_stack"),
+			(party_stack_get_size, ":stack_size", "p_main_party", ":i_stack"),
+			
+			(assign,":wage", 0),
+			(try_begin),
+				(this_or_next|eq, ":troop_id", "trp_player"),
+				(eq, ":troop_id", "trp_kidnapped_girl"),
+				(else_try),
+				(is_between, ":troop_id", pretenders_begin, pretenders_end),
+			(else_try),
+				(is_between, ":troop_id", heroes_begin, heroes_end),
+				(this_or_next|troop_slot_eq, ":troop_id", slot_troop_playerparty_history,dplmc_pp_history_lord_rejoined),      
+				(this_or_next|troop_slot_eq, ":troop_id", slot_troop_occupation, slto_kingdom_hero),
+				(troop_slot_eq, ":troop_id",slot_troop_occupation, slto_kingdom_lady),
+			(else_try),
+				(store_character_level, ":troop_level", ":troop_id"),
+				(assign, ":wage", ":troop_level"),
+				(val_add, ":wage", 3),
+				(val_mul, ":wage", ":wage"),
+				(val_div, ":wage", 21),
+			(try_end),
+			
+			(try_begin), #mounted troops cost 65% more than the normal cost
+				(neg|is_between, ":troop_id", companions_begin, companions_end),
+				(troop_is_mounted, ":troop_id"),
+				(val_mul, ":wage", 5),
+				(val_div, ":wage", 3),
+			(try_end),
+			
+			(try_begin), #mercenaries cost %50 more than the normal cost
+				(is_between, ":troop_id", mercenary_troops_begin, mercenary_troops_end),
+				(val_mul, ":wage", 3),
+				(val_div, ":wage", 2),
+			(try_end),
+			
+			(try_begin),
+				(is_between, ":troop_id", companions_begin, companions_end),
+				(val_mul, ":wage", 2),
+			(try_end),
+			
+			(val_mul, ":wage", ":stack_size"),
+			(val_add, ":total_wage", ":wage"),
+		(try_end),
+		(val_div, ":total_wage", 3),
+		(assign, reg0, ":total_wage"),
 	]),
 ]
 

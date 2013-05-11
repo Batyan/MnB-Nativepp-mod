@@ -11842,11 +11842,12 @@ presentations = [
         (position_set_x, pos1, 25),
         (position_set_y, pos1, ":cur_y"),
         (overlay_set_position, reg1, pos1),
-        (call_script, "script_party_calculate_strength", "p_main_party", 0),
+        # (call_script, "script_party_calculate_strength", "p_main_party", 0),
+        (call_script, "script_get_mercenary_payment"),
         (assign, ":offer_value", reg0),
-		(val_add, ":offer_value", reg1),
-        (val_div, ":offer_value", 40), # Was 4
-        (val_add, ":offer_value", 30),
+		# (val_add, ":offer_value", reg1),
+        # (val_div, ":offer_value", 40), # Was 4
+        # (val_add, ":offer_value", 30),
         (call_script, "script_round_value", ":offer_value"),
         (val_add, ":net_change", reg0),
         (create_text_overlay, reg1, "@{!}{reg0}", tf_right_align|tf_single_line),

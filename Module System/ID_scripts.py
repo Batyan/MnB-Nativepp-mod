@@ -796,5 +796,6 @@ script_remove_family_links = 794
 script_lady_take_arms = 795
 script_set_default_troop_division_control = 796
 script_agent_set_division_controled = 797
+script_get_mercenary_payment = 798
 
 
