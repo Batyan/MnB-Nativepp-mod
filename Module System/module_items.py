@@ -262,7 +262,7 @@ items = [
  ["courser","Courser", [("courser",0)],                        itp_merchandise|itp_type_horse, 0, 
   780,          abundance(75)|hit_points(50)|body_armor(8) |difficulty(2)|horse_speed(52)|horse_maneuver(41)|horse_charge(20)|horse_scale(100),imodbits_horse_basic|imodbit_champion],
  ["arabian_horse_b","Sarranid Horse", [("arabian_horse_b",0)], itp_merchandise|itp_type_horse, 0, 
-  820,  		abundance(70)|hit_points(60)|body_armor(10)|difficulty(3)|horse_speed(46)|horse_maneuver(51)|horse_charge(34)|horse_scale(101),imodbits_horse_basic|imodbit_champion, [], [fac_kingdom_6]],
+  820,  		abundance(70)|hit_points(60)|body_armor(10)|difficulty(3)|horse_speed(46)|horse_maneuver(49)|horse_charge(34)|horse_scale(101),imodbits_horse_basic|imodbit_champion, [], [fac_kingdom_6]],
  ["hunter","Hunter", [("hunting_horse",0)],                    itp_merchandise|itp_type_horse, 0, 
   995,        	abundance(70)|hit_points(70)|body_armor(18)|difficulty(3)|horse_speed(44)|horse_maneuver(44)|horse_charge(40)|horse_scale(107),imodbits_horse_basic|imodbit_champion],
  ["warhorse","War Horse", [("warhorse",0)],                    itp_merchandise|itp_type_horse, 0, 
@@ -1206,7 +1206,8 @@ items = [
 
 #TODO:
 
-["stones",         "Stones", [("throwing_stone",0)], itp_type_thrown |itp_merchandise|itp_primary ,itcf_throw_stone, 1 , weight(4)|difficulty(0)|spd_rtng(97) | shoot_speed(30) | thrust_damage(9 ,  blunt)|max_ammo(8)|weapon_length(7),imodbit_large_bag ],
+["stones",         "Stones", [("throwing_stone",0)], itp_type_thrown |itp_merchandise|itp_primary ,itcf_throw_stone, 
+ 1 , weight(4)|difficulty(0)|spd_rtng(97) | shoot_speed(30) | thrust_damage(9 ,  blunt)|max_ammo(8)|weapon_length(7),imodbit_large_bag ],
 
 ["throwing_knives", "Throwing Knives", [("throwing_knife",0)], itp_type_thrown |itp_merchandise|itp_primary ,itcf_throw_knife, 
  76 , weight(2)|difficulty(0)|spd_rtng(121) | shoot_speed(29) | thrust_damage(19 ,  cut)|max_ammo(7)|weapon_length(25),imodbits_thrown ],

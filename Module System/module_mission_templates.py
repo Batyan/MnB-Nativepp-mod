@@ -650,7 +650,7 @@ common_pbod_triggers = [ #collapse caba_order_triggers into this?
 
   #Fix for setting divisions, duplicated in formations code, so disabled in mst_lead_charge
   (ti_on_agent_spawn, 0, 0, # [(neq, "$g_next_menu", "mnu_simple_encounter"),(neq, "$g_next_menu", "mnu_join_battle")], [(store_trigger_param_1, ":agent"),(call_script, "script_prebattle_agent_fix_division", ":agent")]),
-                            [], [(store_trigger_param_1, ":agent"),(call_script, "script_prebattle_agent_fix_division", ":agent")]),
+                            [(neg|is_between, "$g_encountered_party", centers_begin, centers_end),], [(store_trigger_param_1, ":agent"),(call_script, "script_prebattle_agent_fix_division", ":agent")]),
   (0.5, 0, 0, [#(neq, "$g_next_menu", "mnu_simple_encounter"), #not mst_lead_charge
 			   #(neq, "$g_next_menu", "mnu_join_battle"),
 			   (store_mission_timer_a, reg0),(gt, reg0, 4)], 
@@ -3419,43 +3419,43 @@ common_siege_check_defeat_condition = (
     (assign, "$pin_player_fallen", 1),
 	##PBOD - Battle Continuation
 	(try_begin),
-	  (party_slot_eq, "p_main_party", slot_party_pref_bc_continue, 1), #PBOD Battle Continuation Active
-	  (assign, ":num_allies", 0),
-	  (try_for_agents, ":agent"),
-		 (agent_is_ally, ":agent"),
-		 (agent_is_alive, ":agent"),
-		 (val_add, ":num_allies", 1),
-      (try_end),
-	  (gt, ":num_allies", 0),
-	  (try_begin),
-		  (neq, "$cam_free", 1),
-		  (display_message, "@You have been knocked out by the enemy. Watch your men continue the fight without you or press Tab to retreat."),
-		  (assign, "$cam_free", 1),
-		  (assign, "$cam_mode", 2),
-		  (call_script, "script_cust_cam_cycle_forwards"), #So, on Follow, it doesn't begin with the player's dead body
-		  (mission_cam_set_mode, 1),
-		  # (party_slot_eq, "p_main_party", slot_party_pref_bc_charge_ko, 1), #PBOD "Charge on KO" Active
-		  # (set_show_messages, 0),
-		  # (team_give_order, "$fplayer_team_no", grc_everyone, mordr_charge),
-		  # (set_show_messages, 1),
-	  (try_end),
+		(party_slot_eq, "p_main_party", slot_party_pref_bc_continue, 1), #PBOD Battle Continuation Active
+		(assign, ":num_allies", 0),
+		(try_for_agents, ":agent"),
+			(agent_is_ally, ":agent"),
+			(agent_is_alive, ":agent"),
+			(val_add, ":num_allies", 1),
+		(try_end),
+		(gt, ":num_allies", 0),
+		(try_begin),
+			(neq, "$cam_free", 1),
+			(display_message, "@You have been knocked out by the enemy. Watch your men continue the fight without you or press Tab to retreat."),
+			(assign, "$cam_free", 1),
+			(assign, "$cam_mode", 2),
+			(call_script, "script_cust_cam_cycle_forwards"), #So, on Follow, it doesn't begin with the player's dead body
+			(mission_cam_set_mode, 1),
+			# (party_slot_eq, "p_main_party", slot_party_pref_bc_charge_ko, 1), #PBOD "Charge on KO" Active
+			# (set_show_messages, 0),
+			# (team_give_order, "$fplayer_team_no", grc_everyone, mordr_charge),
+			# (set_show_messages, 1),
+		(try_end),
 	(else_try),
-	##PBOD - Battle Continuation
-    (get_player_agent_no, ":player_agent"),
-    (agent_get_team, ":agent_team", ":player_agent"),
-    (try_begin),
-      (neq, "$attacker_team", ":agent_team"),
-      (neq, "$attacker_team_2", ":agent_team"),
-      (str_store_string, s5, "str_siege_continues"),
-      (call_script, "script_simulate_retreat", 8, 15, 0),
-    (else_try),
-      (str_store_string, s5, "str_retreat"),
-      (call_script, "script_simulate_retreat", 5, 20, 0),
-    (try_end),
-    (assign, "$g_battle_result", -1),
-    (set_mission_result,-1),
-    (call_script, "script_count_mission_casualties_from_agents"),
-    (finish_mission,0),
+		##PBOD - Battle Continuation
+		(get_player_agent_no, ":player_agent"),
+		(agent_get_team, ":agent_team", ":player_agent"),
+		(try_begin),
+			(neq, "$attacker_team", ":agent_team"),
+			(neq, "$attacker_team_2", ":agent_team"),
+			(str_store_string, s5, "str_siege_continues"),
+			(call_script, "script_simulate_retreat", 8, 15, 0),
+		(else_try),
+			(str_store_string, s5, "str_retreat"),
+			(call_script, "script_simulate_retreat", 5, 20, 0),
+		(try_end),
+		(assign, "$g_battle_result", -1),
+		(set_mission_result,-1),
+		(call_script, "script_count_mission_casualties_from_agents"),
+		(finish_mission,0),
 	(try_end)
     ])
 
@@ -3661,6 +3661,7 @@ common_siege_change_men_defence_point = (
 		(try_end),
 		(val_add, ":num_archers", 1),
 		(agent_set_division, ":agent_no", grc_archers), ## assign as archer
+		(agent_set_slot, ":agent_no", slot_agent_new_division, grc_archers),
 		(agent_set_slot, ":agent_no", slot_agent_is_not_reinforcement, 0),
 		(agent_set_slot, ":agent_no", slot_agent_target_entry_point, 0),
 	  (else_try),
@@ -3669,6 +3670,7 @@ common_siege_change_men_defence_point = (
 		(try_begin),
 		  (lt, ":ammo", 1),									## as they have throwing weapons => low ammo
 		  (agent_set_division, ":agent_no", grc_infantry),	## => switch between foot soldier and archer
+		  (agent_set_slot, ":agent_no", slot_agent_new_division, grc_infantry),
 		  (val_add, ":difference", 1),						## good so they don't stand useless in the middle of the tower without ammo ?
 		  (val_add, ":num_archers", -1),
 		  (agent_clear_scripted_mode, ":agent_no"), # Clear scripted mode
@@ -3678,10 +3680,12 @@ common_siege_change_men_defence_point = (
 		(try_begin),
 		  (lt, ":difference", -1),
 		  (agent_set_division, ":agent_no", grc_infantry),
+		  (agent_set_slot, ":agent_no", slot_agent_new_division, grc_infantry),
 		  (val_add, ":difference", 2),
 		(else_try),
 		  (gt, ":difference", 1),
 		  (agent_set_division, ":agent_no", grc_cavalry),
+		  (agent_set_slot, ":agent_no", slot_agent_new_division, grc_cavalry),
 		  (val_add, ":difference", -2),
 		(try_end),
 	  (try_end),
@@ -4452,16 +4456,12 @@ mission_templates = [
 
 		  (str_store_troop_name, s4, ":prisoner"),
 		  (display_message, "str_s4_joins_prison_break"),
+		  
+          (troop_set_slot, ":prisoner", slot_troop_will_join_prison_break, 1),
 			
 		  (store_current_scene, ":cur_scene"), #this might be a better option?
 		  (modify_visitors_at_site, ":cur_scene"),
-			            
-          #<entry_no>,<troop_id>,<number_of_troops>, <team_no>, <group_no>), 
-          #team no and group no are used in multiplayer mode only. default team in entry is used in single player mode            
-          (store_current_scene, ":cur_scene"),
-          (modify_visitors_at_site, ":cur_scene"),                      
           (add_visitors_to_current_scene, 24, ":prisoner", 1, 0, 0),
-          (troop_set_slot, ":prisoner", slot_troop_will_join_prison_break, 1),					          
         (try_end),
 	  ]),
 	
@@ -4519,11 +4519,11 @@ mission_templates = [
    (ti_on_agent_killed_or_wounded, 0, 0, [],
    [
      (store_trigger_param_1, ":dead_agent_no"),
-     (store_trigger_param_2, ":killer_agent_no"),
+     # (store_trigger_param_2, ":killer_agent_no"),
      #(store_trigger_param_3, ":is_wounded"),
         
      (agent_get_troop_id, ":dead_agent_troop_no", ":dead_agent_no"),
-     (agent_get_troop_id, ":killer_agent_troop_no", ":killer_agent_no"),
+     # (agent_get_troop_id, ":killer_agent_troop_no", ":killer_agent_no"),
                 
      (try_begin), 
        (this_or_next|eq, ":dead_agent_troop_no", "trp_swadian_prison_guard"),
@@ -4533,7 +4533,7 @@ mission_templates = [
        (this_or_next|eq, ":dead_agent_troop_no", "trp_rhodok_prison_guard"),
        (eq, ":dead_agent_troop_no", "trp_sarranid_prison_guard"),
           
-       (eq, ":killer_agent_troop_no", "trp_player"),
+       # (eq, ":killer_agent_troop_no", "trp_player"),
           
        (display_message, "@You got keys of dungeon."),
      (try_end),
@@ -5899,6 +5899,7 @@ mission_templates = [
 		 (agent_get_division, ":division", ":agent_no"),
 		 (neq, ":division", grc_archers),
 		 (agent_set_division, ":agent_no", "$g_siege_division_double_entry"),
+		 (agent_set_slot, ":agent_no", slot_agent_new_division, "$g_siege_division_double_entry"),
 		 (val_add, "$g_siege_division_double_entry", 2),
 		 (val_mod, "$g_siege_division_double_entry", 4),
 	       
@@ -5921,8 +5922,8 @@ mission_templates = [
       common_siege_move_belfry,
       common_siege_rotate_belfry,
       common_siege_assign_men_to_belfry,
-	  common_siege_change_men_defence_point,
-	  common_siege_control_division,
+      common_siege_change_men_defence_point,
+      common_siege_control_division,
     ] + common_pbod_triggers + prebattle_orders_triggers + prebattle_deployment_triggers + caba_order_triggers + custom_camera_triggers,
   ),
 
@@ -6003,6 +6004,7 @@ mission_templates = [
 		 (agent_get_division, ":division", ":agent_no"),
 		 (neq, ":division", grc_archers),
 		 (agent_set_division, ":agent_no", "$g_siege_division_double_entry"),
+		 (agent_set_slot, ":agent_no", slot_agent_new_division, "$g_siege_division_double_entry"),
 		 (val_add, "$g_siege_division_double_entry", 2),
 		 (val_mod, "$g_siege_division_double_entry", 4),
 	       
@@ -6136,6 +6138,7 @@ mission_templates = [
 		 (agent_get_division, ":division", ":agent_no"),
 		 (neq, ":division", grc_archers),
 		 (agent_set_division, ":agent_no", "$g_siege_division_double_entry"),
+		 (agent_set_slot, ":agent_no", slot_agent_new_division, "$g_siege_division_double_entry"),
 		 (val_add, "$g_siege_division_double_entry", 2),
 		 (val_mod, "$g_siege_division_double_entry", 4),
 	       
@@ -6251,11 +6254,11 @@ mission_templates = [
       (ti_on_agent_killed_or_wounded, 0, 0, [],
       [
         (store_trigger_param_1, ":dead_agent_no"),
-        (store_trigger_param_2, ":killer_agent_no"),
+        # (store_trigger_param_2, ":killer_agent_no"),
         #(store_trigger_param_3, ":is_wounded"),
         
         (agent_get_troop_id, ":dead_agent_troop_no", ":dead_agent_no"),
-        (agent_get_troop_id, ":killer_agent_troop_no", ":killer_agent_no"),
+        # (agent_get_troop_id, ":killer_agent_troop_no", ":killer_agent_no"),
                 
         (try_begin), 
           (this_or_next|eq, ":dead_agent_troop_no", "trp_swadian_prison_guard"),
@@ -6263,9 +6266,11 @@ mission_templates = [
           (this_or_next|eq, ":dead_agent_troop_no", "trp_khergit_prison_guard"),
           (this_or_next|eq, ":dead_agent_troop_no", "trp_nord_prison_guard"),
           (this_or_next|eq, ":dead_agent_troop_no", "trp_rhodok_prison_guard"),
-          (eq, ":dead_agent_troop_no", "trp_sarranid_prison_guard"),
+          (this_or_next|eq, ":dead_agent_troop_no", "trp_sarranid_prison_guard"),
+          (this_or_next|eq, ":dead_agent_troop_no", "trp_mercenary_prison_guard"),
+          (eq, ":dead_agent_troop_no", "trp_original_prison_guard"),
           
-          (eq, ":killer_agent_troop_no", "trp_player"),
+          # (eq, ":killer_agent_troop_no", "trp_player"),
           
           (display_message, "@You got keys of dungeon."),
         (try_end),
@@ -6303,16 +6308,15 @@ mission_templates = [
           
           (str_store_troop_name, s4, ":prisoner"),
           (display_message, "str_s4_joins_prison_break"),
+		  
+		  (troop_set_slot, ":prisoner", slot_troop_will_join_prison_break, 1),
           
-          (store_current_scene, ":cur_scene"), #this might be a better option?
-          (modify_visitors_at_site, ":cur_scene"),
-          #<entry_no>,<troop_id>,<number_of_troops>, <team_no>, <group_no>), 
-          #team no and group no are used in multiplayer mode only. default team in entry is used in single player mode
           (store_current_scene, ":cur_scene"),
           (modify_visitors_at_site, ":cur_scene"),
           (assign, ":nearest_entry_no", 24),
+		  
           (add_visitors_to_current_scene, ":nearest_entry_no", ":prisoner", 1, 0, 0),
-          (troop_set_slot, ":prisoner", slot_troop_will_join_prison_break, 1),          
+          # (troop_set_slot, ":prisoner", slot_troop_will_join_prison_break, 1),
         (try_end),
 	  ]),
 

@@ -33769,8 +33769,10 @@ scripts = [
       (val_min, "$battle_renown_value", 2500),
       (convert_to_fixed_point, "$battle_renown_value"),
       (store_sqrt, "$battle_renown_value", "$battle_renown_value"),
-      (store_sqrt, "$battle_renown_value", "$battle_renown_value"), # Doubles that to make less renown gain
+      # (store_sqrt, "$battle_renown_value", "$battle_renown_value"), # Doubles that to make less renown gain
       (convert_from_fixed_point, "$battle_renown_value"),
+	  (val_div, "$battle_renown_value", 5), # Big battles will earn more renown than small ones
+	  (val_add, "$battle_renown_value", 1), # Minimum renown gain?
       (assign, reg8, "$battle_renown_value"),
       (display_message, "@Renown value for this battle is {reg8}.",0xFFFFFFFF),
   ]),
@@ -53252,7 +53254,9 @@ scripts = [
         (neq, ":other_team", ":player_team"),
 
         (agent_get_troop_id, ":troop_id", ":agent"),
-   		(neg|is_between, ":troop_id", "trp_swadian_recruit", "trp_looter"),
+   		# (neg|is_between, ":troop_id", "trp_swadian_recruit", "trp_looter"),
+		# Fix prison escape
+   		(neg|is_between, ":troop_id", soldiers_begin, soldiers_end),
 
         (agent_get_position, pos4, ":agent"),
 
@@ -60503,16 +60507,13 @@ scripts = [
 		 (this_or_next|eq, ":skill_id", "skl_power_throw"),
 		 (eq, ":skill_id", "skl_horse_archery"),
 		 (val_add, ":new_skill", 1),
-	   # (else_try),  ##commented 0.751
-	     # (eq, ":skill_id", "skl_athletics"),
-		 # (val_max, ":new_skill", 1),
 	   (else_try),
 	     (eq, ":skill_id", "skl_inventory_management"),
 		 (val_div, ":new_skill", 2),
 		 (val_add, ":new_skill", 1),
 	   (else_try),
-		 (this_or_next|eq, ":skill_id", "skl_shield"), ##new 0.751
-		 (eq, ":skill_id", "skl_athletics"), ##new 0.751
+		 (this_or_next|eq, ":skill_id", "skl_shield"),
+		 (eq, ":skill_id", "skl_athletics"),
 		 (val_max, ":new_skill", 1),
 	   (else_try),
 	     (assign, ":new_skill", ":skill_point"),
@@ -74400,7 +74401,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
     (store_script_param, ":rain_type", 1),
     (store_script_param, ":rain_strength", 2),
 
-				(try_begin),
+	(try_begin),
 		(assign, ":night", 0),
 		(try_begin),
 			(is_currently_night),
@@ -74409,24 +74410,24 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 		(get_global_haze_amount, ":fog"),
 		
 		(assign, ":prof_penalty", 0),
-						(try_begin),
+		(try_begin),
 			(eq, ":night", 1),
 			(val_add, ":prof_penalty", 15), #15% decrease for fighting at night
-						(try_end),
-						(try_begin),
+		(try_end),
+		(try_begin),
 			(ge, ":fog", 50),
 			(val_sub, ":fog", 50),
 			(val_div, ":fog", 5),
 			(val_add, ":prof_penalty", ":fog"), #1% decrease for each 5% of fog over 50
-			(try_end),
-			(try_begin),
+		(try_end),
+		(try_begin),
 			(neq, ":rain_type", -1),
 			(val_sub, ":rain_strength", 20),
 			(val_div, ":rain_strength", 5), #1% decrease for each 5% of snow strength over 20
 			(val_add, ":prof_penalty", ":rain_strength"),
 			(eq, ":rain_type", 1), #another 1% decrease for each 5% of strength over 20 for rain
 			(val_add, ":prof_penalty", ":rain_strength"), 
-			(try_end),
+		(try_end),
 
 		(val_min, ":prof_penalty", 51),
 		(ge, ":prof_penalty", 15), #Make sure it is worth it
@@ -74452,7 +74453,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 				(call_script, "script_weather_troop_lower_proficiencies", ":troop_id", ":prof_penalty"),        
 			(try_end), #Stack Loop
 		(try_end), #Party Loop 
-				(try_end),
+	(try_end),
    ]),
 				
   #script_weather_troop_lower_proficiencies
@@ -74464,22 +74465,22 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
     (store_script_param, ":prof_penalty", 2),
 
     (try_for_range, ":n", 0, 3),
-				(try_begin),
-            (eq, ":n", 0),
-            (assign, ":proficiency", wpt_archery),
-#            (assign, ":prof_item_type", itp_type_bow),
-            (assign, ":prof_slot", slot_troop_orig_wpt_archery),
-				(else_try),
-            (eq, ":n", 1),
-            (assign, ":proficiency", wpt_crossbow),
-#            (assign, ":prof_item_type", itp_type_crossbow),
-            (assign, ":prof_slot", slot_troop_orig_wpt_crossbow),
-				(else_try),
+		(try_begin),
+			(eq, ":n", 0),
+			(assign, ":proficiency", wpt_archery),
+			# (assign, ":prof_item_type", itp_type_bow),
+			(assign, ":prof_slot", slot_troop_orig_wpt_archery),
+		(else_try),
+			(eq, ":n", 1),
+			(assign, ":proficiency", wpt_crossbow),
+			# (assign, ":prof_item_type", itp_type_crossbow),
+			(assign, ":prof_slot", slot_troop_orig_wpt_crossbow),
+		(else_try),
             (eq, ":n", 2),
             (assign, ":proficiency", wpt_throwing),
-#            (assign, ":prof_item_type", itp_type_thrown),
-            (assign, ":prof_slot", slot_troop_orig_wpt_throwing),
-				(try_end),
+			# (assign, ":prof_item_type", itp_type_thrown),
+			(assign, ":prof_slot", slot_troop_orig_wpt_throwing),
+		(try_end),
 
         (store_proficiency_level, ":orig_proficiency", ":troop_id", ":proficiency"),
 				
@@ -79197,6 +79198,7 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
 	(party_get_slot, ":town_lord", ":center_no", slot_town_lord),
 	(gt, ":town_lord", 1), #if the center belongs to no one, don't think about changing to that faction
 	(store_faction_of_party, ":center_faction", ":center_no"),
+	(is_between, ":center_faction", npc_kingdoms_begin, npc_kingdoms_end),
 	(troop_get_slot, ":lord_party", ":town_lord", slot_troop_leaded_party),
 	(try_begin),
 	  (gt, ":lord_party", 0),
@@ -80772,9 +80774,9 @@ Born at {s43}^Contact in {s44} of the {s45}.^\
   # script_reform_battlegroup
   ("reform_battlegroup",
   [
-	(store_script_param, ":team", 1),
-	(store_script_param, ":group", 2),
-	(store_script_param, ":tactical_retreat", 3), # When this parameter is a 1 it means the group will try to keep an eye on other groups, and help them if needed
+	# (store_script_param, ":team", 1),
+	# (store_script_param, ":group", 2),
+	# (store_script_param, ":tactical_retreat", 3), # When this parameter is a 1 it means the group will try to keep an eye on other groups, and help them if needed
 	# That parameter is most of the time at 1 for cavalry groups only, as they can help others more easily
 	# For other groups, it will make them move slowly towards their spawn
 	
