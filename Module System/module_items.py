@@ -614,7 +614,7 @@ items = [
  9 , weight(1)|abundance(100)|head_armor(10)|body_armor(0)|leg_armor(0)|difficulty(0) ,imodbits_cloth ],
 ["leather_steppe_cap_a", "Steppe Cap", [("leather_steppe_cap_a_new",0)], itp_merchandise|itp_type_head_armor ,0,
  25 , weight(1)|abundance(100)|head_armor(13)|body_armor(0)|leg_armor(0) ,imodbits_cloth ],
-["leather_steppe_cap_b", "Steppe Cap ", [("tattered_steppe_cap_b_new",0)], itp_merchandise|itp_type_head_armor ,0,
+["leather_steppe_cap_b", "Steppe Cap", [("tattered_steppe_cap_b_new",0)], itp_merchandise|itp_type_head_armor ,0,
  105 , weight(1)|abundance(100)|head_armor(19)|body_armor(0)|leg_armor(0) ,imodbits_cloth ],
 ["leather_steppe_cap_c", "Steppe Cap", [("leather_steppe_cap_b",0)], itp_merchandise|itp_type_head_armor ,0,
  55 , weight(1)|abundance(100)|head_armor(16)|body_armor(0)|leg_armor(0) ,imodbits_cloth ],

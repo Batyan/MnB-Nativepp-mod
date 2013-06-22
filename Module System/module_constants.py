@@ -1946,7 +1946,7 @@ custom_banner_map_icons_begin = "icon_custom_banner_01"
 custom_banner_map_icons_end = "icon_banner_01"
 
 banner_map_icons_begin = "icon_banner_01"
-banner_map_icons_end_minus_one = "icon_banner_252"
+banner_map_icons_end_minus_one = "icon_bandit_lair"
 
 banner_scene_props_begin = "spr_banner_a"
 banner_scene_props_end_minus_one = "spr_banner_l21"
@@ -1958,7 +1958,7 @@ khergit_banners_end_offset = 84
 sarranid_banners_begin_offset = 105
 sarranid_banners_end_offset = 125
 
-banners_end_offset = 136
+banners_end_offset = 253
 
 # Some constants for merchant invenotries
 merchant_inventory_space = 30
