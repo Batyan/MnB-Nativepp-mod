@@ -2589,9 +2589,19 @@ game_menus = [
 				(str_store_string, s5, "str_whereabouts_unknown"),
 			(else_try), #Excludes companions who have occupation = retirement
 			
-				(troop_set_slot, ":companion", slot_troop_current_mission, npc_mission_rejoin_when_possible),
-			
-				(str_store_string, s8, "str_attempting_to_rejoin_party"),
+				(try_begin),
+				  (check_quest_active, "qst_lend_companion"),
+				  (quest_slot_eq, "qst_lend_companion", slot_quest_target_troop, ":companion"),
+				  (str_store_string, s8, "@On loan,"), 
+				(else_try),
+				  (check_quest_active, "qst_lend_surgeon"),
+				  (quest_slot_eq, "qst_lend_surgeon", slot_quest_target_troop, ":companion"),
+				  (str_store_string, s8, "@On loan,"), 
+				(else_try),
+				  (troop_set_slot, ":companion", slot_troop_current_mission, npc_mission_rejoin_when_possible),
+				  (str_store_string, s8, "str_attempting_to_rejoin_party"),                  
+				(try_end),
+                
 				(str_store_string, s5, "str_whereabouts_unknown"),
 				
 				(try_begin),
@@ -5671,15 +5681,15 @@ game_menus = [
         (else_try),          
           (eq, "$loot_screen_shown", 0),
           (assign, "$loot_screen_shown", 1),
-          (try_begin),
-            (gt, "$g_ally_party", 0),
-            (call_script, "script_party_add_party", "$g_ally_party", "p_temp_party"), #Add remaining prisoners to ally TODO: FIX it.
-          (else_try),
-            (party_get_num_attached_parties, ":num_quick_attachments", "p_main_party"),
-            (gt, ":num_quick_attachments", 0),
-            (party_get_attached_party_with_rank, ":helper_party", "p_main_party", 0),
-            (call_script, "script_party_add_party", ":helper_party", "p_temp_party"), #Add remaining prisoners to our reinforcements
-          (try_end),          
+          # (try_begin),
+            # (gt, "$g_ally_party", 0),
+            # (call_script, "script_party_add_party", "$g_ally_party", "p_temp_party"), #Add remaining prisoners to ally TODO: FIX it.
+          # (else_try),
+            # (party_get_num_attached_parties, ":num_quick_attachments", "p_main_party"),
+            # (gt, ":num_quick_attachments", 0),
+            # (party_get_attached_party_with_rank, ":helper_party", "p_main_party", 0),
+            # (call_script, "script_party_add_party", ":helper_party", "p_temp_party"), #Add remaining prisoners to our reinforcements
+          # (try_end),          
           (troop_clear_inventory, "trp_temp_troop"),
           (call_script, "script_party_calculate_loot", "p_total_enemy_casualties"), #p_encountered_party_backup changed to total_enemy_casualties
           (gt, reg0, 0),          
@@ -14889,12 +14899,12 @@ goods, and books will never be sold. ^^You can change some settings here freely.
             (troop_get_type, ":is_female", "trp_player"),
             (eq, ":is_female", 1),
 
-            (get_achievement_stat, ":number_of_lords_sold", ACHIEVEMENT_MEN_HANDLER, 1),
+            (get_achievement_stat, ":number_of_lords_sold", ACHIEVEMENT_MAN_HANDLER, 1),
             (val_add, ":number_of_lords_sold", 1),
-            (set_achievement_stat, ACHIEVEMENT_MEN_HANDLER, 1, ":number_of_lords_sold"),
+            (set_achievement_stat, ACHIEVEMENT_MAN_HANDLER, 1, ":number_of_lords_sold"),
 
             (eq, ":number_of_lords_sold", 3),
-            (unlock_achievement, ACHIEVEMENT_MEN_HANDLER),
+            (unlock_achievement, ACHIEVEMENT_MAN_HANDLER),
         (try_end),
 		
         (change_screen_return),
@@ -17864,15 +17874,15 @@ goods, and books will never be sold. ^^You can change some settings here freely.
         (try_begin),
           (eq, "$loot_screen_shown", 0),
           (assign, "$loot_screen_shown", 1),
-          (try_begin),
-            (gt, "$g_ally_party", 0),
-            (call_script, "script_party_add_party", "$g_ally_party", "p_temp_party"), #Add remaining prisoners to ally TODO: FIX it.
-          (else_try),
-            (party_get_num_attached_parties, ":num_quick_attachments", "p_main_party"),
-            (gt, ":num_quick_attachments", 0),
-            (party_get_attached_party_with_rank, ":helper_party", "p_main_party", 0),
-            (call_script, "script_party_add_party", ":helper_party", "p_temp_party"), #Add remaining prisoners to our reinforcements
-          (try_end),
+          # (try_begin),
+            # (gt, "$g_ally_party", 0),
+            # (call_script, "script_party_add_party", "$g_ally_party", "p_temp_party"), #Add remaining prisoners to ally TODO: FIX it.
+          # (else_try),
+            # (party_get_num_attached_parties, ":num_quick_attachments", "p_main_party"),
+            # (gt, ":num_quick_attachments", 0),
+            # (party_get_attached_party_with_rank, ":helper_party", "p_main_party", 0),
+            # (call_script, "script_party_add_party", ":helper_party", "p_temp_party"), #Add remaining prisoners to our reinforcements
+          # (try_end),
           (troop_clear_inventory, "trp_temp_troop"),
           
           (party_get_num_companion_stacks, ":num_stacks", "p_temp_casualties"), 

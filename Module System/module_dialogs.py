@@ -4155,6 +4155,30 @@ whereas {reg21?{s9} still has {reg21} {s0} supporting {reg0?her:him}:{s9} has no
    (assign, "$political_quest_object_troop", reg2),
 
  ]],
+ 
+ [anyone|plyr,"minister_talk", [
+	(check_quest_active, "qst_offer_gift"),
+    (quest_slot_eq, "qst_offer_gift", slot_quest_giver_troop, "$g_talk_troop"),
+	
+    (quest_get_slot, ":target_troop", "qst_offer_gift", slot_quest_target_troop),
+	(str_store_troop_name, s4, ":target_troop"),
+	(player_has_item, "itm_furs"),
+	(player_has_item, "itm_velvet"),
+   ],
+   "I have the materials for {s4}'s gift.", "offer_gift_quest_complete",[
+   ]],
+
+   [anyone,"offer_gift_quest_complete", [
+   (quest_get_slot, ":target_troop", "qst_offer_gift", slot_quest_target_troop),
+   (troop_get_type, reg4, ":target_troop"),
+   ],
+   "Ah, let me take those. Hopefully this will mend the quarrel between you two. You may wish to speak to {reg4?her:him}, and see if I had any success.", "close_window",[
+   (quest_set_slot, "qst_offer_gift", slot_quest_current_state, 2),
+   (quest_set_slot, "qst_offer_gift", slot_quest_expiration_days, 365),
+   (troop_remove_item, "trp_player", "itm_furs"),
+   (troop_remove_item, "trp_player", "itm_velvet"),
+   (assign, "$g_leave_encounter", 1),
+   ]],
 
 
   [anyone|plyr,"minister_talk",
@@ -15401,6 +15425,7 @@ What kind of recruits do you want?", "dplmc_constable_recruit_select",
 		(str_store_faction_name, s2, ":new_faction"),
 		(str_store_faction_name, s3, ":old_faction"),
 
+		(troop_set_slot, "$g_talk_troop", slot_troop_occupation, slto_kingdom_hero),
 		(call_script, "script_change_troop_faction", "$g_talk_troop", ":new_faction"),
 
 ##diplomacy start+
@@ -17491,6 +17516,7 @@ You can wait for {reg0?her:his} family to pay {reg0?her:his} ransom of course, b
    ],
    "Ah, let me take those. Hopefully this will mend the quarrel between you two. You may wish to speak to {reg4?her:him}, and see if I had any success.", "close_window",[
    (quest_set_slot, "qst_offer_gift", slot_quest_current_state, 2),
+   (quest_set_slot, "qst_offer_gift", slot_quest_expiration_days, 365),
    (troop_remove_item, "trp_player", "itm_furs"),
    (troop_remove_item, "trp_player", "itm_velvet"),
    (assign, "$g_leave_encounter", 1),
@@ -28876,6 +28902,30 @@ I suppose there are plenty of bounty hunters around to get the job done . . .", 
    ],
    "As you are my chief minister, I wish to speak to about affairs of state", "minister_issues",[
  ]],
+ 
+  [anyone|plyr,"spouse_talk", [
+	(check_quest_active, "qst_offer_gift"),
+    (quest_slot_eq, "qst_offer_gift", slot_quest_giver_troop, "$g_talk_troop"),
+	
+    (quest_get_slot, ":target_troop", "qst_offer_gift", slot_quest_target_troop),
+	(str_store_troop_name, s4, ":target_troop"),
+	(player_has_item, "itm_furs"),
+	(player_has_item, "itm_velvet"),
+   ],
+   "I have the materials for {s4}'s gift.", "offer_gift_quest_complete",[
+   ]],
+
+   [anyone,"offer_gift_quest_complete", [
+   (quest_get_slot, ":target_troop", "qst_offer_gift", slot_quest_target_troop),
+   (troop_get_type, reg4, ":target_troop"),
+   ],
+   "Ah, let me take those. Hopefully this will mend the quarrel between you two. You may wish to speak to {reg4?her:him}, and see if I had any success.", "close_window",[
+   (quest_set_slot, "qst_offer_gift", slot_quest_current_state, 2),
+   (quest_set_slot, "qst_offer_gift", slot_quest_expiration_days, 365),
+   (troop_remove_item, "trp_player", "itm_furs"),
+   (troop_remove_item, "trp_player", "itm_velvet"),
+   (assign, "$g_leave_encounter", 1),
+   ]],
 
   [anyone|plyr,"spouse_talk",
    [
@@ -33184,7 +33234,8 @@ I suppose there are plenty of bounty hunters around to get the job done . . .", 
 
   (eq, "$political_quest_found", "qst_offer_gift"),
   (quest_set_slot, "qst_offer_gift", slot_quest_target_troop, "$political_quest_target_troop"),
-
+  (quest_set_slot, "qst_offer_gift", slot_quest_giver_troop, "$g_talk_troop"),
+  
   (quest_get_slot, ":target_troop", "qst_offer_gift", slot_quest_target_troop),
   (str_store_troop_name, s4, ":target_troop"),
   (troop_get_type, reg4, ":target_troop"),
