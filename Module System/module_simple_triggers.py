@@ -774,13 +774,19 @@ simple_triggers = [
 		   (assign, ":continue", 1),
 		 (try_end),
 	   (try_end),
+	   
+	   (assign, ":reinforcement_cost", reinforcement_cost_moderate),
+	   (try_begin),
+		 (party_slot_eq, ":center_no", slot_center_has_recruitment_camp),
+		 (val_div, ":reinforcement_cost", 2),
+	   (try_end),
 		 
        (assign, ":hiring_budget", ":cur_wealth"),
        (val_div, ":hiring_budget", 2),
 	   (this_or_next|eq, ":continue", 1),
-       (gt, ":hiring_budget", reinforcement_cost_moderate),
+       (gt, ":hiring_budget", ":reinforcement_cost"),
        (call_script, "script_cf_reinforce_party", ":center_no"),
-       (val_sub, ":cur_wealth", reinforcement_cost_moderate),
+       (val_sub, ":cur_wealth", ":reinforcement_cost"),
 	   (neg|party_slot_eq, ":center_no", slot_town_lord, "trp_player"), # don't change wealth of center if it belongs to the player -- he paid for a building!
 	   (neq, ":continue", 1), # don't change wealth of a center that has too few men -- free troops
        (party_set_slot, ":center_no", slot_town_wealth, ":cur_wealth"),

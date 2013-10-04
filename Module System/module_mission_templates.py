@@ -5836,17 +5836,17 @@ mission_templates = [
      (0,mtef_attackers|mtef_team_1,af_override_horse,aif_start_alarmed,12,[]),
      (0,mtef_attackers|mtef_team_1,af_override_horse,aif_start_alarmed,0,[]),
      (10,mtef_defenders|mtef_team_0,af_override_horse,aif_start_alarmed,0,[]),
-     (11,mtef_defenders|mtef_team_0,af_override_horse,aif_start_alarmed,7,[]),
+     (11,mtef_defenders|mtef_team_0,af_override_horse,aif_start_alarmed,8,[]),
      (15,mtef_defenders|mtef_team_0,af_override_horse,aif_start_alarmed,0,[]),
 
-     (40,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (41,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (42,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (43,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (44,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (45,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (46,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (47,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
+     (40,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,0,[]),
+     (41,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,0,[]),
+     (42,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,0,[]),
+     (43,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,0,[]),
+     (44,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,0,[]),
+     (45,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,0,[]),
+     (46,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,0,[]),
+     (47,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,0,[]),
      ],
     [
       common_battle_mission_start,
@@ -5934,16 +5934,16 @@ mission_templates = [
      (0,mtef_attackers|mtef_team_1,af_override_horse,aif_start_alarmed,12,[]),
      (0,mtef_attackers|mtef_team_1,af_override_horse,aif_start_alarmed,0,[]),
      (10,mtef_defenders|mtef_team_0,af_override_horse,aif_start_alarmed,0,[]),
-     (11,mtef_defenders|mtef_team_0,af_override_horse,aif_start_alarmed,7,[]),
+     (11,mtef_defenders|mtef_team_0,af_override_horse,aif_start_alarmed,8,[]),
      (15,mtef_defenders|mtef_team_0,af_override_horse,aif_start_alarmed,0,[]),
 
-     (40,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (41,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (42,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (43,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (44,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (45,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (46,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
+     (40,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,0,[]),
+     (41,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,0,[]),
+     (42,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,0,[]),
+     (43,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,0,[]),
+     (44,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,0,[]),
+     (45,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,0,[]),
+     (46,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,0,[]),
      ],
     [
       common_battle_mission_start,
@@ -6060,138 +6060,7 @@ mission_templates = [
 ##       []),
     ] + common_pbod_triggers + prebattle_orders_triggers + prebattle_deployment_triggers + caba_order_triggers + custom_camera_triggers,
 	),
-  ################################
-  (
-    "castle_attack_walls_skirmish",mtf_battle_mode|mtf_synch_inventory,-1,
-    "You attack the walls of the castle...",
-    [
-     (0,mtef_attackers|mtef_team_1,af_override_horse,aif_start_alarmed,12,[]),
-     (0,mtef_attackers|mtef_team_1,af_override_horse,aif_start_alarmed,0,[]),
-     (10,mtef_defenders|mtef_team_0,af_override_horse,aif_start_alarmed,0,[]),
-     (11,mtef_defenders|mtef_team_0,af_override_horse,aif_start_alarmed,7,[]),
-     (15,mtef_defenders|mtef_team_0,af_override_horse,aif_start_alarmed,0,[]),
-
-     (40,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (41,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (42,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (43,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (44,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (45,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     (46,mtef_defenders|mtef_team_0|mtef_archers_first,af_override_horse,aif_start_alarmed,1,[]),
-     ],
-    [
-      common_battle_mission_start,
-      common_battle_tab_press,
-      common_battle_init_banner,
-      common_siege_question_answered,
-      common_siege_init,
-      common_music_situation_update,
-      common_siege_ai_trigger_init,
-      common_siege_ai_trigger_init_2,
-      common_siege_ai_trigger_init_after_2_secs,
-      common_siege_defender_reinforcement_check,
-      common_siege_defender_reinforcement_archer_reposition,
-      common_siege_attacker_reinforcement_check,
-      common_siege_attacker_do_not_stall,
-      common_battle_check_friendly_kills,
-      common_battle_check_victory_condition,
-      common_battle_victory_display,
-      common_siege_refill_ammo,
-      common_siege_check_defeat_condition,
-      common_battle_order_panel,
-      common_battle_order_panel_tick,
-      common_inventory_not_available,
-	  
-	  common_siege_change_men_defence_point,
-	  common_siege_control_division,
-
-      (ti_on_agent_killed_or_wounded, 0, 0, [],
-       [
-        (store_trigger_param_1, ":dead_agent_no"),
-        (store_trigger_param_2, ":killer_agent_no"),
-        (store_trigger_param_3, ":is_wounded"),
-
-        (try_begin),
-          (ge, ":dead_agent_no", 0),
-          (neg|agent_is_ally, ":dead_agent_no"),
-          (agent_is_human, ":dead_agent_no"),
-          (agent_get_troop_id, ":dead_agent_troop_id", ":dead_agent_no"),
-          (str_store_troop_name, s6, ":dead_agent_troop_id"),
-          (assign, reg0, ":dead_agent_no"),
-          (assign, reg1, ":killer_agent_no"),
-          (assign, reg2, ":is_wounded"),
-          (agent_get_team, reg3, ":dead_agent_no"),          
-          #(display_message, "@{!}dead agent no : {reg0} ; killer agent no : {reg1} ; is_wounded : {reg2} ; dead agent team : {reg3} ; {s6} is added"), 
-          (party_add_members, "p_total_enemy_casualties", ":dead_agent_troop_id", 1), #addition_to_p_total_enemy_casualties
-          (eq, ":is_wounded", 1),
-          (party_wound_members, "p_total_enemy_casualties", ":dead_agent_troop_id", 1), 
-        (try_end),
-       ]),
-	   
-	   
-	   (ti_on_agent_spawn, 0, 0, [],
-       [
-         (store_trigger_param_1, ":agent_no"),
-		 (agent_get_team, ":agent_team", ":agent_no"),
-		 (this_or_next|eq, ":agent_team", "$defender_team"),
-		 (eq, ":agent_team", "$defender_team_2"),
-		 (agent_get_division, ":division", ":agent_no"),
-		 (neq, ":division", grc_archers),
-		 (agent_set_division, ":agent_no", "$g_siege_division_double_entry"),
-		 (agent_set_slot, ":agent_no", slot_agent_new_division, "$g_siege_division_double_entry"),
-		 (val_add, "$g_siege_division_double_entry", 2),
-		 (val_mod, "$g_siege_division_double_entry", 4),
-	       
-         ]),
-
-      (2, 0, 0,
-       [],
-       [
-	   (try_for_agents, ":agent_no"),
-	     (agent_get_team, ":agent_team", ":agent_no"),
-		 (this_or_next|eq, ":agent_team", "$defender_team"),
-		 (eq, ":agent_team", "$defender_team_2"),
-	     (agent_get_division, ":division", ":agent_no"),
-		 (this_or_next|eq, ":division", grc_infantry),
-		 (eq, ":division", grc_cavalry),
-		 
-		 (agent_get_slot, ":entry_point", ":agent_no", slot_agent_target_entry_point),
-		 
-		 (agent_get_position, pos0, ":agent_no"),
-		 (entry_point_get_position, pos1, ":entry_point"),
-         (get_distance_between_positions, ":dist", pos0, pos1),
-		 (agent_get_combat_state, ":agent_cs", ":agent_no"),
-		 (try_begin),
-		   (agent_slot_eq, ":agent_no", slot_agent_is_in_scripted_mode, 0),
-		   (gt, ":dist", 350),
-		   (agent_set_scripted_destination, ":agent_no", pos1, 0),
-		   (agent_set_slot, ":agent_no", slot_agent_is_in_scripted_mode, 1),
-		 (else_try),
-		   (this_or_next|lt, ":dist", 200),
-		   (this_or_next|eq, ":agent_cs", 1), # in combat ?
-		   (eq, ":agent_cs", 3),              # need to stop
-		   (agent_clear_scripted_mode, ":agent_no"),
-		   (agent_set_slot, ":agent_no", slot_agent_is_in_scripted_mode, 0),
-		 (try_end),
-           
-		 
-		 # (agent_clear_scripted_mode, ":agent_no"),
-         # (agent_set_slot, ":agent_no", slot_agent_is_in_scripted_mode, 0),
-		 # (agent_set_slot, ":agent_no", slot_agent_is_not_reinforcement, 1),
-		 # (agent_set_slot, ":agent_no", slot_agent_target_entry_point, ":random_entry_point"),
-		 # (agent_set_scripted_destination, ":agent_no", pos1, 0),
-		 
-	   (try_end),
-	   
-	   
-	   
-	   ]),
-    ]
-    ##diplomacy begin
-    + custom_camera_triggers + caba_order_triggers + prebattle_orders_triggers, ## """+ AI_triggers""",
-    ##diplomacy end
-  ),
-  ####################################################################
+  
   
 
   (
