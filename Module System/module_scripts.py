@@ -16781,6 +16781,7 @@ scripts = [
         (val_add, ":stack_strength", 12),
         (val_mul, ":stack_strength", ":stack_strength"),
         (val_div, ":stack_strength", 100),
+		(val_min, ":stack_strength", 50),
         (party_stack_get_size, ":stack_size",":party",":i_stack"),
         (party_stack_get_num_wounded, ":num_wounded",":party",":i_stack"),
         (val_sub, ":stack_size", ":num_wounded"),
@@ -16815,8 +16816,9 @@ scripts = [
         (val_add, ":stack_strength", 4), #new was 12 (patch 1.125)
         (val_mul, ":stack_strength", ":stack_strength"),
 		(val_mul, ":stack_strength", ":stack_strength"), #changed was 2
-        (val_div, ":stack_strength", 400), #was 100
-        (val_max, ":stack_strength", 2), #new (patch 1.125)
+        (val_div, ":stack_strength", 400), #was 400
+        (val_max, ":stack_strength", 2),
+        (val_min, ":stack_strength", 300),
 		(store_div, ":stack_defense", ":stack_strength", 2),
 		(try_begin),
 		  (troop_is_guarantee_ranged, ":stack_troop"), #ranged weapons have increased attack (big defense penality)
@@ -68155,8 +68157,7 @@ scripts = [
         (val_mul, ":stack_strength", ":stack_strength"),
         (val_mul, ":stack_strength", ":stack_strength"), #new was 2
         #move the next two lines to after terrain advantage
-        #(val_div, ":stack_strength", 100), 
-        #(val_max, ":stack_strength", 1), #new (patch 1.125)
+        # (val_div, ":stack_strength", 100),
         (assign, ":terrain_free_strength", ":stack_strength"),
         ##use Arch3r's terrain advantage code (bug-fix changes 2011-04-13; other changes 2011-04-25)
         (try_begin),
@@ -68212,7 +68213,8 @@ scripts = [
         (try_end),
         #moved the next two lines here from above
         (val_div, ":stack_strength", 400),#<- moved here from above
-        (val_max, ":stack_strength", 1), #new (patch 1.125) #<- moved here from above
+        (val_max, ":stack_strength", 1),
+        (val_min, ":stack_strength", 1500),
         (val_div, ":terrain_free_strength", 400),
         (val_max, ":terrain_free_strength", 1),
         (try_begin),
