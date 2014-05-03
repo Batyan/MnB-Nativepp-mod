@@ -2659,7 +2659,7 @@ strings = [
   ("kingdom_4_adjective",                     "Nord"),
   ("kingdom_5_adjective",                     "Rhodok"),
   ("kingdom_6_adjective",                     "Sarranid"),
-#  ("kingdom_9_adjective",                     "Khergit Tribe"),
+  ("kingdom_9_adjective",                     "Khergit Tribe"),
   ("kingdom_10_adjective",                    "Freerider's"),
   ("kingdom_11_adjective",                    "Mudles"),
   

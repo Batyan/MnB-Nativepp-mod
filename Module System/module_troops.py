@@ -911,7 +911,7 @@ troops = [
    [itm_wrapping_boots,itm_coarse_tunic,itm_felt_hat,itm_felt_hat_b,
    itm_club,itm_pickaxe,itm_cleaver,itm_scythe],
    def_attrib|					level(4),	wpex(50,50,50,15,15,30),knows_common|knows_athletics_1,man_face_younger_1, man_face_middle_2],
-  ["spotter","Spotter","Spotters",tf_guarantee_boots|tf_guarantee_armor,0,0,fac_kingdom_8,
+  ["spotter","Spotter","Spotters",tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_ranged,0,0,fac_kingdom_8,
    [itm_hide_boots,itm_leather_vest,itm_coarse_tunic,itm_leather_cap,itm_fur_hat,
    itm_falchion,itm_shortened_spear,itm_one_handed_war_axe_a,itm_darts],
    str_10|agi_10|int_5|cha_7|	level(9),	wpex(70,65,65,25,25,70),knows_common|knows_riding_1|knows_athletics_2|knows_ironflesh_1,man_face_young_1, man_face_old_2],
@@ -921,12 +921,12 @@ troops = [
    str_12|agi_9|int_5|cha_7|	level(10),	wpex(60,60,65,25,25,45),knows_common|knows_athletics_1|knows_ironflesh_1|knows_power_strike_1,man_face_young_1, man_face_old_2],
   ["scout","Scout","Scouts",tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_horse,0,0,fac_kingdom_8,
    [itm_hide_boots,itm_nomad_boots,itm_leather_vest,itm_gambeson,itm_leather_cap,itm_leather_gloves,
-   itm_falchion,itm_light_lance,itm_sword_medieval_a,itm_sword_medieval_a_long,itm_one_handed_war_axe_a,itm_darts,itm_steppe_horse,itm_saddle_horse],
-   str_12|agi_13|int_7|cha_9|	level(14),	wpex(85,80,80,35,35,90),knows_common|knows_athletics_3|knows_power_throw_1|knows_riding_4|knows_power_strike_1|knows_horse_archery_1,man_face_young_1, man_face_old_2],
+   itm_light_lance,itm_darts,itm_steppe_horse,itm_saddle_horse],
+   str_12|agi_13|int_7|cha_9|	level(14),	wpex(75,70,90,35,35,90),knows_common|knows_athletics_3|knows_power_throw_1|knows_riding_4|knows_power_strike_2|knows_horse_archery_1,man_face_young_1, man_face_old_2],
   ["pathfinder","Pathfinder","Pathfinders",tf_mounted|tf_guarantee_boots|tf_guarantee_armor|tf_guarantee_gloves|tf_guarantee_horse,0,0,fac_kingdom_8,
    [itm_leather_boots,itm_leather_jerkin,itm_gambeson,itm_footman_helmet,itm_leather_gloves,
-   itm_falchion,itm_light_lance,itm_maul,itm_sword_medieval_a,itm_sword_medieval_a_long,itm_one_handed_battle_axe_a,itm_war_darts,itm_steppe_horse,itm_courser],
-   str_15|agi_16|int_10|cha_11|	level(20),	wpex(100,95,95,45,45,110),knows_common|knows_athletics_4|knows_power_throw_2|knows_riding_5|knows_ironflesh_1|knows_power_strike_2|knows_horse_archery_2,man_face_middle_1, man_face_old_2],
+   itm_light_lance,itm_war_darts,itm_steppe_horse,itm_courser],
+   str_15|agi_16|int_10|cha_11|	level(20),	wpex(85,80,115,45,45,110),knows_common|knows_athletics_4|knows_power_throw_2|knows_riding_5|knows_ironflesh_1|knows_power_strike_4|knows_horse_archery_2,man_face_middle_1, man_face_old_2],
   ["trainee","Trainee","Trainees",tf_guarantee_boots|tf_guarantee_ranged|tf_guarantee_armor,0,0,fac_kingdom_8,
    [itm_leather_boots,itm_gambeson,itm_leather_vest,itm_leather_gloves,
    itm_sword_medieval_a,itm_cartridges,itm_flintlock_pistol],
@@ -3313,7 +3313,7 @@ upgrade(troops,"mercenary_trained_horse_archer","mercenary_veteran_horse_archer"
 # Swadian tree
 upgrade(troops,"swadian_recruit","swadian_militia")
 upgrade2(troops,"swadian_militia","swadian_footman","swadian_skirmisher")
-upgrade2(troops,"swadian_footman","swadian_cavalryman","swadian_infantry")
+upgrade2(troops,"swadian_footman","swadian_infantry","swadian_cavalryman")
 upgrade(troops,"swadian_infantry","swadian_sergeant")
 upgrade(troops,"swadian_skirmisher","swadian_crossbowman")
 upgrade(troops,"swadian_crossbowman","swadian_sharpshooter")
@@ -3326,13 +3326,13 @@ upgrade(troops,"vaegir_footman","vaegir_veteran")
 upgrade(troops,"vaegir_scout","vaegir_skirmisher")
 upgrade(troops,"vaegir_skirmisher","vaegir_archer")
 upgrade2(troops,"vaegir_archer","vaegir_marksman","vaegir_sharpshooter")
-upgrade2(troops,"vaegir_veteran","vaegir_light_cavalry","vaegir_infantry")
+upgrade2(troops,"vaegir_veteran","vaegir_infantry","vaegir_light_cavalry")
 upgrade(troops,"vaegir_light_cavalry","vaegir_horseman")
 upgrade(troops,"vaegir_infantry","vaegir_guard")
 upgrade(troops,"vaegir_horseman","vaegir_knight")
 
 # Khergit tree
-upgrade2(troops,"khergit_tribesman","khergit_skirmisher","khergit_steppe_fighter")
+upgrade2(troops,"khergit_tribesman","khergit_steppe_fighter","khergit_skirmisher")
 upgrade(troops,"khergit_skirmisher","khergit_horseman")
 upgrade2(troops,"khergit_horseman","khergit_dune_rider","khergit_horse_archer")
 upgrade(troops,"khergit_horse_archer","khergit_veteran_horse_archer")
@@ -3344,21 +3344,21 @@ upgrade(troops,"khergit_dune_fighter","khergit_dismounted_lancer")
 
 # Nord tree
 upgrade2(troops,"nord_recruit","nord_footman","nord_huntsman")
-upgrade2(troops,"nord_footman","nord_trained_footman","nord_plunderer")
+upgrade2(troops,"nord_footman","nord_plunderer","nord_trained_footman")
 upgrade(troops,"nord_trained_footman","nord_warrior")
 upgrade(troops,"nord_warrior","nord_veteran")
 upgrade(troops,"nord_veteran","nord_champion")
-upgrade2(troops,"nord_plunderer","nord_warrior","nord_mounted_raider")
+upgrade2(troops,"nord_plunderer","nord_mounted_raider","nord_warrior")
 upgrade(troops,"nord_mounted_raider","nord_mounted_warrior")
 # upgrade(troops,"nord_huntsman","nord_archer")
-upgrade2(troops,"nord_huntsman","nord_archer","nord_bowman")
+upgrade2(troops,"nord_huntsman","nord_bowman","nord_archer")
 upgrade(troops,"nord_archer","nord_veteran_archer")
 # upgrade(troops,"nord_bowman","nord_veteran_bowman")
 
 # Rhodok tree
 upgrade2(troops,"rhodok_tribesman","rhodok_spearman","rhodok_crossbowman")
 upgrade2(troops,"rhodok_swordman","rhodok_trained_swordman","rhodok_mounted_skirmisher")
-upgrade2(troops,"rhodok_spearman","rhodok_trained_spearman","rhodok_swordman")
+upgrade2(troops,"rhodok_spearman","rhodok_swordman","rhodok_trained_spearman")
 upgrade(troops,"rhodok_trained_spearman","rhodok_veteran_spearman")
 upgrade(troops,"rhodok_veteran_spearman","rhodok_sergeant")
 upgrade(troops,"rhodok_trained_swordman","rhodok_veteran_swordman")
@@ -3371,7 +3371,7 @@ upgrade(troops,"rhodok_veteran_crossbowman","rhodok_sharpshooter")
 # Sarranid tree
 upgrade(troops,"sarranid_recruit","sarranid_footman")
 upgrade2(troops,"sarranid_footman","sarranid_veteran_footman","sarranid_skirmisher")
-upgrade2(troops,"sarranid_veteran_footman","sarranid_cavalry","sarranid_infantry")
+upgrade2(troops,"sarranid_veteran_footman","sarranid_infantry","sarranid_cavalry")
 upgrade(troops,"sarranid_infantry","sarranid_guard")
 upgrade(troops,"sarranid_skirmisher","sarranid_archer")
 upgrade(troops,"sarranid_archer","sarranid_master_archer")
