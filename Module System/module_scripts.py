@@ -159,6 +159,8 @@ scripts = [
       (assign, "$g_player_party_icon", -1),
 	  (assign, "$do_not_command_troops", 0),
 	  (assign, "$order_parties", 2), # Garison and lords parties are sorted
+	  
+	  (assign, "$g_morale_type", 0),
 
 	  #Warband changes begin -- set this early
 	  (try_for_range, ":npc", 0, kingdom_ladies_end),
@@ -18034,10 +18036,6 @@ scripts = [
       (try_end),
     (try_end),
 
-    #Add morale
-    # (assign, ":morale_gain", ":total_gain"),
-    # (val_div, ":morale_gain", ":num_player_party_shares"),#if there are lots of soldiers in my party there will be less morale increase.
-
     (try_begin),
       (eq, "$cheat_mode", 1),
       (assign, reg0, ":num_player_party_shares"),
@@ -18046,6 +18044,7 @@ scripts = [
     (try_end),
 
     (try_begin), ##new 0.76
+	  (eq, "$g_morale_type", 1),
       (store_div, ":wounded_loss", ":our_dead", 6),
 	  (store_div, ":ennemy_wounded_bonus", ":died_enemy_population", 20),
 	  (val_add, ":ennemy_wounded_bonus", 5),
@@ -18091,13 +18090,18 @@ scripts = [
 	  (val_add, ":ennemy_troops", ":died_enemy_population"),
 	  (store_add, ":fight_loss", ":ennemy_troops", ":num_troops"),
 	  (val_div, ":fight_loss", -150),
+	  
+	  (store_add, ":moral_loss", ":troops_loss", ":fight_loss"),
+	  (val_add, ":moral_loss", ":total_loss"),
+	  (val_div, ":moral_loss", 2),
+      (call_script, "script_change_player_party_morale", ":moral_loss"),
+	(else_try),
+	  (assign, ":morale_gain", ":total_gain"),
+      (val_div, ":morale_gain", ":num_player_party_shares"),#if there are lots of soldiers in my party there will be less morale increase.
+	  (call_script, "script_change_player_party_morale", ":morale_gain"),
 	(try_end),
-	(store_add, ":moral_loss", ":troops_loss", ":fight_loss"),
-	(val_add, ":moral_loss", ":total_loss"),
-	(val_div, ":moral_loss", 2),
 
 
-    (call_script, "script_change_player_party_morale", ":moral_loss"),
 
     (store_mul, ":killed_enemies_by_our_soldiers", ":died_enemy_population", "$g_strength_contribution_of_player"),
     (store_div, ":faction_morale_change", ":killed_enemies_by_our_soldiers", 8), #each 8 killed agent with any faction decreases morale of troops belong to that faction in our party by 1.
@@ -28678,90 +28682,97 @@ scripts = [
   ("change_player_party_morale",
     [
       (store_script_param_1, ":morale_dif"),
-      (party_get_morale, ":cur_morale", "p_main_party"),
-      (val_max, ":cur_morale", 0),
-	  
-	  (call_script, "script_get_player_party_morale_values"),
-	  (assign, ":stability", reg0),
-	  (val_div, ":stability", 2),
-	  
-	  # (store_random_in_range, ":loss_chance", 0, ":stability"),
 	  
 	  (try_begin),
-	    (lt, ":morale_dif", 0),
-		
-		(store_div, ":min_loss", ":morale_dif", 3), # was 4
-		(store_add, ":max_loss", ":min_loss", -4), # was -2
-		
-		(store_random_in_range, ":stability_reduce", 0, ":stability"), # 0% - 50% -- might sometimes give a higher morale loss if stability is too low (below 0)
-		(store_mul, ":reducing", ":stability_reduce", ":max_loss"),
-		(val_div, ":reducing", 100),
-		
-		(val_sub, ":max_loss", ":reducing"),
-		
-		(try_begin), # If min > max we reverse the two
-		  (lt, ":min_loss", ":max_loss"),
-		  (assign, ":storage", ":min_loss"),
-		  (assign, ":min_loss", ":max_loss"),
-		  (assign, ":max_loss", ":storage"),
+	      (eq, "$g_morale_type", 1),
+		  (party_get_morale, ":cur_morale", "p_main_party"),
+		  (val_max, ":cur_morale", 0),
+		  
+		  (call_script, "script_get_player_party_morale_values"),
+		  (assign, ":stability", reg0),
+		  (val_div, ":stability", 2),
+		  
+		  # (store_random_in_range, ":loss_chance", 0, ":stability"),
+		  
+		  (try_begin),
+			(lt, ":morale_dif", 0),
+			
+			(store_div, ":min_loss", ":morale_dif", 3), # was 4
+			(store_add, ":max_loss", ":min_loss", -4), # was -2
+			
+			(store_random_in_range, ":stability_reduce", 0, ":stability"), # 0% - 50% -- might sometimes give a higher morale loss if stability is too low (below 0)
+			(store_mul, ":reducing", ":stability_reduce", ":max_loss"),
+			(val_div, ":reducing", 100),
+			
+			(val_sub, ":max_loss", ":reducing"),
+			
+			(try_begin), # If min > max we reverse the two
+			  (lt, ":min_loss", ":max_loss"),
+			  (assign, ":storage", ":min_loss"),
+			  (assign, ":min_loss", ":max_loss"),
+			  (assign, ":max_loss", ":storage"),
+			(try_end),
+			
+			(store_random_in_range, ":morale_loss", ":max_loss", ":min_loss"),
+			(store_add, ":new_morale", ":cur_morale", ":morale_loss"), # Negative value
+			
+			# (val_mul, ":loss_chance", -1),
+			# (try_begin),
+			  # (ge, ":loss_chance", ":morale_dif"),
+			  # (store_add, ":new_morale", ":cur_morale", ":morale_dif"),
+			# (else_try),
+			  # (store_mul, ":morale_loss", ":morale_dif", ":morale_dif"),
+			  # (val_div, ":morale_loss", ":loss_chance"),
+			  # (store_add, ":new_morale", ":cur_morale", ":morale_loss"),
+			# (try_end),
+		  (else_try),
+			(store_div, ":min_loss", ":morale_dif", 3), # was 4
+			(store_add, ":max_loss", ":min_loss", 2),
+			
+			(store_random_in_range, ":stability_reduce", 0, ":stability"), # 0% - 50% -- might sometimes give a small morale penality if stability is too low (below 0)
+			(store_mul, ":reducing", ":stability_reduce", ":max_loss"),
+			(val_div, ":reducing", 100),
+			
+			(val_add, ":max_loss", ":reducing"),
+			
+			(try_begin), # If min > max we reverse the two
+			  (gt, ":min_loss", ":max_loss"),
+			  (assign, ":storage", ":min_loss"),
+			  (assign, ":min_loss", ":max_loss"),
+			  (assign, ":max_loss", ":storage"),
+			(try_end),
+			
+			(store_random_in_range, ":morale_loss", ":min_loss", ":max_loss"),
+			(store_add, ":new_morale", ":cur_morale", ":morale_loss"),
+			
+			# (try_begin),
+			  # (ge, ":loss_chance", ":morale_dif"),
+			  # (store_add, ":new_morale", ":cur_morale", ":morale_dif"),
+			# (else_try),
+			  # (store_mul, ":morale_loss", ":morale_dif", ":morale_dif"),
+			  # (val_div, ":morale_loss", ":loss_chance"),
+			  # (store_add, ":new_morale", ":cur_morale", ":morale_loss"),
+			# (try_end),
+		  (try_end),
+		(else_try),
+          (party_get_morale, ":cur_morale", "p_main_party"),
+          (val_clamp, ":cur_morale", 0, 100),
+		  
+          (store_add, ":new_morale", ":cur_morale", ":morale_dif"),
 		(try_end),
+
+        (val_clamp, ":new_morale", 0, 100),
 		
-		(store_random_in_range, ":morale_loss", ":max_loss", ":min_loss"),
-		(store_add, ":new_morale", ":cur_morale", ":morale_loss"), # Negative value
-		
-		# (val_mul, ":loss_chance", -1),
-		# (try_begin),
-		  # (ge, ":loss_chance", ":morale_dif"),
-		  # (store_add, ":new_morale", ":cur_morale", ":morale_dif"),
-		# (else_try),
-		  # (store_mul, ":morale_loss", ":morale_dif", ":morale_dif"),
-		  # (val_div, ":morale_loss", ":loss_chance"),
-		  # (store_add, ":new_morale", ":cur_morale", ":morale_loss"),
-		# (try_end),
-	  (else_try),
-	    (store_div, ":min_loss", ":morale_dif", 3), # was 4
-		(store_add, ":max_loss", ":min_loss", 2),
-		
-		(store_random_in_range, ":stability_reduce", 0, ":stability"), # 0% - 50% -- might sometimes give a small morale penality if stability is too low (below 0)
-		(store_mul, ":reducing", ":stability_reduce", ":max_loss"),
-		(val_div, ":reducing", 100),
-		
-		(val_add, ":max_loss", ":reducing"),
-		
-		(try_begin), # If min > max we reverse the two
-		  (gt, ":min_loss", ":max_loss"),
-		  (assign, ":storage", ":min_loss"),
-		  (assign, ":min_loss", ":max_loss"),
-		  (assign, ":max_loss", ":storage"),
+		(party_set_morale, "p_main_party", ":new_morale"),
+		(try_begin),
+		  (lt, ":new_morale", ":cur_morale"),
+		  (store_sub, reg1, ":cur_morale", ":new_morale"),
+		  (display_message, "str_party_lost_morale"),
+		(else_try),
+		  (gt, ":new_morale", ":cur_morale"),
+		  (store_sub, reg1, ":new_morale", ":cur_morale"),
+		  (display_message, "str_party_gained_morale"),
 		(try_end),
-		
-		(store_random_in_range, ":morale_loss", ":min_loss", ":max_loss"),
-		(store_add, ":new_morale", ":cur_morale", ":morale_loss"),
-		
-		# (try_begin),
-		  # (ge, ":loss_chance", ":morale_dif"),
-		  # (store_add, ":new_morale", ":cur_morale", ":morale_dif"),
-		# (else_try),
-		  # (store_mul, ":morale_loss", ":morale_dif", ":morale_dif"),
-		  # (val_div, ":morale_loss", ":loss_chance"),
-		  # (store_add, ":new_morale", ":cur_morale", ":morale_loss"),
-		# (try_end),
-	  (try_end),
-
-      # (store_add, ":new_morale", ":cur_morale", ":morale_dif"),
-      (val_max, ":new_morale", 0),
-	  (val_min, ":new_morale", 100),
-
-      (party_set_morale, "p_main_party", ":new_morale"),
-      (try_begin),
-        (lt, ":new_morale", ":cur_morale"),
-        (store_sub, reg1, ":cur_morale", ":new_morale"),
-        (display_message, "str_party_lost_morale"),
-      (else_try),
-        (gt, ":new_morale", ":cur_morale"),
-        (store_sub, reg1, ":new_morale", ":cur_morale"),
-        (display_message, "str_party_gained_morale"),
-      (try_end),
   ]),
 
   # script_cf_player_has_item_without_modifier
@@ -28874,7 +28885,7 @@ scripts = [
   # Output: reg0 = player_party_morale_target
   ("get_player_party_morale_values",
     [
-      (party_get_num_companion_stacks, ":num_stacks","p_main_party"),
+	  (party_get_num_companion_stacks, ":num_stacks","p_main_party"),
       (assign, ":num_men", 0),
       (try_for_range, ":i_stack", 1, ":num_stacks"),
         (party_stack_get_troop_id, ":stack_troop","p_main_party",":i_stack"),
@@ -28886,57 +28897,112 @@ scripts = [
           (val_add, ":num_men", ":stack_size"),
         (try_end),
       (try_end),
-	  (val_div, ":num_men", 3),
-      (assign, "$g_player_party_morale_modifier_party_size", ":num_men"),
-
-      # (store_skill_level, "$g_player_party_morale_modifier_leadership", "skl_leadership", "trp_player"),
-	  
-	  (store_skill_level, ":player_leadership", "skl_leadership", "trp_player"),
-	  
-	  (store_mul, "$g_player_party_morale_modifier_leadership", ":player_leadership", 2),
-
-      (assign, ":new_morale", "$g_player_party_morale_modifier_leadership"),
-      (val_sub, ":new_morale", "$g_player_party_morale_modifier_party_size"),
-	  
-	  (game_get_reduce_campaign_ai, ":reduce_campaign_ai"),
-      (try_begin), #hard
-       (eq, ":reduce_campaign_ai", 0),
-       (val_add, ":new_morale", 50),
-      (else_try), #moderate
-       (eq, ":reduce_campaign_ai", 1),
-       (val_add, ":new_morale", 60),
-      (else_try), #easy
-       (val_add, ":new_morale", 70),
-      (try_end),
-
-      (assign, "$g_player_party_morale_modifier_food", 0),
-      (try_for_range, ":cur_edible", food_begin, food_end),
-        (call_script, "script_cf_player_has_item_without_modifier", ":cur_edible", imod_rotten),
-        (item_get_slot, ":food_bonus", ":cur_edible", slot_item_food_bonus),
-        (val_add, "$g_player_party_morale_modifier_food", ":food_bonus"),
-      (try_end),
-      (val_add, ":new_morale", "$g_player_party_morale_modifier_food"),
-
-      (try_begin),
-        (eq, "$g_player_party_morale_modifier_food", 0),
-        (assign, "$g_player_party_morale_modifier_no_food", 30),
-        (val_sub, ":new_morale", "$g_player_party_morale_modifier_no_food"),
-      (else_try),
-        (assign, "$g_player_party_morale_modifier_no_food", 0),
-      (try_end),
-
-      (assign, "$g_player_party_morale_modifier_debt", 0),
-      (try_begin),
-        (gt, "$g_player_debt_to_party_members", 0),
-        (call_script, "script_calculate_player_faction_wage"),
-        (assign, ":total_wages", reg0),
-        (store_mul, "$g_player_party_morale_modifier_debt", "$g_player_debt_to_party_members", 10),
-		(val_max, ":total_wages", 1),
-        (val_div, "$g_player_party_morale_modifier_debt", ":total_wages"),
-        (val_clamp, "$g_player_party_morale_modifier_debt", 1, 31),
-        (val_sub, ":new_morale", "$g_player_party_morale_modifier_debt"),
-      (try_end),
-
+	  (try_begin),
+	    (eq, "$g_morale_type", 1),
+       
+	    (val_div, ":num_men", 3),
+        (assign, "$g_player_party_morale_modifier_party_size", ":num_men"),
+       
+        # (store_skill_level, "$g_player_party_morale_modifier_leadership", "skl_leadership", "trp_player"),
+	    
+	    (store_skill_level, ":player_leadership", "skl_leadership", "trp_player"),
+	    
+	    (store_mul, "$g_player_party_morale_modifier_leadership", ":player_leadership", 2),
+       
+        (assign, ":new_morale", "$g_player_party_morale_modifier_leadership"),
+        (val_sub, ":new_morale", "$g_player_party_morale_modifier_party_size"),
+	    
+	    (game_get_reduce_campaign_ai, ":reduce_campaign_ai"),
+        (try_begin), #hard
+         (eq, ":reduce_campaign_ai", 0),
+         (val_add, ":new_morale", 50),
+        (else_try), #moderate
+         (eq, ":reduce_campaign_ai", 1),
+         (val_add, ":new_morale", 60),
+        (else_try), #easy
+         (val_add, ":new_morale", 70),
+        (try_end),
+       
+        (assign, "$g_player_party_morale_modifier_food", 0),
+        (try_for_range, ":cur_edible", food_begin, food_end),
+          (call_script, "script_cf_player_has_item_without_modifier", ":cur_edible", imod_rotten),
+          (item_get_slot, ":food_bonus", ":cur_edible", slot_item_food_bonus),
+          (val_add, "$g_player_party_morale_modifier_food", ":food_bonus"),
+        (try_end),
+        (val_add, ":new_morale", "$g_player_party_morale_modifier_food"),
+       
+        (try_begin),
+          (eq, "$g_player_party_morale_modifier_food", 0),
+          (assign, "$g_player_party_morale_modifier_no_food", 30),
+          (val_sub, ":new_morale", "$g_player_party_morale_modifier_no_food"),
+        (else_try),
+          (assign, "$g_player_party_morale_modifier_no_food", 0),
+        (try_end),
+       
+        (assign, "$g_player_party_morale_modifier_debt", 0),
+        (try_begin),
+          (gt, "$g_player_debt_to_party_members", 0),
+          (call_script, "script_calculate_player_faction_wage"),
+          (assign, ":total_wages", reg0),
+          (store_mul, "$g_player_party_morale_modifier_debt", "$g_player_debt_to_party_members", 10),
+	  	(val_max, ":total_wages", 1),
+          (val_div, "$g_player_party_morale_modifier_debt", ":total_wages"),
+          (val_clamp, "$g_player_party_morale_modifier_debt", 1, 31),
+          (val_sub, ":new_morale", "$g_player_party_morale_modifier_debt"),
+        (try_end),
+	  (else_try),
+        (assign, "$g_player_party_morale_modifier_party_size", ":num_men"),
+        
+        (store_skill_level, ":player_leadership", "skl_leadership", "trp_player"),
+        
+        (try_begin),
+          (eq, "$players_kingdom", "fac_player_supporters_faction"),
+          (faction_get_slot, ":cur_faction_king", "$players_kingdom", slot_faction_leader),
+          (eq, ":cur_faction_king", "trp_player"),
+          (store_mul, "$g_player_party_morale_modifier_leadership", ":player_leadership", 15),
+        (else_try),  
+          (store_mul, "$g_player_party_morale_modifier_leadership", ":player_leadership", 12),
+        (try_end),  
+        
+        (assign, ":new_morale", "$g_player_party_morale_modifier_leadership"),
+        (val_sub, ":new_morale", "$g_player_party_morale_modifier_party_size"),
+        
+        (val_add, ":new_morale", 50),
+        
+        (assign, "$g_player_party_morale_modifier_food", 0),
+        (try_for_range, ":cur_edible", food_begin, food_end),      
+          (call_script, "script_cf_player_has_item_without_modifier", ":cur_edible", imod_rotten),
+          (item_get_slot, ":food_bonus", ":cur_edible", slot_item_food_bonus),
+          
+          (val_mul, ":food_bonus", 3),
+          (val_div, ":food_bonus", 2),
+          
+          (val_add, "$g_player_party_morale_modifier_food", ":food_bonus"),
+        (try_end),
+        (val_add, ":new_morale", "$g_player_party_morale_modifier_food"),
+        
+        (try_begin),
+          (eq, "$g_player_party_morale_modifier_food", 0),
+          (assign, "$g_player_party_morale_modifier_no_food", 30),
+          (val_sub, ":new_morale", "$g_player_party_morale_modifier_no_food"),
+        (else_try),
+          (assign, "$g_player_party_morale_modifier_no_food", 0),
+        (try_end),
+        
+        (assign, "$g_player_party_morale_modifier_debt", 0),
+        (try_begin),
+          (gt, "$g_player_debt_to_party_members", 0),
+          (call_script, "script_calculate_player_faction_wage"),
+          (assign, ":total_wages", reg0),
+          (store_mul, "$g_player_party_morale_modifier_debt", "$g_player_debt_to_party_members", 10),
+		  (val_max, ":total_wages", 1),
+          (val_div, "$g_player_party_morale_modifier_debt", ":total_wages"),
+          (val_clamp, "$g_player_party_morale_modifier_debt", 1, 31),
+          (val_sub, ":new_morale", "$g_player_party_morale_modifier_debt"),
+        (try_end),
+        
+        (val_clamp, ":new_morale", 0, 100),
+	  (try_end),
       (assign, reg0, ":new_morale"),
       ]),
 

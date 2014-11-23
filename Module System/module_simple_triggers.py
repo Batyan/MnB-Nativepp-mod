@@ -542,26 +542,47 @@ simple_triggers = [
   # Party Morale: Move morale towards target value.
   (24,
    [
-      (call_script, "script_get_player_party_morale_values"),
-      (assign, ":stability", reg0),
-	  # (val_div, ":stability", 10),
-	  # (val_add, ":stability", 10),
-      (party_get_morale, ":cur_morale", "p_main_party"),
-	  
-	  # (assign, ":dif", ":stability"),
-	  
-	  (store_random_in_range, ":morale_bonus", 0, ":stability"),
-	  (val_div, ":morale_bonus", 20), # Average : 2
-	  (val_add, ":morale_bonus", 1),
-	  
-	  (val_add, ":cur_morale", ":morale_bonus"),
-	  
-	  (val_min, ":cur_morale", 100),
-	  
-      (party_set_morale, "p_main_party", ":cur_morale"),
-	  
-	  (assign, reg5, ":cur_morale"),
-	  (display_message, "@Current morale: {reg5}", 0xbbbbee),
+      (try_begin),
+	    (eq, "$g_morale_type", 1),
+        (call_script, "script_get_player_party_morale_values"),
+        (assign, ":stability", reg0),
+	    # (val_div, ":stability", 10),
+	    # (val_add, ":stability", 10),
+        (party_get_morale, ":cur_morale", "p_main_party"),
+	    
+	    # (assign, ":dif", ":stability"),
+	    
+	    (store_random_in_range, ":morale_bonus", 0, ":stability"),
+	    (val_div, ":morale_bonus", 20), # Average : 2
+	    (val_add, ":morale_bonus", 1),
+	    
+	    (val_add, ":cur_morale", ":morale_bonus"),
+	    
+	    (val_min, ":cur_morale", 100),
+	    
+        (party_set_morale, "p_main_party", ":cur_morale"),
+	    
+	    (assign, reg5, ":cur_morale"),
+	    (display_message, "@Current morale: {reg5}", 0xbbbbee),
+	  (else_try),
+	    (call_script, "script_get_player_party_morale_values"),
+        (assign, ":target_morale", reg0),
+        (party_get_morale, ":cur_morale", "p_main_party"),
+        (store_sub, ":dif", ":target_morale", ":cur_morale"),
+        (store_div, ":dif_to_add", ":dif", 5),
+        (store_mul, ":dif_to_add_correction", ":dif_to_add", 5),
+        (try_begin),#finding ceiling of the value
+          (neq, ":dif_to_add_correction", ":dif"),
+          (try_begin),
+            (gt, ":dif", 0),
+            (val_add, ":dif_to_add", 1),
+          (else_try),
+            (val_sub, ":dif_to_add", 1),
+          (try_end),
+        (try_end),
+        (val_add, ":cur_morale", ":dif_to_add"),
+        (party_set_morale, "p_main_party", ":cur_morale"),     
+	  (try_end),
     ]),
   
 
